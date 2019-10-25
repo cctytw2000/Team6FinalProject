@@ -57,7 +57,7 @@ public class MemberDetailController {
 	public void setService(MemberService service) {
 		this.MEMservice = service;
 	}
-	
+
 	@Autowired
 	public void setMDservice(MemberDetailService mDservice) {
 		MDservice = mDservice;
@@ -75,6 +75,7 @@ public class MemberDetailController {
 		Member mem = new Member();
 		mem.setMember_id(md.getId());
 		Member member = MEMservice.findById(mem);
+		MEMservice.openActive(member);
 		md.setMember(member);
 		MDservice.add(md);
 		redirectAttributes.addFlashAttribute("msg", "已完成輸入會員資料及開通帳號");
