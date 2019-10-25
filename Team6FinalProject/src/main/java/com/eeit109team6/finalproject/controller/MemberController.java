@@ -39,11 +39,11 @@ import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
 import com.eeit109team6.finalproject.javaUtils.CipherUtils;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
-import com.eeit109team6.finalproject.service.MemberService;
+import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
 public class MemberController {
-	MemberService service;
+	IMemberService service;
 	ServletContext context;
 
 	@Autowired
@@ -52,7 +52,7 @@ public class MemberController {
 	}
 
 	@Autowired
-	public void setService(MemberService service) {
+	public void setService(IMemberService service) {
 		this.service = service;
 	}
 
@@ -209,6 +209,20 @@ public class MemberController {
 			return "redirect:/jump";
 
 		}
+
+	}
+
+	@RequestMapping(value = "/member/logout")
+	public String memberLogout(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
+			RedirectAttributes redirectAttributes, HttpSession session) {
+		session.removeAttribute("username");
+		session.removeAttribute("token");
+		session.removeAttribute("account");
+		session.removeAttribute("member_id");
+		session.removeAttribute("mem");
+		session.removeAttribute("type");
+		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
+		return "redirect:/jump";
 
 	}
 

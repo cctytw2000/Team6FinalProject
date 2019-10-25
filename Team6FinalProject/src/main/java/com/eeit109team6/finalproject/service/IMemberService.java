@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.eeit109team6.finalproject.model.Member;
 
-public interface MemberService {
+public interface IMemberService {
 	public Integer add(Member m);
 
 	public void update(Member m);

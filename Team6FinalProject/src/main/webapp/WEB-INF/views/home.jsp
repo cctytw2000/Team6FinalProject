@@ -265,7 +265,7 @@
 												<a class="dropdown-item" href="#">會員資料</a>
 
 												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="./LogOutMember.do">登出</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">登出</a>
 											</div>
 
 
@@ -277,7 +277,7 @@
 												<a class="dropdown-item" href="#">會員資料</a> <a class="dropdown-item"
 													href="member/CheangePassword.jsp">修改密碼</a>
 												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="./LogOutMember.do">登出</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">登出</a>
 											</div>
 
 

@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.model.Member;
-import com.eeit109team6.finalproject.service.MemberService;
+import com.eeit109team6.finalproject.service.IMemberService;
 
 @Service
 
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements IMemberService {
 	IMemberDao dao;
 
 	@Autowired

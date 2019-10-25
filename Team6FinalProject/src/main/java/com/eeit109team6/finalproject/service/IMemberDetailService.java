@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
 
-public interface MemberDetailService {
+public interface IMemberDetailService {
 	public void add(MemberDetail md);
 
 	public void update(MemberDetail md);

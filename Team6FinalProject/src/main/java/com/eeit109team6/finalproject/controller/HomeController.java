@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
-import com.eeit109team6.finalproject.service.MemberService;
+import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
 public class HomeController {
-	MemberService service;
+	IMemberService service;
 	ServletContext context;
 
 	@Autowired
@@ -28,7 +28,7 @@ public class HomeController {
 	}
 
 	@Autowired
-	public void setService(MemberService service) {
+	public void setService(IMemberService service) {
 		this.service = service;
 	}
 

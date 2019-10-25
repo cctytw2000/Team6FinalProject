@@ -39,14 +39,14 @@ import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
 import com.eeit109team6.finalproject.javaUtils.CipherUtils;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
-import com.eeit109team6.finalproject.service.MemberDetailService;
-import com.eeit109team6.finalproject.service.MemberService;
+import com.eeit109team6.finalproject.service.IMemberDetailService;
+import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
 public class MemberDetailController {
-	MemberService MEMservice;
+	IMemberService MEMservice;
 	ServletContext context;
-	MemberDetailService MDservice;
+	IMemberDetailService MDservice;
 
 	@Autowired
 	public void setContext(ServletContext context) {
@@ -54,12 +54,12 @@ public class MemberDetailController {
 	}
 
 	@Autowired
-	public void setService(MemberService service) {
+	public void setService(IMemberService service) {
 		this.MEMservice = service;
 	}
 
 	@Autowired
-	public void setMDservice(MemberDetailService mDservice) {
+	public void setMDservice(IMemberDetailService mDservice) {
 		MDservice = mDservice;
 	}
 
