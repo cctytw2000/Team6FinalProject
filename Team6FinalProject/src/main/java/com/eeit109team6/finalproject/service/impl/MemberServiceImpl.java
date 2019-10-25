@@ -82,13 +82,13 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public boolean checkAccount(Member m) {
 		// TODO Auto-generated method stub
-		return false;
+		return dao.checkAccount(m);
 	}
 
 	@Override
 	public Member checkAccount(String account) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.checkAccount(account);
 	}
 
 }

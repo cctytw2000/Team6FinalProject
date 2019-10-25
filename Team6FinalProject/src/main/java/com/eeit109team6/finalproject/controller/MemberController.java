@@ -17,9 +17,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
 import com.eeit109team6.finalproject.javaUtils.CipherUtils;
 import com.eeit109team6.finalproject.model.Member;
-import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
@@ -57,7 +56,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
+	public String registerMember(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		String[] suppressedFields = result.getSuppressedFields();
 		if (suppressedFields.length > 0) {
@@ -168,6 +167,76 @@ public class MemberController {
 		redirectAttributes.addFlashAttribute("msg", "請至您輸入的信箱收取驗證信<br>並輸入完整資料開通帳號");
 
 		return "redirect:/jump";
+	}
+
+	@RequestMapping(value = "/member/thirdPartyRegister")
+	public @ResponseBody Integer registerFacebookOrGoogleMember(@RequestParam("account") String account,
+			@RequestParam("type") String type,@RequestParam("username") String username) {
+
+		System.out.println("/member/thirdPartyRegister");
+		System.out.println("account=" + account);
+		System.out.println("type=" + type);
+
+		Member mem = new Member();
+		// ==============設定創建帳號時間=======================
+		Calendar rightNow = Calendar.getInstance();
+		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+				+ ":" + rightNow.get(Calendar.SECOND);
+		// ==============/設定創建帳號時間=======================
+
+		// ==============密碼加密=======================
+		int isactive = 0;
+		String key = "MickeyKittyLouis";
+		String password_AES = CipherUtils.encryptString(key, account).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
+				"");
+		// ==============/密碼加密=======================
+
+		// ==============設定token====================
+		KeyGenerator keyGen;
+		try {
+			keyGen = KeyGenerator.getInstance("AES");
+			keyGen.init(256, new SecureRandom());
+			SecretKey secretKey = keyGen.generateKey();
+			byte[] iv = new byte[16];
+			SecureRandom prng = new SecureRandom();
+			prng.nextBytes(iv);
+			Long math = Long.valueOf((long) (Math.random() * 999999999));
+			String token_notformat = AES_CBC_PKCS5PADDING.Encrypt(secretKey, iv, math.toString());
+			String token = token_notformat.replaceAll("[\\pP\\p{Punct}]", "").replace(" ", "");
+			mem.setToken(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// ==============/設定token====================
+
+		mem.setAccount(account);
+		mem.setPassword(password_AES);
+		mem.setPassword(password_AES);
+		mem.setUsername(username);
+		mem.setType(type);
+
+		mem.setRegisteredtime(registeredtime);
+		mem.setIsactive(0);
+
+		int memberId = service.add(mem);
+
+		return memberId;
+
+	}
+
+	@RequestMapping(value = "/member/checkRepeat")
+	public @ResponseBody Boolean checkRepeatFacebookOrGoogleMember(@RequestParam("account") String account,
+			@RequestParam("type") String type) {
+		System.out.println("/member/checkRepeat");
+		System.out.println("account=" + account);
+		System.out.println("type=" + type);
+		Member mem = new Member();
+		mem.setAccount(account);
+		mem.setType(type);
+		boolean repeatAnswer = service.checkAccount(mem);
+		System.out.println("repeatAnswer" + repeatAnswer);
+		return repeatAnswer;
 	}
 
 	@RequestMapping(value = "/jump")

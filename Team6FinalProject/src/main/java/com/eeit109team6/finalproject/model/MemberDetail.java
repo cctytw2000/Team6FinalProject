@@ -31,6 +31,29 @@ public class MemberDetail {
 	private String token;
 	@Transient
 	private Integer id;
+	@Transient
+	private String username;
+
+	@Transient
+	private String type;
+
+	@Transient
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Transient
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	@Transient
 	public String getToken() {

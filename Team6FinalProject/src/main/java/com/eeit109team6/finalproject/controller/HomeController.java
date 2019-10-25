@@ -51,8 +51,25 @@ public class HomeController {
 		md.setAddress("美國");
 		md.setToken(token);
 		md.setId(memberid);
-		model.addAttribute("memberid", memberid);
-		model.addAttribute("token", token);
+
+		model.addAttribute("MemberDetail", md);
+
+		return "insertMemberDetail";
+	}
+
+	@RequestMapping(value = "/member/insertThirdPartyMemberInformationform", method = RequestMethod.GET)
+	public String insertThirdPartyMemberInformationform(@RequestParam("id") Integer memberid,
+			@RequestParam("type") String type, @RequestParam("username") String username, Model model) {
+
+		MemberDetail md = new MemberDetail();
+
+		
+		
+		md.setUsername(username);
+		md.setId(memberid);
+		md.setType(type);
+		
+
 		model.addAttribute("MemberDetail", md);
 
 		return "insertMemberDetail";

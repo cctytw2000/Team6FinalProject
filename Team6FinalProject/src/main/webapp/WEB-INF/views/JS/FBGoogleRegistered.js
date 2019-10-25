@@ -40,16 +40,17 @@ function FBRestistered() {
 					console.log('id, ' + response.id + '.');
 					console.log(response.email);
 					$.ajax({
-						url: "Check_Repeat.do",
+						url: "member/checkRepeat",
 						data: {
 							account: response.email,
 							type: "Facebook"
 						},
 						type: "POST",
 						success: function (data) {
-							if (data == "true") {
+							console.log("data"+data);
+							if (data == true) {
 								$.ajax({
-										url: "RegisteredMember.do",
+										url: "member/thirdPartyRegister",
 										data: {
 											account: response.email,
 											username: response.name ,
@@ -57,8 +58,9 @@ function FBRestistered() {
 										},
 										type: "POST",
 										success: function (data) {
-								
-											location.href = "http://localhost:8080/EEIT109_35/member/insertMemberDetail.jsp?id="+data
+											console.log("存放第三方資料庫ID="+data)
+											location.href = "member/insertThirdPartyMemberInformationform?id="+data+"&username="+response.name
+											+"&type="+"Facebook"
 										}
 									})		
 							} else {
