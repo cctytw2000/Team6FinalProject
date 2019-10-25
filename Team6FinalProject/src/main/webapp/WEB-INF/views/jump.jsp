@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>跳轉網頁</title>
-    <meta http-equiv="refresh" content="3;url=${pageContext.request.contextPath}">
+    <meta http-equiv="refresh" content="5;url=${pageContext.request.contextPath}">
 
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
@@ -214,7 +214,7 @@
             <div style="width:70%;height:30%;margin:10% auto;text-align: center;">
                 <h1 style="color:white;font-size:50px">${msg}</h1>
                 <h3 style="line-height: 2.5em;color:white">
-                    頁面將在3秒鐘之後跳轉至首頁，如果沒有跳轉請點<a style="color:#33FFFF" href="${pageContext.request.contextPath}">首頁</a>
+                    頁面將在5秒鐘之後跳轉至首頁，如果沒有跳轉請點<a style="color:#33FFFF" href="${pageContext.request.contextPath}">首頁</a>
                 </h3>
             </div>
         </div>
