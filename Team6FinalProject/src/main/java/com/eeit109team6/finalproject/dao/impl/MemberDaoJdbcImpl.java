@@ -175,7 +175,8 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	@Override
 	public boolean checkAccount(Member m) {
 		System.out.println("----查詢帳號是否重複------");
-		System.out.println("此帳號為" + m.getType() + "帳號");
+//		System.out.println("此帳號；" + m.getAccount());
+//		System.out.println("此帳號為" + m.getType() + "帳號");
 
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member where account =?1 and type = ?2");
 		query.setParameter(1, m.getAccount());
@@ -183,6 +184,8 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 
 		try {
 			Member mem = (Member) query.getSingleResult();
+//			System.out.println("帳號；" + mem.getAccount());
+//			System.out.println("此帳號為" + mem.getType() + "帳號");
 			System.out.println("帳號重複");
 			System.out.println("-----------------");
 			return false;

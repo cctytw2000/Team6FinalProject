@@ -169,13 +169,45 @@ public class MemberController {
 		return "redirect:/jump";
 	}
 
+	@RequestMapping(value = "/member/thirdPartyLogin", method = RequestMethod.POST)
+	public @ResponseBody Boolean thirdPartyLogin(@RequestParam("account") String account,
+			@RequestParam("type") String type, @RequestParam("username") String username, HttpSession session) {
+
+//		System.out.println("account:" + account);
+//		System.out.println("username:" + username);
+//		System.out.println("type:" + type);
+
+		Member mem = new Member();
+
+		String key = "MickeyKittyLouis";
+		String password_AES = CipherUtils.encryptString(key, account).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
+				"");
+
+		mem.setAccount(account);
+		mem.setPassword(password_AES);
+		mem.setType(type);
+		Member member = service.login(mem);
+
+		if (member != null) {
+			session.setAttribute("username", member.getUsername());
+			session.setAttribute("token", member.getToken());
+			session.setAttribute("account", member.getAccount());
+			session.setAttribute("member_id", member.getMember_id());
+			session.setAttribute("mem", member);
+			session.setAttribute("type", member.getType());
+
+			return true;
+		} else {
+
+			return false;
+
+		}
+
+	}
+
 	@RequestMapping(value = "/member/thirdPartyRegister")
 	public @ResponseBody Integer registerFacebookOrGoogleMember(@RequestParam("account") String account,
-			@RequestParam("type") String type,@RequestParam("username") String username) {
-
-		System.out.println("/member/thirdPartyRegister");
-		System.out.println("account=" + account);
-		System.out.println("type=" + type);
+			@RequestParam("type") String type, @RequestParam("username") String username) {
 
 		Member mem = new Member();
 		// ==============設定創建帳號時間=======================

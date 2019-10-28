@@ -35,9 +35,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		Member mem = new Member();
-		mem.setAccount("jtes149589@gmail.com");
-		mem.setPassword("jtes5505");
-		mem.setUsername("葉冠麟");
+		mem.setAccount("andy41003a029@gmail.com");
+		mem.setPassword("a14789632");
+		mem.setUsername("葉家榮");
 		model.addAttribute("Member", mem);
 
 		return "home";

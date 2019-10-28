@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新增商品</title>
+</head>
+<body>
+	<h1>新增商品資料</h1>
+	<form:form method="POST" modelAttribute="product">
+		商品分類:<form:select path="category">
+					<form:option value="-1">請挑選</form:option>
+					<form:options items="${categories }"></form:options>
+				</form:select><p>
+		商品名稱:<form:input path="name" type="text"/><p>
+		廠商名稱:<form:input path="publisher" type="text"/><p>
+		商品價格:<form:input path="price" type="text"/><p>
+		庫存數量:<form:input path="stock" type="text"/><p>
+		商品描述:<form:textarea path="game_desc"/><p>
+		是否熱門:<form:radiobutton path="is_hot" value="1" id="1"/><label for="1">是</label>
+				<form:radiobutton path="is_hot" value="0" id="0"/><label for="0">否</label><p>
+		<input type="submit" value="送出">
+	</form:form>
+	<a href="products/cancel">取消</a>
+</body>
+</html>

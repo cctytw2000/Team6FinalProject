@@ -65,7 +65,7 @@ function FBRestistered() {
 									})		
 							} else {
 								alert("此帳號已重複註冊，請登入")
-								location.href = "home.jsp"
+								location.href = "/Team6FinalProject"
 							}
 
 							console.log(data)
@@ -140,17 +140,17 @@ function GoogleRestistered() {
 						console.log(user_info.emails[0].value);
 
 						$.ajax({
-							url: "Check_Repeat.do",
+							url: "member/checkRepeat",
 							data: {
 								account: user_info.emails[0].value,
 								type: "Google"
 							},
 							type: "POST",
 							success: function (data) {
-								if (data == "true") {
+								if (data == true) {
 								
 									$.ajax({
-										url: "RegisteredMember.do",
+										url: "member/thirdPartyRegister",
 										data: {
 											account: user_info.emails[0].value,
 											username:user_info.displayName ,
@@ -158,21 +158,16 @@ function GoogleRestistered() {
 										},
 										type: "POST",
 										success: function (data) {
-								
-											location.href = "http://localhost:8080/EEIT109_35/member/insertMemberDetail.jsp?id="+data
+											console.log("存放第三方資料庫ID="+data)
+											location.href = "member/insertThirdPartyMemberInformationform?id="+data+"&username="+user_info.displayName
+											+"&type="+"Google"
 										}
 									})
-									
-									
-									//location.href = "http://localhost:8080/EEIT109_35/member/insertMemberDetail.jsp?account="
-									//	+ user_info.emails[0].value
-									//	+ "&username="
-									//	+ user_info.displayName
-									//	+ "&type=" + "Google"
+					
 
 								} else {
 									alert("此帳號已重複註冊，請登入")
-									location.href = "home.jsp"
+									location.href = "/Team6FinalProject"
 								}
 
 								

@@ -136,7 +136,7 @@ function GoogleLogin() {
 
 function check_Login(account, username , type) {
 	$.ajax({
-		url: "FBOrGoogleLogin.do",
+		url: "member/thirdPartyLogin",
 		data: {
 			account: account,
 			username: username,
@@ -144,13 +144,13 @@ function check_Login(account, username , type) {
 		},
 		type: "POST",
 		success: function (data) {
-			if (data == "true") {
+			if (data == true) {
 				console.log(data);
-				location.href = "http://localhost:8080/EEIT109_35/home.jsp"
+				location.href = "/Team6FinalProject"
 			} else {
 				console.log(data);
 				alert("此帳號沒註冊請至註冊頁面註冊")
-				location.href = "home.jsp"
+				location.href = "/Team6FinalProject"
 				
 			}
 		}
