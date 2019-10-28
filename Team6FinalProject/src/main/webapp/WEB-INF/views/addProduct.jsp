@@ -15,15 +15,14 @@
 					<form:option value="-1">請挑選</form:option>
 					<form:options items="${categories }"></form:options>
 				</form:select><p>
-		商品名稱:<form:input path="name" type="text"/><p>
-		廠商名稱:<form:input path="publisher" type="text"/><p>
+		商品名稱:<form:input path="name" type="text" size="50px"/><p>
+		廠商名稱:<form:input path="publisher" type="text" size="50px"/><p>
 		商品價格:<form:input path="price" type="text"/><p>
 		庫存數量:<form:input path="stock" type="text"/><p>
-		商品描述:<form:textarea path="game_desc"/><p>
-		是否熱門:<form:radiobutton path="is_hot" value="1" id="1"/><label for="1">是</label>
-				<form:radiobutton path="is_hot" value="0" id="0"/><label for="0">否</label><p>
+		商品描述:<form:textarea path="game_desc" style="width:400px;height:200px;"/><p>
+		是否上架:<form:radiobutton path="is_remove" value="0" id="0"/><label for="0">是</label>
+				<form:radiobutton path="is_remove" value="1" id="1"/><label for="1">否</label><p>
 		<input type="submit" value="送出">
 	</form:form>
-	<a href="products/cancel">取消</a>
 </body>
 </html>

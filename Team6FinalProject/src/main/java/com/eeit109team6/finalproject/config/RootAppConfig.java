@@ -21,8 +21,8 @@ public class RootAppConfig {
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource ds = new ComboPooledDataSource();
-		ds.setUser("john");
-		ds.setPassword("jtes5505");
+		ds.setUser("sa");
+		ds.setPassword("a14789632");
 		try {
 			ds.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (PropertyVetoException e) {

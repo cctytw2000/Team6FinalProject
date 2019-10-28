@@ -39,7 +39,7 @@ public class ProductController {
 	}
 
 	// 提供新增商品時的表單--> addProduct.jsp
-	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/productsBack/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
 		Product product = new Product();
 		model.addAttribute("product", product);
@@ -47,7 +47,7 @@ public class ProductController {
 	}
 
 	// 新增商品--> 商城後台 productsBack.jsp
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/productsBack/add", method = RequestMethod.POST)
 	public String processAddNewProductForm(@ModelAttribute("product") Product product) {
 		Date date = new Date();
 		product.setDate(date);
@@ -112,12 +112,18 @@ public class ProductController {
 	}
 	
 	//取消
-	@RequestMapping("/products/cancel")
-	public String cancel(Model model) {
-		List<Product> products = service.getAllProducts();
-		model.addAttribute("products", products);
+//	@RequestMapping("/products/cancel")
+//	public String cancel(Model model) {
+//		List<Product> products = service.getAllProducts();
+//		model.addAttribute("products", products);
+//		return "redirect:/productsBack";
+//	}
+	
+	// 查詢所有商品(含已下架)--> 商城後台 productsBack.jsp
+	@RequestMapping("/productsBack/all")
+	public String getAll(Model model) {
+		List<Product> list = service.getAllProducts();
+		model.addAttribute("products", list);
 		return "redirect:/productsBack";
 	}
-	
-	
 }

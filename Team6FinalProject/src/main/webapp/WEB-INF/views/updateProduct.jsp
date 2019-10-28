@@ -21,11 +21,10 @@
 		<tr><td>商品價格:<td><form:input path="price" type="text"/>
 		<tr><td>庫存數量:<td><form:input path="stock" type="text"/>
 		<tr><td>商品描述:<td><form:textarea path="game_desc" style="width:400px;height:200px;"/>
-		<tr><td>是否熱門:<td><form:radiobutton path="is_hot" value="1" id="1"/><label for="1">是</label>
-				<form:radiobutton path="is_hot" value="0" id="0"/><label for="0">否</label>
+		<tr><td>是否移除:<td><form:radiobutton path="is_remove" value="1" id="1"/><label for="1">是</label>
+				<form:radiobutton path="is_remove" value="0" id="0"/><label for="0">否</label>
 		<tr><td><input type="submit" value="送出">
 	</table>
 	</form:form>
-	<a href="cancel">取消</a>
 </body>
 </html>

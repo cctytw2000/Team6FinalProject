@@ -22,7 +22,7 @@ public class ProductDaoImpl implements IProductDao {
 	
 	@Override
 	public List<Product> getAllProducts() {
-		String hql = "FROM Product";
+		String hql = "FROM Product p WHERE p.is_remove = 0";
 		List<Product> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
@@ -60,17 +60,28 @@ public class ProductDaoImpl implements IProductDao {
 		return product;
 	}
 
+	//將is_remove改為1，表示商品已下架，但資料庫依然有紀錄
 	@Override
 	public void deleteProductById(int game_id) {
 		Session session = factory.getCurrentSession();
 		Product product = session.get(Product.class, game_id);
-		session.delete(product);
+		product.setIs_remove(1);
+		session.update(product);
 	}
 
 	@Override
 	public void updateProductById(Product product) {
 		Session session = factory.getCurrentSession();
 		session.update(product);		
+	}
+
+	@Override
+	public List<Product> getAll() {
+		String hql = "FROM Product";
+		List<Product> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
 	}
 
 }

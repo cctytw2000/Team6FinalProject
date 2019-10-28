@@ -61,4 +61,9 @@ public class ProductServiceImpl implements ProductService {
 		dao.updateProductById(product);
 	}
 
+	@Override
+	public List<Product> getAll() {
+		return dao.getAll();
+	}
+
 }

@@ -24,7 +24,7 @@ public class Product {
 	private Integer stock;
 	private String category;
 	private Blob photo;
-	private Integer is_hot;
+	private Integer is_remove;
 	
 	public Integer getGame_id() {
 		return game_id;
@@ -74,16 +74,16 @@ public class Product {
 	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
-	public Integer getIs_hot() {
-		return is_hot;
-	}
-	public void setIs_hot(Integer is_hot) {
-		this.is_hot = is_hot;
-	}
 	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public Integer getIs_remove() {
+		return is_remove;
+	}
+	public void setIs_remove(Integer is_remove) {
+		this.is_remove = is_remove;
 	}
 }
