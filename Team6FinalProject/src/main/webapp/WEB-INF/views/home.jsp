@@ -227,7 +227,7 @@
 
 									<div id="submit" class="modal-footer" style="text-align: center">
 										<input name="login" class="btn btn-primary" type="submit" value="登入"> <input
-											class="btn btn-secondary" name="fergetpwd" type="submit" value="忘記密碼">
+											class="btn btn-secondary" name="login" type="submit" value="忘記密碼">
 									</div>
 
 

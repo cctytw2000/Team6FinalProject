@@ -64,13 +64,13 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public boolean forgetPwd(Member m) {
 		// TODO Auto-generated method stub
-		return false;
+		return dao.forgetPwd(m);
 	}
 
 	@Override
 	public Boolean changePwd(Member m) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.changePwd(m);
 	}
 
 	@Override

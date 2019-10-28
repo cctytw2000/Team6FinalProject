@@ -72,10 +72,25 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	}
 
 	@Override
+	public Member findByAccount(Member m) {
+
+		Query query = sessionFactory.getCurrentSession().createQuery("from Member where account = ?1 ");
+		query.setParameter(1, m.getAccount());
+
+		try {
+			Member mem = (Member) query.getSingleResult();
+
+			return mem;
+		} catch (NoResultException e) {
+			System.out.println("找不到此帳號");
+			return null;
+		}
+
+	}
+
+	@Override
 	public Member login(Member m) {
-		System.out.println("account" + m.getAccount());
-		System.out.println("password" + m.getPassword());
-		System.out.println("type" + m.getType());
+
 		List<Member> memList = null;
 		Query query = sessionFactory.getCurrentSession()
 				.createQuery("from Member where account = ?1 and password = ?2 and type = ?3 and isactive = 1");

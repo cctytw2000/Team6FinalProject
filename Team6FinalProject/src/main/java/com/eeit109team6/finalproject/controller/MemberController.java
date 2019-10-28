@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.controller;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -19,7 +20,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -283,32 +283,140 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
-	public String memberLogin(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
-			RedirectAttributes redirectAttributes, HttpSession session) {
+	public String memberLogin(@RequestParam("login") String login, @ModelAttribute("Member") Member mem, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+		System.out.println("他點的是" + login);
+		if ("登入".equals(login)) {
 
-		String key = "MickeyKittyLouis";
-		String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
-				.replace(" ", "");
-		System.out.println("account:" + mem.getAccount());
-		mem.setPassword(password_AES);
-		mem.setType("General");
+			String key = "MickeyKittyLouis";
+			String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
+					.replace(" ", "");
+			System.out.println("account:" + mem.getAccount());
+			mem.setPassword(password_AES);
+			mem.setType("General");
 
-		Member member = service.login(mem);
+			Member member = service.login(mem);
 
-		if (member != null) {
-			session.setAttribute("username", member.getUsername());
-			session.setAttribute("token", member.getToken());
-			session.setAttribute("account", member.getAccount());
-			session.setAttribute("member_id", member.getMember_id());
-			session.setAttribute("mem", member);
-			session.setAttribute("type", member.getType());
-			redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
-			return "redirect:/jump";
+			if (member != null) {
+				session.setAttribute("username", member.getUsername());
+				session.setAttribute("token", member.getToken());
+				session.setAttribute("account", member.getAccount());
+				session.setAttribute("member_id", member.getMember_id());
+				session.setAttribute("mem", member);
+				session.setAttribute("type", member.getType());
+				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
+				return "redirect:/jump";
+			} else {
+				System.out.println("member=" + member);
+				redirectAttributes.addFlashAttribute("msg", "帳號密碼錯誤<br>請確認後再登入");
+				return "redirect:/jump";
+
+			}
 		} else {
-			System.out.println("member=" + member);
-			redirectAttributes.addFlashAttribute("msg", "帳號密碼錯誤<br>請確認後再登入");
-			return "redirect:/jump";
 
+			return "forgetPassWord";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/member/sendChangePassWordPage", method = RequestMethod.POST)
+	public String sendChangePassWord(@RequestParam("account") String account, Model model,
+			RedirectAttributes redirectAttributes) {
+//		System.out.println("account=" + account);
+
+		Member mem = new Member();
+		mem.setAccount(account);
+		KeyGenerator keyGen;
+		try {
+			keyGen = KeyGenerator.getInstance("AES");
+			keyGen.init(256, new SecureRandom());
+			SecretKey secretKey = keyGen.generateKey();
+			byte[] iv = new byte[16];
+			SecureRandom prng = new SecureRandom();
+			prng.nextBytes(iv);
+			Long math = Long.valueOf((long) (Math.random() * 999999999));
+			String token_notformat = AES_CBC_PKCS5PADDING.Encrypt(secretKey, iv, math.toString());
+			String token = token_notformat.replaceAll("[\\pP\\p{Punct}]", "").replace(" ", "");
+
+			mem.setToken(token);
+			mem.setType("General");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		boolean forget = service.forgetPwd(mem);
+
+		if (forget) {
+			String email = null;
+			String pwd = null;
+
+			BufferedReader bfr;
+			try {
+				bfr = new BufferedReader(new FileReader("C:\\sqldata\\sqldata.txt"));
+				String data;
+
+				while ((data = bfr.readLine()) != null) {
+					System.out.println(data);
+					email = data.split(",")[0];
+					pwd = data.split(",")[1];
+				}
+
+				bfr.close();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			String host = "smtp.gmail.com";
+			int port = 587;
+			final String Email = email;// your Gmail
+			final String EmailPwd = pwd;// your password
+
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.port", port);
+			Session session = Session.getInstance(props, new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(Email, EmailPwd);
+				}
+			});
+
+			try {
+
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(Email));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mem.getAccount()));
+
+				String url = "http://localhost:8080/Team6FinalProject/member/InsertNewPassowrd?account="
+						+ mem.getAccount() + "&token=" + mem.getToken() + "&type=forget";
+
+				message.setSubject("忘記密碼");
+				message.setText("please click this url to change your password\n" + url);
+
+				Transport transport = session.getTransport("smtp");
+				transport.connect(host, port, Email, EmailPwd);
+
+				Transport.send(message);
+
+				System.out.println("寄送email結束.");
+				redirectAttributes.addFlashAttribute("msg", "請至您的電子郵件<br>點擊連結修改密碼");
+
+				return "redirect:/jump";
+
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "沒有此帳號，或者您註冊的帳號為FB、Google帳號");
+
+			return "redirect:/jump";
 		}
 
 	}
@@ -324,6 +432,60 @@ public class MemberController {
 		session.removeAttribute("type");
 		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
 		return "redirect:/jump";
+
+	}
+
+	@RequestMapping(value = "/member/InsertNewPassowrd", method = RequestMethod.GET)
+	public String insertNewPassWrod(@RequestParam("account") String account, @RequestParam("type") String type,
+			@RequestParam("token") String token, Model model, RedirectAttributes redirectAttributes) {
+
+		System.out.println("account:" + account);
+		System.out.println("token:" + token);
+		System.out.println("type:" + type);
+
+//		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
+		model.addAttribute("token", token);
+		model.addAttribute("account", account);
+		model.addAttribute("type", type);
+		return "InsertNewPassowrd";
+
+	}
+
+	@RequestMapping(value = "/member/ChangeNewPassowrd", method = RequestMethod.POST)
+	public String ChangeNewPassowrd(@RequestParam("account") String account,
+
+			@RequestParam("token") String token, @RequestParam("newPassWord") String newPassWord, Model model,
+			RedirectAttributes redirectAttributes) {
+		Member mem = new Member();
+		System.out.println("account:" + account);
+		System.out.println("token:" + token);
+		System.out.println("newPassWord:" + newPassWord);
+		
+		
+		
+		// ==============密碼加密=======================
+		int isactive = 0;
+		String key = "MickeyKittyLouis";
+		String password_AES = CipherUtils.encryptString(key, newPassWord).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
+				"");
+		// ==============/密碼加密=======================
+		
+		
+		
+		
+		mem.setAccount(account);
+		mem.setToken(token);
+		mem.setType("General");
+		mem.setPassword(password_AES);
+		Boolean isSuccess = service.changePwd(mem);
+		if (isSuccess) {
+			redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
+			return "redirect:/jump";
+		} else {
+
+			redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
+			return "redirect:/jump";
+		}
 
 	}
 

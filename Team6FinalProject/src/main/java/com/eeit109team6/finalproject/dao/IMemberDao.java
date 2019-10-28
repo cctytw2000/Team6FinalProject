@@ -30,4 +30,6 @@ public interface IMemberDao {
 	
 	public Member checkAccount(String account);
 
+	public Member findByAccount(Member m);
+
 }

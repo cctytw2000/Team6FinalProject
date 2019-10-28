@@ -7,18 +7,19 @@
 </head>
 <body>
 
-<form action="./FerGetPWD.do" method="post">
+	<form action="${pageContext.request.contextPath}/member/insertMemberInformation" method="post">
 
- <fieldset>
-<legend>忘記密碼</legend>
-<div class="div1">
-<label class='label1'>帳號:</label><input type="text" id="account" name="account">
-</div>
-<div class="div1" style="text-align: center">
-<input name="insert" type="submit" value="輸入">
-</div>
+		<fieldset>
+			<legend>忘記密碼</legend>
+			<div class="div1">
+				<label class='label1'>帳號:</label><input type="text" id="account"
+					name="account">
+			</div>
+			<div class="div1" style="text-align: center">
+				<input name="insert" type="submit" value="輸入">
+			</div>
 
-</fieldset>
-</form>
+		</fieldset>
+	</form>
 </body>
 </html>
