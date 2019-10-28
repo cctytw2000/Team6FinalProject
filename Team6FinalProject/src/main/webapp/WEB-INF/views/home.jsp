@@ -298,9 +298,9 @@
 										<a class="dropdown-item" href="./LogOutMember.do">登出</a>
 									</div>
 								</li>
-								
+
 								<li class="nav-item"><a class="nav-link" href="manager">後台</a></li>
-								
+
 							</ul>
 						</div>
 					</nav>

@@ -20,6 +20,7 @@
 		</select>
 		<input type="submit" value="查詢">
 	</form>
+	<h3><a href="products/add">新增商品</a></h3><br>
 	<c:forEach var="product" items="${products }">
 		<table>
 			<tr><td>商品名稱<td><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a>

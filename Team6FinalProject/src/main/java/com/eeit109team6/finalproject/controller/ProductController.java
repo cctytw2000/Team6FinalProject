@@ -116,6 +116,8 @@ public class ProductController {
 	public String cancel(Model model) {
 		List<Product> products = service.getAllProducts();
 		model.addAttribute("products", products);
-		return "productsBack";
+		return "redirect:/productsBack";
 	}
+	
+	
 }
