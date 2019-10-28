@@ -4,10 +4,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>更新商品</title>
+	<meta charset="UTF-8">
+	<title>更新商品</title>
 </head>
+
 <body>
 	<h1>更新商品資料</h1>
 	<form:form method="POST" modelAttribute="product">
@@ -27,4 +29,5 @@
 	</table>
 	</form:form>
 </body>
+
 </html>

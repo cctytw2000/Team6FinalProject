@@ -149,27 +149,28 @@
                 modelAttribute="MemberDetail" enctype="multipart/form-data">
 
                 <fieldset style="margin-left:40%">
-                 
-		
-<!-- 		md.setUsername(username); -->
-<!-- 		md.setId(memberid); -->
-<!-- 		md.setType(type); -->
+
+
+                    <!-- 		md.setUsername(username); -->
+                    <!-- 		md.setId(memberid); -->
+                    <!-- 		md.setType(type); -->
 
 
 
-			<c:choose>
-				<c:when test="${MemberDetail.id != Null && MemberDetail.token && MemberDetail.username == null }">
-			   				<form:hidden path="id" />
-		                    <form:hidden path="token" />
-				</c:when>
-				<c:otherwise>
-	
-			   				<form:hidden path="id" />
-		                    <form:hidden path="type" />
-		                    <form:hidden path="username" />
-				</c:otherwise>
+                    <c:choose>
+                        <c:when
+                            test="${MemberDetail.id != Null && MemberDetail.token && MemberDetail.username == null }">
+                            <form:hidden path="id" />
+                            <form:hidden path="token" />
+                        </c:when>
+                        <c:otherwise>
 
-			</c:choose>
+                            <form:hidden path="id" />
+                            <form:hidden path="type" />
+                            <form:hidden path="username" />
+                        </c:otherwise>
+
+                    </c:choose>
 
 
 

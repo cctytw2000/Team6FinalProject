@@ -5,12 +5,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>所有商品</title>
+	<meta charset="UTF-8">
+	<title>所有商品</title>
 </head>
+
 <body>
-<h1>商城後台</h1>
+	<h1>商城後台</h1>
 	<form method="GET" action="queryCategory">
 		商品分類<select name="category">
 			<option value="-1">請挑選</option>
@@ -23,9 +25,15 @@
 	<h3><a href="productsBack/add">新增商品</a></h3><br>
 	<c:forEach var="product" items="${products }">
 		<table>
-			<tr><td>商品名稱<td><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a>
-			<tr><td>商品售價<td>NT ${product.price }元
-			<tr><td>商品分類<td>${product.category }
+			<tr>
+				<td>商品名稱
+				<td><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a>
+			<tr>
+				<td>商品售價
+				<td>NT ${product.price }元
+			<tr>
+				<td>商品分類
+				<td>${product.category }
 		</table>
 		<form method="GET" action="products/update">
 			<input type="hidden" name="game_id" value="${product.game_id }">
@@ -38,4 +46,5 @@
 		<hr>
 	</c:forEach>
 </body>
+
 </html>
