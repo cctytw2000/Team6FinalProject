@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.model.Member;
 
-@Transactional
+
 @Repository
 public class MemberDaoJdbcImpl implements IMemberDao {
 

@@ -167,13 +167,14 @@ $(document).ready(function () {
 	$("#check").click(function () {
 		if ($("#account").val() != "") {
 			$.ajax({
-				url: "Check_Repeat.do",
+				url: "member/checkGeneralRepeat",
 				data: {
-					account: $("#account").val()
+					account: $("#account").val(),
+					type:"General"
 				},
 				type: "POST",
 				success: function (data) {
-					if (data == "true") {
+					if (data == true) {
 						account_check_val_repeat = true;
 						opencreate();
 						alert("您可以使用此帳號");

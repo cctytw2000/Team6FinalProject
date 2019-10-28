@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit109team6.finalproject.dao.ILiLoInforDao;
 import com.eeit109team6.finalproject.model.LiLoInfo;
 
-@Transactional
+
 @Repository
 public class LiLoInforDaoJdbcImpl implements ILiLoInforDao {
 

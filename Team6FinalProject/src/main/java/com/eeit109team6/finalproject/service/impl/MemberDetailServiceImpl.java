@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.dao.IMemberDetailDao;
@@ -20,7 +21,7 @@ public class MemberDetailServiceImpl implements IMemberDetailService {
 	public void setDao(IMemberDetailDao dao) {
 		this.dao = dao;
 	}
-
+	@Transactional
 	@Override
 	public void add(MemberDetail md) {
 		dao.add(md);

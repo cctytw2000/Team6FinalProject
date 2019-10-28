@@ -37,22 +37,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
 import com.eeit109team6.finalproject.javaUtils.CipherUtils;
+import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.service.ILiLoInforService;
 import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
 public class MemberController {
-	IMemberService service;
+	IMemberService MemService;
 	ServletContext context;
+	ILiLoInforService LiLoInforService;
 
 	@Autowired
 	public void setContext(ServletContext context) {
 		this.context = context;
 	}
 
+//	@Autowired
+//	public void setService(IMemberService MemService) {
+//		this.MemService = MemService;
+//	}
+//	
+//	
+//	@Autowired
+//	public void setService(ILiLoInforService LiLoInforService) {
+//		this.LiLoInforService = LiLoInforService;
+//	}
+
 	@Autowired
-	public void setService(IMemberService service) {
-		this.service = service;
+	public void setMemService(IMemberService memService) {
+		MemService = memService;
+	}
+
+	@Autowired
+	public void setLiLoInforService(ILiLoInforService liLoInforService) {
+		LiLoInforService = liLoInforService;
 	}
 
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
@@ -105,7 +124,7 @@ public class MemberController {
 			mem.setRegisteredtime(registeredtime);
 			mem.setIsactive(0);
 
-			Integer memberId = service.add(mem);
+			Integer memberId = MemService.add(mem);
 			String email = null;
 			String pwd = null;
 
@@ -171,7 +190,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/thirdPartyLogin", method = RequestMethod.POST)
 	public @ResponseBody Boolean thirdPartyLogin(@RequestParam("account") String account,
-			@RequestParam("type") String type, @RequestParam("username") String username, HttpSession session) {
+			@RequestParam("type") String type, @RequestParam("username") String username, HttpSession session,
+			HttpServletRequest request) {
 
 //		System.out.println("account:" + account);
 //		System.out.println("username:" + username);
@@ -186,9 +206,26 @@ public class MemberController {
 		mem.setAccount(account);
 		mem.setPassword(password_AES);
 		mem.setType(type);
-		Member member = service.login(mem);
+		Member member = MemService.login(mem);
+
+		LiLoInfo lilo = new LiLoInfo();
+
+		// ==============設定創建帳號時間=======================
+		Calendar rightNow = Calendar.getInstance();
+		String logintime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+				+ ":" + rightNow.get(Calendar.SECOND);
+		// ==============/設定創建帳號時間=======================
+
+		lilo.setMember(member);
+		lilo.setLoginTime(logintime);
+		lilo.setType("Login");
+		lilo.setClientIP(request.getRemoteAddr());
+		lilo.setAccountType(type);
 
 		if (member != null) {
+			lilo.setIsSuccess(1);
+			LiLoInforService.add(lilo);
 			session.setAttribute("username", member.getUsername());
 			session.setAttribute("token", member.getToken());
 			session.setAttribute("account", member.getAccount());
@@ -251,7 +288,7 @@ public class MemberController {
 		mem.setRegisteredtime(registeredtime);
 		mem.setIsactive(0);
 
-		int memberId = service.add(mem);
+		int memberId = MemService.add(mem);
 
 		return memberId;
 
@@ -266,10 +303,31 @@ public class MemberController {
 		Member mem = new Member();
 		mem.setAccount(account);
 		mem.setType(type);
-		boolean repeatAnswer = service.checkAccount(mem);
+		boolean repeatAnswer = MemService.checkAccount(mem);
 		System.out.println("repeatAnswer" + repeatAnswer);
 		return repeatAnswer;
 	}
+	
+	
+	@RequestMapping(value = "/member/checkGeneralRepeat")
+	public @ResponseBody Boolean checkGeneralRepeat(@RequestParam("account") String account,
+			@RequestParam("type") String type) {
+		System.out.println("/member/checkRepeat");
+		System.out.println("account=" + account);
+		System.out.println("type=" + type);
+		Member mem = new Member();
+		mem.setAccount(account);
+		mem.setType(type);
+		boolean repeatAnswer = MemService.checkAccount(mem);
+		System.out.println("repeatAnswer" + repeatAnswer);
+		return repeatAnswer;
+	}
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/jump")
 	public String jumpWeb(Model model) {
@@ -284,7 +342,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String memberLogin(@RequestParam("login") String login, @ModelAttribute("Member") Member mem, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+			BindingResult result, RedirectAttributes redirectAttributes, HttpSession session,
+			HttpServletRequest request) {
 		System.out.println("他點的是" + login);
 		if ("登入".equals(login)) {
 
@@ -295,9 +354,25 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			mem.setType("General");
 
-			Member member = service.login(mem);
+			Member member = MemService.login(mem);
+			LiLoInfo lilo = new LiLoInfo();
+
+			// ==============設定創建帳號時間=======================
+			Calendar rightNow = Calendar.getInstance();
+			String logintime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+					+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":"
+					+ rightNow.get(Calendar.MINUTE) + ":" + rightNow.get(Calendar.SECOND);
+			// ==============/設定創建帳號時間=======================
+
+			lilo.setMember(member);
+			lilo.setLoginTime(logintime);
+			lilo.setType("Login");
+			lilo.setClientIP(request.getRemoteAddr());
+			lilo.setAccountType("General");
+			lilo.setIsSuccess(1);
 
 			if (member != null) {
+				LiLoInforService.add(lilo);
 				session.setAttribute("username", member.getUsername());
 				session.setAttribute("token", member.getToken());
 				session.setAttribute("account", member.getAccount());
@@ -307,7 +382,11 @@ public class MemberController {
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
-				System.out.println("member=" + member);
+				member = MemService.checkAccount(mem.getAccount());
+				
+				lilo.setIsSuccess(0);
+				lilo.setMember(member);
+				LiLoInforService.add(lilo);
 				redirectAttributes.addFlashAttribute("msg", "帳號密碼錯誤<br>請確認後再登入");
 				return "redirect:/jump";
 
@@ -346,7 +425,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
-		boolean forget = service.forgetPwd(mem);
+		boolean forget = MemService.forgetPwd(mem);
 
 		if (forget) {
 			String email = null;
@@ -460,24 +539,19 @@ public class MemberController {
 		System.out.println("account:" + account);
 		System.out.println("token:" + token);
 		System.out.println("newPassWord:" + newPassWord);
-		
-		
-		
+
 		// ==============密碼加密=======================
 		int isactive = 0;
 		String key = "MickeyKittyLouis";
-		String password_AES = CipherUtils.encryptString(key, newPassWord).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
-				"");
+		String password_AES = CipherUtils.encryptString(key, newPassWord).replaceAll("[\\pP\\p{Punct}]", "")
+				.replace(" ", "");
 		// ==============/密碼加密=======================
-		
-		
-		
-		
+
 		mem.setAccount(account);
 		mem.setToken(token);
 		mem.setType("General");
 		mem.setPassword(password_AES);
-		Boolean isSuccess = service.changePwd(mem);
+		Boolean isSuccess = MemService.changePwd(mem);
 		if (isSuccess) {
 			redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 			return "redirect:/jump";

@@ -52,7 +52,7 @@
 	<header class="header-section">
 		<div class="container">
 			<!-- logo -->
-			<a class="site-logo" href="../home.jsp"> <img src="../Images/logo.png" alt="">
+			<a class="site-logo" href="${pageContext.request.contextPath}"> <img src="../Images/logo.png" alt="">
 			</a>
 
 			<!-- responsive -->
@@ -65,7 +65,7 @@
 					<nav class="navbar navbar-expand-lg navbar-dark">
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mr-auto">
-								<li class="nav-item active"><a class="nav-link" href="#">首頁<span
+								<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}">首頁<span
 											class="sr-only">(current)</span></a></li>
 								<li class="nav-item"><a class="nav-link" href="#">最新消息</a>
 								</li>
