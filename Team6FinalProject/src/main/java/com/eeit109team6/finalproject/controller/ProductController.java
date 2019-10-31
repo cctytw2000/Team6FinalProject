@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -49,8 +50,13 @@ public class ProductController {
 	// 查詢所有商品--> 商城前台 products.jsp
 	@RequestMapping("/products")
 	public String list(Model model) {
+		Member mem = new Member();
+		mem.setAccount("andy41003a029@gmail.com");
+		mem.setPassword("a14789632");
+		mem.setUsername("葉家榮");
 		List<Product> list = service.getAllProducts();
 		model.addAttribute("products", list);
+		model.addAttribute("Member", mem);
 		return "products";
 	}
 

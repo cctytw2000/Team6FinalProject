@@ -1,5 +1,9 @@
 ﻿package com.eeit109team6.finalproject.model;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 // Test from DavidChen-TP
 // kunalin asdasd
@@ -33,7 +39,35 @@ public class Member {
 	private String type;
 	private int isactive;
 	private MemberDetail memberdetail;
+	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
 
+
+	@OneToMany(cascade=CascadeType.ALL , mappedBy = "member",fetch = FetchType.EAGER)
+	public Set<LiLoInfo> getLiLoInfo() {
+		return liLoInfo;
+	}
+
+	public void setLiLoInfo(Set<LiLoInfo> liLoInfo) {
+		this.liLoInfo = liLoInfo;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	public MemberDetail getMemberdetail() {
+		return memberdetail;
+	}
+
+	public void setMemberdetail(MemberDetail memberdetail) {
+		this.memberdetail = memberdetail;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
 		return account;
@@ -99,14 +133,7 @@ public class Member {
 		this.token = token;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-	public MemberDetail getMemberdetail() {
-		return memberdetail;
-	}
 
-	public void setMemberdetail(MemberDetail memberdetail) {
-		this.memberdetail = memberdetail;
-	}
 
 	@Column(name = "TYPE")
 	public String getType() {

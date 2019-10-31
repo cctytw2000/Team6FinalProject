@@ -9,23 +9,62 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
 <title>所有商品</title>
+
+
+
 </head>
 
 <body>
 	
+<jsp:include page="header/homeHeader.jsp" />
 
-	<section>
-		<div>
-			<div class="container" style="text-align: center">
-				<h1>商品清單</h1>
+
+			<!-- Latest news section -->
+	<div class="latest-news-section">
+		<div class="ln-title">重要消息</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+			
+				<c:forEach var="product" items="${products }">
+
+				
+				
+				
+				<div class="nt-item">
+					<span class="new">${product.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
+				</div>
+			</c:forEach>
+			
+			
+			
 			</div>
 		</div>
-	</section>
-	
-	<form method="GET" action="queryCategory">
+	</div>
+	<!-- Latest news section end -->
+
+
+
+
+
+
+<!-- 	<section> -->
+<!-- 		<div> -->
+<!-- 			<div class="container" style="text-align: center"> -->
+<!-- 				<h1>商品清單</h1> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+
+
+
+<!-- 	<hr -->
+<!-- 		style="height: 1px; border: none; color: #333; background-color: #333;"> -->
+		
+			    <div style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
+			    <form method="GET" action="queryCategory">
 		商品分類<select name="category">
 			<option value="-1">請挑選</option>
 			<c:forEach var="category" items="${categories }">
@@ -34,16 +73,15 @@
 		</select>
 		<input type="submit" value="查詢">
 	</form>
-	<hr
-		style="height: 1px; border: none; color: #333; background-color: #333;">
-		
 	<section class="container">
+		
 		<div class="row">
 			<c:forEach var="product" items="${products }">
 				<div class="col-sm-6 col-md-3" style="width: 360px; height: 360px">
 					<div class="thumbnail" style="width: 320px; height: 340px">
-						<img width='150' height='150'
-							src="<c:url value='/getPicture/${product.game_id}' />" />
+					<div style="padding-left:25%">
+						<img width='150px' height='150px' src="<c:url value='/getPicture/${product.game_id}' />" />
+						</div>
 						<div class="caption">
 							<p align="center"><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a></p>
 							<p align="center">NT ${product.price }元</p>
@@ -54,4 +92,8 @@
 			</c:forEach>
 		</div>
 	</section> 
+</div>
+	<jsp:include page="footer/homeFooter.jsp" />
+	</body>
+	
 </html>
