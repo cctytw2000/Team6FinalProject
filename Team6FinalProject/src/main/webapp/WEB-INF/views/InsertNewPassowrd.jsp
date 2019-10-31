@@ -16,16 +16,16 @@
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/RegisteredMember.css' type="text/css" />
 
 
-
+	<script src="${pageContext.request.contextPath}/JS/ForgetPWD.js"></script>
 
 
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-	<script src="${pageContext.request.contextPath}/JS/login.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
 	<style>
 		.label1 {
 			color: white;
@@ -208,7 +208,9 @@
 
 	<section class="footer-top-section">
 		<div style="height: 378px" class="container">
-
+        <div class="footer-top-bg">
+                <img src="<c:url value='/Images/footer-top-bg.png' />" />
+            </div>
 
 
 			<c:choose>
@@ -216,6 +218,8 @@
 					<form action="${pageContext.request.contextPath}/member/ChangeNewPassowrd" method="post">
 						<input type="hidden" name="account" value="${account}"> <input type="hidden" name="token"
 							value="${token}">
+							
+						<input type="hidden" name="oldpassword" value="Null">
 						<fieldset style="margin-left: 40%">
 							<div style="text-align: center; color: white">修改密碼</div>
 							<div class="div1">
@@ -260,9 +264,10 @@
 
 				<c:otherwise>
 
-					<form action="../forgetPWDInsertNewPassowrd.do" method="post">
+					<form action="${pageContext.request.contextPath}/member/ChangeNewPassowrd" method="post">
 						<input type="hidden" name="account" value="${param.account}">
 						<input type="hidden" name="token" value="${param.token}">
+
 						<fieldset style="margin-left: 40%; width: 50%">
 							<div style="text-align: center; color: white; font-size: 36px">
 								修改密碼</div>
@@ -273,7 +278,7 @@
 							</div>
 							<div class="div1">
 								<label class='label1'>新密碼:</label><input type="password" id="password"
-									name="newpassword">
+									name="newPassWord">
 
 							</div>
 							<div class="div1">

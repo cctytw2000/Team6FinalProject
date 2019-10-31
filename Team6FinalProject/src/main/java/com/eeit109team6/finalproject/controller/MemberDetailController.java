@@ -54,6 +54,7 @@ public class MemberDetailController {
 			MDservice.add(md);
 			System.out.println("普通會員帳號開通填資料完畢");
 			redirectAttributes.addFlashAttribute("msg", "已完成輸入會員資料及開通帳號");
+			return "redirect:/jump";
 		} else {
 			Member mem = new Member();
 			mem.setMember_id(md.getId());
@@ -61,10 +62,11 @@ public class MemberDetailController {
 			MEMservice.openActive(member);
 			md.setMember(member);
 			MDservice.add(md);
+			redirectAttributes.addFlashAttribute("msg", "已完成輸入會員資料及開通帳號");
+			return "redirect:/jump";
 
 		}
 
-		return "redirect:/jump";
 	}
 
 }

@@ -69,7 +69,7 @@
 			<form action="${pageContext.request.contextPath}/member/sendChangePassWordPage" method="post">
 
 				<fieldset style="margin-left:40%">
-					<h3 style="text-align:center;color:white">忘記密碼</h3>
+					<h3 style="text-align:center;color:white">${msg}</h3>
 					<div class="div1">
 						<label style="color:white" class='label1'>帳號:</label><input type="text" id="account"
 							name="account">

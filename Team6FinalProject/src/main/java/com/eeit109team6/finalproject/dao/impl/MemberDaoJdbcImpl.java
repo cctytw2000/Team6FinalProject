@@ -178,7 +178,8 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 
 		try {
 			Member memList = (Member) query.getSingleResult();
-			memList.setPassword(m.getPassword());
+			memList.setPassword(newpassword);
+			sessionFactory.getCurrentSession().update(memList);
 			return true;
 		} catch (NoResultException e) {
 			System.out.println("沒有此帳號");

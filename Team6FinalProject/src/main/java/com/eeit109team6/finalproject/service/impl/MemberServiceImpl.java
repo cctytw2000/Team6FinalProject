@@ -73,11 +73,11 @@ public class MemberServiceImpl implements IMemberService {
 
 		return dao.changePwd(m);
 	}
-
+	@Transactional
 	@Override
 	public Boolean changePwd(Member m, String oldpassword) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.changePwd(m, oldpassword);
 	}
 	@Transactional
 	@Override
