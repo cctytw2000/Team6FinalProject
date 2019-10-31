@@ -46,7 +46,7 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public List<Product> getProductsByCategory(String category) {
-		String hql = "FROM Product p WHERE p.category = :category";
+		String hql = "FROM Product p WHERE p.category = :category AND p.is_remove = 0";
 		List<Product> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("category", category).getResultList();

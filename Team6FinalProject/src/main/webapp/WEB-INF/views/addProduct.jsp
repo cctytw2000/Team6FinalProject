@@ -12,7 +12,7 @@
 
 <body>
 	<h1>新增商品資料</h1>
-	<form:form method="POST" modelAttribute="product">
+	<form:form method="POST" modelAttribute="product" enctype="multipart/form-data">
 		商品分類:<form:select path="category">
 					<form:option value="-1">請挑選</form:option>
 					<form:options items="${categories }"></form:options>
@@ -24,6 +24,7 @@
 		商品描述:<form:textarea path="game_desc" style="width:400px;height:200px;"/><p>
 		是否上架:<form:radiobutton path="is_remove" value="0" id="0"/><label for="0">是</label>
 				<form:radiobutton path="is_remove" value="1" id="1"/><label for="1">否</label><p>
+		選擇圖片:<form:input path="productImage" type="file"/><p>
 		<input type="submit" value="送出">
 	</form:form>
 </body>
