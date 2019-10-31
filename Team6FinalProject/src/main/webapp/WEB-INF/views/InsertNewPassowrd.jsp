@@ -208,9 +208,7 @@
 
 	<section class="footer-top-section">
 		<div style="height: 378px" class="container">
-			<div class="footer-top-bg">
-				<img src="../Images/footer-top-bg.png" alt="">
-			</div>
+
 
 
 			<c:choose>

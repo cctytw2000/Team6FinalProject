@@ -48,90 +48,8 @@
 
 <body>
 
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<jsp:include page="header/header.jsp" />
 
-    <!-- Header section -->
-    <header style="overflow: hidden;" class="header-section">
-        <div class="container">
-            <!-- logo -->
-            <a class="site-logo" href="${pageContext.request.contextPath}">
-                <!--                 <img src="../Images/logo.png" alt=""> -->
-                <img src="<c:url value='/Images/logo.png' />" />
-            </a>
-
-            <!-- responsive -->
-            <div class="nav-switch">
-                <i class="fa fa-bars"></i>
-            </div>
-            <!-- site menu -->
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath}">首頁<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">最新消息</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">遊戲討論區</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">影片區</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">商城</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <!-- Header section end -->
-
-    <!-- Latest news section -->
-    <div class="latest-news-section">
-        <div class="ln-title">重要消息</div>
-        <div class="news-ticker">
-            <div class="news-ticker-contant">
-                <div class="nt-item"><span class="new">新聞</span> <a href="#">台灣獲得 LOL S2 冠軍</a></div>
-                <div class="nt-item"><span class="strategy">重要訊息</span> <a href="#">LOL 即將倒閉</a></div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 練笑話 準決賽</a> </div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講幹話 準決賽</a> </div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a> </div>
-            </div>
-        </div>
-    </div>
-    <!-- Latest news section end -->
-
-
-    <!-- Hero section -->
-    <!--     <section class="hero-section"> -->
-    <!--         <div class="hero-slider owl-carousel"> -->
-    <!--             <div class="hs-item set-bg" data-setbg="../Images/slider-1.jpg"> -->
-    <!--                 <div class="hs-text"> -->
-    <!--                     <div class="container"> -->
-    <!--                         <h2>The Best <span>Games</span> Out There</h2> -->
-    <!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada <br> lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus faucibus finibus.</p> -->
-    <!--                         <a href="#" class="site-btn">Read More</a> -->
-    <!--                     </div> -->
-    <!--                 </div> -->
-    <!--             </div> -->
-    <!--             <div class="hs-item set-bg" data-setbg="../Images/slider-2.jpg"> -->
-    <!--                 <div class="hs-text"> -->
-    <!--                     <div class="container"> -->
-    <!--                         <h2>The Best <span>Games</span> Out There</h2> -->
-    <!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada <br> lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus faucibus finibus.</p> -->
-    <!--                         <a href="#" class="site-btn">Read More</a> -->
-    <!--                     </div> -->
-    <!--                 </div> -->
-    <!--             </div> -->
-    <!--         </div> -->
-    <!--     </section> -->
-    <!-- Hero section end -->
 
 
 
@@ -139,8 +57,6 @@
     <section class="footer-top-section">
         <div class="container">
             <div class="footer-top-bg">
-                <!--                 <img src="../Images/footer-top-bg.png" alt=""> -->
-
                 <img src="<c:url value='/Images/footer-top-bg.png' />" />
             </div>
 
@@ -243,39 +159,7 @@
 
 
 
-
-
-
-    <!-- Footer section -->
-    <footer class="footer-section">
-        <div class="container">
-            <ul class="footer-menu">
-                <li><a href="../home.jsp">Home</a></li>
-                <li><a href="review.html">Games</a></li>
-                <li><a href="categories.html">Blog</a></li>
-                <li><a href="community.html">Forums</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <p class="copyright">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;
-                <script>
-                    document.write(new Date().getFullYear());
-                </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-                    aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-        </div>
-    </footer>
-    <!-- Footer section end -->
-
-
-    <!--====== Javascripts & Jquery ======-->
-    <script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/main.js"></script>
+<jsp:include page="footer/footer.jsp" />
 
 
 

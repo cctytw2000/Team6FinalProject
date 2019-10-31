@@ -28,7 +28,7 @@ public class RootAppConfig {
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
-		ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=finalproject");
+		ds.setJdbcUrl("jdbc:sqlserver://192.168.138.243:1433;databaseName=finalproject");
 		ds.setInitialPoolSize(4);
 		ds.setMaxPoolSize(8);
 		return ds;

@@ -37,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
 import com.eeit109team6.finalproject.javaUtils.CipherUtils;
+import com.eeit109team6.finalproject.javaUtils.Mail;
 import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.service.ILiLoInforService;
@@ -53,16 +54,6 @@ public class MemberController {
 		this.context = context;
 	}
 
-//	@Autowired
-//	public void setService(IMemberService MemService) {
-//		this.MemService = MemService;
-//	}
-//	
-//	
-//	@Autowired
-//	public void setService(ILiLoInforService LiLoInforService) {
-//		this.LiLoInforService = LiLoInforService;
-//	}
 
 	@Autowired
 	public void setMemService(IMemberService memService) {
@@ -81,9 +72,8 @@ public class MemberController {
 		if (suppressedFields.length > 0) {
 			throw new RuntimeException(
 					"嘗試輸入錯誤的欄位:" + org.springframework.util.StringUtils.arrayToCommaDelimitedString(suppressedFields));
-
 		}
-		if (mem.getPassword() != null) {
+
 
 			// ==============設定創建帳號時間=======================
 			Calendar rightNow = Calendar.getInstance();
@@ -93,7 +83,7 @@ public class MemberController {
 			// ==============/設定創建帳號時間=======================
 
 			// ==============密碼加密=======================
-			int isactive = 0;
+
 			String key = "MickeyKittyLouis";
 			String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
 					.replace(" ", "");
@@ -123,7 +113,6 @@ public class MemberController {
 
 			mem.setRegisteredtime(registeredtime);
 			mem.setIsactive(0);
-
 			Integer memberId = MemService.add(mem);
 			String email = null;
 			String pwd = null;
@@ -137,55 +126,34 @@ public class MemberController {
 				}
 				bfr.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+
 				e1.printStackTrace();
 			}
+			
+			
+			Mail mail = new Mail ();
+			mail.setEmail(email);
+			mail.setPwd(pwd);
+			
 
-			final String Email = email;// your Gmail
-			final String EmailPwd = pwd;// your password
-			String host = "smtp.gmail.com";
-			int port = 587;
-
-			Properties props = new Properties();
-			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.port", port);
-			Session session = Session.getInstance(props, new Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(Email, EmailPwd);
-				}
-			});
-
-			try {
-
-				String url = "http://" + request.getServerName() + ":" + request.getServerPort()
-						+ request.getContextPath() + "/member/insertMemberInformationform?id=" + memberId + "&token="
-						+ mem.getToken();
-				System.out.println("url = " + url);
-				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(Email));
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mem.getAccount()));
-				message.setSubject("驗證信");
-				message.setText(
-						"Wellcome To FootBook \n" + "http://localhost:8080/Team6FinalProject/member/insertMemberIn"
-								+ "formationform?id=" + memberId + "&token=" + mem.getToken());
-
-				Transport transport = session.getTransport("smtp");
-				transport.connect(host, port, Email, EmailPwd);
-
-				Transport.send(message);
-
+			Boolean isSuccess = mail.SendMessage(memberId, mem.getAccount(), mem.getToken());
+			if(isSuccess) {
 				System.out.println("寄送email結束.");
+				redirectAttributes.addFlashAttribute("msg", "請至您輸入的信箱收取驗證信<br>並輸入完整資料開通帳號");
 
-			} catch (MessagingException e) {
-				throw new RuntimeException(e);
+				return "redirect:/jump";
+			}else {
+
+				redirectAttributes.addFlashAttribute("msg", "有東西有問題喔");
+
+				return "redirect:/jump";
 			}
+			
+			
 
-		}
-		redirectAttributes.addFlashAttribute("msg", "請至您輸入的信箱收取驗證信<br>並輸入完整資料開通帳號");
 
-		return "redirect:/jump";
+		
+
 	}
 
 	@RequestMapping(value = "/member/thirdPartyLogin", method = RequestMethod.POST)
@@ -255,7 +223,7 @@ public class MemberController {
 		// ==============/設定創建帳號時間=======================
 
 		// ==============密碼加密=======================
-		int isactive = 0;
+
 		String key = "MickeyKittyLouis";
 		String password_AES = CipherUtils.encryptString(key, account).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
 				"");

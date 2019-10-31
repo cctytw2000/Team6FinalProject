@@ -45,6 +45,7 @@ function FBRestistered() {
 							account: response.email,
 							type: "Facebook"
 						},
+
 						type: "POST",
 						success: function (data) {
 							console.log("data"+data);
