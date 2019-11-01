@@ -28,7 +28,7 @@
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
 			
-				<c:forEach var="product" items="${products }">
+				<c:forEach var="product" items="${sessionScope.products }">
 
 				
 				
@@ -65,7 +65,7 @@
 		
 			    <div style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
 			    <form method="GET" action="queryCategory">
-		商品分類<select name="category">
+		<h6 style="color:white">商品分類</h6><select name="category">
 			<option value="-1">請挑選</option>
 			<c:forEach var="category" items="${categories }">
 				<option value="${category }">${category }</option>

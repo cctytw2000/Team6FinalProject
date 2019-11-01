@@ -21,14 +21,14 @@ public class RootAppConfig {
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource ds = new ComboPooledDataSource();
-		ds.setUser("john");
-		ds.setPassword("jtes5505");
+		ds.setUser("sa");
+		ds.setPassword("a14789632");
 		try {
 			ds.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
-		ds.setJdbcUrl("jdbc:sqlserver://192.168.138.243:1433;databaseName=finalproject"); //教室192.168.138.243:1433、回家要改成localhost:1433
+		ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=finalproject"); //教室192.168.138.243:1433、回家要改成localhost:1433
 		ds.setInitialPoolSize(4);
 		ds.setMaxPoolSize(8);
 		return ds;

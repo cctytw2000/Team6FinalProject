@@ -1,5 +1,7 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.Cart;
 import com.eeit109team6.finalproject.model.CartItem;
+import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -25,7 +28,7 @@ public class CartController {
 	
 	@RequestMapping("/addToCart")
 	public String add(@RequestParam("game_id") Integer game_id, @RequestParam("count") Integer count, 
-			HttpServletRequest request, HttpSession session) {
+			HttpServletRequest request, HttpSession session, Model model) {
 //		request.getSession().setAttribute("cart", new Cart()); //得到一台購物車，應該要寫到登入成功內?
 //		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		Cart cart = (Cart) session.getAttribute("cart");
@@ -41,20 +44,44 @@ public class CartController {
 		cart.add(cartItem); //把項目加到購物車中
 //		request.getSession().setAttribute("cart", cart);
 		session.setAttribute("cart", cart);
+		
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
 		return "cart";
 	}
 	
 	@RequestMapping("/clearCart")
-	public String clear(HttpServletRequest request) {
+	public String clear(HttpServletRequest request, Model model) {
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		cart.clear();
+		
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
 		return "cart";
 	}
 	
 	@RequestMapping("/removeCartItem")
-	public String remove(@RequestParam("game_id") Integer game_id, HttpServletRequest request) {
+	public String remove(@RequestParam("game_id") Integer game_id, HttpServletRequest request, Model model) {
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		cart.remove(game_id);
+		
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
 		return "cart";
 	}
 }

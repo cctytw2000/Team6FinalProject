@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Session;

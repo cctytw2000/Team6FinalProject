@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,14 @@ public class ProductController {
 
 	// 查詢所有商品--> 商城前台 products.jsp
 	@RequestMapping("/products")
-	public String list(Model model) {
+	public String list(Model model, HttpSession session) {
 		Member mem = new Member();
-		mem.setAccount("andy41003a029@gmail.com");
+		mem.setAccount("sandy60108@yahoo.com.tw");
 		mem.setPassword("a14789632");
-		mem.setUsername("葉家榮");
+		mem.setUsername("andy");
 		List<Product> list = service.getAllProducts();
 		model.addAttribute("products", list);
+		session.setAttribute("products", list);
 		model.addAttribute("Member", mem);
 		return "products";
 	}
@@ -114,6 +116,13 @@ public class ProductController {
 	// 查詢單筆商品詳細資料--> product.jsp
 	@RequestMapping("/product")
 	public String getProductById(@RequestParam("game_id") Integer game_id, Model model) {
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		List<Product> list = service.getAllProducts();
+		model.addAttribute("products", list);
 		Product product = service.getProductById(game_id);
 		model.addAttribute("product", product);
 		return "product";

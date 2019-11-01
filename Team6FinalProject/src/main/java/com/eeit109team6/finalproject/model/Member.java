@@ -23,6 +23,7 @@ import javax.persistence.Transient;
 // Doris
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 // Test From Git Third
 //andy is a handsome boy.
 //test git abc
@@ -41,11 +42,27 @@ public class Member {
 	private String type;
 	private int isactive;
 	private MemberDetail memberdetail;
+
 	private MemberLevel memberlevel;
 	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
 
 
-	@OneToMany(cascade=CascadeType.ALL , mappedBy = "member",fetch = FetchType.EAGER)
+	private Set<Orders> orders = new LinkedHashSet<Orders>();
+
+	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
 	public Set<LiLoInfo> getLiLoInfo() {
 		return liLoInfo;
 	}
@@ -62,6 +79,7 @@ public class Member {
 	public void setMemberdetail(MemberDetail memberdetail) {
 		this.memberdetail = memberdetail;
 	}
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="MEMBERLEVEL" )
@@ -145,8 +163,6 @@ public class Member {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-
 
 	@Column(name = "TYPE")
 	public String getType() {
