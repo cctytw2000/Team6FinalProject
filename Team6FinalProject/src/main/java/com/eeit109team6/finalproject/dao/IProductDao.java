@@ -14,4 +14,5 @@ public interface IProductDao {
 	void deleteProductById(int game_id); //刪除商品
 	void updateProductById(Product product); //更新商品
 	List<Product> getAll(); //查詢所有商品(含已下架)
+	List<Product> getProductByKeyWord(String keyWord); //關鍵字查詢
 }

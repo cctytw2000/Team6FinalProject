@@ -61,9 +61,16 @@ public class ProductServiceImpl implements ProductService {
 		dao.updateProductById(product);
 	}
 
+	@Transactional
 	@Override
 	public List<Product> getAll() {
 		return dao.getAll();
+	}
+
+	@Transactional
+	@Override
+	public List<Product> getProductByKeyWord(String keyWord) {
+		return dao.getProductByKeyWord(keyWord);
 	}
 
 }

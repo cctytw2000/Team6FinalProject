@@ -233,4 +233,18 @@ public class ProductController {
 		}
 		return b;
 	}
+	
+	@RequestMapping("/getProductByKeyWord")
+	public String getProductByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
+		List<Product> list = service.getProductByKeyWord(keyWord);
+		model.addAttribute("products", list);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "products";
+	}
 }

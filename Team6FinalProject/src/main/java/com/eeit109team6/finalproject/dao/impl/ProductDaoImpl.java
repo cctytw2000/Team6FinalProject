@@ -85,4 +85,12 @@ public class ProductDaoImpl implements IProductDao {
 		return list;
 	}
 
+	@Override
+	public List<Product> getProductByKeyWord(String keyWord) {
+		String hql = "FROM Product p where p.name LIKE'%"+keyWord+"%'"; 
+		Session session = factory.getCurrentSession();
+		List<Product> list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
 }

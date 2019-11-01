@@ -14,4 +14,5 @@ public interface ProductService {
 	void deleteProductById(int game_id);
 	void updateProductById(Product product);
 	List<Product> getAll();
+	List<Product> getProductByKeyWord(String keyWord);
 }

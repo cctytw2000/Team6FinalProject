@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
+
 <title>所有商品</title>
 
 
@@ -46,26 +47,20 @@
 	<!-- Latest news section end -->
 
 
-
-
-
-
-<!-- 	<section> -->
-<!-- 		<div> -->
-<!-- 			<div class="container" style="text-align: center"> -->
-<!-- 				<h1>商品清單</h1> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</section> -->
-
-
-
-<!-- 	<hr -->
 <!-- 		style="height: 1px; border: none; color: #333; background-color: #333;"> -->
 		
-			    <div style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
-			    <form method="GET" action="queryCategory">
-		<h6 style="color:white">商品分類</h6><select name="category">
+<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
+
+	<nav class="navbar navbar-expand-sm ">
+  			<form class="form-inline" action="getProductByKeyWord">
+   				 <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
+    			<button class="btn btn-success" type="submit">Search</button>
+  			</form>
+	</nav>
+	
+	<form method="GET" action="queryCategory">
+		<h6 style="color:white">商品分類</h6>
+		<select name="category">
 			<option value="-1">請挑選</option>
 			<c:forEach var="category" items="${categories }">
 				<option value="${category }">${category }</option>
@@ -73,6 +68,21 @@
 		</select>
 		<input type="submit" value="查詢">
 	</form>
+	
+<!-- 	<div class="container"> -->
+<!-- 	<div class="btn-group"> -->
+<!--       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> -->
+<!--       	商品分類 -->
+<!--       </button> -->
+<!--       <div class="dropdown-menu"> -->
+<%--       	<c:forEach var="category" items="${categories }"> --%>
+<%-- 			<a class="dropdown-item" href="queryCategory?category=${category }">${category }</a> --%>
+<%-- 		</c:forEach> --%>
+<!--       </div> -->
+<!--     </div> -->
+<!-- 	</div> -->
+
+		
 	<section class="container">
 		
 		<div class="row">
@@ -83,7 +93,7 @@
 						<img width='150px' height='150px' src="<c:url value='/getPicture/${product.game_id}' />" />
 						</div>
 						<div class="caption">
-							<p align="center"><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a></p>
+							<p align="center"style="max-width:300px;"><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a></p>
 							<p align="center">NT ${product.price }元</p>
 							<p align="center">${product.category }</p>
 						</div>
@@ -93,7 +103,8 @@
 		</div>
 	</section> 
 </div>
-	<jsp:include page="footer/homeFooter.jsp" />
-	</body>
+
+<jsp:include page="footer/homeFooter.jsp" />
+</body>
 	
 </html>
