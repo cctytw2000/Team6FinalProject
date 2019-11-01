@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -39,6 +41,7 @@ public class Member {
 	private String type;
 	private int isactive;
 	private MemberDetail memberdetail;
+	private MemberLevel memberlevel;
 	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
 
 
@@ -60,6 +63,15 @@ public class Member {
 		this.memberdetail = memberdetail;
 	}
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="MEMBERLEVEL" )
+	public MemberLevel getMemberlevel() {
+		return memberlevel;
+	}
+
+	public void setMemberlevel(MemberLevel memberlevel) {
+		this.memberlevel = memberlevel;
+	}
 	
 	
 	
@@ -67,7 +79,8 @@ public class Member {
 	
 	
 	
-	
+
+
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
 		return account;

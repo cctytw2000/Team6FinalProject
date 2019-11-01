@@ -40,7 +40,9 @@ import com.eeit109team6.finalproject.javaUtils.CipherUtils;
 import com.eeit109team6.finalproject.javaUtils.Mail;
 import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberLevel;
 import com.eeit109team6.finalproject.service.ILiLoInforService;
+import com.eeit109team6.finalproject.service.IMemberLevelService;
 import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
@@ -48,6 +50,15 @@ public class MemberController {
 	IMemberService MemService;
 	ServletContext context;
 	ILiLoInforService LiLoInforService;
+	IMemberLevelService IMemberLevelService;
+	
+	
+	
+	
+	@Autowired
+	public void setIMemberLevelService(IMemberLevelService iMemberLevelService) {
+		IMemberLevelService = iMemberLevelService;
+	}
 
 	@Autowired
 	public void setContext(ServletContext context) {
@@ -81,12 +92,13 @@ public class MemberController {
 		// ==============/設定創建帳號時間=======================
 
 		// ==============密碼加密=======================
-
 		String key = "MickeyKittyLouis";
 		String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
 				.replace(" ", "");
 		// ==============/密碼加密=======================
 
+		MemberLevel level = IMemberLevelService.findById(2);
+//		System.out.println("level==" + level.getLevelName());
 		// ==============設定token====================
 		KeyGenerator keyGen;
 		try {
@@ -108,7 +120,7 @@ public class MemberController {
 		mem.setPassword(password_AES);
 
 		mem.setType("General");
-
+		mem.setMemberlevel(level);
 		mem.setRegisteredtime(registeredtime);
 		mem.setIsactive(0);
 		Integer memberId = MemService.add(mem);
@@ -160,7 +172,6 @@ public class MemberController {
 		Member member = MemService.login(mem);
 
 		LiLoInfo lilo = new LiLoInfo();
-
 		// ==============設定創建帳號時間=======================
 		Calendar rightNow = Calendar.getInstance();
 		String logintime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
@@ -173,7 +184,7 @@ public class MemberController {
 		lilo.setType("Login");
 		lilo.setClientIP(request.getRemoteAddr());
 		lilo.setAccountType(type);
-
+System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
 		if (member != null) {
 			lilo.setIsSuccess(1);
 			LiLoInforService.add(lilo);
@@ -183,6 +194,7 @@ public class MemberController {
 			session.setAttribute("member_id", member.getMember_id());
 			session.setAttribute("mem", member);
 			session.setAttribute("type", member.getType());
+			session.setAttribute("level", member.getMemberlevel().getLevelName());
 
 			return true;
 		} else {
@@ -230,12 +242,13 @@ public class MemberController {
 		}
 		// ==============/設定token====================
 
+		MemberLevel level = IMemberLevelService.findById(2);
 		mem.setAccount(account);
 		mem.setPassword(password_AES);
 		mem.setPassword(password_AES);
 		mem.setUsername(username);
 		mem.setType(type);
-
+		mem.setMemberlevel(level);
 		mem.setRegisteredtime(registeredtime);
 		mem.setIsactive(0);
 
@@ -324,6 +337,9 @@ public class MemberController {
 				session.setAttribute("member_id", member.getMember_id());
 				session.setAttribute("mem", member);
 				session.setAttribute("type", member.getType());
+				
+
+				session.setAttribute("level", member.getMemberlevel().getLevelName());
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
@@ -354,112 +370,110 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/sendChangePassWordPage", method = RequestMethod.POST)
 	public String sendChangePassWord(@RequestParam("account") String account, Model model,
-			RedirectAttributes redirectAttributes,HttpSession session) {
+			RedirectAttributes redirectAttributes, HttpSession session) {
 //		System.out.println("account=" + account);
-		String changeType , type ;
+		String changeType, type;
 		if (session.getAttribute("account") == null) {
-			 changeType = "忘記密碼";
-			 type = "forget";
-		}else {
-			 changeType = "修改密碼";
-			 type = "change";
+			changeType = "忘記密碼";
+			type = "forget";
+		} else {
+			changeType = "修改密碼";
+			type = "change";
 		}
-			System.out.println("忘記密碼");
-			Member mem = new Member();
-			mem.setAccount(account);
-			KeyGenerator keyGen;
-			try {
-				keyGen = KeyGenerator.getInstance("AES");
-				keyGen.init(256, new SecureRandom());
-				SecretKey secretKey = keyGen.generateKey();
-				byte[] iv = new byte[16];
-				SecureRandom prng = new SecureRandom();
-				prng.nextBytes(iv);
-				Long math = Long.valueOf((long) (Math.random() * 999999999));
-				String token_notformat = AES_CBC_PKCS5PADDING.Encrypt(secretKey, iv, math.toString());
-				String token = token_notformat.replaceAll("[\\pP\\p{Punct}]", "").replace(" ", "");
+		System.out.println("忘記密碼");
+		Member mem = new Member();
+		mem.setAccount(account);
+		KeyGenerator keyGen;
+		try {
+			keyGen = KeyGenerator.getInstance("AES");
+			keyGen.init(256, new SecureRandom());
+			SecretKey secretKey = keyGen.generateKey();
+			byte[] iv = new byte[16];
+			SecureRandom prng = new SecureRandom();
+			prng.nextBytes(iv);
+			Long math = Long.valueOf((long) (Math.random() * 999999999));
+			String token_notformat = AES_CBC_PKCS5PADDING.Encrypt(secretKey, iv, math.toString());
+			String token = token_notformat.replaceAll("[\\pP\\p{Punct}]", "").replace(" ", "");
 
-				mem.setToken(token);
-				mem.setType("General");
-			} catch (Exception e) {
+			mem.setToken(token);
+			mem.setType("General");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		boolean forget = MemService.forgetPwd(mem);
+
+		if (forget) {
+			String email = null;
+			String pwd = null;
+
+			BufferedReader bfr;
+			try {
+				bfr = new BufferedReader(new FileReader("C:\\sqldata\\sqldata.txt"));
+				String data;
+
+				while ((data = bfr.readLine()) != null) {
+					System.out.println(data);
+					email = data.split(",")[0];
+					pwd = data.split(",")[1];
+				}
+
+				bfr.close();
+			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
-			boolean forget = MemService.forgetPwd(mem);
+			String host = "smtp.gmail.com";
+			int port = 587;
+			final String Email = email;// your Gmail
+			final String EmailPwd = pwd;// your password
 
-			if (forget) {
-				String email = null;
-				String pwd = null;
-
-				BufferedReader bfr;
-				try {
-					bfr = new BufferedReader(new FileReader("C:\\sqldata\\sqldata.txt"));
-					String data;
-
-					while ((data = bfr.readLine()) != null) {
-						System.out.println(data);
-						email = data.split(",")[0];
-						pwd = data.split(",")[1];
-					}
-
-					bfr.close();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.port", port);
+			Session session_ = Session.getInstance(props, new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(Email, EmailPwd);
 				}
+			});
 
-				String host = "smtp.gmail.com";
-				int port = 587;
-				final String Email = email;// your Gmail
-				final String EmailPwd = pwd;// your password
+			try {
 
-				Properties props = new Properties();
-				props.put("mail.smtp.host", host);
-				props.put("mail.smtp.auth", "true");
-				props.put("mail.smtp.starttls.enable", "true");
-				props.put("mail.smtp.port", port);
-				Session session_ = Session.getInstance(props, new Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(Email, EmailPwd);
-					}
-				});
+				Message message = new MimeMessage(session_);
+				message.setFrom(new InternetAddress(Email));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mem.getAccount()));
 
-				try {
+				String url = "http://localhost:8080/Team6FinalProject/member/InsertNewPassowrd?account="
+						+ mem.getAccount() + "&token=" + mem.getToken() + "&type=" + type;
 
-					Message message = new MimeMessage(session_);
-					message.setFrom(new InternetAddress(Email));
-					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mem.getAccount()));
+				message.setSubject(changeType);
+				message.setText("please click this url to change your password\n" + url);
 
-					String url = "http://localhost:8080/Team6FinalProject/member/InsertNewPassowrd?account="
-							+ mem.getAccount() + "&token=" + mem.getToken() + "&type="+type;
+				Transport transport = session_.getTransport("smtp");
+				transport.connect(host, port, Email, EmailPwd);
 
-					message.setSubject(changeType);
-					message.setText("please click this url to change your password\n" + url);
+				Transport.send(message);
 
-					Transport transport = session_.getTransport("smtp");
-					transport.connect(host, port, Email, EmailPwd);
-
-					Transport.send(message);
-
-					System.out.println("寄送email結束.");
-					redirectAttributes.addFlashAttribute("msg", "請至您的電子郵件<br>點擊連結修改密碼");
-
-					return "redirect:/jump";
-
-				} catch (MessagingException e) {
-					throw new RuntimeException(e);
-				}
-			} else {
-				redirectAttributes.addFlashAttribute("msg", "沒有此帳號，或者您註冊的帳號為FB、Google帳號");
+				System.out.println("寄送email結束.");
+				redirectAttributes.addFlashAttribute("msg", "請至您的電子郵件<br>點擊連結修改密碼");
 
 				return "redirect:/jump";
-			}
-		
 
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "沒有此帳號，或者您註冊的帳號為FB、Google帳號");
+
+			return "redirect:/jump";
+		}
 
 	}
 
@@ -516,9 +530,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/ChangeNewPassowrd", method = RequestMethod.POST)
-	public String ChangeNewPassowrd(@RequestParam("account") String account,@RequestParam("token") String token, @RequestParam("newPassWord") String newPassWord,@RequestParam("oldpassword") String oldPassWord ,Model model,
-			RedirectAttributes redirectAttributes) {
-		if("Null".equals(oldPassWord)) {
+	public String ChangeNewPassowrd(@RequestParam("account") String account, @RequestParam("token") String token,
+			@RequestParam("newPassWord") String newPassWord, @RequestParam("oldpassword") String oldPassWord,
+			Model model, RedirectAttributes redirectAttributes) {
+		if ("Null".equals(oldPassWord)) {
 			Member mem = new Member();
 //			System.out.println("account:" + account);
 //			System.out.println("token:" + token);
@@ -544,7 +559,7 @@ public class MemberController {
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
 			}
-		}else {
+		} else {
 			Member mem = new Member();
 			System.out.println("account:" + account);
 			System.out.println("token:" + token);
@@ -556,15 +571,11 @@ public class MemberController {
 					.replace(" ", "");
 			// ==============/舊密碼加密=======================
 
-			
 			// ==============新密碼密碼加密=======================
-
 
 			String new_password_AES = CipherUtils.encryptString(key, newPassWord).replaceAll("[\\pP\\p{Punct}]", "")
 					.replace(" ", "");
 			// ==============/密碼加密=======================
-			
-			
 
 			mem.setAccount(account);
 			mem.setToken(token);
@@ -581,7 +592,6 @@ public class MemberController {
 			}
 
 		}
-
 
 	}
 

@@ -261,10 +261,28 @@
 											href="#">修改密碼</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="./LogOutMember.do">登出</a>
+										
 									</div>
 								</li>
 
+
+
+
+
+
+
+
+
+
+								<c:choose>
+										<c:when test="${sessionScope.level == 'admin'}">
+
 								<li class="nav-item"><a class="nav-link" href="manager">後台</a></li>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+
+								</c:choose>
 
 							</ul>
 						</div>
