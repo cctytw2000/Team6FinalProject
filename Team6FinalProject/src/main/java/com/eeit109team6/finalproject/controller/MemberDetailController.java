@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.model.Member;
@@ -69,19 +70,32 @@ public class MemberDetailController {
 		}
 
 	}
-	
-	
+
 	@RequestMapping(value = "/member/memberdetail")
-	public String memberdetail( Model model,HttpSession session) {
-		
+	public String memberdetail(Model model, HttpSession session) {
+
 		Member mem = new Member();
-		
+
 		Member member = (Member) session.getAttribute("mem");
 		model.addAttribute("Member", mem);
 		model.addAttribute("MemberDetial", member);
 
 		return "memberDetails";
-		
+
 	}
-	
+
+	@RequestMapping(value = "/member/ChangeNickname")
+	public String updateMemberDetail(@RequestParam("nickname") String nickname,
+			@RequestParam("memberID") Integer memberID, RedirectAttributes redirectAttributes) {
+		System.out.println("nickname=" + nickname);
+		System.out.println("memberID=" + memberID);
+		Member mem = new Member();
+		mem.setMember_id(memberID);
+		MemberDetail md = MDservice.fintById(mem);
+		md.setNickname(nickname);
+		MDservice.update(md);
+		redirectAttributes.addFlashAttribute("msg", "已修改完成會員暱稱");
+		return "redirect:/jump";
+	}
+
 }

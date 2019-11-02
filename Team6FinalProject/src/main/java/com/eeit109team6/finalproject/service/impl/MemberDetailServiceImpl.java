@@ -21,16 +21,17 @@ public class MemberDetailServiceImpl implements IMemberDetailService {
 	public void setDao(IMemberDetailDao dao) {
 		this.dao = dao;
 	}
+
 	@Transactional
 	@Override
 	public void add(MemberDetail md) {
 		dao.add(md);
 
 	}
-
+	@Transactional
 	@Override
 	public void update(MemberDetail md) {
-		// TODO Auto-generated method stub
+		dao.update(md);
 
 	}
 
@@ -45,11 +46,11 @@ public class MemberDetailServiceImpl implements IMemberDetailService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Transactional
 	@Override
 	public MemberDetail fintById(Member m) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.fintById(m);
 	}
 
 }

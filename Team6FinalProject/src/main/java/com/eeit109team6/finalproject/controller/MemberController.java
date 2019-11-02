@@ -51,10 +51,7 @@ public class MemberController {
 	ServletContext context;
 	ILiLoInforService LiLoInforService;
 	IMemberLevelService IMemberLevelService;
-	
-	
-	
-	
+
 	@Autowired
 	public void setIMemberLevelService(IMemberLevelService iMemberLevelService) {
 		IMemberLevelService = iMemberLevelService;
@@ -292,6 +289,8 @@ public class MemberController {
 		return "jump";
 	}
 
+
+
 	@InitBinder
 	public void whiteListion(WebDataBinder binder) {
 		binder.setAllowedFields("account", "password", "username");
@@ -337,7 +336,6 @@ public class MemberController {
 				session.setAttribute("member_id", member.getMember_id());
 				session.setAttribute("mem", member);
 				session.setAttribute("type", member.getType());
-				
 
 				session.setAttribute("level", member.getMemberlevel().getLevelName());
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");

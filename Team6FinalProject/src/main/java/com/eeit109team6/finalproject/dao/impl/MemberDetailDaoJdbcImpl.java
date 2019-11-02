@@ -14,7 +14,6 @@ import com.eeit109team6.finalproject.dao.IMemberDetailDao;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
 
-
 @Repository
 public class MemberDetailDaoJdbcImpl implements IMemberDetailDao {
 
@@ -45,7 +44,7 @@ public class MemberDetailDaoJdbcImpl implements IMemberDetailDao {
 
 	@Override
 	public void update(MemberDetail md) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().update(md);
 
 	}
 
