@@ -64,6 +64,8 @@ public class OrderItem {
 	public void setSubtotal(Integer subtotal) {
 		this.subtotal = subtotal;
 	}
+	
+	
 	public Product getProduct() {
 		return product;
 	}

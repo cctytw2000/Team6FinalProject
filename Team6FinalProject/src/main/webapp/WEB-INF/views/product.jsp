@@ -42,7 +42,7 @@
 				<p>發行商: ${product.publisher }</p>
 				<p>售價:NT${product.price }元</p>
 				<p>庫存: ${product.stock}</p>
-				<p>商品分類: ${product.category}</p>
+				<p>商品分類: ${product.category.category}</p>
 				<p>商品簡介:${product.game_desc }</p>
 				<p>
 					<button type="button" class="btn btn-warning" onclick="window.location.href='products'">返回</button>

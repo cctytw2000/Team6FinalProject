@@ -28,7 +28,7 @@ public class Product {
 	private String game_desc;
 	private Date date;
 	private Integer stock;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CATEGORY_ID" )
 	private Category category;
 	private Blob photo;

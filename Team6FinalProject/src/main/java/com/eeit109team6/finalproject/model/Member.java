@@ -49,7 +49,7 @@ public class Member {
 
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MEMBERLEVEL" )
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
@@ -60,7 +60,7 @@ public class Member {
 	}
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	public Set<Orders> getOrders() {
 		return orders;
 	}
@@ -70,7 +70,7 @@ public class Member {
 		this.orders = orders;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	public Set<LiLoInfo> getLiLoInfo() {
 		return liLoInfo;
 	}

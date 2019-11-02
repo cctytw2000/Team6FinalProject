@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.Cart;
 import com.eeit109team6.finalproject.model.CartItem;
@@ -84,6 +86,41 @@ public class OrderController {
 		mem.setUsername("andy");
 		model.addAttribute("Member", mem);
 		
-		return "makeOrder";
+		return "redirect:/showOrder";
 	}
+	
+	@RequestMapping("/showOrder")
+	public String showOrder(Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("mem");
+		List<Orders> list = service.showOrder(member.getMember_id());
+		model.addAttribute("orders", list);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "showOrder";
+	}
+	
+	@RequestMapping("/showOrderDetail")
+	public String getOrderById(@RequestParam("order_id") Integer order_id, Model model, HttpSession session) {
+		Orders order = service.getOrderById(order_id);
+		Set<OrderItem> ois = order.getOrderItems();
+		for(OrderItem oi : ois) {
+			System.out.println("==============="+oi.getProduct());
+		}
+		model.addAttribute("order", order);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "showOrderDetail";
+	}
+
+	
 }

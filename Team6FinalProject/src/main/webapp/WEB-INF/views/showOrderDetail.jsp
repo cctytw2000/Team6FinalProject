@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>訂單</title>
+<title>訂單資料</title>
 </head>
 <body>
 	<jsp:include page="header/homeHeader.jsp" />
@@ -26,25 +26,26 @@
     </div>
     <!-- Latest news section end -->
     
-    <section class="footer-top-section" style="height: auto;">
-        <div style="height: auto;color:white;" class="container">
+    <section class="footer-top-section" style="height: 495px;">
+        <div style="height: 378px;color:white;" class="container">
             <div class="footer-top-bg">
                 <img src="../Images/footer-top-bg.png" alt="">
             </div>
     
-	<h2 align="center"  style="color:white">${sessionScope.mem.username }的訂單</h2><br>
+	<h2 align="center"  style="color:white">訂單編號${order.order_id }</h2><br>
 		<div align="center">
 			<table border="1" style="text-align:center">
- 				<tr><th>訂單編號<th>訂單時間<th>訂單金額<th>狀態
-				<c:forEach var="order" items="${orders}">
-					<tr><td><a href="showOrderDetail?order_id=${order.order_id }">${order.order_id }</a>
-					<td>${order.ordertime}
-					<td>${order.total}元
-					<td><c:choose>
-						<c:when test="${order.state == 1}">未付款</c:when>
-					</c:choose>
+ 				<tr><th>商品編號<th>商品名稱<th>數量<th>金額
+				<c:forEach var="orderItem" items="${order.orderItems}">
+					<tr><td>${orderItem.product.game_id}</td>
+					<td>${orderItem.product.name}</td>
+					<td>${orderItem.count}</td>
+					<td>${orderItem.subtotal}元</td>
+					</tr>
 				</c:forEach>
 			</table>
+			訂單時間${order.ordertime}<br>
+			總金額${order.total }元<p>
 		</div>
 	 </div>
 

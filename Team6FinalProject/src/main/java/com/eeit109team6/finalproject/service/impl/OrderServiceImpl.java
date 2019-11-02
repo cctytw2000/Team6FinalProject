@@ -1,5 +1,7 @@
 package com.eeit109team6.finalproject.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,18 @@ public class OrderServiceImpl implements OrderService {
 	public void insertOrder(Orders order) {
 		dao.insertOrder(order);
 		
+	}
+
+	@Transactional
+	@Override
+	public List<Orders> showOrder(Integer member_id) {
+		return dao.showOrder(member_id);
+	}
+
+	@Transactional
+	@Override
+	public Orders getOrderById(Integer order_id) {
+		return dao.getOrderById(order_id);
 	}
 
 }

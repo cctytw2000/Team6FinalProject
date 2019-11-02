@@ -19,7 +19,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer category_id;
 	private String category;
-	@OneToMany(cascade=CascadeType.ALL , mappedBy = "category",fetch = FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL , mappedBy = "category",fetch = FetchType.LAZY)
 	private Set<Product> product = new LinkedHashSet<>();
 	
 	public Integer getCategory_id() {

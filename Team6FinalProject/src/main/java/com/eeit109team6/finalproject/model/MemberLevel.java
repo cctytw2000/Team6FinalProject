@@ -27,7 +27,7 @@ public class MemberLevel {
 	
 	
 
-	@OneToMany(cascade=CascadeType.ALL , mappedBy = "memberlevel",fetch = FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL , mappedBy = "memberlevel",fetch = FetchType.LAZY)
 	public Set<Member> getMember() {
 		return member;
 	}
