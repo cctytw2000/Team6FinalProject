@@ -86,7 +86,7 @@ public class MemberDetailController {
 
 	@RequestMapping(value = "/member/ChangeNickname")
 	public String updateMemberDetail(@RequestParam("nickname") String nickname,
-			@RequestParam("memberID") Integer memberID, RedirectAttributes redirectAttributes) {
+			@RequestParam("memberID") Integer memberID, RedirectAttributes redirectAttributes,HttpSession session) {
 		System.out.println("nickname=" + nickname);
 		System.out.println("memberID=" + memberID);
 		Member mem = new Member();
@@ -94,6 +94,8 @@ public class MemberDetailController {
 		MemberDetail md = MDservice.fintById(mem);
 		md.setNickname(nickname);
 		MDservice.update(md);
+		Member member = MEMservice.findById(mem);
+		session.setAttribute("mem", member);
 		redirectAttributes.addFlashAttribute("msg", "已修改完成會員暱稱");
 		return "redirect:/jump";
 	}
