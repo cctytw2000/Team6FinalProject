@@ -12,7 +12,7 @@
 	<meta charset="UTF-8">
 	<title>Game Book</title>
 
-	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
@@ -21,7 +21,7 @@
 
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
-
+	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/login.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>

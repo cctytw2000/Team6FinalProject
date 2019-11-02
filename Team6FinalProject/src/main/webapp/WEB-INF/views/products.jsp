@@ -50,7 +50,7 @@
 
 <!-- 		style="height: 1px; border: none; color: #333; background-color: #333;"> -->
 		
-<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
+<div style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
 
 	<nav class="navbar navbar-expand-sm ">
   			<form class="form-inline" action="getProductByKeyWord">

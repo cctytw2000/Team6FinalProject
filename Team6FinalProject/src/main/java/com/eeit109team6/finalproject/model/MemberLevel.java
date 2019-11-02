@@ -33,7 +33,6 @@ public class MemberLevel {
 	}
 
 
-
 	public void setMember(Set<Member> member) {
 		this.member = member;
 	}

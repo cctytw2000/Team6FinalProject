@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.controller;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,5 +69,19 @@ public class MemberDetailController {
 		}
 
 	}
+	
+	
+	@RequestMapping(value = "/member/memberdetail")
+	public String memberdetail( Model model,HttpSession session) {
+		
+		Member mem = new Member();
+		
+		Member member = (Member) session.getAttribute("mem");
+		model.addAttribute("Member", mem);
+		model.addAttribute("MemberDetial", member);
 
+		return "memberDetails";
+		
+	}
+	
 }

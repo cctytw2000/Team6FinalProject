@@ -96,14 +96,26 @@
 
 
 
+    <div class="div1">
+                        <label class='label1'>暱稱:</label>
+                        <form:input id="nickname" name="nickname" path="nickname" type='text' /><span
+                            id="nickname_password"></span>
+
+
+                    </div>
 
 
 
 
 
 
+    <div class="div1">
+                        <label class='label1'>行動電話:</label>
+                        <form:input id="tel" name="tel" path="tel" type='text' /><span
+                            id="tel_password"></span>
 
 
+                    </div>
 
 
 
@@ -116,8 +128,6 @@
                         <label class='label1'>身分證字號:</label>
                         <form:input id="idnumber" name="idnumber" path="idnumber" type='text' /><span
                             id="idnumber_password"></span>
-
-
 
 
                     </div>

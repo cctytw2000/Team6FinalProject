@@ -19,11 +19,7 @@
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-    <%-- <script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
-    <%-- <script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
-    <!-- <script -->
-    <%-- 	src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
-    <%-- <script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
+
 
 
 

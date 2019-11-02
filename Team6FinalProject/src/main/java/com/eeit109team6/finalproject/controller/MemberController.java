@@ -184,7 +184,7 @@ public class MemberController {
 		lilo.setType("Login");
 		lilo.setClientIP(request.getRemoteAddr());
 		lilo.setAccountType(type);
-System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
+//		System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
 		if (member != null) {
 			lilo.setIsSuccess(1);
 			LiLoInforService.add(lilo);

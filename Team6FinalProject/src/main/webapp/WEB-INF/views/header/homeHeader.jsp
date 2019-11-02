@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
@@ -14,10 +14,10 @@
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-	<script src="${pageContext.request.contextPath}/JS/login.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
 
 
 
@@ -107,10 +107,20 @@
 											class="form-control" style="display:inline" /><span id="msg"
 											style="margin: -15px"></span>
 
-
-
 										<h6 style="color: gray; font-size: 12px">(1.不可空白，2.至少兩個字以上，3.必須為中文字)</h6>
 									</div>
+									
+									
+									
+			
+									
+									
+									
+									
+									
+									
+									
+									
 
 									<div style="width: 90%; margin-left: 30px">
 										<button type="button" style="background-color: #0066FF" class="btn btn-facebook"
@@ -227,7 +237,7 @@
 										<c:when test="${sessionScope.type != 'General'}">
 
 											<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<a class="dropdown-item" href="#">會員資料</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
 
 												<div class="dropdown-divider"></div>
 												<a class="dropdown-item"
@@ -240,7 +250,7 @@
 
 
 											<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<a class="dropdown-item" href="#">會員資料</a> <a class="dropdown-item"
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a> <a class="dropdown-item"
 													href="${pageContext.request.contextPath}/member/sendChangePassWordMail">修改密碼</a>
 												<div class="dropdown-divider"></div>
 												<a class="dropdown-item"
@@ -257,7 +267,7 @@
 
 
 									<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="#">會員資料</a> <a class="dropdown-item"
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a> <a class="dropdown-item"
 											href="#">修改密碼</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="./LogOutMember.do">登出</a>

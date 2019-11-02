@@ -49,7 +49,15 @@ public class Member {
 
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="MEMBERLEVEL" )
+	public MemberLevel getMemberlevel() {
+		return memberlevel;
+	}
+
+	public void setMemberlevel(MemberLevel memberlevel) {
+		this.memberlevel = memberlevel;
+	}
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
@@ -81,15 +89,7 @@ public class Member {
 	}
 
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="MEMBERLEVEL" )
-	public MemberLevel getMemberlevel() {
-		return memberlevel;
-	}
 
-	public void setMemberlevel(MemberLevel memberlevel) {
-		this.memberlevel = memberlevel;
-	}
 	
 	
 	
@@ -172,5 +172,7 @@ public class Member {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+
 
 }

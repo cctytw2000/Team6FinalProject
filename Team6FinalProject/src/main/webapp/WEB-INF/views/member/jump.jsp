@@ -87,7 +87,7 @@ color : white ;
 										    
 										    
                                             <div style="z-index=9999" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">會員資料</a>
+                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
                                                 <a class="dropdown-item" href="#">修改密碼</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="./LogOutMember.do">登出</a>

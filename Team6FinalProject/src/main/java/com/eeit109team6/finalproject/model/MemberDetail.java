@@ -24,9 +24,29 @@ public class MemberDetail {
 	private String idnumber;
 	private String sex;
 	private String birth;
+	private String nickname;
+	private String tel;
 	private String address;
 	private Member member;
 
+	
+	
+	
+	
+	
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	
+	
+	
+	
+	
+	
 	@Transient
 	private String token;
 	@Transient
@@ -130,5 +150,15 @@ public class MemberDetail {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
 
 }
