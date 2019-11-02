@@ -11,7 +11,8 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <title>所有商品</title>
 
 
@@ -58,29 +59,29 @@
   			</form>
 	</nav>
 	
-	<form method="GET" action="queryCategory">
-		<h6 style="color:white">商品分類</h6>
-		<select name="category">
-			<option value="-1">請挑選</option>
-			<c:forEach var="category" items="${categories }">
-				<option value="${category }">${category }</option>
-			</c:forEach>
-		</select>
-		<input type="submit" value="查詢">
-	</form>
+<%-- 	<form method="GET" action="queryCategory"> --%>
+<!-- 		<h6 style="color:white">商品分類</h6> -->
+<!-- 		<select name="category"> -->
+<!-- 			<option value="-1">請挑選</option> -->
+<%-- 			<c:forEach var="category" items="${categories }"> --%>
+<%-- 				<option value="${category }">${category }</option> --%>
+<%-- 			</c:forEach> --%>
+<!-- 		</select> -->
+<!-- 		<input type="submit" value="查詢"> -->
+<%-- 	</form> --%>
 	
-<!-- 	<div class="container"> -->
-<!-- 	<div class="btn-group"> -->
-<!--       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> -->
-<!--       	商品分類 -->
-<!--       </button> -->
-<!--       <div class="dropdown-menu"> -->
-<%--       	<c:forEach var="category" items="${categories }"> --%>
-<%-- 			<a class="dropdown-item" href="queryCategory?category=${category }">${category }</a> --%>
-<%-- 		</c:forEach> --%>
-<!--       </div> -->
-<!--     </div> -->
-<!-- 	</div> -->
+	<div class="container" style="margin:0px">
+	<div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      	商品分類
+      </button>
+      <div class="dropdown-menu">
+      	<c:forEach var="category" items="${categories }">
+			<a class="dropdown-item" href="queryCategory?category=${category }">${category }</a>
+		</c:forEach>
+      </div>
+    </div>
+	</div>
 
 		
 	<section class="container">

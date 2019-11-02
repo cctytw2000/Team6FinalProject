@@ -31,6 +31,18 @@ public class CartController {
 			HttpServletRequest request, HttpSession session, Model model) {
 //		request.getSession().setAttribute("cart", new Cart()); //得到一台購物車，應該要寫到登入成功內?
 //		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		
+		Member member = (Member)session.getAttribute("mem");
+		if(member == null) {
+			Member mem = new Member();
+			mem.setAccount("sandy60108@yahoo.com.tw");
+			mem.setPassword("a14789632");
+			mem.setUsername("andy");
+			model.addAttribute("Member", mem);
+			model.addAttribute("msg", "您必須先登入!");
+			return "jump";
+		}
+		
 		Cart cart = (Cart) session.getAttribute("cart");
 		if(cart == null) {
 			cart = new Cart();
