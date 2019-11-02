@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
@@ -101,15 +102,15 @@ public class ProductController {
 
 	// 依照分類查詢商品
 	@RequestMapping("/queryCategory")
-	public String getProductsByCategory(@RequestParam("category") String category, Model model) {
-		List<Product> products = service.getProductsByCategory(category);
+	public String getProductsByCategory(@RequestParam("category_id") Integer category_id, Model model) {
+		List<Product> products = service.getProductsByCategory(category_id);
 		model.addAttribute("products", products);
 		return "products";
 	}
 
 	// 查詢所有商品分類並存入Model
 	@ModelAttribute("categories")
-	public List<String> getCategories() {
+	public List<Category> getCategories() {
 		return service.getAllCategories();
 	}
 

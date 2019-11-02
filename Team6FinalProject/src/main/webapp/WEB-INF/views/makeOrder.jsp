@@ -18,7 +18,7 @@
             <div class="news-ticker-contant">
                 <c:forEach var="product" items="${sessionScope.products }">
 					<div class="nt-item">
-						<span class="new">${product.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
+						<span class="new">${product.category.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
 					</div>
 				</c:forEach>
             </div>

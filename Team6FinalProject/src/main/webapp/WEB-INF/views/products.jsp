@@ -36,7 +36,7 @@
 				
 				
 				<div class="nt-item">
-					<span class="new">${product.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
+					<span class="new">${product.category.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
 				</div>
 			</c:forEach>
 			
@@ -76,8 +76,8 @@
       	商品分類
       </button>
       <div class="dropdown-menu">
-      	<c:forEach var="category" items="${categories }">
-			<a class="dropdown-item" href="queryCategory?category=${category }">${category }</a>
+      	<c:forEach var="c" items="${categories }">
+			<a class="dropdown-item" href="queryCategory?category_id=${c.category_id }">${c.category }</a>
 		</c:forEach>
       </div>
     </div>
@@ -96,7 +96,7 @@
 						<div class="caption">
 							<p align="center"style="max-width:300px;"><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a></p>
 							<p align="center">NT ${product.price }元</p>
-							<p align="center">${product.category }</p>
+							<p align="center">${product.category.category }</p>
 						</div>
 					</div>
 				</div>

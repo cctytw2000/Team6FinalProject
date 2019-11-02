@@ -4,9 +4,12 @@ import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,7 +28,9 @@ public class Product {
 	private String game_desc;
 	private Date date;
 	private Integer stock;
-	private String category;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="CATEGORY_ID" )
+	private Category category;
 	private Blob photo;
 	private Integer is_remove;
 	
@@ -86,10 +91,10 @@ public class Product {
 	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	public Integer getIs_remove() {

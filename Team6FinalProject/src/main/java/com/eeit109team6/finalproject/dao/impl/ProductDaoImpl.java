@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IProductDao;
+import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Product;
 
 @Repository
@@ -37,20 +38,21 @@ public class ProductDaoImpl implements IProductDao {
 	}
 
 	@Override
-	public List<String> getAllCategories() {
-		String hql = "SELECT DISTINCT p.category FROM Product p";
+	public List<Category> getAllCategories() {
+//		String hql = "SELECT DISTINCT p.category FROM Product p";
+		String hql = "FROM Category";
 		Session session = factory.getCurrentSession();
-		List<String> list = new ArrayList<>();
+		List<Category> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
 
 	@Override
-	public List<Product> getProductsByCategory(String category) {
-		String hql = "FROM Product p WHERE p.category = :category AND p.is_remove = 0";
+	public List<Product> getProductsByCategory(Integer category_id) {
+		String hql = "FROM Product p WHERE p.category_id = :category_id AND p.is_remove = 0";
 		List<Product> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
-		list = session.createQuery(hql).setParameter("category", category).getResultList();
+		list = session.createQuery(hql).setParameter("category_id", category_id).getResultList();
 		return list;
 	}
 
