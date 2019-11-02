@@ -17,12 +17,13 @@ public class OrderItem {
 	private Integer item_id;   //商品細項編號
 	private Integer count;  //商品數量
 	private Integer subtotal;  //小計
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "GAME_ID")
 	private Product product;   //購買的遊戲
 	@ManyToOne
 	@JoinColumn(name = "ORDER_ID")
 	private Orders order;  //所屬訂單
-	private Integer game_id;
+//	private Integer game_id;
 //	@Transient
 //	private Integer order_id;
 	
@@ -73,11 +74,11 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public Integer getGame_id() {
-		return game_id;
-	}
-	public void setGame_id(Integer game_id) {
-		this.game_id = game_id;
-	}
+//	public Integer getGame_id() {
+//		return game_id;
+//	}
+//	public void setGame_id(Integer game_id) {
+//		this.game_id = game_id;
+//	}
 	
 }

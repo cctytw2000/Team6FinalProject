@@ -2,7 +2,10 @@ package com.eeit109team6.finalproject.model;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -33,10 +37,18 @@ public class Product {
 	private Category category;
 	private Blob photo;
 	private Integer is_remove;
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
 	@Transient
 	private MultipartFile productImage;
 	
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
 	public MultipartFile getProductImage() {
 		return productImage;
 	}

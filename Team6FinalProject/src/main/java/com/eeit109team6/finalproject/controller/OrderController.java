@@ -65,7 +65,7 @@ public class OrderController {
 			orderItem.setCount(cartItem.getCount());
 			orderItem.setSubtotal(cartItem.getSubtotal());
 			orderItem.setProduct(cartItem.getProduct());
-			orderItem.setGame_id(cartItem.getProduct().getGame_id()); //test
+//			orderItem.setGame_id(cartItem.getProduct().getGame_id()); //test
 			orderItem.setOrder(order);
 			
 			orderItemSet.add(orderItem);
@@ -107,10 +107,6 @@ public class OrderController {
 	@RequestMapping("/showOrderDetail")
 	public String getOrderById(@RequestParam("order_id") Integer order_id, Model model, HttpSession session) {
 		Orders order = service.getOrderById(order_id);
-		Set<OrderItem> ois = order.getOrderItems();
-		for(OrderItem oi : ois) {
-			System.out.println("==============="+oi.getProduct());
-		}
 		model.addAttribute("order", order);
 		
 		Member mem = new Member();
