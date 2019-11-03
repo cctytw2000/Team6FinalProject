@@ -293,4 +293,34 @@ public class ProductController {
 		service.addCategory(c);
 		return "redirect:/productsBack";
 	}
+	
+	//低到高
+	@RequestMapping("queryCategoryByLow")
+	public String getProductByLow(Model model) {
+		List<Product> products = service.getProductsByLow();
+		model.addAttribute("products", products);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "products";
+	}
+	
+	//高到低
+	@RequestMapping("queryProductByHigh")
+	public String getProductByHigh(Model model) {
+		List<Product> products = service.getProductsByHigh();
+		model.addAttribute("products", products);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "products";
+	}
 }

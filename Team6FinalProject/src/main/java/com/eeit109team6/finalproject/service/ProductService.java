@@ -18,4 +18,6 @@ public interface ProductService {
 	List<Product> getProductByKeyWord(String keyWord);
 	void addCategory(Category category);
 	Category getCategoryById(Integer category_id);
+	List<Product> getProductsByHigh(); //依價格高到低查詢商品(不含已下架)
+	List<Product> getProductsByLow(); //依價格低到高查詢所有商品(不含已下架)
 }

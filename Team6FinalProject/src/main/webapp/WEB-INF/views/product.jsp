@@ -39,18 +39,18 @@
 			<img width='200' height='200'
 				src="<c:url value='/getPicture/${product.game_id}'/>" />
 				<h5 style="color:white;font-size:23px">${product.name }
-				<div style="color:white;padding-left:15px">
-				<p>商品分類: ${product.category.category}
-				<p>發行商: ${product.publisher}
+				<div style="padding-left:15px;margin-top:30px">
+				<p style="color:pink">商品分類: ${product.category.category}
+				<p style="color:pink">發行商: ${product.publisher}
 
-				<p style="font-size: 30px">售價:NT${product.price }元<span style="padding-left:50px">庫存:${product.stock}</span>
+				<p style="font-size: 30px;color:white">售價:NT${product.price }元<span style="padding-left:50px;color:white">庫存:${product.stock}</span>
 				</div>
 				</h5>
 
 			<div>
 				
 				<p>
-				<h4 style="color:#878787">商品簡介:<p>${product.game_desc }</h4>
+				<h4 style="color:pink">商品簡介:<p style="color:pink">${product.game_desc }</h4>
 	
 					<button type="button" class="btn btn-warning" onclick="window.location.href='products'">返回</button>
 					<a href='addToCart?game_id=${product.game_id }&count=1' class='btn btn-warning btn-large'> 

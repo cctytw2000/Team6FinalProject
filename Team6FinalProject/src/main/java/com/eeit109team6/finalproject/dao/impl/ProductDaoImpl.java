@@ -114,4 +114,22 @@ public class ProductDaoImpl implements IProductDao {
 		return category;
 	}
 
+	@Override
+	public List<Product> getProductsByHigh() {
+		String hql = "FROM Product WHERE is_remove = 0 ORDER BY price DESC"; //高到低
+		Session session = factory.getCurrentSession();
+		List<Product> list = new ArrayList<>();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	@Override
+	public List<Product> getProductsByLow() {
+		String hql = "FROM Product WHERE is_remove = 0 ORDER BY price ASC"; //低到高
+		Session session = factory.getCurrentSession();
+		List<Product> list = new ArrayList<>();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
 }

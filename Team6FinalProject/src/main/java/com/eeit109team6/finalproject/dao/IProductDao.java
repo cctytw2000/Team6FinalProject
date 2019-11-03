@@ -18,4 +18,6 @@ public interface IProductDao {
 	List<Product> getProductByKeyWord(String keyWord); //關鍵字查詢
 	void addCategory(Category category); //新增商品分類
 	Category getCategoryById(Integer category_id); //依分類id查詢分類，以便之後可新增、更新商品
+	List<Product> getProductsByHigh(); //依價格高到低查詢商品(不含已下架)
+	List<Product> getProductsByLow(); //依價格低到高查詢所有商品(不含已下架)
 }

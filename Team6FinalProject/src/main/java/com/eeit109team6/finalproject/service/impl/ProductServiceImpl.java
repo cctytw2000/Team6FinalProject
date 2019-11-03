@@ -86,4 +86,16 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCategoryById(category_id);
 	}
 
+	@Transactional
+	@Override
+	public List<Product> getProductsByHigh() {
+		return dao.getProductsByHigh();
+	}
+
+	@Transactional
+	@Override
+	public List<Product> getProductsByLow() {
+		return dao.getProductsByLow();
+	}
+
 }
