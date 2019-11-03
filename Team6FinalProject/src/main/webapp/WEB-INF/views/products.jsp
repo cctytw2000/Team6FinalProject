@@ -83,18 +83,26 @@
 		
 		<div class="row">
 			<c:forEach var="product" items="${products }">
-				<div class="col-sm-6 col-md-3" style="width: 360px; height: 360px">
-					<div class="thumbnail" style="width: 300px; height: 340px">
-					<div style="padding-left:25%">
-						<img width='150px' height='150px' src="<c:url value='/getPicture/${product.game_id}' />" />
-						</div>
-						<div class="caption">
-							<p align="center"style="max-width:280px;margin-top:10px"><a href="<spring:url value='product?game_id=${product.game_id }'/>" style="color:white">${product.name }</a></p>
-							<p align="center" style="color:pink">NT ${product.price }元</p>
-							<p align="center" style="color:pink">${product.category.category }</p>
-						</div>
-					</div>
-				</div>
+<!-- 				<div class="col-sm-6 col-md-3" style="width: 360px; height: 360px"> -->
+<!-- 					<div class="thumbnail" style="width: 300px; height: 340px"> -->
+<!-- 					<div style="padding-left:25%"> -->
+<%-- 						<img width='150px' height='150px' src="<c:url value='/getPicture/${product.game_id}' />" /> --%>
+<!-- 						</div> -->
+<!-- 						<div class="caption"> -->
+<%-- 							<p align="center"style="max-width:280px;margin-top:10px"><a href="<spring:url value='product?game_id=${product.game_id }'/>" style="color:white">${product.name }</a></p> --%>
+<%-- 							<p align="center" style="color:pink">NT ${product.price }元</p> --%>
+<%-- 							<p align="center" style="color:pink">${product.category.category }</p> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+			<div class="col-sm-3 " style="width: 400px; height: 500px; ">
+				<img class="card-img-top" src="<c:url value='/getPicture/${product.game_id}' />" alt="Card image" style="width:90%">
+    			<div class="card-body">
+      				<h6 class="card-title"><a href="<spring:url value='product?game_id=${product.game_id }'/>" style="color:white">${product.name }</a></h6>
+      				<p class="card-text">NT ${product.price }元</p>
+      				<a href="addToCart?game_id=${product.game_id }&count=1" class="btn btn-primary">加入購物車</a>
+    			</div>
+    		</div>
 			</c:forEach>
 		</div>
 	
