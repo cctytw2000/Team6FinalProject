@@ -57,14 +57,7 @@ public class ProductDaoImpl implements IProductDao {
 	}
 	
 	
-	@Override
-	public Category getCategoryByName(String name) {
-		String hql = "FROM Category WHERE category = :category";
 
-		Session session = factory.getCurrentSession();
-		Category c = (Category) session.createQuery(hql).setParameter("category",name).getSingleResult();
-		return c;
-	}
 	
 	
 	

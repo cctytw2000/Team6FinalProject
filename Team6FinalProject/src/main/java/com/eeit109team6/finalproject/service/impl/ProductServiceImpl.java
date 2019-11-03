@@ -73,19 +73,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getProductByKeyWord(String keyWord) {
 		return dao.getProductByKeyWord(keyWord);
 	}
-	@Transactional
-	@Override
-	public Category getCategoryByName(String name) {
 
-		return dao.getCategoryByName(name);
-	}
 
 	@Transactional
 	@Override
 	public void addCategory(Category category) {
 		dao.addCategory(category);
 	}
-
 	@Transactional
 	@Override
 	public Category getCategoryById(Integer category_id) {
