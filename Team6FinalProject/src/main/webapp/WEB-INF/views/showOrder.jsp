@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,14 @@
             </div>
     
 	<h2 align="center"  style="color:white">${sessionScope.mem.username }的訂單</h2><br>
+		<c:choose>
+				<c:when test="${empty sessionScope.orders }">
+					<div align="center">
+						<h3 style="color: white">您沒有訂單紀錄</h3>
+					</div>
+				</c:when>
+				
+				<c:otherwise>
 		<div align="center" style="width:60%;margin:15px auto">
 			<table border="1" style="text-align:center;width:100%">
  				<tr><th>訂單編號<th>訂單時間<th>訂單金額<th>狀態
@@ -47,6 +56,8 @@
 				</c:forEach>
 			</table>
 		</div>
+		</c:otherwise>
+			</c:choose>
 	 </div>
 
     </section>
