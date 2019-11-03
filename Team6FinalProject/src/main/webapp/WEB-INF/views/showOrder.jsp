@@ -33,15 +33,15 @@
             </div>
     
 	<h2 align="center"  style="color:white">${sessionScope.mem.username }的訂單</h2><br>
-		<div align="center">
-			<table border="1" style="text-align:center">
+		<div align="center" style="width:60%;margin:15px auto">
+			<table border="1" style="text-align:center;width:100%">
  				<tr><th>訂單編號<th>訂單時間<th>訂單金額<th>狀態
 				<c:forEach var="order" items="${orders}">
 					<tr><td><a href="showOrderDetail?order_id=${order.order_id }">${order.order_id }</a>
-					<td>${order.ordertime}
-					<td>${order.total}元
-					<td><c:choose>
-						<c:when test="${order.state == 1}">未付款</c:when>
+					<td>${order.ordertime.replace(".0","")}
+					<td><span style="color:yellow;font-size:23px">${order.total}</span><span style="font-size:23px;float:right">元</span>
+					<c:choose>
+						<c:when test="${order.state == 1}"> <td style="color:red">未付款</td> </c:when>
 					</c:choose>
 				</c:forEach>
 			</table>

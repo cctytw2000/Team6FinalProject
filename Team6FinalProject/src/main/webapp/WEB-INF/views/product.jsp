@@ -33,19 +33,25 @@
 	</div>
 	<!-- Latest news section end -->
 
-	<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
+	<div style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
 	<section class="container">
-		<div class="row" style="padding:30px">
+		<div class="row" style="padding:50px 15%">
 			<img width='200' height='200'
 				src="<c:url value='/getPicture/${product.game_id}'/>" />
-			<div class="col-md-5">
-				<h3 style="color:white">${product.name }</h3>
-				<p>發行商: ${product.publisher }</p>
-				<p>售價:NT${product.price }元</p>
-				<p>庫存: ${product.stock}</p>
-				<p>商品分類: ${product.category.category}</p>
-				<p>商品簡介:${product.game_desc }</p>
+				<h5 style="color:white;font-size:23px">${product.name }
+				<div style="color:white;padding-left:15px">
+				<p>商品分類: ${product.category.category}
+				<p>發行商: ${product.publisher}
+
+				<p style="font-size: 30px">售價:NT${product.price }元<span style="padding-left:50px">庫存:${product.stock}</span>
+				</div>
+				</h5>
+
+			<div>
+				
 				<p>
+				<h4 style="color:#878787">商品簡介:<p>${product.game_desc }</h4>
+	
 					<button type="button" class="btn btn-warning" onclick="window.location.href='products'">返回</button>
 					<a href='addToCart?game_id=${product.game_id }&count=1' class='btn btn-warning btn-large'> 
 						<span class='glyphicon-shopping-cart glyphicon'></span>加入購物車
