@@ -80,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
 		dao.addCategory(category);
 	}
 
+	@Transactional
 	@Override
 	public Category getCategoryById(Integer category_id) {
 		return dao.getCategoryById(category_id);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -21,7 +22,7 @@
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
 			
-				<c:forEach var="product" items="${products }">
+				<c:forEach var="product" items="${sessionScope.products }">
 					<div class="nt-item">
 						<span class="new">${product.category.category }</span><a href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span> 只要NT ${product.price }元</span>
 					</div>
