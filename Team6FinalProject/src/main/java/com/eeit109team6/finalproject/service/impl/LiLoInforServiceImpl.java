@@ -9,7 +9,7 @@ import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.service.ILiLoInforService;
 
 @Service
-public class ILiLoInforServiceImpl implements ILiLoInforService {
+public class LiLoInforServiceImpl implements ILiLoInforService {
 	ILiLoInforDao dao;
 
 	@Autowired
