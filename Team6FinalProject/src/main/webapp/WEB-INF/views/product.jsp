@@ -34,7 +34,7 @@
 	<!-- Latest news section end -->
 
 	<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
-	<section class="container" style="margin-left:25%">
+	<section class="container">
 		<div class="row" style="padding:30px">
 			<img width='200' height='200'
 				src="<c:url value='/getPicture/${product.game_id}'/>" />
