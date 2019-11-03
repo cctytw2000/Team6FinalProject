@@ -229,7 +229,19 @@
 								<li class="nav-item"><a class="nav-link" href="#">遊戲討論區</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
-								<li class="nav-item"><a class="nav-link" href="products">商城</a></li>
+<!-- 								<li class="nav-item"><a class="nav-link" href="products">商城</a></li> -->
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">商城</a>
+										
+										<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/products">所有商品</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/showCart">購物車</a>
+
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/showOrder">我的訂單</a>
+										</div>
+								
+								</li>
 								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
 										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 會員中心 </a>

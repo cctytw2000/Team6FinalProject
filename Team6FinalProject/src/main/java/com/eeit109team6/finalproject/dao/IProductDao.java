@@ -16,4 +16,6 @@ public interface IProductDao {
 	void updateProductById(Product product); //更新商品
 	List<Product> getAll(); //查詢所有商品(含已下架)
 	List<Product> getProductByKeyWord(String keyWord); //關鍵字查詢
+	void addCategory(Category category); //新增商品分類
+	Category getCategoryById(Integer category_id); //依分類id查詢分類，以便之後可新增、更新商品
 }

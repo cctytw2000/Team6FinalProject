@@ -14,9 +14,9 @@
 	<h1>更新商品資料</h1>
 	<form:form method="POST" modelAttribute="product" enctype="multipart/form-data">
 	<table>
-		<tr><td>商品分類:<td><form:select path="category">
-					<form:option value="-1">請挑選</form:option>
-					<form:options items="${categories }"></form:options>
+		<tr><td>商品分類:<td><form:select path="category_">
+					<form:option value="${product.category.category_id }" label="${product.category.category }"/>
+					<form:options items="${categoryMap }"></form:options>
 				</form:select>
 		<tr><td>商品名稱:<td><form:input path="name" type="text" size="50px"/>
 		<tr><td>廠商名稱:<td><form:input path="publisher" type="text" size="50px"/>

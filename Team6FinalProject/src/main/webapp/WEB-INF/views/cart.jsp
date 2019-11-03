@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +29,21 @@
 
 
 
-    <section class="footer-top-section" style="height: 495px;">
+    <section class="footer-top-section" style="height: auto;">
         <div style="height: 378px" class="container">
-            <div class="footer-top-bg">
-                <img src="../Images/footer-top-bg.png" alt="">
-            </div>
 
 
 
-            <h2 align="center" style="color:white;">購物車</h2><br>
+
+    <h2 align="center" style="color:white;">購物車</h2><br>
+    <c:choose>
+		<c:when test="${empty sessionScope.cart or fn:length(sessionScope.cart.cartItems) eq 0 }">
+			<div align="center">
+				<h3 style="color:white">您的購物車是空的，趕緊去購物</h3>
+				<img src="<c:url value='/Images/emptycart-removebg.png' />"/>
+			</div>
+		</c:when>
+		<c:otherwise>
 	<div align="center" style="color:white;">
 		<table border="1" style="text-align:center">
 			<tr><th>商品編號<th>商品名稱<th>數量<th>金額<th>刪除
@@ -53,6 +60,8 @@
 			</form>
 		</table>
 	</div>
+		</c:otherwise>
+	</c:choose>
 	<div align="center" style="color:white;">
 		<br>
 		<table cellspacing="20">

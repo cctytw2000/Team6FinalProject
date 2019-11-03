@@ -96,4 +96,16 @@ public class CartController {
 		
 		return "cart";
 	}
+	
+	@RequestMapping("/showCart")
+	public String showCart(HttpSession session, Model model) {
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
+		return "cart";
+	}
 }

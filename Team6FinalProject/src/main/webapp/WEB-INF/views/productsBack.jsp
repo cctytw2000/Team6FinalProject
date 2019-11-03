@@ -17,11 +17,16 @@
 		商品分類<select name="category">
 			<option value="-1">請挑選</option>
 			<c:forEach var="category" items="${categories }">
-				<option value="${category }">${category }</option>
+				<option value="${category.category }">${category.category }</option>
 			</c:forEach>
 		</select>
 		<input type="submit" value="查詢">
 	</form>
+	<h3>新增商品分類</h3>
+	<form action="productsBack/addCategory">
+		<input type="text" name="category">
+		<input type="submit" value="送出">
+	</form><br>
 	<h3><a href="productsBack/add">新增商品</a></h3><br>
 	<c:forEach var="product" items="${products }">
 		<table>
@@ -33,7 +38,7 @@
 				<td>NT ${product.price }元
 			<tr>
 				<td>商品分類
-				<td>${product.category }
+				<td>${product.category.category }
 		</table>
 		<form method="GET" action="products/update">
 			<input type="hidden" name="game_id" value="${product.game_id }">

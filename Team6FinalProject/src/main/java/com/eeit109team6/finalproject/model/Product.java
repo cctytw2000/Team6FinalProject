@@ -22,7 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="product")
 public class Product {
-	
+	@Transient
+	private Integer category_ ; 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer game_id;
@@ -40,6 +41,20 @@ public class Product {
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
+	
+	
+	
+	
+	
+	
+	
+	@Transient
+	public Integer getCategory_() {
+		return category_;
+	}
+	public void setCategory_(Integer category_) {
+		this.category_ = category_;
+	}
 	@Transient
 	private MultipartFile productImage;
 	

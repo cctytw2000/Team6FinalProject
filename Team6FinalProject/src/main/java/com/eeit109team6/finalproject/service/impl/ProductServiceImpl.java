@@ -74,4 +74,15 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getProductByKeyWord(keyWord);
 	}
 
+	@Transactional
+	@Override
+	public void addCategory(Category category) {
+		dao.addCategory(category);
+	}
+
+	@Override
+	public Category getCategoryById(Integer category_id) {
+		return dao.getCategoryById(category_id);
+	}
+
 }

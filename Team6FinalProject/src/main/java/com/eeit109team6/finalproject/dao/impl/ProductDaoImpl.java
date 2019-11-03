@@ -49,7 +49,7 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public List<Product> getProductsByCategory(Integer category_id) {
-		String hql = "FROM Product p WHERE p.category_id = :category_id AND p.is_remove = 0";
+		String hql = "FROM Product WHERE category_id = :category_id AND is_remove = 0";
 		List<Product> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("category_id", category_id).getResultList();
@@ -93,6 +93,19 @@ public class ProductDaoImpl implements IProductDao {
 		Session session = factory.getCurrentSession();
 		List<Product> list = session.createQuery(hql).getResultList();
 		return list;
+	}
+
+	@Override
+	public void addCategory(Category category) {
+		Session session = factory.getCurrentSession();
+		session.save(category);
+	}
+
+	@Override
+	public Category getCategoryById(Integer category_id) {
+		Session session = factory.getCurrentSession();
+		Category category = session.get(Category.class, category_id);
+		return category;
 	}
 
 }

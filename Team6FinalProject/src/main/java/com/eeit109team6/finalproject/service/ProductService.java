@@ -16,4 +16,6 @@ public interface ProductService {
 	void updateProductById(Product product);
 	List<Product> getAll();
 	List<Product> getProductByKeyWord(String keyWord);
+	void addCategory(Category category);
+	Category getCategoryById(Integer category_id);
 }

@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -72,8 +74,17 @@ public class ProductController {
 	// 提供新增商品時的表單--> addProduct.jsp
 	@RequestMapping(value = "/productsBack/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
+	
 		Product product = new Product();
 		model.addAttribute("product", product);
+		
+		List<Category> list = service.getAllCategories();
+		Map<Integer, String> categoryMap = new HashMap<>();
+		for(Category c : list) {
+			categoryMap.put(c.getCategory_id(), c.getCategory());
+		}
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "addProduct";
 	}
 
@@ -95,6 +106,9 @@ public class ProductController {
 				throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
 			}
 		}
+		Integer c_ = product.getCategory_();   //取回分類id
+		Category c = service.getCategoryById(c_);  //利用id取得Category
+		product.setCategory(c);  //設定商品的Category，會自動關聯
 		//測試上傳圖片
 		service.addProduct(product);
 		return "redirect:/productsBack";
@@ -105,6 +119,13 @@ public class ProductController {
 	public String getProductsByCategory(@RequestParam("category_id") Integer category_id, Model model) {
 		List<Product> products = service.getProductsByCategory(category_id);
 		model.addAttribute("products", products);
+		
+		Member mem = new Member();
+		mem.setAccount("sandy60108@yahoo.com.tw");
+		mem.setPassword("a14789632");
+		mem.setUsername("andy");
+		model.addAttribute("Member", mem);
+		
 		return "products";
 	}
 
@@ -151,6 +172,14 @@ public class ProductController {
 	public String getUpdateProductForm(@RequestParam("game_id") Integer game_id, Model model) {
 		Product product = service.getProductById(game_id);
 		model.addAttribute("product", product);
+		
+		List<Category> list = service.getAllCategories();
+		Map<Integer, String> categoryMap = new HashMap<>();
+		for(Category c : list) {
+			categoryMap.put(c.getCategory_id(), c.getCategory());
+		}
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "updateProduct";
 	}
 
@@ -159,7 +188,7 @@ public class ProductController {
 	public String processUpdateProductForm(@ModelAttribute("product") Product product) {
 		Date date = new Date();
 		product.setDate(date);
-		//上傳圖片
+		//上傳圖片begin
 		MultipartFile productImage = product.getProductImage();
 		String originalFilename = productImage.getOriginalFilename();
 		if(productImage != null && !productImage.isEmpty()) {
@@ -172,7 +201,12 @@ public class ProductController {
 				throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
 			}
 		}
-		//上傳圖片
+		//上傳圖片end
+		
+		Integer c_ = product.getCategory_();   //取回分類id
+		Category c = service.getCategoryById(c_);  //利用id取得Category
+		product.setCategory(c);
+		
 		service.updateProductById(product);;
 		return "redirect:/productsBack";
 	}
@@ -235,6 +269,7 @@ public class ProductController {
 		return b;
 	}
 	
+	//關鍵字查詢--> 商城前台 products.jsp
 	@RequestMapping("/getProductByKeyWord")
 	public String getProductByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
 		List<Product> list = service.getProductByKeyWord(keyWord);
@@ -247,5 +282,14 @@ public class ProductController {
 		model.addAttribute("Member", mem);
 		
 		return "products";
+	}
+	
+	//新增商品分類
+	@RequestMapping("/productsBack/addCategory")
+	public String addCategory(@RequestParam("category") String category) {
+		Category c = new Category();
+		c.setCategory(category);
+		service.addCategory(c);
+		return "redirect:/productsBack";
 	}
 }
