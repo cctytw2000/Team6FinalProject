@@ -3,6 +3,7 @@ package com.eeit109team6.finalproject.dao;
 import java.util.List;
 
 import com.eeit109team6.finalproject.model.Category;
+import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Product;
 
 public interface IProductDao {
@@ -20,4 +21,6 @@ public interface IProductDao {
 	Category getCategoryById(Integer category_id); //依分類id查詢分類，以便之後可新增、更新商品
 	List<Product> getProductsByHigh(); //依價格高到低查詢商品(不含已下架)
 	List<Product> getProductsByLow(); //依價格低到高查詢所有商品(不含已下架)
+	void addComment(Comment comment); //新增商品評論
+	List<Comment> getCommentById(Integer game_id); //依商品id取得評論
 }

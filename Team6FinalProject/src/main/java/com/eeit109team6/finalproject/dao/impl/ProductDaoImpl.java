@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IProductDao;
 import com.eeit109team6.finalproject.model.Category;
+import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Product;
 
 @Repository
@@ -129,6 +130,20 @@ public class ProductDaoImpl implements IProductDao {
 		Session session = factory.getCurrentSession();
 		List<Product> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		Session session = factory.getCurrentSession();
+		session.save(comment);
+	}
+
+	@Override
+	public List<Comment> getCommentById(Integer game_id) {
+		String hql = "FROM Comment WHERE game_id = :game_id AND is_remove = 0 ORDER BY time DESC";
+		Session session = factory.getCurrentSession();
+		List<Comment> list = session.createQuery(hql).setParameter("game_id", game_id).getResultList();
 		return list;
 	}
 
