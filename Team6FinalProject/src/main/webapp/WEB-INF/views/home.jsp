@@ -12,7 +12,7 @@
 	<meta charset="UTF-8">
 	<title>Game Book</title>
 
-<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+	<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<jsp:include page="header/homeHeader.jsp" />
+	<jsp:include page="header/homeHeader.jsp" />
 
 
 	<!-- Hero section -->
@@ -524,8 +524,8 @@
 
 
 
-<jsp:include page="footer/homeFooter.jsp" />
-	
+	<jsp:include page="footer/homeFooter.jsp" />
+
 
 
 </body>

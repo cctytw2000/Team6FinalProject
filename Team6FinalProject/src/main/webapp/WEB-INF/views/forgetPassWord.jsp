@@ -27,10 +27,10 @@
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
 
 
 
@@ -46,7 +46,7 @@
 
 
 
-<jsp:include page="header/header.jsp" />
+	<jsp:include page="header/header.jsp" />
 
 
 
@@ -62,9 +62,9 @@
 
 	<section class="footer-top-section">
 		<div style="height: 350px" class="container">
-        <div class="footer-top-bg">
-                <img src="<c:url value='/Images/footer-top-bg.png' />" />
-            </div>
+			<div class="footer-top-bg">
+				<img src="<c:url value='/Images/footer-top-bg.png' />" />
+			</div>
 
 			<form action="${pageContext.request.contextPath}/member/sendChangePassWordPage" method="post">
 
@@ -89,7 +89,7 @@
 
 
 
-<jsp:include page="footer/footer.jsp" />
+	<jsp:include page="footer/footer.jsp" />
 
 
 

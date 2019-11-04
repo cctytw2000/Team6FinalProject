@@ -73,13 +73,16 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
-	public String registerMember(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
-			RedirectAttributes redirectAttributes, HttpServletRequest request) {
-		String[] suppressedFields = result.getSuppressedFields();
-		if (suppressedFields.length > 0) {
-			throw new RuntimeException(
-					"嘗試輸入錯誤的欄位:" + org.springframework.util.StringUtils.arrayToCommaDelimitedString(suppressedFields));
-		}
+	public String registerMember(@RequestParam("account") String account, @RequestParam("password") String password,
+			@RequestParam("username") String username, Model model, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
+//		String[] suppressedFields = result.getSuppressedFields();
+
+		Member mem = new Member();
+//		if (suppressedFields.length > 0) {
+//			throw new RuntimeException(
+//					"嘗試輸入錯誤的欄位:" + org.springframework.util.StringUtils.arrayToCommaDelimitedString(suppressedFields));
+//		}
 
 		// ==============設定創建帳號時間=======================
 		Calendar rightNow = Calendar.getInstance();
@@ -90,8 +93,8 @@ public class MemberController {
 
 		// ==============密碼加密=======================
 		String key = "MickeyKittyLouis";
-		String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
-				.replace(" ", "");
+		String password_AES = CipherUtils.encryptString(key, password).replaceAll("[\\pP\\p{Punct}]", "").replace(" ",
+				"");
 		// ==============/密碼加密=======================
 
 		MemberLevel level = IMemberLevelService.findById(2);
@@ -113,7 +116,8 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		// ==============/設定token====================
-
+		mem.setAccount(account);
+		mem.setUsername(username);
 		mem.setPassword(password_AES);
 
 		mem.setType("General");
@@ -289,24 +293,26 @@ public class MemberController {
 		return "jump";
 	}
 
-
-
 	@InitBinder
 	public void whiteListion(WebDataBinder binder) {
 		binder.setAllowedFields("account", "password", "username");
 	}
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
-	public String memberLogin(@RequestParam("login") String login, @ModelAttribute("Member") Member mem, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes, HttpSession session,
-			HttpServletRequest request) {
+	public String memberLogin(@RequestParam("login") String login, @RequestParam("loginpassword") String password,
+			@RequestParam("loginaccount") String account, Model model, RedirectAttributes redirectAttributes,
+			HttpSession session, HttpServletRequest request) {
 		System.out.println("他點的是" + login);
+
+		Member mem = new Member();
+		mem.setAccount(account);
+		mem.setPassword(password);
 		if ("登入".equals(login)) {
 
 			String key = "MickeyKittyLouis";
 			String password_AES = CipherUtils.encryptString(key, mem.getPassword()).replaceAll("[\\pP\\p{Punct}]", "")
 					.replace(" ", "");
-			System.out.println("account:" + mem.getAccount());
+
 			mem.setPassword(password_AES);
 			mem.setType("General");
 

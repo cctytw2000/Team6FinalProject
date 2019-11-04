@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>跳轉網頁</title>
-    <meta http-equiv="refresh" content="5;url=${pageContext.request.contextPath}">
+<%--     <meta http-equiv="refresh" content="5;url=${pageContext.request.contextPath}"> --%>
 
 
     <link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
@@ -41,11 +41,11 @@
 <body>
 
 
-<jsp:include page="header/header.jsp" />
+    <jsp:include page="header/header.jsp" />
 
 
 
-    <section class="footer-top-section" style="height: 495px;">
+    <section class="footer-top-section" style="height: 100%;">
         <div style="height: 378px" class="container">
 
 
@@ -65,7 +65,7 @@
 
 
 
-<jsp:include page="footer/footer.jsp" />
+    <jsp:include page="footer/footer.jsp" />
 
 
 

@@ -22,10 +22,10 @@
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
-<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
+	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
 	<style>
 		.label1 {
 			color: white;
@@ -65,7 +65,8 @@
 					<nav class="navbar navbar-expand-lg navbar-dark">
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mr-auto">
-								<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}">首頁<span
+								<li class="nav-item active"><a class="nav-link"
+										href="${pageContext.request.contextPath}">首頁<span
 											class="sr-only">(current)</span></a></li>
 								<li class="nav-item"><a class="nav-link" href="#">最新消息</a>
 								</li>
@@ -80,7 +81,8 @@
 										<c:when test="${sessionScope.type != 'General'}">
 
 											<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
+												<a class="dropdown-item"
+													href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
 
 												<div class="dropdown-divider"></div>
 												<a class="dropdown-item" href="./LogOutMember.do">登出</a>
@@ -92,8 +94,9 @@
 
 
 											<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a> <a class="dropdown-item"
-													href="member/CheangePassword.jsp">修改密碼</a>
+												<a class="dropdown-item"
+													href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
+												<a class="dropdown-item" href="member/CheangePassword.jsp">修改密碼</a>
 												<div class="dropdown-divider"></div>
 												<a class="dropdown-item" href="./LogOutMember.do">登出</a>
 											</div>
@@ -108,8 +111,9 @@
 
 
 									<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a> <a class="dropdown-item"
-											href="#">修改密碼</a>
+										<a class="dropdown-item"
+											href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a> <a
+											class="dropdown-item" href="#">修改密碼</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="./LogOutMember.do">登出</a>
 									</div>
@@ -208,9 +212,9 @@
 
 	<section class="footer-top-section">
 		<div style="height: 378px" class="container">
-        <div class="footer-top-bg">
-                <img src="<c:url value='/Images/footer-top-bg.png' />" />
-            </div>
+			<div class="footer-top-bg">
+				<img src="<c:url value='/Images/footer-top-bg.png' />" />
+			</div>
 
 
 			<c:choose>
@@ -218,7 +222,7 @@
 					<form action="${pageContext.request.contextPath}/member/ChangeNewPassowrd" method="post">
 						<input type="hidden" name="account" value="${account}"> <input type="hidden" name="token"
 							value="${token}">
-							
+
 						<input type="hidden" name="oldpassword" value="Null">
 						<fieldset style="margin-left: 40%">
 							<div style="text-align: center; color: white">修改密碼</div>

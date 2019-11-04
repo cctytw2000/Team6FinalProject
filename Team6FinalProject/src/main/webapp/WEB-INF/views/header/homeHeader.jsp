@@ -68,8 +68,8 @@
 						<div class="modal-body">
 
 
-							<form:form action="${pageContext.request.contextPath}/member/register" method='POST'
-								modelAttribute="Member" class='form-horizontal' enctype="multipart/form-data">
+							<form action="${pageContext.request.contextPath}/member/register" method='POST'
+								class='form-horizontal' enctype="multipart/form-data">
 
 								<fieldset>
 
@@ -77,7 +77,7 @@
 									<div class="form-group">
 										<label for="account">帳號:</label>
 
-										<form:input id="account" name="account" path="account" type='text'
+										<input id="account" name="account" type='text'
 											class="form-control" style="display:inline" autocomplete="off" /><i
 											style="margin: -15px" id="check" class="fas fa-clipboard-check"></i><span
 											style="margin-left: 30px" id="account_msg"></span>
@@ -89,7 +89,7 @@
 									<div class="form-group">
 										<label for="password">密碼:</label>
 
-										<form:input id="password" name="password" path="password" type='password'
+										<input id="password" name="password" type='password'
 											class="form-control" style="display:inline" /><i style="margin: -20px"
 											onclick="showHide();" id="eye" class="fas fa-eye"></i><span
 											style="margin-left: 30px" id="msg_password"></span>
@@ -103,7 +103,7 @@
 									<div class="form-group">
 										<label for="username">姓名:</label>
 
-										<form:input id="username" name="username" path="username" type='text'
+										<input id="username" name="username" type='text'
 											class="form-control" style="display:inline" /><span id="msg"
 											style="margin: -15px"></span>
 
@@ -143,7 +143,7 @@
 									</div>
 
 								</fieldset>
-							</form:form>
+							</form>
 
 
 
@@ -162,14 +162,14 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form:form action="${pageContext.request.contextPath}/member/login" method='POST'
-								modelAttribute="Member" class='form-horizontal'>
+							<form action="${pageContext.request.contextPath}/member/login" method='POST'
+								 class='form-horizontal'>
 								<fieldset>
 									<div class="form-group">
 										<label for="usr">帳號:</label>
 
 
-										<form:input id="loginaccount" name="loginaccount" path="account" type='text'
+										<input id="loginaccount" name="loginaccount" type='text'
 											class="form-control" />
 
 
@@ -181,7 +181,7 @@
 
 
 
-										<form:input id="loginpassword" name="loginpassword" path="password"
+										<input id="loginpassword" name="loginpassword"
 											type='password' class="form-control" /><span id="passowrd_msg"></span>
 									</div>
 									<div style="width: 90%; margin-left: 30px">
@@ -207,7 +207,7 @@
 
 
 								</fieldset>
-							</form:form>
+							</form>
 						</div>
 
 					</div>

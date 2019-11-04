@@ -53,18 +53,18 @@
 
 
     <!-- Latest news section -->
-    <div class="latest-news-section">
-        <div class="ln-title">重要消息</div>
-        <div class="news-ticker">
-            <div class="news-ticker-contant">
-                <div class="nt-item"><span class="new">新聞</span> <a href="#">台灣獲得 LOL S2 冠軍</a></div>
-                <div class="nt-item"><span class="strategy">重要訊息</span> <a href="#">LOL 即將倒閉</a></div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 練笑話 準決賽</a> </div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講幹話 準決賽</a> </div>
-                <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a> </div>
-            </div>
-        </div>
-    </div>
+<!--     <div class="latest-news-section"> -->
+<!--         <div class="ln-title">重要消息</div> -->
+<!--         <div class="news-ticker"> -->
+<!--             <div class="news-ticker-contant"> -->
+<!--                 <div class="nt-item"><span class="new">新聞</span> <a href="#">台灣獲得 LOL S2 冠軍</a></div> -->
+<!--                 <div class="nt-item"><span class="strategy">重要訊息</span> <a href="#">LOL 即將倒閉</a></div> -->
+<!--                 <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 練笑話 準決賽</a> </div> -->
+<!--                 <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講幹話 準決賽</a> </div> -->
+<!--                 <div class="nt-item"><span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a> </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
     <!-- Latest news section end -->
 
 

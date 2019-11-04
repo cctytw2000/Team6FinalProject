@@ -5,10 +5,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>購物車</title>
+	<meta charset="UTF-8">
+	<title>購物車</title>
 </head>
+
 <body>
 	<jsp:include page="header/homeHeader.jsp" />
 
@@ -41,8 +43,7 @@
 			<h2 align="center" style="color: white;">購物車</h2>
 			<br>
 			<c:choose>
-				<c:when
-					test="${empty sessionScope.cart or fn:length(sessionScope.cart.cartItems) eq 0 }">
+				<c:when test="${empty sessionScope.cart or fn:length(sessionScope.cart.cartItems) eq 0 }">
 					<div align="center">
 						<h3 style="color: white">您的購物車是空的，趕緊去購物</h3>
 						<img src="<c:url value='/Images/emptycart-removebg.png' />" />
@@ -66,16 +67,15 @@
 								<th>商品名稱
 								<th>數量
 								<th>金額
-								<th>刪除 <c:forEach var="cartItem"
-										items="${sessionScope.cart.cartItems}">
-										<tr>
-											<td><input type="hidden" name="game_id"
-												value="${cartItem.product.game_id}">${cartItem.product.game_id}
-											<td>${cartItem.product.name}
-											<td>${cartItem.count}
-											<td>${cartItem.subtotal}元
-											<td><button type="button"
-													onclick="window.location.href='removeCartItem?game_id=${cartItem.product.game_id}'">刪除</button>
+								<th>刪除 <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
+							<tr>
+								<td><input type="hidden" name="game_id"
+										value="${cartItem.product.game_id}">${cartItem.product.game_id}
+								<td>${cartItem.product.name}
+								<td>${cartItem.count}
+								<td>${cartItem.subtotal}元
+								<td><button type="button"
+										onclick="window.location.href='removeCartItem?game_id=${cartItem.product.game_id}'">刪除</button>
 									</c:forEach>
 							<tr>
 								<td colspan="5" align="right">
