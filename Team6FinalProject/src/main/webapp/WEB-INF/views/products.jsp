@@ -99,7 +99,14 @@
 
 
 		<section class="container">
-
+			<c:choose>
+				<c:when test="${empty products }">
+					<div align="center">
+						<h3 style="color:white;">很抱歉搜尋不到您要的商品</h3>
+						<img src="<c:url value='/Images/noproduct.png' />" />
+					</div>
+				</c:when>
+			<c:otherwise>
 			<div class="row">
 				<c:forEach var="product" items="${products }">
 					<!-- 				<div class="col-sm-6 col-md-3" style="width: 360px; height: 360px"> -->
@@ -131,7 +138,7 @@
 					</div>
 				</c:forEach>
 			</div>
-
+			
 			<ul class="pagination justify-content-center"
 				style="background-color: none">
 				<li class="page-item"><a class="page-link"
@@ -143,6 +150,11 @@
 				<li class="page-item"><a class="page-link"
 					href="javascript:void(0);">Next</a></li>
 			</ul>
+			
+			</c:otherwise>
+			</c:choose>
+
+			
 
 		</section>
 	</div>
