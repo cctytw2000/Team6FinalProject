@@ -39,6 +39,7 @@
 
 			<h2 align="center" style="color:white">訂單編號${order.order_id }</h2><br>
 			<div align="center">
+				訂單時間${order.ordertime.replace(".0","")}<br><br>
 				<table border="1" style="text-align:center">
 					<tr>
 						<th>商品編號
@@ -53,8 +54,8 @@
 						<td>${orderItem.subtotal}元</td>
 					</tr>
 					</c:forEach>
-				</table>
-				訂單時間${order.ordertime}<br>
+				</table><br>
+				
 				總金額${order.total }元<p>
 			</div>
 		</div>

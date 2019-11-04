@@ -25,7 +25,8 @@ public class Orders {
 	private String ordertime;
 	private Integer total;
 	private Integer state;
-//	private Integer member_id;
+	@Transient
+	private Integer member_id;
 	private String address;
 	private boolean is_remove;
 	
@@ -89,5 +90,11 @@ public class Orders {
 	}
 	public void setIs_remove(boolean is_remove) {
 		this.is_remove = is_remove;
+	}
+	public Integer getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
 	}
 }

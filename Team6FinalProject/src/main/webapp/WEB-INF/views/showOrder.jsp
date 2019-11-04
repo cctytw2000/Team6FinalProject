@@ -11,7 +11,7 @@
 	<title>訂單</title>
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/homeHeader.jsp" />
 
 
@@ -32,7 +32,7 @@
 	</div>
 	<!-- Latest news section end -->
 
-	<section class="footer-top-section" style="height: 100%;">
+	<section class="footer-top-section" style="height: auto;">
 		<div style="height: auto;color:white;" class="container">
 			<div class="footer-top-bg">
 				<img src="../Images/footer-top-bg.png" alt="">
@@ -40,7 +40,7 @@
 
 			<h2 align="center" style="color:white">${sessionScope.mem.username }的訂單</h2><br>
 			<c:choose>
-				<c:when test="${empty sessionScope.orders }">
+				<c:when test="${empty orders }">
 					<div align="center">
 						<h3 style="color: white">您沒有訂單紀錄</h3>
 					</div>
@@ -73,8 +73,13 @@
 		</div>
 
 	</section>
+	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
 
-	<jsp:include page="footer/homeFooter.jsp" />
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 </body>
 
 </html>

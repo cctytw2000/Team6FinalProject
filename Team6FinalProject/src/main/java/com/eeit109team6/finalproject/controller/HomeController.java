@@ -1,6 +1,9 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IMemberService;
+import com.eeit109team6.finalproject.service.ProductService;
 
 @Controller
 public class HomeController {
-	IMemberService service;
+//	IMemberService service;
+	ProductService service;
+	@Autowired
+	public void setService(ProductService service) {
+		this.service = service;
+	}
+
 	ServletContext context;
 
 	@Autowired
@@ -27,18 +38,16 @@ public class HomeController {
 		this.context = context;
 	}
 
-	@Autowired
-	public void setService(IMemberService service) {
-		this.service = service;
-	}
+//	@Autowired
+//	public void setService(IMemberService service) {
+//		this.service = service;
+//	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
-//		Member mem = new Member();
-//		mem.setAccount("sandy60108@yahoo.com.tw");
-//		mem.setPassword("a14789632");
-//		mem.setUsername("andy");
-//		model.addAttribute("Member", mem);
+	public String index(Model model, HttpSession session) {
+
+//		List<Product> list = service.getAllProducts();
+//		session.setAttribute("products_home", list);
 
 		return "home";
 	}
