@@ -126,6 +126,45 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	}
 
 	@Override
+	public void openActive(Integer id) {
+		System.out.println("openActive");
+
+		Query query = sessionFactory.getCurrentSession().createQuery("from Member where member_id = ?1 ");
+		query.setParameter(1, id);
+
+
+		try {
+			Member mem = (Member) query.getSingleResult();
+			mem.setIsactive(1);
+			sessionFactory.getCurrentSession().update(mem);
+
+		} catch (NoResultException e) {
+			System.out.println("找不到此帳號");
+
+		}
+
+	}
+
+	@Override
+	public void closeActive(Integer id) {
+		System.out.println("closeActive");
+		Query query = sessionFactory.getCurrentSession().createQuery("from Member where member_id = ?1 ");
+		query.setParameter(1, id);
+
+
+		try {
+			Member mem = (Member) query.getSingleResult();
+			mem.setIsactive(0);
+			sessionFactory.getCurrentSession().update(mem);
+
+		} catch (NoResultException e) {
+			System.out.println("找不到此帳號");
+
+		}
+
+	}
+
+	@Override
 	public boolean forgetPwd(Member m) {
 
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member where account = ?1 and type = ?2");

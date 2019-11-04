@@ -32,4 +32,8 @@ public interface IMemberDao {
 
 	public Member findByAccount(Member m);
 
+	void openActive(Integer id);
+
+	void closeActive(Integer id);
+
 }

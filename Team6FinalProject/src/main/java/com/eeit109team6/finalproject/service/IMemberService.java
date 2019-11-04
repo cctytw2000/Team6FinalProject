@@ -29,4 +29,8 @@ public interface IMemberService {
 
 	public Member checkAccount(String account);
 
+	void openActive(Integer id);
+
+	void closeActive(Integer id);
+
 }

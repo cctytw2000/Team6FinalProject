@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Properties;
 
@@ -285,6 +286,22 @@ public class MemberController {
 		boolean repeatAnswer = MemService.checkAccount(mem);
 		System.out.println("repeatAnswer" + repeatAnswer);
 		return repeatAnswer;
+	}
+
+	@RequestMapping(value = "/member/changeActive", method = RequestMethod.POST)
+	public @ResponseBody Boolean changeActive(@RequestParam("id") Integer id, @RequestParam("type") String type,
+			@RequestParam("action") String action) {
+		System.out.println("id=" + id);
+		System.out.println("type=" + type);
+		System.out.println("action=" + action);
+		if ("close".equals(action)) {
+			MemService.closeActive(id);
+			return true;
+		} else {
+			MemService.openActive(id);
+			return true;
+		}
+
 	}
 
 	@RequestMapping(value = "/jump")
@@ -596,6 +613,28 @@ public class MemberController {
 			}
 
 		}
+
+	}
+
+	@RequestMapping(value = "/membersBack")
+	public String memberBack(Model model, HttpSession session, HttpServletRequest request) {
+
+		ArrayList<Member> member = MemService.findAll();
+		model.addAttribute("Memners", member);
+
+		return "membersBack";
+
+	}
+
+	@RequestMapping(value = "/member")
+	public String memberBack(@RequestParam("id") Integer id, Model model, HttpSession session,
+			HttpServletRequest request) {
+		System.out.println("id" + id);
+		Member m = new Member();
+		m.setMember_id(id);
+		Member member = MemService.findById(m);
+		model.addAttribute("member", member);
+		return "memberBack";
 
 	}
 
