@@ -53,17 +53,31 @@
 
 					<p>
 						<h4 style="color:pink">商品簡介:<p style="color:pink">${product.game_desc }</h4>
-
+						<div style="float:right">
 						<button type="button" class="btn btn-warning"
 							onclick="window.location.href='products'">返回</button>
 						<a href='addToCart?game_id=${product.game_id }&count=1' class='btn btn-warning btn-large'>
 							<span class='glyphicon-shopping-cart glyphicon'></span>加入購物車
 						</a>
+						</div>
 					</p>
 				</div>
 				
-				<div class="form-group" align="center">
-  					<nav class="navbar navbar-expand-sm ">
+					
+    				<c:forEach var="c" items="${comments }">
+    					<div class="media border p-3" style="width:600px">
+    
+    						<div class="media-body">
+     				 			<h4>${c.member_name } <small><i>Posted on ${c.time.replace(".0","")}</i></small></h4>
+      							<p>${c.comment }</p>      
+    						</div>
+  						</div>
+    				</c:forEach>
+      				
+      				
+      				
+				<div class="form-group">
+  					<nav class="navbar navbar-expand-sm " style="padding-left:0px">
 						<form class="form-inline" action="addComment">
 							<input type="hidden" name="game_id" value="${product.game_id }">
 							<textarea class="form-control" rows="1" id="comment" name="comment" style="width:600px" placeholder="請輸入評論..."></textarea>
@@ -72,17 +86,6 @@
 					</nav>
 				</div>
 				
-					
-    				<c:forEach var="c" items="${comments }">
-    					<div class="media border p-3" style="width:600px">
-    
-    						<div class="media-body">
-     				 			<h4>${c.member_id } <small><i>Posted on ${c.time.replace(".0","")}</i></small></h4>
-      							<p>${c.comment }</p>      
-    						</div>
-  						</div>
-    				</c:forEach>
-      				
 				
 			</div>
 

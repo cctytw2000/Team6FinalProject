@@ -334,6 +334,18 @@ public class ProductController {
 	@RequestMapping("/addComment")
 	public String addComment(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,
 			Model model, HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("mem");
+		if(member == null) {
+			Member mem = new Member();
+			mem.setAccount("sandy60108@yahoo.com.tw");
+			mem.setPassword("a14789632");
+			mem.setUsername("andy");
+			model.addAttribute("Member", mem);
+			model.addAttribute("msg", "您必須先登入!");
+			return "jump";
+		}
+		
 		Comment c = new Comment();
 		
 		c.setComment(comment);
@@ -346,8 +358,7 @@ public class ProductController {
 		Product p = service.getProductById(game_id);
 		c.setProduct(p);
 		
-		Member member = (Member)session.getAttribute("mem");
-		c.setMember_id(member.getMember_id());
+		c.setMember_name(member.getUsername());
 		
 		c.setIs_remove(false);
 		
