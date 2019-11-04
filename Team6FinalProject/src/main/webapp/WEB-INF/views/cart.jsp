@@ -54,8 +54,7 @@
 							<tr>
 								<td><button type="button" class="btn btn-outline-warning"
 										onclick="window.location.href='products'">繼續購物</button>
-								<td><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='makeOrder'">確定購買</button>
+								
 						</table>
 					</div>
 				</c:when>
