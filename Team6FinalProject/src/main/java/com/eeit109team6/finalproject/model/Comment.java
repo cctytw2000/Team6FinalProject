@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="comment")
@@ -21,7 +22,7 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="GAME_ID" )
 	private Product product;
-	private Integer member_id;
+	private String member_name;
 	private boolean is_remove;
 	
 	public Integer getComment_id() {
@@ -54,11 +55,13 @@ public class Comment {
 	public void setIs_remove(boolean is_remove) {
 		this.is_remove = is_remove;
 	}
-	public Integer getMember_id() {
-		return member_id;
+	public String getMember_name() {
+		return member_name;
 	}
-	public void setMember_id(Integer member_id) {
-		this.member_id = member_id;
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
 	}
+	
+	
 	
 }
