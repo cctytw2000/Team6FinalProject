@@ -114,14 +114,10 @@
                                                     </tbody>
 
 
+    
 
                                                 </table>
-                                                <ul style="width:100%" class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                    <li class="page-item"><a id="1" class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a id="2" class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a id="3" class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                <ul id="pageBottom" style="width: 40%;margin: 15px auto;" class="pagination">
                                                 </ul>
                                             </div>
                                         </h5>
