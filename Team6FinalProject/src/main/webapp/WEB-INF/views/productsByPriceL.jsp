@@ -100,7 +100,7 @@
 
 		<section class="container">
 			<c:choose>
-				<c:when test="${empty pages }">
+				<c:when test="${empty pages.list }">
 					<div align="center">
 						<h3 style="color:white;">很抱歉搜尋不到您要的商品</h3>
 						<img src="<c:url value='/Images/noproduct.png' />" />
