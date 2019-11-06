@@ -106,6 +106,9 @@ public class CartController {
 		mem.setUsername("andy");
 		model.addAttribute("Member", mem);
 		
+		List<Product> list = service.getAllProducts();
+		session.setAttribute("products", list);
+		
 		return "cart";
 	}
 }

@@ -19,16 +19,22 @@ import com.eeit109team6.finalproject.model.Cart;
 import com.eeit109team6.finalproject.model.CartItem;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Orders;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.service.IMemberService;
 import com.eeit109team6.finalproject.service.OrderService;
+import com.eeit109team6.finalproject.service.ProductService;
 
 @Controller
 public class OrderController {
 	OrderService service;
+	ProductService serviceP;
+	
+	@Autowired
+	public void setServiceP(ProductService serviceP) {
+		this.serviceP = serviceP;
+	}
 
-	
-	
 	@Autowired
 	public void setService(OrderService service) {
 		this.service = service;
@@ -100,6 +106,9 @@ public class OrderController {
 		mem.setPassword("a14789632");
 		mem.setUsername("andy");
 		model.addAttribute("Member", mem);
+		
+		List<Product> listP = serviceP.getAllProducts();
+		session.setAttribute("products", listP);
 		
 		return "showOrder";
 	}

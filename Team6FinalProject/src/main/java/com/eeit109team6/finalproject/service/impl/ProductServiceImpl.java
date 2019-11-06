@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit109team6.finalproject.dao.IProductDao;
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.Page;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -41,8 +42,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public List<Product> getProductsByCategory(Integer category_id) {
-		return dao.getProductsByCategory(category_id);
+	public Page<Product> getProductsByCategory(Integer category_id, Integer currentPage, Integer rows) {
+		Page<Product> page = new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setRows(rows);
+		int totalCount = dao.getProductsTotalByCategory(category_id);
+		page.setTotalCount(totalCount);
+		int start = (currentPage - 1) * rows;
+		List<Product> list = dao.getProductsByCategory(category_id, start, rows);
+		page.setList(list);
+		int totalPage = (totalCount % rows) == 0 ? (totalCount/rows) : (totalCount/rows)+1;
+		page.setTotalPage(totalPage);
+		return page;
 	}
 
 	@Transactional
@@ -71,8 +82,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public List<Product> getProductByKeyWord(String keyWord) {
-		return dao.getProductByKeyWord(keyWord);
+	public Page<Product> getProductByKeyWord(String keyWord, Integer currentPage, Integer rows) {
+		Page<Product> page = new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setRows(rows);
+		int totalCount = dao.findTotalCountProductByKeyWord(keyWord);
+		page.setTotalCount(totalCount);
+		int start = (currentPage - 1) * rows;
+		List<Product> list = dao.getProductByKeyWord(keyWord, start, rows);
+		page.setList(list);
+		int totalPage = (totalCount % rows) == 0 ? (totalCount/rows) : (totalCount/rows)+1;
+		page.setTotalPage(totalPage);
+		return page;
 	}
 
 
@@ -89,14 +110,34 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public List<Product> getProductsByHigh() {
-		return dao.getProductsByHigh();
+	public Page<Product> getProductsByHigh(Integer currentPage, Integer rows) {
+		Page<Product> page = new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setRows(rows);
+		int totalCount = dao.findTotalCount();
+		page.setTotalCount(totalCount);
+		int start = (currentPage - 1) * rows;
+		List<Product> list = dao.getProductsByHigh(start, rows);
+		page.setList(list);
+		int totalPage = (totalCount % rows) == 0 ? (totalCount/rows) : (totalCount/rows)+1;
+		page.setTotalPage(totalPage);
+		return page;
 	}
 
 	@Transactional
 	@Override
-	public List<Product> getProductsByLow() {
-		return dao.getProductsByLow();
+	public Page<Product> getProductsByLow(Integer currentPage, Integer rows) {
+		Page<Product> page = new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setRows(rows);
+		int totalCount = dao.findTotalCount();
+		page.setTotalCount(totalCount);
+		int start = (currentPage - 1) * rows;
+		List<Product> list = dao.getProductsByLow(start, rows);
+		page.setList(list);
+		int totalPage = (totalCount % rows) == 0 ? (totalCount/rows) : (totalCount/rows)+1;
+		page.setTotalPage(totalPage);
+		return page;
 	}
 
 	@Transactional
@@ -105,9 +146,26 @@ public class ProductServiceImpl implements ProductService {
 		dao.addComment(comment);
 	}
 
+	@Transactional
 	@Override
 	public List<Comment> getCommentById(Integer game_id) {
 		return dao.getCommentById(game_id);
+	}
+
+	@Transactional
+	@Override
+	public Page<Product> findProductsByPage(Integer currentPage, Integer rows) {
+		Page<Product> page = new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setRows(rows);
+		int totalCount = dao.findTotalCount();
+		page.setTotalCount(totalCount);
+		int start = (currentPage - 1) * rows;
+		List<Product> list = dao.findByPage(start, rows);
+		page.setList(list);
+		int totalPage = (totalCount % rows) == 0 ? (totalCount/rows) : (totalCount/rows)+1;
+		page.setTotalPage(totalPage);
+		return page;
 	}
 
 }

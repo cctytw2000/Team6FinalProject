@@ -55,7 +55,7 @@
 						<h4 style="color:pink">商品簡介:<p style="color:pink">${product.game_desc }</h4>
 						<div style="float:right">
 						<button type="button" class="btn btn-warning"
-							onclick="window.location.href='products'">返回</button>
+							onclick="window.location.href='findProductsByPage'">返回</button>
 						<a href='addToCart?game_id=${product.game_id }&count=1' class='btn btn-warning btn-large'>
 							<span class='glyphicon-shopping-cart glyphicon'></span>加入購物車
 						</a>

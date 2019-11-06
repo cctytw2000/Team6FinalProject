@@ -48,18 +48,25 @@ public class ProductDaoImpl implements IProductDao {
 		return list;
 	}
 
+	
 	@Override
-	public List<Product> getProductsByCategory(Integer category_id) {
+	public int getProductsTotalByCategory(Integer category_id) {
 		String hql = "FROM Product WHERE category_id = :category_id AND is_remove = 0";
 		List<Product> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("category_id", category_id).getResultList();
-		return list;
+		
+		return list.size();
 	}
 	
-	
-
-	
+	@Override
+	public List<Product> getProductsByCategory(Integer category_id, Integer start, Integer rows) {
+		String hql = "FROM Product WHERE category_id = :category_id AND is_remove = 0";
+		List<Product> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).setParameter("category_id", category_id).setFirstResult(start).setMaxResults(rows).getResultList();
+		return list;
+	}
 	
 	
 
@@ -93,12 +100,22 @@ public class ProductDaoImpl implements IProductDao {
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
-
+	
 	@Override
-	public List<Product> getProductByKeyWord(String keyWord) {
+	public int findTotalCountProductByKeyWord(String keyWord) {
+		String hql = "FROM Product p where p.name LIKE'%"+keyWord+"%'";
+		List<Product> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		
+		return list.size();
+	}
+	
+	@Override
+	public List<Product> getProductByKeyWord(String keyWord, Integer start, Integer rows) {
 		String hql = "FROM Product p where p.name LIKE'%"+keyWord+"%'"; 
 		Session session = factory.getCurrentSession();
-		List<Product> list = session.createQuery(hql).getResultList();
+		List<Product> list = session.createQuery(hql).setFirstResult(start).setMaxResults(rows).getResultList();
 		return list;
 	}
 
@@ -116,20 +133,20 @@ public class ProductDaoImpl implements IProductDao {
 	}
 
 	@Override
-	public List<Product> getProductsByHigh() {
+	public List<Product> getProductsByHigh(Integer start, Integer rows) {
 		String hql = "FROM Product WHERE is_remove = 0 ORDER BY price DESC"; //高到低
 		Session session = factory.getCurrentSession();
 		List<Product> list = new ArrayList<>();
-		list = session.createQuery(hql).getResultList();
+		list = session.createQuery(hql).setFirstResult(start).setMaxResults(rows).getResultList();
 		return list;
 	}
 
 	@Override
-	public List<Product> getProductsByLow() {
+	public List<Product> getProductsByLow(Integer start, Integer rows) {
 		String hql = "FROM Product WHERE is_remove = 0 ORDER BY price ASC"; //低到高
 		Session session = factory.getCurrentSession();
 		List<Product> list = new ArrayList<>();
-		list = session.createQuery(hql).getResultList();
+		list = session.createQuery(hql).setFirstResult(start).setMaxResults(rows).getResultList();
 		return list;
 	}
 
@@ -144,6 +161,25 @@ public class ProductDaoImpl implements IProductDao {
 		String hql = "FROM Comment WHERE game_id = :game_id AND is_remove = 0 ORDER BY time DESC";
 		Session session = factory.getCurrentSession();
 		List<Comment> list = session.createQuery(hql).setParameter("game_id", game_id).getResultList();
+		return list;
+	}
+
+	@Override
+	public int findTotalCount() {
+		String hql = "FROM Product p WHERE p.is_remove = 0";
+		List<Product> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		
+		return list.size();
+	}
+
+	@Override
+	public List<Product> findByPage(int start, Integer rows) {
+		String hql = "FROM Product p WHERE p.is_remove = 0";
+		Session session = factory.getCurrentSession();
+		List<Product> list = session.createQuery(hql).setFirstResult(start).setMaxResults(rows).getResultList(); 
+	    
 		return list;
 	}
 

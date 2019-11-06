@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.Page;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -119,17 +120,20 @@ public class ProductController {
 
 	// 依照分類查詢商品
 	@RequestMapping("/queryCategory")
-	public String getProductsByCategory(@RequestParam("category_id") Integer category_id, Model model) {
-		List<Product> products = service.getProductsByCategory(category_id);
-		model.addAttribute("products", products);
+	public String getProductsByCategory(@RequestParam("category_id") Integer category_id,Integer currentPage,
+			Integer rows, Model model) {
+		if(currentPage == null || "".equals(currentPage+"")) {
+			currentPage=1;
+		}
+		if(rows == null || "".equals(rows+"")) {
+			rows=3;
+		}
+		Page<Product> page = service.getProductsByCategory(category_id, currentPage, rows);
+		model.addAttribute("pages", page);
 		
-		Member mem = new Member();
-		mem.setAccount("sandy60108@yahoo.com.tw");
-		mem.setPassword("a14789632");
-		mem.setUsername("andy");
-		model.addAttribute("Member", mem);
+		model.addAttribute("category_id", category_id);
 		
-		return "products";
+		return "productsByCategory";
 	}
 
 	// 查詢所有商品分類並存入Model
@@ -218,13 +222,7 @@ public class ProductController {
 		return "redirect:/productsBack";
 	}
 	
-	//取消
-//	@RequestMapping("/products/cancel")
-//	public String cancel(Model model) {
-//		List<Product> products = service.getAllProducts();
-//		model.addAttribute("products", products);
-//		return "redirect:/productsBack";
-//	}
+	
 	
 	// 查詢所有商品(含已下架)--> 商城後台 productsBack.jsp
 	@RequestMapping("/productsBack/all")
@@ -278,17 +276,22 @@ public class ProductController {
 	
 	//關鍵字查詢--> 商城前台 products.jsp
 	@RequestMapping("/getProductByKeyWord")
-	public String getProductByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
-		List<Product> list = service.getProductByKeyWord(keyWord);
-		model.addAttribute("products", list);
+	public String getProductByKeyWord( String keyWord, Model model,Integer currentPage,
+			Integer rows) {
+		if(currentPage == null || "".equals(currentPage+"")) {
+			currentPage=1;
+		}
+		if(rows == null || "".equals(rows+"")) {
+			rows=3;
+		}
+
 		
-		Member mem = new Member();
-		mem.setAccount("sandy60108@yahoo.com.tw");
-		mem.setPassword("a14789632");
-		mem.setUsername("andy");
-		model.addAttribute("Member", mem);
+		Page<Product> page = service.getProductByKeyWord(keyWord, currentPage, rows);
+		model.addAttribute("pages", page);
 		
-		return "products";
+		model.addAttribute("keyWord", keyWord);
+		
+		return "productsByKeyWord";
 	}
 	
 	//新增商品分類
@@ -301,33 +304,35 @@ public class ProductController {
 	}
 	
 	//低到高
-	@RequestMapping("queryCategoryByLow")
-	public String getProductByLow(Model model) {
-		List<Product> products = service.getProductsByLow();
-		model.addAttribute("products", products);
+	@RequestMapping("queryProductByLow")
+	public String getProductByLow(Integer currentPage, 
+			Integer rows, Model model, HttpSession session) {
+		if(currentPage == null || "".equals(currentPage+"")) {
+			currentPage=1;
+		}
+		if(rows == null || "".equals(rows+"")) {
+			rows=3;
+		}
+		Page<Product> page = service.getProductsByLow(currentPage, rows);
+		model.addAttribute("pages", page);
 		
-		Member mem = new Member();
-		mem.setAccount("sandy60108@yahoo.com.tw");
-		mem.setPassword("a14789632");
-		mem.setUsername("andy");
-		model.addAttribute("Member", mem);
-		
-		return "products";
+		return "productsByPriceL";
 	}
 	
 	//高到低
 	@RequestMapping("queryProductByHigh")
-	public String getProductByHigh(Model model) {
-		List<Product> products = service.getProductsByHigh();
-		model.addAttribute("products", products);
+	public String getProductByHigh(Integer currentPage, 
+			Integer rows, Model model, HttpSession session) {
+		if(currentPage == null || "".equals(currentPage+"")) {
+			currentPage=1;
+		}
+		if(rows == null || "".equals(rows+"")) {
+			rows=3;
+		}
+		Page<Product> page = service.getProductsByHigh(currentPage, rows);
+		model.addAttribute("pages", page);
 		
-		Member mem = new Member();
-		mem.setAccount("sandy60108@yahoo.com.tw");
-		mem.setPassword("a14789632");
-		mem.setUsername("andy");
-		model.addAttribute("Member", mem);
-		
-		return "products";
+		return "productsByPriceH";
 	}
 	
 	//新增商品評論
@@ -365,6 +370,26 @@ public class ProductController {
 		service.addComment(c);
 		
 		return "redirect:/product?game_id="+game_id;
+	}
+	
+	//依照頁碼查詢商品
+	@RequestMapping("/findProductsByPage")
+	public String findProductsByPage(Integer currentPage, 
+			Integer rows, Model model, HttpSession session) {
+		if(currentPage == null || "".equals(currentPage+"")) {
+			currentPage=1;
+		}
+		if(rows == null || "".equals(rows+"")) {
+			rows=3;
+		}
+		Page<Product> page = service.findProductsByPage(currentPage,rows);
+//		System.out.println(page);
+		model.addAttribute("pages", page);
+		
+		List<Product> list = service.getAllProducts();
+		session.setAttribute("products", list);
+		
+		return "products";
 	}
 	
 	

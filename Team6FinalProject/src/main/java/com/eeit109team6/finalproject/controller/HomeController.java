@@ -47,7 +47,7 @@ public class HomeController {
 	public String index(Model model, HttpSession session) {
 
 //		List<Product> list = service.getAllProducts();
-//		session.setAttribute("products_home", list);
+//		session.setAttribute("products", list);
 
 		return "home";
 	}
@@ -71,14 +71,9 @@ public class HomeController {
 			@RequestParam("type") String type, @RequestParam("username") String username, Model model) {
 
 		MemberDetail md = new MemberDetail();
-
-		
-		
 		md.setUsername(username);
 		md.setId(memberid);
 		md.setType(type);
-		
-
 		model.addAttribute("MemberDetail", md);
 
 		return "insertMemberDetail";
