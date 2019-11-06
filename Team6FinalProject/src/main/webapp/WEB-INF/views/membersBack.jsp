@@ -41,6 +41,7 @@
 				<tr>
 					<th>會員編號</th>
 					<th>會員帳號</th>
+					<th>帳號類型</th>
 					<th>會員姓名</th>
 					<th>帳號創建日期</th>
 					<th>會員狀態</th>
@@ -52,6 +53,7 @@
 						<td><a
 							href="<spring:url value='member?id=${member.member_id }'/>">${member.member_id }</a>
 						<td>${member.account }</td>
+						<td>${member.type }</td>
 						<td>${member.username }</td>
 						<td>${member.registeredtime.replace(".0","")}</td>
 
