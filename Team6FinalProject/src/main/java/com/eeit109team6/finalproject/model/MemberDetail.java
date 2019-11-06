@@ -15,6 +15,8 @@ import org.hibernate.annotations.Parameter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component(value = "memberDetail")
 @Scope(value = "prototype")
 @Entity

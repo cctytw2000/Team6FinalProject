@@ -30,6 +30,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -634,6 +635,16 @@ public class MemberController {
 		m.setMember_id(id);
 		Member member = MemService.findById(m);
 		model.addAttribute("member", member);
+		return "memberBack";
+
+	}
+
+	@RequestMapping(value = "/member/{id}.json")
+	public String loginImfo(@PathVariable("id") Integer memberId, Model model, HttpSession session,
+			HttpServletRequest request) {
+
+		ArrayList<LiLoInfo> infoList = LiLoInforService.findById(memberId);
+		model.addAttribute("infoList", infoList);
 		return "memberBack";
 
 	}

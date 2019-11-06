@@ -2,21 +2,18 @@ package com.eeit109team6.finalproject.config;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,23 +24,14 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "com.eeit109team6.finalproject.controller" 
-	,"com.eeit109team6.finalproject.config"
-	,"com.eeit109team6.finalproject.dao.impl"
-	,"com.eeit109team6.finalproject.service.impl"
-	
+@ComponentScan({ "com.eeit109team6.finalproject.controller", "com.eeit109team6.finalproject.config",
+		"com.eeit109team6.finalproject.dao.impl", "com.eeit109team6.finalproject.service.impl"
 
 })
 //public class WebAppConfig extends WebMvcConfigurerAdapter {   old
 @Component
-public class WebAppConfig implements WebMvcConfigurer  { // new
+public class WebAppConfig implements WebMvcConfigurer { // new
 
-	
-
-
-	
-	
-	
 	@Bean
 	public ViewResolver Resolver() {
 		System.out.println("WebAppConfig : WebMvcConfigurerAdapter : ViewResolver");
@@ -55,8 +43,8 @@ public class WebAppConfig implements WebMvcConfigurer  { // new
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-	    registry.addInterceptor(new LoginInterceptor());
-	  
+		registry.addInterceptor(new LoginInterceptor());
+
 	}
 
 	@Bean
@@ -72,21 +60,9 @@ public class WebAppConfig implements WebMvcConfigurer  { // new
 		registry.addResourceHandler("/JS/**").addResourceLocations("/WEB-INF/views/JS/");
 		registry.addResourceHandler("/Images/**").addResourceLocations("/WEB-INF/views/Images/");
 		registry.addResourceHandler("/icon-fonts/**").addResourceLocations("/WEB-INF/views/icon-fonts/");
-		
-		
-		
-		
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	@Override
 //	public void addCorsMappings(CorsRegistry registry) {
 //		registry.addMapping("/**");
@@ -116,5 +92,10 @@ public class WebAppConfig implements WebMvcConfigurer  { // new
 		resolver.setDefaultViews(views);
 		return resolver;
 
+	}
+
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer.defaultContentType(MediaType.APPLICATION_JSON);
 	}
 }

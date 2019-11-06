@@ -1,5 +1,7 @@
 package com.eeit109team6.finalproject.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,13 @@ public class LiLoInforServiceImpl implements ILiLoInforService {
 	public Boolean add(LiLoInfo l) {
 		// TODO Auto-generated method stub
 		return dao.add(l);
+	}
+	
+	@Transactional
+	@Override
+	public ArrayList<LiLoInfo> findById(Integer memberId) {
+
+		return dao.findById(memberId);
 	}
 
 }

@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="orders")
 public class Orders {
@@ -32,6 +34,7 @@ public class Orders {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id" )
+	@JsonIgnoreProperties("orders")
 	private Member member;
 	
 	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)

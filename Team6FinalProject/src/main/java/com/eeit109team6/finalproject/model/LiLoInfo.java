@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,10 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component(value = "liLoInfo")
 @Scope(value = "prototype")
@@ -26,6 +25,7 @@ public class LiLoInfo {
 	private String loginTime;
 	private String accountType;
 	private Integer isSuccess;
+
 	private Member member;
 	private Integer id ;
 
@@ -55,15 +55,12 @@ public class LiLoInfo {
 //
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MEMBERID" )
+	@JsonIgnore
 	public Member getMember() {
 		return member;
 	}
 
-//	@PrimaryKeyJoinColumn
-//	@OneToOne(fetch = FetchType.LAZY)
-//	public Member getMember() {
-//		return member;
-//	}
+
 
 	public void setMember(Member member) {
 		this.member = member;

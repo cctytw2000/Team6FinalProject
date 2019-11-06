@@ -24,6 +24,9 @@ import javax.persistence.Transient;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 // Test From Git Third
 //andy is a handsome boy.
 //test git abc
@@ -51,6 +54,7 @@ public class Member {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MEMBERLEVEL" )
+	@JsonIgnore
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
 	}
@@ -61,6 +65,7 @@ public class Member {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnore
 	public Set<Orders> getOrders() {
 		return orders;
 	}
@@ -71,6 +76,7 @@ public class Member {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnore
 	public Set<LiLoInfo> getLiLoInfo() {
 		return liLoInfo;
 	}
@@ -80,6 +86,7 @@ public class Member {
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	@JsonIgnore
 	public MemberDetail getMemberdetail() {
 		return memberdetail;
 	}
@@ -89,15 +96,6 @@ public class Member {
 	}
 
 	
-
-	
-	
-	
-	
-	
-	
-	
-
 
 	@Column(name = "ACCOUNT")
 	public String getAccount() {

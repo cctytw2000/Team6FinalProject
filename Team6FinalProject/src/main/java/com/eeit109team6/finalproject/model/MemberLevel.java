@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component(value = "memberLevel")
 @Scope(value = "prototype")
 @Entity
@@ -23,25 +25,18 @@ public class MemberLevel {
 	private Integer levelId;
 	private String levelName;
 
-	private Set<Member> member = new  LinkedHashSet<Member>();
-	
-	
+	private Set<Member> member = new LinkedHashSet<Member>();
 
-	@OneToMany(cascade=CascadeType.ALL , mappedBy = "memberlevel",fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "memberlevel", fetch = FetchType.LAZY)
+
 	public Set<Member> getMember() {
 		return member;
 	}
 
-
 	public void setMember(Set<Member> member) {
 		this.member = member;
 	}
-	
-	
-	
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getLevelId() {
