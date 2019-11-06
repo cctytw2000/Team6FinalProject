@@ -36,7 +36,7 @@
 
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/homeHeader.jsp" />
 
 
@@ -53,7 +53,7 @@
 
 
 	<div
-		style="height:100%;background-image: url(<c:url value='/Images/pattern.png' />)">
+		style="height:100%;">
 		<section class="container">
 			<div class="row" style="padding: 50px 15%">
 
@@ -88,23 +88,45 @@
 				</h5>
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
-
-    </div>
-    <div id="menu2" class="container tab-pane fade"><br>
-<h5 style="color: white; font-size: 23px">
+	<h5 style="color: white; font-size: 23px">
 					帳號ID:${member.member_id}
-					
-			
 					<div style="margin-top: 30px">
-							<c:forEach var="imfo" items="${member.liLoInfo }">
-						<p style="color: pink">請求IP:${imfo.ClientIP}</p>
-						<p style="color: pink">請求類型: ${imfo.type}</p>
-						<p style="color: pink">時間: ${imfo.loginTime}</p>
-						<p style="color: pink">帳號類型: ${imfo.accountType}</p>
-						<p style="color: pink">成功與否: ${imfo.isSuccess}</p>
-</c:forEach>
+						<p style="color: pink">身分證字號: ${member.memberdetail.idnumber}</p>
+						<p style="color: pink">性別: ${member.memberdetail.sex}</p>
+						<p style="color: pink">電話: ${member.memberdetail.tel}</p>
+						<p style="color: pink">地址: ${member.memberdetail.address}</p>
+						<p style="color: pink">生日:${member.memberdetail.birth}</p>
+
 					</div>
 				</h5>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+							<h5 style="color: white; font-size: 23px">
+								帳號ID:${member.member_id}
+
+
+								<div style="margin-top: 30px">
+									<table border="1" style="width:100%">
+										<tr>
+											<th>請求IP</th>
+											<th>請求類型</th>
+											<th>時間</th>
+											<th>帳號類型</th>
+											<th>成功與否</th>
+										</tr>
+
+										<c:forEach var="imfo" items="${member.liLoInfo }">
+
+											<tr>
+												<td>${imfo.clientIP}</td>
+												<td>${imfo.type}</td>
+												<td>${imfo.loginTime}</td>
+												<td>${imfo.accountType}</td>
+												<td>${imfo.isSuccess}</td>
+										</c:forEach>
+									</table>
+								</div>
+							</h5>
     </div>
   </div>
 </div>
@@ -121,7 +143,16 @@
 
 
 	</div>
-	<jsp:include page="footer/homeFooter.jsp" />
+	
+	
+	
+	
+	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 
 </body>
 

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class LiLoInfo {
 //	private Integer memberID;
 	private String type;
-	private String ClientIP;
+	private String clientIP;
 	private String loginTime;
 	private String accountType;
 	private Integer isSuccess;
@@ -70,11 +70,11 @@ public class LiLoInfo {
 	}
 
 	public String getClientIP() {
-		return ClientIP;
+		return clientIP;
 	}
 
 	public void setClientIP(String clientIP) {
-		ClientIP = clientIP;
+		this.clientIP = clientIP;
 	}
 
 	public String getType() {
