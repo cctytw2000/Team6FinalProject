@@ -101,7 +101,7 @@
 					</div>
 					<div>
 						<label>身分證字號：</label>
-						<p>${MemberDetial.memberdetail.idnumber.replace(3,7,"OOOO")}</p>
+						<p>${MemberDetial.memberdetail.idnumber}</p>
 					</div>
 
 				</div>

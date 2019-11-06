@@ -2,17 +2,23 @@ package com.eeit109team6.finalproject.config;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
@@ -29,9 +35,15 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 })
 //public class WebAppConfig extends WebMvcConfigurerAdapter {   old
+@Component
+public class WebAppConfig implements WebMvcConfigurer  { // new
 
-public class WebAppConfig implements WebMvcConfigurer { // new
+	
 
+
+	
+	
+	
 	@Bean
 	public ViewResolver Resolver() {
 		System.out.println("WebAppConfig : WebMvcConfigurerAdapter : ViewResolver");
@@ -39,6 +51,12 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+	    registry.addInterceptor(new LoginInterceptor());
+	  
 	}
 
 	@Bean
@@ -60,6 +78,8 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 		
 	}
 
+	
+	
 	
 	
 	

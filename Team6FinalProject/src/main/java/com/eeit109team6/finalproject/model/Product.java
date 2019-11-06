@@ -41,13 +41,20 @@ public class Product {
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+	private Set<Comment> comment = new LinkedHashSet<>();
 	
 	
 	
 	
 	
 	
-	
+	public Set<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
 	@Transient
 	public Integer getCategory_() {
 		return category_;

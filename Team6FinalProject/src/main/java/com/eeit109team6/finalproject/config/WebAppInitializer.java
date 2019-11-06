@@ -14,27 +14,22 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer implements WebApplicationInitializer  {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
+		implements WebApplicationInitializer {
 
-	
-	
-	
-	
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		System.out.println("WebAppInitializer : DispatcherServlet : getRootConfigClasses");
+
 		return new Class[] { RootAppConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		System.out.println("WebAppInitializer : DispatcherServlet : getServletConfigClasses");
-		return new Class[] { WebAppConfig.class };
+		return new Class[] { WebAppConfig.class, LoginInterceptor.class };
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		System.out.println("WebAppInitializer : DispatcherServlet : getServletMappings");
 		return new String[] { "/" };
 	}
 

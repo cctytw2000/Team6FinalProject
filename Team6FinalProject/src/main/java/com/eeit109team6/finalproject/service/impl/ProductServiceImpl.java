@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.IProductDao;
 import com.eeit109team6.finalproject.model.Category;
+import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -96,6 +97,17 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getProductsByLow() {
 		return dao.getProductsByLow();
+	}
+
+	@Transactional
+	@Override
+	public void addComment(Comment comment) {
+		dao.addComment(comment);
+	}
+
+	@Override
+	public List<Comment> getCommentById(Integer game_id) {
+		return dao.getCommentById(game_id);
 	}
 
 }

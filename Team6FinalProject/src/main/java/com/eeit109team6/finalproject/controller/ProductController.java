@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Category;
+import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
@@ -148,6 +150,10 @@ public class ProductController {
 		model.addAttribute("products", list);
 		Product product = service.getProductById(game_id);
 		model.addAttribute("product", product);
+		
+		List<Comment> comment = service.getCommentById(game_id);
+		model.addAttribute("comments", comment);
+		
 		return "product";
 	}
 
@@ -323,4 +329,43 @@ public class ProductController {
 		
 		return "products";
 	}
+	
+	//新增商品評論
+	@RequestMapping("/addComment")
+	public String addComment(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,
+			Model model, HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("mem");
+		if(member == null) {
+			Member mem = new Member();
+			mem.setAccount("sandy60108@yahoo.com.tw");
+			mem.setPassword("a14789632");
+			mem.setUsername("andy");
+			model.addAttribute("Member", mem);
+			model.addAttribute("msg", "您必須先登入!");
+			return "jump";
+		}
+		
+		Comment c = new Comment();
+		
+		c.setComment(comment);
+		
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date d = new Date();
+		String sd = sdFormat.format(d);
+		c.setTime(sd);
+		
+		Product p = service.getProductById(game_id);
+		c.setProduct(p);
+		
+		c.setMember_name(member.getUsername());
+		
+		c.setIs_remove(false);
+		
+		service.addComment(c);
+		
+		return "redirect:/product?game_id="+game_id;
+	}
+	
+	
 }
