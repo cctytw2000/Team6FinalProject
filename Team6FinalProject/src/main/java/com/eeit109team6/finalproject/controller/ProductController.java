@@ -166,6 +166,17 @@ public class ProductController {
 	public String listBack(Model model) {
 		List<Product> list = service.getAllProducts();
 		model.addAttribute("products", list);
+		List<Product> c_list = service.getCancelProducts();
+		model.addAttribute("cancelProduct", c_list);
+		Product product = new Product();
+		model.addAttribute("product", product);
+		List<Category> categories = service.getAllCategories();
+		Map<Integer, String> categoryMap = new HashMap<>();
+		for(Category c : categories) {
+			categoryMap.put(c.getCategory_id(), c.getCategory());
+		}
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "productsBack";
 	}
 
@@ -173,6 +184,15 @@ public class ProductController {
 	@RequestMapping("/productsBack/products/delete")
 	public String deleteProductById(@RequestParam("game_id") Integer game_id, Model model) {
 		service.deleteProductById(game_id);
+		List<Product> products = service.getAllProducts();
+		model.addAttribute("products", products);
+		return "redirect:/productsBack";
+	}
+	
+	// 將已下架商品重新上架--> 商城後台 productsBack.jsp
+	@RequestMapping("/productsBack/products/reAdd")
+	public String reAddProductById(@RequestParam("game_id") Integer game_id, Model model) {
+		service.reAddProductById(game_id);
 		List<Product> products = service.getAllProducts();
 		model.addAttribute("products", products);
 		return "redirect:/productsBack";
@@ -404,5 +424,38 @@ public class ProductController {
 			
 		return "productBack";
 	}
+	
+	// 新增商品--> 商城後台 productsBack.jsp
+		@RequestMapping(value = "/productsBack/addProduct")
+		public String addProduct(Integer category_id, String name, String publisher, Integer price, Integer stock,
+				String game_desc, Integer is_remove, MultipartFile productImage) {
+			Product product = new Product();
+			product.setName(name);
+			product.setPublisher(publisher);
+			product.setPrice(price);
+			product.setStock(stock);
+			product.setGame_desc(game_desc);
+			product.setIs_remove(is_remove);
+			Date date = new Date();
+			product.setDate(date);
+			//測試上傳圖片
+			
+			String originalFilename = productImage.getOriginalFilename();
+			if(productImage != null && !productImage.isEmpty()) {
+				try {
+					byte[] b = productImage.getBytes();
+					Blob blob = new SerialBlob(b);
+					product.setPhoto(blob);
+				} catch(Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
+				}
+			}
+			Category c = service.getCategoryById(category_id);  //利用id取得Category
+			product.setCategory(c);  //設定商品的Category，會自動關聯
+			//測試上傳圖片
+			service.addProduct(product);
+			return "redirect:/productsBack";
+		}
 	
 }

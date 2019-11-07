@@ -14,7 +14,8 @@ public interface IProductDao {
 	int getProductsTotalByCategory(Integer category_id); //計算依分類查詢商品的總數
 	List<Product> getProductsByCategory(Integer category_id, Integer start, Integer rows); //依照分類查詢商品(不含已下架)
 	void addProduct(Product product); //新增商品
-	void deleteProductById(int game_id); //刪除商品
+	void deleteProductById(int game_id); //刪除商品，將is_remove改為1，表示商品已下架，但資料庫依然有紀錄
+	void reAddProductById(int game_id); //重新上架商品，將is_remove改為0，表示將已下架商品重新上架
 	void updateProductById(Product product); //更新商品
 	List<Product> getAll(); //查詢所有商品(含已下架)
 	int findTotalCountProductByKeyWord(String keyWord); //計算關鍵字查詢資料總數
@@ -27,6 +28,7 @@ public interface IProductDao {
 	List<Comment> getCommentById(Integer game_id); //依商品id取得評論
 	int findTotalCount(); //查詢商品總記錄數量
 	List<Product> findByPage(int start, Integer rows); //依照頁碼查詢每頁商品
+	List<Product> getCancelProducts(); //查詢已下架商品
 	
 	
 }

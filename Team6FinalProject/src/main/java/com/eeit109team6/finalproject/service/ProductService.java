@@ -15,6 +15,7 @@ public interface ProductService {
 	Page<Product> getProductsByCategory(Integer category_id, Integer currentPage, Integer rows);
 	void addProduct(Product product);
 	void deleteProductById(int game_id);
+	void reAddProductById(int game_id);
 	void updateProductById(Product product);
 	List<Product> getAll();
 	Page<Product> getProductByKeyWord(String keyWord, Integer currentPage, Integer rows);
@@ -25,5 +26,6 @@ public interface ProductService {
 	void addComment(Comment comment);
 	List<Comment> getCommentById(Integer game_id);
 	Page<Product> findProductsByPage(Integer currentPage, Integer rows);
+	List<Product> getCancelProducts();
 	
 }
