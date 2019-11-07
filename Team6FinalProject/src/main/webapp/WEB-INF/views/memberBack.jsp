@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-<title>商品資料</title>
+<title>會員資訊</title>
 
 
 

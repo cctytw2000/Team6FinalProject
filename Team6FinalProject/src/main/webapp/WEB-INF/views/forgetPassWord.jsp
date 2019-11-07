@@ -8,14 +8,14 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>${msg}</title>
 	<!-- <link rel="stylesheet" href="CSS/RegisteredMember.css"> -->
 
 
 
 
 
-	<title>Game Book</title>
+
 
 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />

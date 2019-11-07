@@ -39,7 +39,7 @@ public class MemberServiceImpl implements IMemberService {
 		// TODO Auto-generated method stub
 
 	}
-
+	@Transactional
 	@Override
 	public ArrayList<Member> findAll() {
 		// TODO Auto-generated method stub
