@@ -27,7 +27,7 @@
                                     <a class="nav-link" href="#">首頁<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">最新消息</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/newsBack">消息管理</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">遊戲討論區</a>
