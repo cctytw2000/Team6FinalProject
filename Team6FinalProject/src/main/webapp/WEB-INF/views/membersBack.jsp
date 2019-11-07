@@ -35,7 +35,7 @@
 		<div align="center"
 			style="color: black; width: 60%; margin: 15px auto">
 			<h1>會員後台</h1>
-			<table border="1" border="1" style="text-align: center; width: 100%">
+			<table border="1" border="1" style="color:white;text-align: center; width: 100%">
 
 
 				<tr>
@@ -45,7 +45,7 @@
 					<th>會員姓名</th>
 					<th>帳號創建日期</th>
 					<th>會員狀態</th>
-					<th>更改狀態   <spring:url value='member?id=2'/> </th>
+					<th>更改狀態</th>
 				</tr>
 				<tbody id="memberInfo"></tbody>
 <%-- 				<c:forEach var="member" items="${Memners}"> --%>

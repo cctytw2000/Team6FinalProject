@@ -643,7 +643,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/membersBack")
 	public String memberBack(Model model, HttpSession session, HttpServletRequest request) {
-
+		System.out.println("/membersBack");
 		ArrayList<Member> member = MemService.findAll();
 		model.addAttribute("Memners", member);
 

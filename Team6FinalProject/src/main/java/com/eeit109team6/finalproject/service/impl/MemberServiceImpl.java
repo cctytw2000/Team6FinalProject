@@ -12,7 +12,6 @@ import com.eeit109team6.finalproject.model.MemberLevel;
 import com.eeit109team6.finalproject.service.IMemberService;
 
 @Service
-
 public class MemberServiceImpl implements IMemberService {
 	IMemberDao dao;
 
@@ -42,7 +41,7 @@ public class MemberServiceImpl implements IMemberService {
 	@Transactional
 	@Override
 	public ArrayList<Member> findAll() {
-		// TODO Auto-generated method stub
+		System.out.println("service findAll()");
 		return dao.findAll();
 	}
 
