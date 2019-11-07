@@ -216,20 +216,26 @@ public class ProductController {
 
 	// 更新商品--> 商城後台 productsBack.jsp
 	@RequestMapping(value = "/productsBack/products/update", method = RequestMethod.POST)
-	public String processUpdateProductForm(@ModelAttribute("product") Product product) {
+	public String processUpdateProductForm(@ModelAttribute("product") Product product, @RequestParam("game_id") Integer game_id) {
 		Date date = new Date();
 		product.setDate(date);
+		
 		//上傳圖片begin
 		MultipartFile productImage = product.getProductImage();
-		String originalFilename = productImage.getOriginalFilename();
-		if(productImage != null && !productImage.isEmpty()) {
-			try {
-				byte[] b = productImage.getBytes();
-				Blob blob = new SerialBlob(b);
-				product.setPhoto(blob);
-			} catch(Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
+		if(productImage.getSize() == 0) {
+			Product original = service.getProductById(game_id);
+			product.setPhoto(original.getPhoto());
+		}else {
+			String originalFilename = productImage.getOriginalFilename();
+			if(productImage != null && !productImage.isEmpty()) {
+				try {
+					byte[] b = productImage.getBytes();
+					Blob blob = new SerialBlob(b);
+					product.setPhoto(blob);
+				} catch(Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
+				}
 			}
 		}
 		//上傳圖片end
@@ -238,7 +244,7 @@ public class ProductController {
 		Category c = service.getCategoryById(c_);  //利用id取得Category
 		product.setCategory(c);
 		
-		service.updateProductById(product);;
+		service.updateProductById(product);
 		return "redirect:/productsBack";
 	}
 	

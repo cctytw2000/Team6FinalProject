@@ -98,6 +98,7 @@ public class ProductDaoImpl implements IProductDao {
 	@Override
 	public void updateProductById(Product product) {
 		Session session = factory.getCurrentSession();
+		session.clear();
 		session.update(product);		
 	}
 
