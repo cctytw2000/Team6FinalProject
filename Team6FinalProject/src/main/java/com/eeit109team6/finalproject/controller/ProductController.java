@@ -170,7 +170,7 @@ public class ProductController {
 	}
 
 	// 商品下架--> 商城後台 productsBack.jsp
-	@RequestMapping("/products/delete")
+	@RequestMapping("/productsBack/products/delete")
 	public String deleteProductById(@RequestParam("game_id") Integer game_id, Model model) {
 		service.deleteProductById(game_id);
 		List<Product> products = service.getAllProducts();
@@ -179,7 +179,7 @@ public class ProductController {
 	}
 
 	// 提供更新商品時的表單--> updateProduct.jsp
-	@RequestMapping(value = "/products/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/productsBack/products/update", method = RequestMethod.GET)
 	public String getUpdateProductForm(@RequestParam("game_id") Integer game_id, Model model) {
 		Product product = service.getProductById(game_id);
 		model.addAttribute("product", product);
@@ -195,7 +195,7 @@ public class ProductController {
 	}
 
 	// 更新商品--> 商城後台 productsBack.jsp
-	@RequestMapping(value = "/products/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/productsBack/products/update", method = RequestMethod.POST)
 	public String processUpdateProductForm(@ModelAttribute("product") Product product) {
 		Date date = new Date();
 		product.setDate(date);
@@ -392,5 +392,17 @@ public class ProductController {
 		return "products";
 	}
 	
+	// 查詢單筆商品詳細資料--> productBack.jsp
+	@RequestMapping("/productsBack/productBack")
+	public String getProductByIdToBack(@RequestParam("game_id") Integer game_id, Model model) {
+		
+		Product product = service.getProductById(game_id);
+		model.addAttribute("product", product);
+			
+		List<Comment> comment = service.getCommentById(game_id);
+		model.addAttribute("comments", comment);
+			
+		return "productBack";
+	}
 	
 }
