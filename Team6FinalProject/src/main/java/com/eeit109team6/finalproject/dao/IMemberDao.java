@@ -3,6 +3,7 @@ package com.eeit109team6.finalproject.dao;
 import java.util.ArrayList;
 
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberLevel;
 
 public interface IMemberDao {
 
@@ -35,5 +36,7 @@ public interface IMemberDao {
 	void openActive(Integer id);
 
 	void closeActive(Integer id);
+
+	void updateLevel(Integer id,MemberLevel level);
 
 }

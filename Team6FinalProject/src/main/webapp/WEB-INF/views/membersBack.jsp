@@ -29,7 +29,7 @@
 </head>
 <body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 
-	<jsp:include page="header/manageHeader.jsp" />
+    <jsp:include page="header/manageHeader.jsp" />
 
 	<section class="" style="height: 100%;">
 		<div align="center"
@@ -45,30 +45,31 @@
 					<th>會員姓名</th>
 					<th>帳號創建日期</th>
 					<th>會員狀態</th>
-					<th>更改狀態</th>
+					<th>更改狀態   <spring:url value='member?id=2'/> </th>
 				</tr>
-				<c:forEach var="member" items="${Memners}">
-					<tr>
+				<tbody id="memberInfo"></tbody>
+<%-- 				<c:forEach var="member" items="${Memners}"> --%>
+<!-- 					<tr> -->
 
-						<td><a
-							href="<spring:url value='member?id=${member.member_id }'/>">${member.member_id }</a>
-						<td>${member.account }</td>
-						<td>${member.type }</td>
-						<td>${member.username }</td>
-						<td>${member.registeredtime.replace(".0","")}</td>
+<!-- 						<td><a -->
+<%-- 							href="<spring:url value='member?id=${member.member_id }'/>">${member.member_id }</a> --%>
+<%-- 						<td>${member.account }</td> --%>
+<%-- 						<td>${member.type }</td> --%>
+<%-- 						<td>${member.username }</td> --%>
+<%-- 						<td>${member.registeredtime.replace(".0","")}</td> --%>
 
 
-						<c:choose>
-							<c:when test="${member.isactive == 0}">
-								<td style="color: red">封鎖</td>
-								<td><button onclick="openActive('${member.member_id}','${member.type}')" type="button">開通</button></td>
-							</c:when>
-							<c:otherwise>
-								<td style="color: green">開通</td>
-								<td><button onclick="closeActive('${member.member_id}','${member.type}')" type="button">封鎖</button></td>
-							</c:otherwise>
-						</c:choose>
-				</c:forEach>
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${member.isactive == 0}"> --%>
+<!-- 								<td style="color: red">封鎖</td> -->
+<%-- 								<td><button onclick="openActive('${member.member_id}','${member.type}')" type="button">開通</button></td> --%>
+<%-- 							</c:when> --%>
+<%-- 							<c:otherwise> --%>
+<!-- 								<td style="color: green">開通</td> -->
+<%-- 								<td><button onclick="closeActive('${member.member_id}','${member.type}')" type="button">封鎖</button></td> --%>
+<%-- 							</c:otherwise> --%>
+<%-- 						</c:choose> --%>
+<%-- 				</c:forEach> --%>
 				
 			</table>
 		</div>

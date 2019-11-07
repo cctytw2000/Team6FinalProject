@@ -3,6 +3,7 @@ package com.eeit109team6.finalproject.service;
 import java.util.ArrayList;
 
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberLevel;
 
 public interface IMemberService {
 	public Integer add(Member m);
@@ -32,5 +33,7 @@ public interface IMemberService {
 	void openActive(Integer id);
 
 	void closeActive(Integer id);
+
+	void updateLevel(Integer id, MemberLevel level);
 
 }
