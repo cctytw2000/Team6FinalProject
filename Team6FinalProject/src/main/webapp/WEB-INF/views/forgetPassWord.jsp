@@ -42,7 +42,7 @@
 
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 
 
 
@@ -89,7 +89,11 @@
 
 
 
-	<jsp:include page="footer/footer.jsp" />
+	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
 
 
 

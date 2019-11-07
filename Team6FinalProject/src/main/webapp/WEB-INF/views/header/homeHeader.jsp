@@ -299,7 +299,7 @@
 								<c:choose>
 										<c:when test="${sessionScope.level == 'admin'}">
 
-								<li class="nav-item"><a class="nav-link" href="manager">後台</a></li>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/manager">後台</a></li>
 										</c:when>
 										<c:otherwise>
 										</c:otherwise>
@@ -321,7 +321,7 @@
 								<li class="nav-item"><a class="nav-link" href="#">遊戲討論區</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
-								<li class="nav-item"><a class="nav-link" href="findProductsByPage">商城</a></li>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/findProductsByPage">商城</a></li>
 							</ul>
 						</div>
 					</nav>

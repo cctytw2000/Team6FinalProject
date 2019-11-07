@@ -108,7 +108,7 @@
 											<th>請求類型</th>
 											<th>時間</th>
 											<th>帳號類型</th>
-											<th>成功與否</th>
+											<th>請求狀態</th>
 										</tr>
 										<tbody id="infoBody">
 

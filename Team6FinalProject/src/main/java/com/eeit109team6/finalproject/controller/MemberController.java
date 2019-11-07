@@ -101,6 +101,7 @@ public class MemberController {
 
 		MemberLevel level = IMemberLevelService.findById(2);
 //		System.out.println("level==" + level.getLevelName());
+
 		// ==============設定token====================
 		KeyGenerator keyGen;
 		try {
@@ -543,7 +544,6 @@ public class MemberController {
 		System.out.println("token:" + token);
 		System.out.println("type:" + type);
 
-//		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
 		model.addAttribute("token", token);
 		model.addAttribute("account", account);
 		model.addAttribute("type", type);
@@ -554,7 +554,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/ChangeNewPassowrd", method = RequestMethod.POST)
 	public String ChangeNewPassowrd(@RequestParam("account") String account, @RequestParam("token") String token,
 			@RequestParam("newPassWord") String newPassWord, @RequestParam("oldpassword") String oldPassWord,
-			Model model, RedirectAttributes redirectAttributes) {
+			Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 		if ("Null".equals(oldPassWord)) {
 			Member mem = new Member();
 //			System.out.println("account:" + account);
@@ -574,9 +574,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem);
 			if (isSuccess) {
+				session.removeAttribute("username");
+				session.removeAttribute("token");
+				session.removeAttribute("account");
+				session.removeAttribute("member_id");
+				session.removeAttribute("mem");
+				session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
+				session.removeAttribute("username");
+				session.removeAttribute("token");
+				session.removeAttribute("account");
+				session.removeAttribute("member_id");
+				session.removeAttribute("mem");
+				session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
@@ -605,9 +617,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem, new_password_AES);
 			if (isSuccess) {
+				session.removeAttribute("username");
+				session.removeAttribute("token");
+				session.removeAttribute("account");
+				session.removeAttribute("member_id");
+				session.removeAttribute("mem");
+				session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
+				session.removeAttribute("username");
+				session.removeAttribute("token");
+				session.removeAttribute("account");
+				session.removeAttribute("member_id");
+				session.removeAttribute("mem");
+				session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
