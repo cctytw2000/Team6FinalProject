@@ -57,6 +57,8 @@
 				</table><br>
 				
 				總金額${order.total }元<p>
+				<button type="button" class="btn btn-outline-warning"
+										onclick="window.location.href='aioCheckOutOneTime?order_id=${order.order_id }'">確定付款</button>
 			</div>
 		</div>
 
