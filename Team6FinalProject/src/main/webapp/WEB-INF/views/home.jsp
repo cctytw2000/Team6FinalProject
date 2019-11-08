@@ -35,42 +35,18 @@
 
 
 	<!-- Hero section -->
-	<section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<div class="hs-item set-bg" data-setbg="Images/slider-1.jpg">
-				<div class="hs-text">
-					<div class="container">
-						<h2>
-							The Best <span>Games</span> Out There
-						</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-							malesuada <br> lorem maximus mauris scelerisque, at rutrum
-							nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus
-							faucibus finibus.
-						</p>
-						<a href="#" class="site-btn">Read More</a>
-					</div>
-				</div>
-			</div>
-			<div class="hs-item set-bg" data-setbg="Images/slider-2.jpg">
-				<div class="hs-text">
-					<div class="container">
-						<h2>
-							The Best <span>Games</span> Out There
-						</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-							malesuada <br> lorem maximus mauris scelerisque, at rutrum
-							nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus
-							faucibus finibus.
-						</p>
-						<a href="#" class="site-btn">Read More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- 	<section class="hero-section"> -->
+		
+		    <section style="background-color:black" style="width:100%;height:100%">
+	            <video style="height:100%;width:100%" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+	                <source src="./Movie/BlizzCon2019.mp4" type="video/mp4">
+	            </video> 
+    </section>
+		
+		
+		
+		
+<!-- 	</section> -->
 	<!-- Hero section end -->
 	<!-- Latest news section -->
 	<div class="latest-news-section">

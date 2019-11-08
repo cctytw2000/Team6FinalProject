@@ -228,7 +228,7 @@
 								</li>
 								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/discussion">遊戲討論區</a>
 								</li>
-								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/movies">影片區</a></li>
 <!-- 								<li class="nav-item"><a class="nav-link" href="products">商城</a></li> -->
 								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
 										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -320,7 +320,7 @@
 								</li>
 								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/discussion">遊戲討論區</a>
 								</li>
-								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/movies">影片區</a></li>
 								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/findProductsByPage">商城</a></li>
 							</ul>
 						</div>
