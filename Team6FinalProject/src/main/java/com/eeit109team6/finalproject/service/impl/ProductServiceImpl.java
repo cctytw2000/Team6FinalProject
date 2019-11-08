@@ -157,6 +157,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<Comment> getCommentById(Integer game_id) {
 		return dao.getCommentById(game_id);
 	}
+	
+	@Transactional
+	@Override
+	public void editComment(Integer comment_id, String comment) {
+		dao.editComment(comment_id, comment);
+	}
 
 	@Transactional
 	@Override
@@ -179,6 +185,8 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getCancelProducts() {
 		return dao.getCancelProducts();
 	}
+
+	
 
 	
 

@@ -25,6 +25,7 @@ public interface ProductService {
 	Page<Product> getProductsByLow(Integer currentPage, Integer rows); //依價格低到高查詢所有商品(不含已下架)
 	void addComment(Comment comment);
 	List<Comment> getCommentById(Integer game_id);
+	void editComment(Integer comment_id, String comment);
 	Page<Product> findProductsByPage(Integer currentPage, Integer rows);
 	List<Product> getCancelProducts();
 	

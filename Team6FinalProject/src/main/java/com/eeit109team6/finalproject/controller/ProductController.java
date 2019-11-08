@@ -398,6 +398,13 @@ public class ProductController {
 		return "redirect:/product?game_id="+game_id;
 	}
 	
+	@RequestMapping("/edditComment")
+	public String edditComment(@RequestParam("game_id") Integer game_id,
+			@RequestParam("comment_id") Integer comment_id, @RequestParam("comment") String comment) {
+		service.editComment(comment_id, comment);
+		return "redirect:/product?game_id="+game_id;
+	}
+	
 	//依照頁碼查詢商品
 	@RequestMapping("/findProductsByPage")
 	public String findProductsByPage(Integer currentPage, 

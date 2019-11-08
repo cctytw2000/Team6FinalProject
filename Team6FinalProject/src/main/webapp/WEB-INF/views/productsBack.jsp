@@ -27,7 +27,7 @@
 	<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
-	
+
 	
 </head>
 
@@ -136,9 +136,11 @@
 		</form>
 	</nav>
 	
+	
+	
 	</div>
 	
-	
+</div>	
 </div>
 
 

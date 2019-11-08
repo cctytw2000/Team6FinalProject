@@ -173,6 +173,13 @@ public class ProductDaoImpl implements IProductDao {
 		List<Comment> list = session.createQuery(hql).setParameter("game_id", game_id).getResultList();
 		return list;
 	}
+	
+	@Override
+	public void editComment(Integer comment_id, String comment) {
+		String hql = "update Comment set comment = :comment where comment_id = :comment_id";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("comment", comment).setParameter("comment_id", comment_id).executeUpdate();
+	}
 
 	@Override
 	public int findTotalCount() {
@@ -201,6 +208,8 @@ public class ProductDaoImpl implements IProductDao {
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
+
+	
 
 	
 
