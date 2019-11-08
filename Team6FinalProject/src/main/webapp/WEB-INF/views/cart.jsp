@@ -53,7 +53,7 @@
 						<table cellspacing="20">
 							<tr>
 								<td><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='products'">繼續購物</button>
+										onclick="window.location.href='findProductsByPage'">繼續購物</button>
 								
 						</table>
 					</div>
@@ -90,7 +90,7 @@
 								<td>總金額: ${sessionScope.cart.total}元
 								<td>
 								<td><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='products'">繼續購物</button>
+										onclick="window.location.href='findProductsByPage'">繼續購物</button>
 								<td><button type="button" class="btn btn-outline-warning"
 										onclick="window.location.href='makeOrder'">確定購買</button>
 						</table>
