@@ -67,6 +67,12 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteProductById(int game_id) {
 		dao.deleteProductById(game_id);		
 	}
+	
+	@Transactional
+	@Override
+	public void reAddProductById(int game_id) {
+		dao.reAddProductById(game_id);
+	}
 
 	@Transactional
 	@Override
@@ -167,5 +173,13 @@ public class ProductServiceImpl implements ProductService {
 		page.setTotalPage(totalPage);
 		return page;
 	}
+
+	@Transactional
+	@Override
+	public List<Product> getCancelProducts() {
+		return dao.getCancelProducts();
+	}
+
+	
 
 }

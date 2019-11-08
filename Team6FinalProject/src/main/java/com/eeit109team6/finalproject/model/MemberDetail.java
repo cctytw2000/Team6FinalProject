@@ -15,7 +15,7 @@ import org.hibernate.annotations.Parameter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component(value = "memberDetail")
 @Scope(value = "prototype")
@@ -60,6 +60,7 @@ public class MemberDetail {
 	private String type;
 
 	@Transient
+	@JsonIgnore
 	public String getType() {
 		return type;
 	}
@@ -69,6 +70,7 @@ public class MemberDetail {
 	}
 
 	@Transient
+	@JsonIgnore
 	public String getUsername() {
 		return username;
 	}
@@ -78,6 +80,7 @@ public class MemberDetail {
 	}
 
 	@Transient
+	@JsonIgnore
 	public String getToken() {
 		return token;
 	}
@@ -87,6 +90,7 @@ public class MemberDetail {
 	}
 
 	@Transient
+	@JsonIgnore
 	public Integer getId() {
 		return id;
 	}
@@ -145,6 +149,7 @@ public class MemberDetail {
 
 	@PrimaryKeyJoinColumn
 	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	public Member getMember() {
 		return member;
 	}

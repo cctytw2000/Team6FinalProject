@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberLevel;
 
 @Repository
 public class MemberDaoJdbcImpl implements IMemberDao {
@@ -45,8 +46,10 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	}
 
 	@Override
-	public void update(Member m) {
-
+	public void updateLevel(Integer id,MemberLevel level) {
+		Member mem =sessionFactory.getCurrentSession().get(Member.class, id);
+		mem.setMemberlevel(level);
+		sessionFactory.getCurrentSession().update(mem);
 	}
 
 	@Override
@@ -266,6 +269,12 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 			return null;
 		}
 
+	}
+
+	@Override
+	public void update(Member m) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberLevel;
 import com.eeit109team6.finalproject.service.IMemberService;
 
 @Service
-
 public class MemberServiceImpl implements IMemberService {
 	IMemberDao dao;
 
@@ -38,10 +38,10 @@ public class MemberServiceImpl implements IMemberService {
 		// TODO Auto-generated method stub
 
 	}
-
+	@Transactional
 	@Override
 	public ArrayList<Member> findAll() {
-		// TODO Auto-generated method stub
+		System.out.println("service findAll()");
 		return dao.findAll();
 	}
 
@@ -113,6 +113,12 @@ public class MemberServiceImpl implements IMemberService {
 		System.out.println("closeActive");
 		dao.closeActive(id);
 
+	}
+	
+	@Transactional
+	@Override
+	public void updateLevel(Integer id,MemberLevel level) {
+		dao.updateLevel(id, level);
 	}
 
 }

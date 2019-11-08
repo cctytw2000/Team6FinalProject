@@ -85,10 +85,20 @@ public class ProductDaoImpl implements IProductDao {
 		product.setIs_remove(1);
 		session.update(product);
 	}
+	
+	//將is_remove改為0，表示將已下架商品重新上架
+	@Override
+	public void reAddProductById(int game_id) {
+		Session session = factory.getCurrentSession();
+		Product product = session.get(Product.class, game_id);
+		product.setIs_remove(0);
+		session.update(product);
+	}
 
 	@Override
 	public void updateProductById(Product product) {
 		Session session = factory.getCurrentSession();
+		session.clear();
 		session.update(product);		
 	}
 
@@ -182,5 +192,16 @@ public class ProductDaoImpl implements IProductDao {
 	    
 		return list;
 	}
+
+	@Override
+	public List<Product> getCancelProducts() {
+		String hql = "FROM Product p WHERE p.is_remove = 1";
+		List<Product> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	
 
 }

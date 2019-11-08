@@ -35,9 +35,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="membersBack">會員管理</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="productsBack">商品管理</a>
-                                </li>
+                                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">商城管理</a>
+										
+										<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/productsBack">商品管理</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/#">訂單管理</a>
+										</div>
+								
+								</li>
                             </ul>
                         </div>
                     </nav>

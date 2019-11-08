@@ -31,7 +31,7 @@
 </style>
 </head>
 
-<body style="height: 100%">
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 
 	<jsp:include page="header/homeHeader.jsp" />
 
@@ -100,7 +100,7 @@
 
 		<section class="container">
 			<c:choose>
-				<c:when test="${empty pages }">
+				<c:when test="${empty pages.list }">
 					<div align="center">
 						<h3 style="color:white;">很抱歉搜尋不到您要的商品</h3>
 						<img src="<c:url value='/Images/noproduct.png' />" />
@@ -183,8 +183,13 @@
 
 		</section>
 	</div>
-
-	<jsp:include page="footer/homeFooter.jsp" />
+    <!--====== Javascripts & Jquery ======-->
+    <script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/main.js"></script>
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 </body>
 
 </html>
