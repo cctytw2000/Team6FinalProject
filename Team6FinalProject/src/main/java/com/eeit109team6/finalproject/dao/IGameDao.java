@@ -5,7 +5,7 @@ import java.util.List;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 
-public interface IGameDAO {
+public interface IGameDao {
 	void addGame(Game game);
 	void addGameType(GameType gameType);
 	List<GameType> getAllGameTypes();

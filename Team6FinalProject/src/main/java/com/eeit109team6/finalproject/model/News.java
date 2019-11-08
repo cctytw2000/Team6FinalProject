@@ -16,24 +16,42 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="news")
 public class News {
 
+	@Transient
+	private Integer newsType_;
+	
+	@Id
+	@Column(name="NEWSID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsId;
 	private String title;
+	@Column(name="PUBLICATIONDATE")
 	private Timestamp publicationDate; 
+	@Column(name="ARTICLE")
 	private String article;
+	@Column(name="LIKES")
 	private Integer likes;
+	@Column(name="VIEWS")
 	private Integer views;
+	@Column(name="ISVISABLE")
 	private Boolean isVisable; 
+	@Column(name="IPADDRESS")
 	private String ipAddress;
+	@Column(name="LASTUPDATED")
 	private Timestamp lastUpdated;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
 	private Set<Message> messages = new HashSet<Message>(); 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
 	private Set<ArticlePicture> articlePictures =new HashSet<ArticlePicture>();
 //	@ManyToMany(mappedBy = "likedNewses")
 //	private Set<Member> memberLikes =new HashSet<Member>();
+	@JoinColumn(name = "NEWSTYPEID")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private NewsType newsType;
 //	private Member member;
 	
@@ -49,10 +67,15 @@ public class News {
 
 	public News() {
 	}
+	
+	public Integer getNewsType_() {
+		return newsType_;
+	}
 
-	@Id
-	@Column(name="NEWSID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public void setNewsType_(Integer newsType_) {
+		this.newsType_ = newsType_;
+	}
+
 	public Integer getNewsId() {
 		return newsId;
 	}
@@ -61,8 +84,6 @@ public class News {
 		this.newsId = newsId;
 	}
 
-	@JoinColumn(name = "NEWSTYPEID")
-	@ManyToOne(fetch = FetchType.LAZY)
 	public NewsType getNewsType() {
 		return newsType;
 	}
@@ -80,7 +101,6 @@ public class News {
 		this.title = title;
 	}
 
-	@Column(name="PUBLICATIONDATE")
 	public Timestamp getPublicationDate() {
 		return publicationDate;
 	}
@@ -89,7 +109,6 @@ public class News {
 		this.publicationDate = publicationDate;
 	}
 
-	@Column(name="ARTICLE")
 	public String getArticle() {
 		return article;
 	}
@@ -98,7 +117,6 @@ public class News {
 		this.article = article;
 	}
 
-	@Column(name="LIKES")
 	public Integer getLikes() {
 		return likes;
 	}
@@ -107,7 +125,6 @@ public class News {
 		this.likes = likes;
 	}
 
-	@Column(name="VIEWS")
 	public Integer getViews() {
 		return views;
 	}
@@ -116,7 +133,6 @@ public class News {
 		this.views = views;
 	}
 
-	@Column(name="ISVISABLE")
 	public Boolean getIsVisable() {
 		return isVisable;
 	}
@@ -125,7 +141,6 @@ public class News {
 		this.isVisable = isVisable;
 	}
 
-	@Column(name="IPADDRESS")
 	public String getIpAddress() {
 		return ipAddress;
 	}
@@ -134,7 +149,6 @@ public class News {
 		this.ipAddress = ipAddress;
 	}
 
-	@Column(name="LASTUPDATED")
 	public Timestamp getLastUpdated() {
 		return lastUpdated;
 	}
@@ -143,7 +157,6 @@ public class News {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
 	public Set<Message> getMessages() {
 		return messages;
 	}
@@ -152,7 +165,6 @@ public class News {
 		this.messages = messages;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
 	public Set<ArticlePicture> getArticlePictures() {
 		return articlePictures;
 	}

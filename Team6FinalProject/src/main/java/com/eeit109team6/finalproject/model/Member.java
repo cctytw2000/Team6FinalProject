@@ -170,6 +170,43 @@ public class Member {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+//	================================新消息要關聯的部分================================
+//	@ManyToMany
+//	@JoinTable(name="userlike",
+//	joinColumns = @JoinColumn(name="member_id"),
+//	inverseJoinColumns = @JoinColumn(name="newsid"))
+//	private Set<News> likedNewses = new HashSet<News>();
+//	
+//	public Set<News> getLikedNewses() {
+//		return likedNewses;
+//	}
+//
+//	public void setLikedNewses(Set<News> likedNewses) {
+//		this.likedNewses = likedNewses;
+//	}
+	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
+//	private Set<News> Newses = new HashSet<News>();
+//
+//	public Set<News> getNewses() {
+//		return Newses;
+//	}
+//
+//	public void setNewses(Set<News> newses) {
+//		Newses = newses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "message", cascade = CascadeType.ALL)
+//	private Set<Message> messages = new HashSet<Message>();
+//
+//	public Set<Message> getMessages() {
+//		return messages;
+//	}
+//
+//	public void setMessages(Set<Message> messages) {
+//		this.messages = messages;
+//	}
 
 
 

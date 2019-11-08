@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeit109team6.finalproject.dao.IGameDAO;
+import com.eeit109team6.finalproject.dao.IGameDao;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.service.IGameService;
@@ -17,10 +17,10 @@ public class GameServiceImpl implements IGameService {
 	public GameServiceImpl() {
 	}
 	
-	IGameDAO dao;
+	IGameDao dao;
 	
 	@Autowired
-	public void setDao(IGameDAO dao) {
+	public void setDao(IGameDao dao) {
 		this.dao = dao;
 	}
 

@@ -9,6 +9,7 @@ import com.eeit109team6.finalproject.model.NewsType;
 public interface INewsService {
 	void addNewsType(NewsType newsType);
 	NewsType getNewsTypeById(Integer newsTypeId);
+	List<NewsType> getAllNewsTypes();
 //====================================================未完成====================================================		
 	List<News> getAllNews(); 
 	void addNews(News news); 

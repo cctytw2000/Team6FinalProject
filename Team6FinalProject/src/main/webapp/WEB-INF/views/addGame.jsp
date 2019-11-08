@@ -27,7 +27,8 @@
 </head>
 <body>
 	<h1>新增遊戲資料</h1>
-	<form:form action="${pageContext.request.contextPath}/newsBack/add"
+	<form:form
+		action="${pageContext.request.contextPath}/newsBack/addGame1"
 		method="POST" modelAttribute="game">
 		遊戲類別:<form:select path="gameType_">
 			<form:option value="-1">請挑選</form:option>
@@ -47,15 +48,11 @@
 			發行平台:
 			<form:input path="platform" type="text" />
 		<p>
-			<!-- 新聞類別預設遊戲介紹為1 -->
+			<!-- 消息類別預設遊戲介紹為1 -->
 			<form:hidden path="newsType_" value="1" />
 		<p>
 			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
 	</form:form>
-	<!-- GameController's value:/addGame/cancel -->
-
-	<button onclick="GoBack()">取消</button>
-
-
 </body>
 </html>

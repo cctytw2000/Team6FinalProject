@@ -8,12 +8,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eeit109team6.finalproject.dao.IGameDAO;
+import com.eeit109team6.finalproject.dao.IGameDao;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 
 @Repository
-public class GameDaoImpl implements IGameDAO {
+public class GameDaoImpl implements IGameDao {
 
 	public GameDaoImpl() {
 	}

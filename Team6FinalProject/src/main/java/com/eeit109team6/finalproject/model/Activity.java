@@ -1,8 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,28 +9,67 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "activity")
 public class Activity {
 
-	private Integer activityId;
-	private String activityName;
-	private Timestamp startingDate_time;
-	private Date startingDate;
-	private Date endingDate;
-	private String location;
-	private ActivityType activityType;
-	private NewsType newsType;
-
-	public Activity() {
-	}
+	@Transient
+	private Integer activityType_ ;
+	@Transient
+	private Integer newsType_ ;
 
 	@Id
 	@Column(name = "ACTIVITYID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer activityId;
+	@Column(name = "ACTIVITYNAME")
+	private String activityName;
+	@Column(name = "STARTINGDATE_TIME")
+	private String startingDate_time;
+	@Column(name = "STARTINGTIME_DATE")
+	private String startingTime_date;
+	@Column(name = "STARTINGDATE")
+	private String startingDate;
+	@Column(name = "ENDINGDATE")
+	private String endingDate;
+	@Column(name = "LOCATION")
+	private String location;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ACTIVITYTYPEID")
+	private ActivityType activityType;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "NEWSTYPEID")
+	private NewsType newsType;
+
+	public Activity() {
+	}
+	
+	public String getStartingTime_date() {
+		return startingTime_date;
+	}
+
+	public void setStartingTime_date(String startingTime_date) {
+		this.startingTime_date = startingTime_date;
+	}
+	
+	public Integer getActivityType_() {
+		return activityType_;
+	}
+
+	public void setActivityType_(Integer activityType_) {
+		this.activityType_ = activityType_;
+	}
+
+	public Integer getNewsType_() {
+		return newsType_;
+	}
+
+	public void setNewsType_(Integer newsType_) {
+		this.newsType_ = newsType_;
+	}
+
 	public Integer getActivityId() {
 		return activityId;
 	}
@@ -42,8 +78,7 @@ public class Activity {
 		this.activityId = activityId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ACTIVITYTYPEID")
+	
 	public ActivityType getActivityType() {
 		return activityType;
 	}
@@ -52,8 +87,6 @@ public class Activity {
 		this.activityType = activityType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "NEWSTYPEID")
 	public NewsType getNewsType() {
 		return newsType;
 	}
@@ -62,7 +95,6 @@ public class Activity {
 		this.newsType = newsType;
 	}
 
-	@Column(name = "ACTIVITYNAME")
 	public String getActivityName() {
 		return activityName;
 	}
@@ -71,34 +103,30 @@ public class Activity {
 		this.activityName = activityName;
 	}
 
-	@Column(name = "STARTINGDATE_TIME")
-	public Timestamp getStartingDate_time() {
+	public String getStartingDate_time() {
 		return startingDate_time;
 	}
 
-	public void setStartingDate_time(Timestamp startingDate_time) {
+	public void setStartingDate_time(String startingDate_time) {
 		this.startingDate_time = startingDate_time;
 	}
 
-	@Column(name = "STARTINGDATE")
-	public Date getStartingDate() {
+	public String getStartingDate() {
 		return startingDate;
 	}
 
-	public void setStartingDate(Date startingDate) {
+	public void setStartingDate(String startingDate) {
 		this.startingDate = startingDate;
 	}
 
-	@Column(name = "ENDINGDATE")
-	public Date getEndingDate() {
+	public String getEndingDate() {
 		return endingDate;
 	}
 
-	public void setEndingDate(Date endingDate) {
+	public void setEndingDate(String endingDate) {
 		this.endingDate = endingDate;
 	}
 
-	@Column(name = "LOCATION")
 	public String getLocation() {
 		return location;
 	}

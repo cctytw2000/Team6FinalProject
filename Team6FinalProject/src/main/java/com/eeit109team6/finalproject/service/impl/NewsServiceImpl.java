@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeit109team6.finalproject.dao.INewsDAO;
+import com.eeit109team6.finalproject.dao.INewsDao;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
@@ -18,9 +18,9 @@ public class NewsServiceImpl implements INewsService{
 	public NewsServiceImpl(){
 	}
 	
-	INewsDAO dao;
+	INewsDao dao;
 	@Autowired
-	public void setDao(INewsDAO dao) {
+	public void setDao(INewsDao dao) {
 		this.dao = dao;
 	}
 	
@@ -34,6 +34,12 @@ public class NewsServiceImpl implements INewsService{
 	@Override
 	public NewsType getNewsTypeById(Integer newsTypeId) {
 		return dao.getNewsTypeById(newsTypeId);
+	}
+	
+	@Transactional
+	@Override
+	public List<NewsType> getAllNewsTypes() {
+		return dao.getAllNewsTypes();
 	}
 
 //====================================================未完成====================================================

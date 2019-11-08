@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -7,13 +8,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eeit109team6.finalproject.dao.INewsDAO;
+import com.eeit109team6.finalproject.dao.INewsDao;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 
 @Repository
-public class NewsDaoImpl implements INewsDAO {
+public class NewsDaoImpl implements INewsDao {
 
 	public NewsDaoImpl() {
 	}
@@ -36,6 +37,15 @@ public class NewsDaoImpl implements INewsDAO {
 		Session session = factory.getCurrentSession();
 		NewsType newsType = session.get(NewsType.class, newsTypeId);
 		return newsType;
+	}
+	
+	@Override
+	public List<NewsType> getAllNewsTypes() {
+		String hql = "From NewsType";
+		Session session = factory.getCurrentSession();
+		List<NewsType> list = new ArrayList<>();
+		list=session.createQuery(hql).getResultList();
+		return list;
 	}
 
 //====================================================未完成====================================================	

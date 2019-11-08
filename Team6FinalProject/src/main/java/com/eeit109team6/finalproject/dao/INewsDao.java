@@ -6,9 +6,10 @@ import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 
-public interface INewsDAO {
+public interface INewsDao {
 	void addNewsType(NewsType newsType);//新增新聞類別
 	NewsType getNewsTypeById(Integer newsTypeId);//取得newsTypeId
+	List<NewsType> getAllNewsTypes();
 //====================================================未完成====================================================		
 	List<News> getAllNews(); //查詢所有新聞
 	void addNews(News news); //新增新聞
