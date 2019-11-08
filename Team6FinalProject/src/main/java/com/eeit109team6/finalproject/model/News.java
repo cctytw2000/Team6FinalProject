@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,55 +20,112 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="news")
+@Table(name = "news")
 public class News {
 
 	@Transient
+	private Integer game_;
+	@Transient
 	private Integer newsType_;
-	
+	@Transient
+	private Integer activity_;
+
 	@Id
-	@Column(name="NEWSID")
+	@Column(name = "NEWSID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsId;
+	
+	@Column(name = "TITLE")
 	private String title;
-	@Column(name="PUBLICATIONDATE")
-	private Timestamp publicationDate; 
-	@Column(name="ARTICLE")
+	
+	@Column(name = "PUBLICATIONDATE")
+	private Date publicationDate;
+	
+	@Column(name = "ARTICLE")
 	private String article;
-	@Column(name="LIKES")
+	
+	@Column(name = "LIKES")
 	private Integer likes;
-	@Column(name="VIEWS")
+	
+	@Column(name = "VIEWS")
 	private Integer views;
-	@Column(name="ISVISABLE")
-	private Boolean isVisable; 
-	@Column(name="IPADDRESS")
+	
+	@Column(name = "ISVISABLE")
+	private Boolean isVisable;
+	
+	@Column(name = "IPADDRESS")
 	private String ipAddress;
-	@Column(name="LASTUPDATED")
-	private Timestamp lastUpdated;
+	
+	@Column(name = "LASTUPDATED")
+	private Date lastUpdated;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
-	private Set<Message> messages = new HashSet<Message>(); 
+	private Set<Message> messages = new HashSet<Message>();
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
-	private Set<ArticlePicture> articlePictures =new HashSet<ArticlePicture>();
+	private Set<ArticlePicture> articlePictures = new HashSet<ArticlePicture>();
+	//單向多對一
+	@JoinColumn(name = "GAMEID")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Game game;
+	@JoinColumn(name = "ACTIVITYID")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Activity activity;	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="MEMBER_ID")
+	private Member member;
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+		
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
 //	@ManyToMany(mappedBy = "likedNewses")
 //	private Set<Member> memberLikes =new HashSet<Member>();
 	@JoinColumn(name = "NEWSTYPEID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private NewsType newsType;
-//	private Member member;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="MEMBER_ID")
-//	public Member getMember() {
-//		return member;
-//	}
-//
-//	public void setMember(Member member) {
-//		this.member = member;
-//	}
 
 	public News() {
 	}
-	
+
+	public Integer getActivity_() {
+		return activity_;
+	}
+
+	public void setActivity_(Integer activity_) {
+		this.activity_ = activity_;
+	}
+
+	public Integer getGame_() {
+		return game_;
+	}
+
+	public void setGame_(Integer game_) {
+		this.game_ = game_;
+	}
+
 	public Integer getNewsType_() {
 		return newsType_;
 	}
@@ -92,7 +150,6 @@ public class News {
 		this.newsType = newsType;
 	}
 
-	@Column(name="TITLE")
 	public String getTitle() {
 		return title;
 	}
@@ -101,11 +158,11 @@ public class News {
 		this.title = title;
 	}
 
-	public Timestamp getPublicationDate() {
+	public Date getPublicationDate() {
 		return publicationDate;
 	}
 
-	public void setPublicationDate(Timestamp publicationDate) {
+	public void setPublicationDate(Date publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 
@@ -149,11 +206,11 @@ public class News {
 		this.ipAddress = ipAddress;
 	}
 
-	public Timestamp getLastUpdated() {
+	public Date getLastUpdated() {
 		return lastUpdated;
 	}
 
-	public void setLastUpdated(Timestamp lastUpdated) {
+	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 

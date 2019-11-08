@@ -37,12 +37,15 @@ public class Game {
 	private String platform;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "newstypeid")
+	@JoinColumn(name = "NEWSTYPEID")
 	private NewsType newsType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gametypeid")
+	@JoinColumn(name = "GAMETYPEID")
 	private GameType gameType;
+
+	public Game() {
+	}
 
 	public String getPublicationDate() {
 		return publicationDate;
@@ -52,25 +55,18 @@ public class Game {
 		this.publicationDate = publicationDate;
 	}
 
-	public Game() {
-	}
-
-	@Transient
 	public Integer getGameType_() {
 		return gameType_;
 	}
 
-	@Transient
 	public void setGameType_(Integer gameType_) {
 		this.gameType_ = gameType_;
 	}
 
-	@Transient
 	public Integer getNewsType_() {
 		return newsType_;
 	}
 
-	@Transient
 	public void setNewsType_(Integer newsType_) {
 		this.newsType_ = newsType_;
 	}

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IGameDao;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
+import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class GameDaoImpl implements IGameDao {
@@ -46,24 +47,35 @@ public class GameDaoImpl implements IGameDao {
 		GameType gameType = session.get(GameType.class, gameTypeId);
 		return gameType;
 	}
-//====================================================未完成====================================================
+	
 	@Override
-	public List<Game> getAllGame() {
-		String hql = "FROM Product";
+	public List<Game> getAllGames() {
+		String hql = "FROM Game";
 		List<Game> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
+	
 
+	@Override
+	public Game getGameById(Integer gameId) {
+		Session session = factory.getCurrentSession();
+		Game game = session.get(Game.class, gameId);
+		return game;
+	}
+	
 	@Override
 	public void addGame(Game game) {
 		Session session = factory.getCurrentSession();
 		session.save(game);
 	}
+//====================================================未完成====================================================
+
+	
 
 	@Override
-	public void deleteGameById(int gameId) {
+	public void deleteGameById(Integer gameId) {
 		Session session = factory.getCurrentSession();
 		Game game = session.get(Game.class, gameId);
 		session.delete(game);
@@ -76,11 +88,5 @@ public class GameDaoImpl implements IGameDao {
 		session.update(game);
 	}
 
-	@Override
-	public Game getGameById(int gameId) {
-		Session session = factory.getCurrentSession();
-		Game game = session.get(Game.class, gameId);
-		return game;
-	}
 
 }

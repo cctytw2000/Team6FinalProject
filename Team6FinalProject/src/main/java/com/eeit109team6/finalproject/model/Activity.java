@@ -16,9 +16,9 @@ import javax.persistence.Transient;
 public class Activity {
 
 	@Transient
-	private Integer activityType_ ;
+	private Integer activityType_;
 	@Transient
-	private Integer newsType_ ;
+	private Integer newsType_;
 
 	@Id
 	@Column(name = "ACTIVITYID")
@@ -45,7 +45,7 @@ public class Activity {
 
 	public Activity() {
 	}
-	
+
 	public String getStartingTime_date() {
 		return startingTime_date;
 	}
@@ -53,7 +53,7 @@ public class Activity {
 	public void setStartingTime_date(String startingTime_date) {
 		this.startingTime_date = startingTime_date;
 	}
-	
+
 	public Integer getActivityType_() {
 		return activityType_;
 	}
@@ -78,7 +78,6 @@ public class Activity {
 		this.activityId = activityId;
 	}
 
-	
 	public ActivityType getActivityType() {
 		return activityType;
 	}

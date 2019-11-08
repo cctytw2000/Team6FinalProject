@@ -10,9 +10,11 @@ public interface IGameDao {
 	void addGameType(GameType gameType);
 	List<GameType> getAllGameTypes();
 	GameType getGameTypeById(Integer gameTypeId); 
+	List<Game> getAllGames(); 
+	Game getGameById(Integer gameId);
 //====================================================未完成====================================================		
-	List<Game> getAllGame(); 
-	void deleteGameById(int gameId); 
+	
+	void deleteGameById(Integer gameId); 
 	void updateGameById(Game game); 
-	public Game getGameById(int gameId);
+	
 }

@@ -42,12 +42,20 @@ public class GameServiceImpl implements IGameService {
 		return dao.getGameTypeById(gameTypeId);
 	}
 	
-//====================================================未完成====================================================
 	@Transactional
 	@Override
-	public List<Game> getAllGame() {
-		return dao.getAllGame();
+	public List<Game> getAllGames() {
+		return dao.getAllGames();
 	}
+	
+	@Transactional
+	@Override
+	public Game getGameById(Integer gameId) {
+		return dao.getGameById(gameId);
+	}
+	
+//====================================================未完成====================================================
+	
 
 	@Transactional
 	@Override
@@ -68,11 +76,7 @@ public class GameServiceImpl implements IGameService {
 		
 	}
 
-	@Transactional
-	@Override
-	public Game getGameById(int gameId) {
-		return dao.getGameById(gameId);
-	}
+	
 
 	
 	

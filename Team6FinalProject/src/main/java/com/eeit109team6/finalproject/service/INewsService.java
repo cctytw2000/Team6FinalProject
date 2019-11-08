@@ -10,9 +10,10 @@ public interface INewsService {
 	void addNewsType(NewsType newsType);
 	NewsType getNewsTypeById(Integer newsTypeId);
 	List<NewsType> getAllNewsTypes();
+	void addNews(News news); 
 //====================================================未完成====================================================		
 	List<News> getAllNews(); 
-	void addNews(News news); 
+	
 	void deleteNewsById(int newsId); 
 	void updateNewsById(News news);
 }

@@ -41,6 +41,12 @@ public class NewsServiceImpl implements INewsService{
 	public List<NewsType> getAllNewsTypes() {
 		return dao.getAllNewsTypes();
 	}
+	
+	@Transactional
+	@Override
+	public void addNews(News news) {
+		dao.addNews(news);	
+	}
 
 //====================================================未完成====================================================
 	@Override
@@ -49,11 +55,7 @@ public class NewsServiceImpl implements INewsService{
 		return null;
 	}
 
-	@Override
-	public void addNews(News news) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void deleteNewsById(int newsId) {

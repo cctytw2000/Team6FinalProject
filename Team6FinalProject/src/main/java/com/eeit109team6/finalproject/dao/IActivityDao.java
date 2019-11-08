@@ -10,11 +10,13 @@ public interface IActivityDao {
 	List<ActivityType> getAllActivityTypes();
 	ActivityType getActivityTypeById(Integer activityTypeId);
 	void addActivity(Activity activity); 
+	List<Activity> getAllActivities();
+	public Activity getActivityById(Integer activityId);
 //====================================================未完成====================================================		
-	List<ActivityType> getAllActivities(); 
-	void deleteActivityById(int activityId); 
+	 
+	void deleteActivityById(Integer activityId); 
 	void updateActivityById(Activity activity); 
-	public Activity getActivityById(int activityId);
+	
 	
 	
 	

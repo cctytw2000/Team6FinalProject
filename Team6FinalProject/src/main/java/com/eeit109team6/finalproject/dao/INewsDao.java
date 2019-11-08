@@ -10,9 +10,10 @@ public interface INewsDao {
 	void addNewsType(NewsType newsType);//新增新聞類別
 	NewsType getNewsTypeById(Integer newsTypeId);//取得newsTypeId
 	List<NewsType> getAllNewsTypes();
+	void addNews(News news); //新增新聞
 //====================================================未完成====================================================		
 	List<News> getAllNews(); //查詢所有新聞
-	void addNews(News news); //新增新聞
+	
 	void deleteNewsById(int newsId); //刪除新聞
 	void updateNewsById(int newsId); //更新新聞
 }

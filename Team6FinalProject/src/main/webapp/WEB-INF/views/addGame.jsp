@@ -40,7 +40,7 @@
 		<p>
 			發行日期:
 			<form:input id="datepicker" name="publicationDate" autocomplete="off"
-				path="publicationDate" type="text" />
+				path="publicationDate" type="text" value=""/>
 		<p>
 			發行商名稱:
 			<form:input path="publisher" type="text" />

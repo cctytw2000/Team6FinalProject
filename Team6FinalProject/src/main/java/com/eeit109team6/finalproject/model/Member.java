@@ -185,18 +185,7 @@ public class Member {
 //	public void setLikedNewses(Set<News> likedNewses) {
 //		this.likedNewses = likedNewses;
 //	}
-	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
-//	private Set<News> Newses = new HashSet<News>();
-//
-//	public Set<News> getNewses() {
-//		return Newses;
-//	}
-//
-//	public void setNewses(Set<News> newses) {
-//		Newses = newses;
-//	}
-//	
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "message", cascade = CascadeType.ALL)
 //	private Set<Message> messages = new HashSet<Message>();
 //

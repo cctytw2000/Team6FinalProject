@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IActivityDao;
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
+import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 
 @Repository
@@ -53,20 +54,27 @@ public class ActivityDaoImpl implements IActivityDao {
 		Session session = factory.getCurrentSession();
 		session.save(activity);
 	}
+	
+	@Override
+	public List<Activity> getAllActivities() {
+		String hql = "FROM Activity";
+		List<Activity> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+
+	@Override
+	public Activity getActivityById(Integer activityId) {
+		Session session = factory.getCurrentSession();
+		Activity activity = session.get(Activity.class, activityId);
+		return activity;
+	}
 
 //====================================================未完成====================================================
 
-	@Override
-	public List<ActivityType> getAllActivities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public void deleteActivityById(int activityId) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void updateActivityById(Activity activity) {
@@ -74,10 +82,12 @@ public class ActivityDaoImpl implements IActivityDao {
 
 	}
 
+
+
 	@Override
-	public Activity getActivityById(int activityId) {
+	public void deleteActivityById(Integer activityId) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }

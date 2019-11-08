@@ -47,6 +47,12 @@ public class NewsDaoImpl implements INewsDao {
 		list=session.createQuery(hql).getResultList();
 		return list;
 	}
+	
+	@Override
+	public void addNews(News news) {
+		Session session = factory.getCurrentSession();
+		session.save(news);
+	}
 
 //====================================================未完成====================================================	
 	@Override
@@ -55,11 +61,7 @@ public class NewsDaoImpl implements INewsDao {
 		return null;
 	}
 
-	@Override
-	public void addNews(News news) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void deleteNewsById(int newsId) {

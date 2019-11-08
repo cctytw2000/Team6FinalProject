@@ -48,20 +48,24 @@ public class ActivityServiceImpl implements IActivityService {
 	public void addActivity(Activity activity) {
 		dao.addActivity(activity);
 	}
+	
+	@Transactional
+	@Override
+	public List<Activity> getAllActivities() {
+		return dao.getAllActivities();
+	}
+	
+	@Transactional
+	@Override
+	public Activity getActivityById(Integer activityId) {
+		return dao.getActivityById(activityId);
+	}
 
 //====================================================未完成====================================================
 
-	@Override
-	public List<ActivityType> getAllActivities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public void deleteActivityById(int activityId) {
-		// TODO Auto-generated method stub
 
-	}
 
 	@Override
 	public void updateActivityById(Activity activity) {
@@ -69,10 +73,13 @@ public class ActivityServiceImpl implements IActivityService {
 
 	}
 
+
+
+
 	@Override
-	public Activity getActivityById(int activityId) {
+	public void deleteActivityById(Integer activityId) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
