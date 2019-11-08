@@ -226,7 +226,7 @@
 											class="sr-only">(current)</span></a></li>
 								<li class="nav-item"><a class="nav-link" href="#">最新消息</a>
 								</li>
-								<li class="nav-item"><a class="nav-link" href="#">遊戲討論區</a>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/discussion">遊戲討論區</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
 <!-- 								<li class="nav-item"><a class="nav-link" href="products">商城</a></li> -->
@@ -318,7 +318,7 @@
 											class="sr-only">(current)</span></a></li>
 								<li class="nav-item"><a class="nav-link" href="#">最新消息</a>
 								</li>
-								<li class="nav-item"><a class="nav-link" href="#">遊戲討論區</a>
+								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/discussion">遊戲討論區</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#">影片區</a></li>
 								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/findProductsByPage">商城</a></li>
