@@ -17,12 +17,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-
 //		String url = request.getRequestURI();
-//		System.out.println("url==" + url);
+
+
+		// /project/member/login
 //
 //
 //
+
+//		if ("/Team6FinalProject/".equals(url) ) {
+//
+//			return true;
+//		}
 //		if (url.indexOf("/CSS/") > 0 || url.indexOf("/JS/") > 0 || url.indexOf("/Images/") > 0) {
 //
 //			return true;
@@ -40,8 +46,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 //		HttpSession session = request.getSession();
 //
 //		String username = (String) session.getAttribute("username");
-//		if (username != null) {
-//			return true;
+//
+//		if (url.indexOf("/member/logout") > 0 && username == null) {
+//			System.out.println("url.indexOf(\"/member/logout\")" + url.indexOf("/member/logout"));
+//			System.out.println("username == null" + username == null);
+//			return false;
+//		}else {
+//			System.out.println("url.indexOf(\"/member/logout\")" + url.indexOf("/member/logout"));
+//			System.out.println("username == null" + username == null);
+//	
+//			
 //		}
 //
 //
