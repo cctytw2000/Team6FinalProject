@@ -361,7 +361,7 @@ public class ProductController {
 		return "productsByPriceH";
 	}
 	
-	//新增商品評論
+	//新增商品評論-> 商品後台
 	@RequestMapping("/addComment")
 	public String addComment(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,
 			Model model, HttpSession session) {
@@ -398,11 +398,57 @@ public class ProductController {
 		return "redirect:/product?game_id="+game_id;
 	}
 	
+	//新增商品評論-> 商品後台
+		@RequestMapping("/productsBack/addComment")
+		public String addCommentProductBack(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,
+				Model model, HttpSession session) {
+			
+			Member member = (Member)session.getAttribute("mem");
+			if(member == null) {
+				Member mem = new Member();
+				mem.setAccount("sandy60108@yahoo.com.tw");
+				mem.setPassword("a14789632");
+				mem.setUsername("andy");
+				model.addAttribute("Member", mem);
+				model.addAttribute("msg", "您必須先登入!");
+				return "jump";
+			}
+			
+			Comment c = new Comment();
+			
+			c.setComment(comment);
+			
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date d = new Date();
+			String sd = sdFormat.format(d);
+			c.setTime(sd);
+			
+			Product p = service.getProductById(game_id);
+			c.setProduct(p);
+			
+			c.setMember_name(member.getUsername());
+			
+			c.setIs_remove(false);
+			
+			service.addComment(c);
+			
+			return "redirect:/productsBack/productBack?game_id="+game_id;
+		}
+	
+	//編輯商品評論
 	@RequestMapping("/edditComment")
 	public String edditComment(@RequestParam("game_id") Integer game_id,
 			@RequestParam("comment_id") Integer comment_id, @RequestParam("comment") String comment) {
 		service.editComment(comment_id, comment);
 		return "redirect:/product?game_id="+game_id;
+	}
+	
+	//刪除商品評論
+	@RequestMapping("/removeComment")
+	public String removeComment(@RequestParam("game_id") Integer game_id,
+			@RequestParam("comment_id") Integer comment_id) {
+		service.deleteCommentById(comment_id);
+		return "redirect:/productsBack/productBack?game_id="+game_id;
 	}
 	
 	//依照頁碼查詢商品

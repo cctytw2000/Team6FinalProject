@@ -163,6 +163,13 @@ public class ProductServiceImpl implements ProductService {
 	public void editComment(Integer comment_id, String comment) {
 		dao.editComment(comment_id, comment);
 	}
+	
+	@Transactional
+	@Override
+	public void deleteCommentById(int comment_id) {
+		dao.deleteCommentById(comment_id);
+	}
+
 
 	@Transactional
 	@Override
@@ -186,6 +193,7 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCancelProducts();
 	}
 
+	
 	
 
 	

@@ -180,6 +180,13 @@ public class ProductDaoImpl implements IProductDao {
 		Session session = factory.getCurrentSession();
 		session.createQuery(hql).setParameter("comment", comment).setParameter("comment_id", comment_id).executeUpdate();
 	}
+	
+	@Override
+	public void deleteCommentById(int comment_id) {
+		String hql = "update Comment set is_remove = 1 where comment_id = :comment_id";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("comment_id", comment_id).executeUpdate();
+	}
 
 	@Override
 	public int findTotalCount() {
@@ -208,6 +215,8 @@ public class ProductDaoImpl implements IProductDao {
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
+
+	
 
 	
 

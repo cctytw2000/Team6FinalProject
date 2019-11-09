@@ -26,6 +26,7 @@ public interface ProductService {
 	void addComment(Comment comment);
 	List<Comment> getCommentById(Integer game_id);
 	void editComment(Integer comment_id, String comment);
+	void deleteCommentById(int comment_id);
 	Page<Product> findProductsByPage(Integer currentPage, Integer rows);
 	List<Product> getCancelProducts();
 	

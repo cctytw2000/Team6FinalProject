@@ -26,6 +26,7 @@ public interface IProductDao {
 	List<Product> getProductsByLow(Integer start, Integer rows); //依價格低到高查詢所有商品(不含已下架)
 	void addComment(Comment comment); //新增商品評論
 	List<Comment> getCommentById(Integer game_id); //依商品id取得評論
+	void deleteCommentById(int comment_id); //依商品id刪除評論
 	void editComment(Integer comment_id, String comment); //更新商品評論
 	int findTotalCount(); //查詢商品總記錄數量
 	List<Product> findByPage(int start, Integer rows); //依照頁碼查詢每頁商品

@@ -66,8 +66,11 @@
     					<div class="media border p-3" style="width:600px">
     
     						<div class="media-body">
-     				 			<h4>${c.member_name } <small><i>Posted on ${c.time.replace(".0","")}</i></small></h4>
-      							<p>${c.comment }</p>      
+     				 			<h4 style="color: #BBFFEE">${c.member_name } 
+     				 				<small><i>Posted on ${c.time.replace(".0","")}</i></small>
+     				 				<small><i id="remove" onclick="window.location.href='<spring:url value='/removeComment?game_id=${product.game_id}&comment_id=${c.comment_id}'/>'">刪除</i></small>
+								</h4>
+      							<p id="${c.comment_id}" style="color: #FFFFBB">${c.comment }</p>      
     						</div>
   						</div>
     				</c:forEach>
