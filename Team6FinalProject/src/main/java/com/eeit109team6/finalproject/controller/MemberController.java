@@ -199,7 +199,6 @@ public class MemberController {
 			session.setAttribute("mem", member);
 			session.setAttribute("type", member.getType());
 			session.setAttribute("level", member.getMemberlevel().getLevelName());
-
 			return true;
 		} else {
 

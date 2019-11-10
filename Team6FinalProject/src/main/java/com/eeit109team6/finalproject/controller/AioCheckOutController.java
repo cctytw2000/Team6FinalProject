@@ -36,12 +36,17 @@ public class AioCheckOutController {
 	// 信用卡一次付清
 	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public @ResponseBody String aioCheckOutDevide(@RequestParam("order_id") Integer order_id, HttpSession session) {
-
+System.out.println("進來了");
 		Orders order = service.getOrderById(order_id);
 
 		all = new AllInOne("");
-
+	
 		AioCheckOutOneTime aio = new AioCheckOutOneTime();
+
+//		QueryTradeObj qto = new QueryTradeObj();
+//		qto.set
+//		String info = all.queryTrade(qto);
+		
 
 
 		InvoiceObj invoice = new InvoiceObj();
@@ -81,6 +86,7 @@ public class AioCheckOutController {
 		aio.setReturnURL("http://211.23.128.214:5000");
 		try {
 			String html = all.aioCheckOut(aio, invoice);
+
 			System.out.println("html === "+html);
 			return html;
 		} catch (EcpayException e) {

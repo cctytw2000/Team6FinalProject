@@ -81,7 +81,7 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="footer-logo text-white">
-						<img src="Images/footer-logo.png" alt="">
+						<img src="Images/newLogoFooter.png" alt="">
 						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
 							dolor sit ame.</p>
 					</div>
