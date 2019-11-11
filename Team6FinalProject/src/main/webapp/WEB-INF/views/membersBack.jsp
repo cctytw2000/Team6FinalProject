@@ -33,8 +33,8 @@
 
 	<section class="" style="height: 100%;">
 		<div align="center"
-			style="color: black; width: 60%; margin: 15px auto">
-			<h1>會員後台</h1>
+			style=" width: 60%; margin: 15px auto">
+			<h1 style="color:white">會員後台</h1>
 			<table border="1" border="1" style="color:white;text-align: center; width: 100%">
 
 

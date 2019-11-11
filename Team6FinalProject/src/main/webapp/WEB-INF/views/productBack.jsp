@@ -39,12 +39,12 @@ color:red
 </style>
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/manageHeader.jsp" />
 
 
 
-	<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
+	<div style="height:auto;">
 		<section class="container">
 			<div class="row" style="padding:50px 15%">
 				<img width='200' height='200' src="<c:url value='/getPicture/${product.game_id}'/>" />
@@ -164,7 +164,7 @@ color:red
 	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
-	<jsp:include page="footer/homeFooter.jsp" />
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 </body>
 
 </html>
