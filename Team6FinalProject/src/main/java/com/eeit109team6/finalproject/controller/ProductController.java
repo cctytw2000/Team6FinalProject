@@ -410,7 +410,7 @@ public class ProductController {
 				mem.setPassword("a14789632");
 				mem.setUsername("andy");
 				model.addAttribute("Member", mem);
-				model.addAttribute("msg", "您必須先登入!");
+				model.addAttribute("msg", "您必須先登入才能進行評論!");
 				return "jump";
 			}
 			

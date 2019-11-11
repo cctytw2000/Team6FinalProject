@@ -98,6 +98,15 @@ public class OrderController {
 	@RequestMapping("/showOrder")
 	public String showOrder(Model model, HttpSession session) {
 		Member member = (Member)session.getAttribute("mem");
+		if(member == null) {
+			Member mem = new Member();
+			mem.setAccount("sandy60108@yahoo.com.tw");
+			mem.setPassword("a14789632");
+			mem.setUsername("andy");
+			model.addAttribute("Member", mem);
+			model.addAttribute("msg", "您必須先登入!");
+			return "jump";
+		}
 		List<Orders> list = service.showOrder(member.getMember_id());
 		model.addAttribute("orders", list);
 		

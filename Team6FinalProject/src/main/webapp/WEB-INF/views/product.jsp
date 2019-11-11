@@ -92,9 +92,7 @@
 						</div>
 					</div>
 				</c:forEach>
-
-
-
+				
 				<div class="form-group">
 					<nav class="navbar navbar-expand-sm " style="padding-left: 0px">
 						<form class="form-inline" action="addComment">
@@ -109,25 +107,7 @@
 
 			</div>
 
-			<!-- 		<h2>test</h2> -->
-			<!--   		<div class="card" style="width:400px"> -->
-			<%--     		<img class="card-img-top" src="<c:url value='/getPicture/${product.game_id}'/>" alt="Card image" style="width:100%"> --%>
-			<!--     		<div class="card-body"> -->
-			<%--      		 <h4 class="card-title">${product.name }</h4> --%>
-			<%--      		 <p class="card-text">${product.publisher }</p> --%>
-			<%--      	 	<p class="card-text">售價:NT${product.price }元</p> --%>
-			<%--       		<p class="card-text">庫存: ${product.stock}</p> --%>
-			<%--      		 <p class="card-text">商品分類: ${product.category}</p> --%>
-			<%--       		<p class="card-text">商品簡介:${product.game_desc }元</p> --%>
-			<!--       		<a href="#" class="btn btn-primary">See Profile</a> -->
-			<!--     		</div> -->
-			<!--   		</div> -->
-
-
-
 		</section>
-
-
 
 	</div>
 	<jsp:include page="footer/homeFooter.jsp" />
