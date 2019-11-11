@@ -63,7 +63,7 @@
 	<div class="tab-content">
 	
 	
-	<div id="product" class="container tab-pane active">
+	<div id="product" class="container tab-pane active" style="width:800px">
 	<table border="1" style="text-align: center">
 		<tr><th>商品編號<th>商品名稱<th>商品售價<th>商品分類<th>下架
 			<c:forEach var="product" items="${products }">
@@ -78,7 +78,7 @@
 	</table>
 	</div>
 	
-	<div id="productCancel" class="container tab-pane fade">
+	<div id="productCancel" class="container tab-pane fade" style="width:800px">
 	<table border="1" style="text-align: center">
 		<tr><th>商品編號<th>商品名稱<th>商品售價<th>商品分類<th>上架
 			<c:forEach var="c_product" items="${cancelProduct }">

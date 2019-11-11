@@ -114,8 +114,8 @@ color:red
 							<p>
 									選擇圖片:
 									<input name="productImage" type="file" />
-									<p>
-										<input type="button" class="btn btn-secondary" value="更新">
+									<p style="float:right">
+										<input type="button" class="btn btn-success" value="更新">
 		</form>
       </div>
       
@@ -129,7 +129,7 @@ color:red
     
     						<div class="media-body">
      				 			<h4 style="color: #BBFFEE">${c.member_name } 
-     				 				<small><i>Posted on ${c.time.replace(".0","")}</i></small>
+     				 				<small style="margin-left:5%"><i>Posted on ${c.time.replace(".0","")}</i></small>
      				 				<small><i id="remove" onclick="window.location.href='<spring:url value='/removeComment?game_id=${product.game_id}&comment_id=${c.comment_id}'/>'">刪除</i></small>
 								</h4>
       							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p>      
