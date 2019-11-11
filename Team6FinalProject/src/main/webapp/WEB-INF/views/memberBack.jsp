@@ -98,7 +98,7 @@
 											</tr>
 											<tr id="level">
 												<td>會員身分</td>
-												<td>${member.memberlevel.levelName}<button id="openupdate" type="button" onclick="openUpdate()">編輯</button></td>
+												<td>${member.memberlevel.levelName}<button id="openupdate" type="button" onclick="openUpdate('${member.memberlevel.levelName}')">編輯</button></td>
 
 											</tr>
 										</tbody>
