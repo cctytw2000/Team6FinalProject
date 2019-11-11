@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
+import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
@@ -47,6 +48,14 @@ public class NewsServiceImpl implements INewsService{
 	public void addNews(News news) {
 		dao.addNews(news);	
 	}
+	
+	@Transactional
+	@Override
+	public void addArticlePicture(ArticlePicture articlePicture) {
+		dao.addArticlePicture(articlePicture);		
+	}
+	
+
 
 //====================================================未完成====================================================
 	@Override
@@ -68,5 +77,9 @@ public class NewsServiceImpl implements INewsService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+
+	
 
 }

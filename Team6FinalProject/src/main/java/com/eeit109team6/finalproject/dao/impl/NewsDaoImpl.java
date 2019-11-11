@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
+import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
@@ -53,7 +54,13 @@ public class NewsDaoImpl implements INewsDao {
 		Session session = factory.getCurrentSession();
 		session.save(news);
 	}
-
+	
+	@Override
+	public void addArticlePicture(ArticlePicture articlePicture) {
+		Session session = factory.getCurrentSession();
+		session.save(articlePicture);		
+	}
+	
 //====================================================未完成====================================================	
 	@Override
 	public List<News> getAllNews() {
@@ -73,6 +80,10 @@ public class NewsDaoImpl implements INewsDao {
 	public void updateNewsById(int newsId) {
 		// TODO Auto-generated method stub
 
-	}	
+	}
+
+	
+
+	
 
 }

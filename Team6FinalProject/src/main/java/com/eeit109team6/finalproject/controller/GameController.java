@@ -1,8 +1,13 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
@@ -22,6 +28,13 @@ import com.eeit109team6.finalproject.service.INewsService;
 public class GameController {
 
 	public GameController() {
+	}
+
+	ServletContext context;
+
+	@Autowired
+	public void setContext(ServletContext context) {
+		this.context = context;
 	}
 
 	IGameService gameService;
@@ -55,18 +68,16 @@ public class GameController {
 
 	// 新增遊戲--> 消息後台 newsBack.jsp
 	@RequestMapping(value = "/newsBack/addGame1", method = RequestMethod.POST)
-	public String processAddNewGameForm(@ModelAttribute("game") Game game) {
+	public String processAddNewGameForm(@ModelAttribute("game") Game game) throws ParseException {
 		Integer gt_ = game.getGameType_(); // 取回遊戲類別分類id
 		GameType gt = gameService.getGameTypeById(gt_); // 利用id取得遊戲類別
 		Integer nt_ = game.getNewsType_(); // 取回新聞類別分類id
 		NewsType nt = newsService.getNewsTypeById(nt_); // 利用id取得新聞類別
-		// ==============其實不用=======================
-		// ==============設定發行日期(時間)=======================
-//		Calendar rightNow = Calendar.getInstance();
-//		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-//				+ ":" + rightNow.get(Calendar.SECOND);
-		// ==============/設定發行日期(時間)=======================
+		//改變日期格式
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String PublicationDate = format1.format((Date)format.parse(game.getPublicationDate()));
+		game.setPublicationDate(PublicationDate);
 		game.setGameType(gt); // 設定遊戲的遊戲類別
 		game.setNewsType(nt); // 設定遊戲的新聞類別
 		gameService.addGame(game);
@@ -86,6 +97,25 @@ public class GameController {
 	@ModelAttribute("gameTypes")
 	public List<GameType> getGameTypes() {
 		return gameService.getAllGameTypes();
+	}
+
+	// 用ajax傳回gameDetail給addNews.jsp
+	@RequestMapping(value = "/newsBack/searchGameByAjax", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> test(@RequestParam("gameId") Integer gameId) {
+//		System.out.println(gameId);
+		Game g = gameService.getGameById(gameId);
+		Map<String, String> gameMap = new HashMap<>();
+		gameMap.put("name", g.getGameName());
+		// 若未設定發售日則傳回未設定 
+		if (g.getPublicationDate().equals("")) {
+			gameMap.put("publicationDate", "未設定");
+		} else {
+			gameMap.put("publicationDate", g.getPublicationDate());
+		}
+		gameMap.put("publisher", g.getPublisher());
+		gameMap.put("platform", g.getPlatform());
+
+		return gameMap;
 	}
 
 }

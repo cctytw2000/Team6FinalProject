@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.model.Product;
@@ -78,5 +79,6 @@ public class HomeController {
 
 		return "insertMemberDetail";
 	}
+
 
 }

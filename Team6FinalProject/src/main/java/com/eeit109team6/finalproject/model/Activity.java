@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,20 +20,13 @@ public class Activity {
 	private Integer newsType_;
 
 	@Id
-	@Column(name = "ACTIVITYID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer activityId;
-	@Column(name = "ACTIVITYNAME")
 	private String activityName;
-	@Column(name = "STARTINGDATE_TIME")
 	private String startingDate_time;
-	@Column(name = "STARTINGTIME_DATE")
 	private String startingTime_date;
-	@Column(name = "STARTINGDATE")
 	private String startingDate;
-	@Column(name = "ENDINGDATE")
 	private String endingDate;
-	@Column(name = "LOCATION")
 	private String location;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACTIVITYTYPEID")

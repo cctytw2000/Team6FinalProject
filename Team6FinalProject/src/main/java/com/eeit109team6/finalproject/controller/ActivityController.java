@@ -1,8 +1,13 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
+import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.NewsType;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -36,6 +43,13 @@ public class ActivityController {
 	@Autowired
 	public void setService(INewsService newsService) {
 		this.newsService = newsService;
+	}
+
+	ServletContext context;
+
+	@Autowired
+	public void setContext(ServletContext context) {
+		this.context = context;
 	}
 
 	// 新增活動類別
@@ -72,24 +86,61 @@ public class ActivityController {
 
 	// 新增活動--> 消息後台 newsBack.jsp
 	@RequestMapping(value = "/newsBack/addActivity1", method = RequestMethod.POST)
-	public String processAddNewActivityForm(@ModelAttribute("activity") Activity activity) {
+	public String processAddNewActivityForm(@ModelAttribute("activity") Activity activity) throws ParseException {
 		Integer at_ = activity.getActivityType_(); // 取回遊戲類別分類id
 		ActivityType at = activityService.getActivityTypeById(at_); // 利用id取得遊戲類別
 		Integer nt_ = activity.getNewsType_(); // 取回新聞類別分類id
 		NewsType nt = newsService.getNewsTypeById(nt_); // 利用id取得新聞類別
-		// ==============其實不用=======================
-		// ==============設定活動日期(時間)其實不用=======================
-//		Calendar rightNow = Calendar.getInstance();
-//		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-//				+ ":" + rightNow.get(Calendar.SECOND);
-		// ==============/設定活動日期(時間)=======================
-
+		// 改變日期格式
+		if(!(activity.getStartingDate_time()).equals("")){
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String StartingDate_time = format1.format((Date) format.parse(activity.getStartingDate_time()));
+		activity.setStartingDate_time(StartingDate_time);
+		}
+		if(!(activity.getStartingDate()).equals("")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String StartingDate = format1.format((Date) format.parse(activity.getStartingDate()));
+			activity.setStartingDate(StartingDate);
+			}
+		if(!(activity.getEndingDate()).equals("")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String EndingDate = format1.format((Date) format.parse(activity.getEndingDate()));
+			activity.setEndingDate(EndingDate);
+			}
 		activity.setActivityType(at); // 設定遊戲的遊戲類別
 		activity.setNewsType(nt); // 設定遊戲的新聞類別
 		activityService.addActivity(activity);
 		return "redirect:/newsBack";
 	}
 
+	// 用ajax傳回activityDetail給addNews.jsp
+	@RequestMapping(value = "/newsBack/searchActivityByAjax", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> test(@RequestParam("activityId") Integer activityId) {
+		System.out.println(activityId);
+		Activity a = activityService.getActivityById(activityId);
+		Map<String, String> activityMap = new HashMap<>();
+		activityMap.put("name", a.getActivityName());
+		activityMap.put("location", a.getLocation());
+		// 若未設定日期/時間則不回傳
+//		System.out.println(a.getStartingTime_date());
+//		System.out.println(a.getStartingTime_date() instanceof String);
+		if (!(a.getStartingDate_time().equals(""))) {
+			activityMap.put("startingDate_time", a.getStartingDate_time());
+		} 
+		if (!(a.getStartingTime_date().equals("00:00:00"))) {
+			activityMap.put("startingTime_date", a.getStartingTime_date());
+		} 
+		if (!(a.getStartingDate().equals(""))) {
+			activityMap.put("startingDate", a.getStartingDate());
+		} 
+		if (!(a.getEndingDate().equals(""))) {
+			activityMap.put("endingDate", a.getEndingDate());
+		} 
+
+		return activityMap;
+	}
 
 }

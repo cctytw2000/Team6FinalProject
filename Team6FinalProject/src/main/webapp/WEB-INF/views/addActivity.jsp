@@ -114,9 +114,10 @@ function TimePick() {
 			<h4>
 				適用於<span style="color: red;">多</span>日活動
 			</h4>
-			活動開始日:
-			<form:input id="datepicker2" name="startingDate" autocomplete="off"
-				path="startingDate" type="text" />
+			<p>
+				活動開始日:
+				<form:input id="datepicker2" name="startingDate" autocomplete="off"
+					path="startingDate" type="text" />
 			<p>
 				活動結束日:
 				<form:input id="datepicker3" name="endingDate" autocomplete="off"

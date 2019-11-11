@@ -10,22 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name="articlepicture")
+@Table(name = "articlepicture")
 public class ArticlePicture {
-
-	private Integer pictureId;
-	private String pictureName;
-	private Blob picture;
-	private News news;
 	
-	public ArticlePicture() {
-	}
+	@Transient
+	private MultipartFile newsImage;
 	
 	@Id
-	@Column(name="PICTUREID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer pictureId;
+	private Blob picture;
+	@ManyToOne
+	@JoinColumn(name = "NEWSID")
+	private News news;
+
+	public ArticlePicture() {
+	}
+
 	public Integer getPictureId() {
 		return pictureId;
 	}
@@ -34,16 +40,6 @@ public class ArticlePicture {
 		this.pictureId = pictureId;
 	}
 
-	@Column(name="PICTURENAME", columnDefinition = "nvarchar")
-	public String getPictureName() {
-		return pictureName;
-	}
-
-	public void setPictureName(String pictureName) {
-		this.pictureName = pictureName;
-	}
-
-	@Column(name="PICTURE")
 	public Blob getPicture() {
 		return picture;
 	}
@@ -52,14 +48,20 @@ public class ArticlePicture {
 		this.picture = picture;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="NEWSID")
 	public News getNews() {
 		return news;
 	}
 
 	public void setNews(News news) {
 		this.news = news;
+	}
+
+	public MultipartFile getNewsImage() {
+		return newsImage;
+	}
+
+	public void setNewsImage(MultipartFile newsImage) {
+		this.newsImage = newsImage;
 	}
 
 }

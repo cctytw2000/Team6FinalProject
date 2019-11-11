@@ -21,21 +21,12 @@ public class Game {
 	private Integer newsType_;
 
 	@Id
-	@Column(name = "GAMEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer gameId;
-
-	@Column(name = "GAMENAME")
 	private String gameName;
-
-	@Column(name = "PUBLICATIONDATE")
 	private String publicationDate;
-
-	@Column(name = "PUBLISHER")
 	private String publisher;
-	@Column(name = "PLATFORM")
 	private String platform;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "NEWSTYPEID")
 	private NewsType newsType;
