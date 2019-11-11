@@ -38,6 +38,7 @@ public class MemberServiceImpl implements IMemberService {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Transactional
 	@Override
 	public ArrayList<Member> findAll() {
@@ -100,6 +101,7 @@ public class MemberServiceImpl implements IMemberService {
 		// TODO Auto-generated method stub
 		return dao.checkAccount(account);
 	}
+
 	@Transactional
 	@Override
 	public void openActive(Integer id) {
@@ -107,6 +109,7 @@ public class MemberServiceImpl implements IMemberService {
 		dao.openActive(id);
 
 	}
+
 	@Transactional
 	@Override
 	public void closeActive(Integer id) {
@@ -114,11 +117,17 @@ public class MemberServiceImpl implements IMemberService {
 		dao.closeActive(id);
 
 	}
-	
+
 	@Transactional
 	@Override
-	public void updateLevel(Integer id,MemberLevel level) {
+	public void updateLevel(Integer id, MemberLevel level) {
 		dao.updateLevel(id, level);
+	}
+	@Transactional
+	@Override
+	public void changeHeadshot(String file, Integer memberId) {
+		dao.changeHeadshot(file, memberId);
+
 	}
 
 }

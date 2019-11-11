@@ -41,6 +41,7 @@ public class Member {
 	private String registeredtime;
 	private String token;
 	private String username;
+	private String headshot;
 
 	private String type;
 	private int isactive;
@@ -169,6 +170,14 @@ public class Member {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getHeadshot() {
+		return headshot;
+	}
+
+	public void setHeadshot(String headshot) {
+		this.headshot = headshot;
 	}
 	
 //	================================新消息要關聯的部分================================

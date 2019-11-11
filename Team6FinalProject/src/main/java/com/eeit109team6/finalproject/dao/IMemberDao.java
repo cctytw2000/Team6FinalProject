@@ -28,7 +28,7 @@ public interface IMemberDao {
 	public Boolean changePwd(Member m, String oldpassword);
 
 	public boolean checkAccount(Member m);
-	
+
 	public Member checkAccount(String account);
 
 	public Member findByAccount(Member m);
@@ -37,6 +37,8 @@ public interface IMemberDao {
 
 	void closeActive(Integer id);
 
-	void updateLevel(Integer id,MemberLevel level);
+	void updateLevel(Integer id, MemberLevel level);
+
+	void changeHeadshot(String file, Integer memberId);
 
 }

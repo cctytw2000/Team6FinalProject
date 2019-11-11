@@ -1,9 +1,12 @@
 package com.eeit109team6.finalproject.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.javaUtils.AES_CBC_PKCS5PADDING;
@@ -76,8 +80,9 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
 	public String registerMember(@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("username") String username, Model model, RedirectAttributes redirectAttributes,
-			HttpServletRequest request) {
+			@RequestParam("username") String username, @RequestParam("memberimg") MultipartFile memberimg, Model model,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
 //		String[] suppressedFields = result.getSuppressedFields();
 
 		Member mem = new Member();
@@ -122,7 +127,7 @@ public class MemberController {
 		mem.setAccount(account);
 		mem.setUsername(username);
 		mem.setPassword(password_AES);
-
+		mem.setHeadshot(memberimg.getOriginalFilename());
 		mem.setType("General");
 		mem.setMemberlevel(level);
 		mem.setRegisteredtime(registeredtime);
@@ -144,6 +149,25 @@ public class MemberController {
 			e1.printStackTrace();
 		}
 
+		try {
+			InputStream img = memberimg.getInputStream();
+			File file = new File("C:\\memberImages", username + memberId + memberimg.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(file);
+			byte[] buff = new byte[1024];
+			int len;
+
+			while ((len = img.read(buff)) != -1) {
+				fos.write(buff, 0, len);
+			}
+
+			fos.close();
+			img.close();
+
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
 		Mail mail = new Mail();
 		mail.setEmail(email);
 		mail.setPwd(pwd);
@@ -152,6 +176,7 @@ public class MemberController {
 			System.out.println("寄送email結束.");
 			redirectAttributes.addFlashAttribute("msg", "請至您輸入的信箱收取驗證信<br>並輸入完整資料開通帳號");
 			return "redirect:/jump";
+
 		} else {
 			redirectAttributes.addFlashAttribute("msg", "有東西有問題喔");
 			return "redirect:/jump";
@@ -669,6 +694,44 @@ public class MemberController {
 		ArrayList<LiLoInfo> infoList = LiLoInforService.findById(memberId);
 		model.addAttribute("infoList", infoList);
 		return "memberBack";
+
+	}
+
+	@RequestMapping(value = "/member/Changeheadshot", method = RequestMethod.POST)
+	public String loginImfo(@RequestParam("memberimg") MultipartFile memberimg,
+			@RequestParam("memberId") Integer memberId, RedirectAttributes redirectAttributes, HttpSession session) {
+		Member m = new Member();
+		m.setMember_id(memberId);
+		Member member = MemService.findById(m);
+		try {
+			InputStream img = memberimg.getInputStream();
+			File file = new File("C:\\memberImages", member.getUsername() + memberId + memberimg.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(file);
+			byte[] buff = new byte[1024];
+			int len;
+
+			while ((len = img.read(buff)) != -1) {
+				fos.write(buff, 0, len);
+			}
+
+			fos.close();
+			img.close();
+
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		System.out.println("File name  = " + memberimg.getOriginalFilename());
+		MemService.changeHeadshot(memberimg.getOriginalFilename(), memberId);
+
+		session.removeAttribute("username");
+		session.removeAttribute("token");
+		session.removeAttribute("account");
+		session.removeAttribute("member_id");
+		session.removeAttribute("mem");
+		session.removeAttribute("type");
+		redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
+		return "redirect:/jump";
 
 	}
 

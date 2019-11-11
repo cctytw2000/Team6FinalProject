@@ -54,8 +54,32 @@
 	<jsp:include page="header/homeHeader.jsp" />
 
 
-	<section class="footer-top-section" style="height: 100%; padding-top: 15px">
+	<section class="footer-top-section" style="height: auto; padding-top: 15px">
 		<div style="width: 30%; height: 100%; background-color: white; border-radius: 15px 15px;" class="container">
+		
+		
+		
+		
+		<c:choose>
+				<c:when test="${sessionScope.mem.headshot != Null}">
+	
+		<img width="212" height="212" src="<c:url value='/memberImages/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
+	
+				</c:when>
+				<c:otherwise>
+	<form action="${pageContext.request.contextPath}/member/Changeheadshot" method="post" enctype="multipart/form-data">
+			<img width="212" height="212" src="<c:url value='/memberImages/noimage.jpg' />">
+			<input name="memberId" type='hidden' value="${sessionScope.mem.member_id}"/> 
+			<input id="memberimg" name="memberimg" type='file'/> <input type="submit" />
+					</form>
+				</c:otherwise>
+
+			</c:choose>
+		
+		
+		
+		
+	
 
 			<form action="${pageContext.request.contextPath}/member/ChangeNickname" method="post">
 				<p style="text-align: center; font-size: 30px; color: black">個人資料</p>

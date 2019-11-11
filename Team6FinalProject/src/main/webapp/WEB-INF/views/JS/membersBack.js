@@ -9,8 +9,15 @@ function openActive(id, type) {
 		},
 
 		success: function (response) {
-			alert(response)
-			window.location.reload()
+//			alert(response)
+//			window.location.reload()
+			$.ajax({
+				url: "membersBack.json",
+				success: function (response) {
+					console.log(response)
+					showMemberInfo(response)
+				}
+			});
 		}
 	});
 }
@@ -26,8 +33,15 @@ function closeActive(id, type) {
 		},
 
 		success: function (response) {
-			alert(response)
-			window.location.reload()
+//			alert(response)
+//			window.location.reload()
+			$.ajax({
+				url: "membersBack.json",
+				success: function (response) {
+					console.log(response)
+					showMemberInfo(response)
+				}
+			});
 		}
 	});
 }

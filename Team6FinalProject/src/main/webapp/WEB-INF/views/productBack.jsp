@@ -26,6 +26,17 @@
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <title>商品資料</title>
+
+<style>
+#remove{
+cursor:pointer;
+
+}
+#remove:hover{
+color:red
+
+}
+</style>
 </head>
 
 <body>

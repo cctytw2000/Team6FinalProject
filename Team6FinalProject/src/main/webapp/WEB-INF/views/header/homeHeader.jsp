@@ -39,7 +39,24 @@
 			<c:choose>
 				<c:when test="${sessionScope.account != Null}">
 					<div class="user-panel">
-						<span style="font-size: 18px" class="welcome">${sessionScope.username}
+						<span style="font-size: 18px" class="welcome">
+			
+								<c:choose>
+				<c:when test="${sessionScope.mem.headshot != Null}">
+	
+					<img style="margin-right: 10px;" width="26px" height="26px" src="<c:url value='/memberImag
+						es/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
+	
+				</c:when>
+				<c:otherwise>
+	
+			<img width="26px" height="26px" src="<c:url value='/memberImages/noimage.jpg' />">
+	
+				</c:otherwise>
+
+			</c:choose>
+						
+						${sessionScope.username}
 							您好</span>
 
 					</div>
@@ -113,7 +130,7 @@
 									
 									
 			
-									
+										<input id="memberimg" name="memberimg" type='file'/>
 									
 									
 									

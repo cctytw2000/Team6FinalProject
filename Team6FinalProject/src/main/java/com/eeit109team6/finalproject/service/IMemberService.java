@@ -36,4 +36,6 @@ public interface IMemberService {
 
 	void updateLevel(Integer id, MemberLevel level);
 
+	void changeHeadshot(String file, Integer memberId);
+
 }

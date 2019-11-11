@@ -46,8 +46,8 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	}
 
 	@Override
-	public void updateLevel(Integer id,MemberLevel level) {
-		Member mem =sessionFactory.getCurrentSession().get(Member.class, id);
+	public void updateLevel(Integer id, MemberLevel level) {
+		Member mem = sessionFactory.getCurrentSession().get(Member.class, id);
 		mem.setMemberlevel(level);
 		sessionFactory.getCurrentSession().update(mem);
 	}
@@ -62,6 +62,15 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member");
 		ArrayList<Member> member = (ArrayList<Member>) query.getResultList();
 		return member;
+	}
+
+	@Override
+	public void changeHeadshot(String file, Integer memberId) {
+		Member member = sessionFactory.getCurrentSession().get(Member.class, memberId);
+		member.setHeadshot(file);
+
+		sessionFactory.getCurrentSession().update(member);
+
 	}
 
 	@Override
@@ -135,7 +144,6 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member where member_id = ?1 ");
 		query.setParameter(1, id);
 
-
 		try {
 			Member mem = (Member) query.getSingleResult();
 			mem.setIsactive(1);
@@ -153,7 +161,6 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 		System.out.println("closeActive");
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member where member_id = ?1 ");
 		query.setParameter(1, id);
-
 
 		try {
 			Member mem = (Member) query.getSingleResult();
@@ -274,7 +281,7 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	@Override
 	public void update(Member m) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
