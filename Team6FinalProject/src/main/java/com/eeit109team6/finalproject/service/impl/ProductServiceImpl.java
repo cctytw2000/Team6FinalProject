@@ -193,6 +193,11 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCancelProducts();
 	}
 
+	@Override
+	public List<Product> getProductTop8() {
+		return dao.getProductTop8();
+	}
+
 	
 	
 

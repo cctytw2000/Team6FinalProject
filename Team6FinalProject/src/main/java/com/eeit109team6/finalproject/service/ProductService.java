@@ -29,5 +29,6 @@ public interface ProductService {
 	void deleteCommentById(int comment_id);
 	Page<Product> findProductsByPage(Integer currentPage, Integer rows);
 	List<Product> getCancelProducts();
+	List<Product> getProductTop8();
 	
 }

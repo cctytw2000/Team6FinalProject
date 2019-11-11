@@ -15,6 +15,16 @@
 
 <script src="${pageContext.request.contextPath}/JS/product.js"></script>
 
+<style>
+#edit{
+cursor:pointer;
+
+}
+#edit:hover{
+color:red
+
+}
+</style>
 
 </head>
 

@@ -46,8 +46,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
 
-//		List<Product> list = service.getAllProducts();
-//		session.setAttribute("products", list);
+		List<Product> list = service.getProductTop8();
+		session.setAttribute("productsTop8", list);
 
 		return "home";
 	}

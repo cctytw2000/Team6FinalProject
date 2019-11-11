@@ -216,6 +216,15 @@ public class ProductDaoImpl implements IProductDao {
 		return list;
 	}
 
+	@Override
+	public List<Product> getProductTop8() {
+		String hql = "FROM Product p WHERE p.is_remove = 0 ORDER BY date DESC";
+		Session session = factory.getCurrentSession();
+		List<Product> list = session.createQuery(hql).setMaxResults(8).getResultList(); 
+	    
+		return list;
+	}
+
 	
 
 	

@@ -144,14 +144,14 @@ public class ProductController {
 
 	// 查詢單筆商品詳細資料--> product.jsp
 	@RequestMapping("/product")
-	public String getProductById(@RequestParam("game_id") Integer game_id, Model model) {
+	public String getProductById(@RequestParam("game_id") Integer game_id, Model model, HttpSession session) {
 		Member mem = new Member();
 		mem.setAccount("sandy60108@yahoo.com.tw");
 		mem.setPassword("a14789632");
 		mem.setUsername("andy");
 		model.addAttribute("Member", mem);
 		List<Product> list = service.getAllProducts();
-		model.addAttribute("products", list);
+		session.setAttribute("products", list);
 		Product product = service.getProductById(game_id);
 		model.addAttribute("product", product);
 		

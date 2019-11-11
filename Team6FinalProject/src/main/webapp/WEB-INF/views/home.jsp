@@ -10,7 +10,7 @@
 <head>
 	<link href="./favicon.ico" rel="shortcut icon">
 	<meta charset="UTF-8">
-	<title>Game Book</title>
+	<title>Gamily</title>
 
 	<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
@@ -398,100 +398,24 @@
 	<section class="review-section spad set-bg" data-setbg="#">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">遊戲商城</div>
-				<h2>熱門商品</h2>
+				<button type="button" class="btn btn-danger" onclick="window.location.href='findProductsByPage'">遊戲商城</button>
+				<h2>最新商品</h2>
 			</div>
 			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/1.jpg">
-							<div class="score yellow">9.3</div>
-						</div>
-						<div class="review-text">
-							<h5>Assasin’’s Creed</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/2.jpg">
-							<div class="score purple">9.5</div>
-						</div>
-						<div class="review-text">
-							<h5>Doom</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
+				<c:forEach var="p" items="${sessionScope.productsTop8 }">
+					<div class="col-lg-3 col-md-6"> 
+						<div class="review-item">
+							<div class="review-cover set-bg" data-setbg="<c:url value='/getPicture/${p.game_id}' />">
+								<div class="score yellow">$${p.price }</div>
+							</div>
+							<div class="review-text">
+								<h5>
+									<a href="<spring:url value='product?game_id=${p.game_id }'/>">${p.name }</a>
+								</h5>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="Images/review/4.jpg">
-							<div class="score pink">$1300</div>
-						</div>
-						<div class="review-text">
-							<h5>GTA</h5>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p> -->
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

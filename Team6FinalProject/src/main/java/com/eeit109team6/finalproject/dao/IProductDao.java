@@ -31,6 +31,6 @@ public interface IProductDao {
 	int findTotalCount(); //查詢商品總記錄數量
 	List<Product> findByPage(int start, Integer rows); //依照頁碼查詢每頁商品
 	List<Product> getCancelProducts(); //查詢已下架商品
-	
+	List<Product> getProductTop8(); //查詢8筆最新商品
 	
 }
