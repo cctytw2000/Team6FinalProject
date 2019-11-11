@@ -88,7 +88,7 @@
 									</c:when>
 								</c:choose>
 							</h4>
-							<p id="${c.comment_id}" style="color: #FFFFBB">${c.comment }</p>
+							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p>
 						</div>
 					</div>
 				</c:forEach>

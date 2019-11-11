@@ -480,6 +480,13 @@ public class ProductController {
 			
 		List<Comment> comment = service.getCommentById(game_id);
 		model.addAttribute("comments", comment);
+		
+		List<Category> list = service.getAllCategories();
+		Map<Integer, String> categoryMap = new HashMap<>();
+		for(Category c : list) {
+			categoryMap.put(c.getCategory_id(), c.getCategory());
+		}
+		model.addAttribute("categoryMap", categoryMap);
 			
 		return "productBack";
 	}
@@ -516,5 +523,42 @@ public class ProductController {
 			service.addProduct(product);
 			return "redirect:/productsBack";
 		}
+		
+	//更新商品資訊
+	@RequestMapping("/productsBack/updateProduct")
+	public String updateProduct(@RequestParam("game_id") Integer game_id, Integer category_id, String name, String publisher, Integer price, Integer stock,
+			String game_desc, MultipartFile productImage) {
+		Product original = service.getProductById(game_id);
+		original.setCategory(service.getCategoryById(category_id));
+		original.setName(name);
+		original.setPublisher(publisher);
+		original.setPrice(price);
+		original.setStock(stock);
+		original.setGame_desc(game_desc);
+		original.setIs_remove(0);
+		
+		//上傳圖片begin
+				
+				if(productImage.getSize() == 0) {
+					original.setPhoto(original.getPhoto());
+				}else {
+					String originalFilename = productImage.getOriginalFilename();
+					if(productImage != null && !productImage.isEmpty()) {
+						try {
+							byte[] b = productImage.getBytes();
+							Blob blob = new SerialBlob(b);
+							original.setPhoto(blob);
+						} catch(Exception e) {
+							e.printStackTrace();
+							throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
+						}
+					}
+				}
+		//上傳圖片end
+				
+		service.updateProductById(original);
+		
+		return "redirect:/productsBack/productBack?game_id="+game_id;
+	}
 	
 }

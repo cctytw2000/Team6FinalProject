@@ -65,12 +65,63 @@ color:red
 						<div style="float:right">
 						<button type="button" class="btn btn-warning"
 							onclick="window.location.href='<spring:url value='/productsBack'/>'">返回</button>
-						<a href='products/update?game_id=${product.game_id }' class='btn btn-warning btn-large'>
-							<span class='glyphicon-shopping-cart glyphicon'></span>更改商品資訊
-						</a>
+<%-- 						<a href='products/update?game_id=${product.game_id }' class='btn btn-warning btn-large'> --%>
+<!-- 							<span class='glyphicon-shopping-cart glyphicon'></span>更改商品資訊 -->
+<!-- 						</a> -->
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+  							更新商品資訊
+						</button>
 						</div>
 					</p>
 				</div>
+				
+				<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">更新商品資訊</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="updateProduct" enctype="multipart/form-data">
+        <input type="hidden" name="game_id" value="${product.game_id }">
+        <p>
+		商品分類:<select name="category_id">
+			<option value="${product.category.category_id }">${product.category.category }</option>
+				<c:forEach var="c" items="${categoryMap}">
+					<option value="${c.key }">${c.value }
+				</c:forEach>
+		</select>
+		</p>
+		<p>
+			商品名稱:
+			<input name="name" type="text" size="50px" value="${product.name }"/>
+			<p>
+				廠商名稱:
+				<input name="publisher" type="text" size="50px" value="${product.publisher}"/>
+				<p>
+					商品價格:
+					<input name="price" type="text" value="${product.price }"/>
+					<p>
+						庫存數量:
+						<input name="stock" type="text" value="${product.stock }"/>
+						<p>
+							商品描述:
+							<textarea name="game_desc" style="width:400px;height:200px;" >${product.game_desc }</textarea>
+							<p>
+									選擇圖片:
+									<input name="productImage" type="file" />
+									<p>
+										<input type="button" class="btn btn-secondary" value="更新">
+		</form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 				
 					
     				<c:forEach var="c" items="${comments }">
@@ -81,7 +132,7 @@ color:red
      				 				<small><i>Posted on ${c.time.replace(".0","")}</i></small>
      				 				<small><i id="remove" onclick="window.location.href='<spring:url value='/removeComment?game_id=${product.game_id}&comment_id=${c.comment_id}'/>'">刪除</i></small>
 								</h4>
-      							<p id="${c.comment_id}" style="color: #FFFFBB">${c.comment }</p>      
+      							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p>      
     						</div>
   						</div>
     				</c:forEach>
