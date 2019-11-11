@@ -33,8 +33,8 @@
 
 <body>
 <jsp:include page="header/manageHeader.jsp" />
-<div class="container mt-3">
-	<h1>商品管理</h1>
+<div class="container mt-3" style="padding: 50px 15%">
+	<h1 align="center">商品管理</h1>
 <%-- 	<form method="GET" action="queryCategory"> --%>
 <!-- 		商品分類<select name="category"> -->
 <!-- 			<option value="-1">請挑選</option> -->
@@ -95,12 +95,14 @@
 	
 	<div id="addProduct" class="container tab-pane fade">
 		<form method="POST" action="productsBack/addProduct" enctype="multipart/form-data">
+		<p>
 		商品分類:<select name="category_id">
 			<option value="-1">請挑選</option>
 				<c:forEach var="c" items="${categoryMap}">
 					<option value="${c.key }">${c.value }
 				</c:forEach>
 		</select>
+		</p>
 		<p>
 			商品名稱:
 			<input name="name" type="text" size="50px" />
