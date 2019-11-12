@@ -134,5 +134,5 @@ public class GameController {
 			gameService.deleteGameTypeById(gameTypeId);
 			return "redirect:/newsBack";
 		}
-
+	
 }

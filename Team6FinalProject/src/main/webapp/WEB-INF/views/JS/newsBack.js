@@ -73,8 +73,8 @@ function deleteGameType(gmaeTypeId) {
 		+ '<span>&times;</span>'
 		+  '</button>'
 	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteGameNewsType">'
-		+ '<input type="hidden" name="gmaeTypeId" value='
+		'<form method="post" action="deleteGameType">'
+		+ '<input type="hidden" name="gameTypeId" value='
 		+ a
 		+ ' />'
 		+ '<p>'
