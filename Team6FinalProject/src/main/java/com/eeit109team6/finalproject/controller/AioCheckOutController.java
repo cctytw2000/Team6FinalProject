@@ -36,18 +36,16 @@ public class AioCheckOutController {
 	// 信用卡一次付清
 	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public @ResponseBody String aioCheckOutDevide(@RequestParam("order_id") Integer order_id, HttpSession session) {
-System.out.println("進來了");
+		System.out.println("進來了");
 		Orders order = service.getOrderById(order_id);
 
 		all = new AllInOne("");
-	
+
 		AioCheckOutOneTime aio = new AioCheckOutOneTime();
 
 //		QueryTradeObj qto = new QueryTradeObj();
 //		qto.set
 //		String info = all.queryTrade(qto);
-		
-
 
 		InvoiceObj invoice = new InvoiceObj();
 		// 模擬不開發票
@@ -56,12 +54,10 @@ System.out.println("進來了");
 		String s = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);
 		aio.setMerchantTradeNo(s);
 
-		
-		// 廠商可自行決定交易時間		
-		String time=order.getOrdertime().replace(".0", "").replace("-", "/");
+		// 廠商可自行決定交易時間
+		String time = order.getOrdertime().replace(".0", "").replace("-", "/");
 		aio.setMerchantTradeDate(time);
 
-		
 		// 從廠商DB撈出的商品資訊
 		order.getOrderItems();
 		String items = "";
@@ -74,7 +70,7 @@ System.out.println("進來了");
 			}
 		}
 		System.out.println("games:" + items);
-		System.out.println("time:"+time);
+		System.out.println("time:" + time);
 		System.out.println("pay:" + s);
 		System.out.println("game:" + order.getOrder_id().toString());
 		aio.setItemName(items);
@@ -88,7 +84,7 @@ System.out.println("進來了");
 		try {
 			String html = all.aioCheckOut(aio, invoice);
 
-			System.out.println("html === "+html);
+			System.out.println("html === " + html);
 			return html;
 		} catch (EcpayException e) {
 			throw new Error(e.getNewExceptionMessage());

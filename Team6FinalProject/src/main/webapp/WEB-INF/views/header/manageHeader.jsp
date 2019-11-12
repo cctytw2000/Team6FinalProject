@@ -30,7 +30,7 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/newsBack">消息管理</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">遊戲討論區</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/discussionBack">討論區管理</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/membersBack">會員管理</a>

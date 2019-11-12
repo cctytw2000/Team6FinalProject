@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeit109team6.finalproject.dao.IDiscussionDAO;
+import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.service.IDiscussionService;
 
 @Service
 public class DiscussionServiceImpl implements IDiscussionService {
-	IDiscussionDAO dao;
+	IDiscussionDao dao;
 
 	@Autowired
-	public void setDao(IDiscussionDAO dao) {
+	public void setDao(IDiscussionDao dao) {
 		this.dao = dao;
 	}
 
