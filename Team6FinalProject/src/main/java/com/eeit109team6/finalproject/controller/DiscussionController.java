@@ -42,7 +42,7 @@ public class DiscussionController {
 		this.boardTypeService = boardTypeService;
 	}
 	
-	//查詢所有文章。  開發當前階段的討論區主頁 --> showDiscussion.jsp
+	// 論區主頁:查詢所有看板 --> showDiscussion.jsp
 	@RequestMapping("/discussion")
 	public String getAllBoardType(Model model) {
 		List<BoardType> list = boardTypeService.getAllBoardType();
@@ -51,15 +51,30 @@ public class DiscussionController {
 		return "showDiscussion";
 	}
 	
+	// 本方法暫時不使用
+	// 顯示全站討論區所有文章列表
+//	@RequestMapping("/board")		
+//	public String getAllArticles(Model model) {
+//		List<Discussion> list = discussionService.getAllArticles();
+//		model.addAttribute(list);//discussionList  不給定名字，則用物件首字小寫+型態首字大寫List。
+//		//將service實作類別取得的物件，設給Spring提供的Model介面的model物件
+//		//Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
+//	return "board";
+//	}
+	
 	// 進入指定看板，顯示指定看板的文章列表 --> board.jsp
 	@RequestMapping("/board")		
-	public String getAllArticles(Model model) {
-		List<Discussion> list = discussionService.getAllArticles();
+	public String getArticleByBoardTypeId(@RequestParam("id") Integer boardId ,Model model) {
+		List<Discussion> list = discussionService.getArticleByBoardTypeId(boardId);
 		model.addAttribute(list);//discussionList  不給定名字，則用物件首字小寫+型態首字大寫List。
 		//將service實作類別取得的物件，設給Spring提供的Model介面的model物件
 		//Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
 	return "board";
 	}
+	
+	
+	
+	
 	
 	//查詢單一主題 
 	//要改為查詢討論串

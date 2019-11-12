@@ -12,6 +12,8 @@
 </head>
 <body>
 	<div align="center">
+	<h1>看板主頁</h1>
+	<h1>您進入的看板名稱:${boardType.boardName}</h1>
 	<a href="#">發表新主題</a>
 <table>
 	<tr><th>標題</th><th>作者</th></tr>

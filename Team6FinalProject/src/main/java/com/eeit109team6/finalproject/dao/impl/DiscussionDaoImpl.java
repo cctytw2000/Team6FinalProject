@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class DiscussionDaoImpl implements IDiscussionDao {
@@ -28,6 +29,17 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+	@Override
+	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
+		
+		String hql = "FROM Discussion WHERE boardId = :boardId";
+		List<Discussion> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).setParameter("boardId", boardId).getResultList();
+		
 		return list;
 	}
 	

@@ -16,6 +16,8 @@ public class Discussion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer articleId;	//文章編號
+	@Transient					//忽略此屬性
+	private Integer boardId;	//所屬看板編號
 	private String subject;		//文章標題
 	private String author;		//發文者顯示名稱
 	@Transient					//忽略此屬性
