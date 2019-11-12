@@ -60,7 +60,7 @@ public class MovieController {
 			@RequestMapping(value = "/moviepersonal/addmovie")
 			public String addProduct(Integer movie_ID, String name, String movie_content, Date time, Integer owner_ID,
 					Integer like_Sum, Integer click_Sum, String location_Test) {
-				System.out.println("---,MultipartFile productImage-------------@RequestMapping(value = \"/moviepersonal/addmovie\")     addProduct---------------");
+				System.out.println("----------------@RequestMapping(value = \"/moviepersonal/addmovie\")     addProduct--------,MultipartFile productImage-------");
 				MovieInfo  movieInfo = new MovieInfo();
 				movieInfo.setName(name);
 				movieInfo.setMovie_content(movie_content);
