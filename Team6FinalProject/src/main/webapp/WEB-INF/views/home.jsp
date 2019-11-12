@@ -39,7 +39,7 @@
 		
 		    <section style="background-color:black" style="width:100%;height:100%">
 	            <video style="height:100%;width:100%" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-	                <source src="./Movie/BlizzCon2019.mp4" type="video/mp4">
+	                <source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />' type="video/mp4">
 	            </video> 
     </section>
 		
@@ -406,7 +406,7 @@
 					<div class="col-lg-3 col-md-6"> 
 						<div class="review-item">
 							<div class="review-cover set-bg" data-setbg="<c:url value='/getPicture/${p.game_id}' />">
-								<div class="score yellow">$${p.price }</div>
+								<div class="score yellow" style="margin-top:0px">$${p.price }</div>
 							</div>
 							<div class="review-text">
 								<h5>

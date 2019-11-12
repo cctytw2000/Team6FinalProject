@@ -91,7 +91,7 @@ color:red
 
 						<div class="media-body">
 							<h4 style="color: #BBFFEE">${c.member_name }
-								<small><i>Posted on ${c.time.replace(".0","")}</i></small>
+								<small style="margin-left:5%"><i>Posted on ${c.time.replace(".0","")}</i></small>
 								<c:choose>
 									<c:when test="${sessionScope.mem.username == c.member_name}">
 										<small><i id="edit" onclick="update('${c.comment_id}','${c.comment }','${product.game_id }')">編輯</i></small>

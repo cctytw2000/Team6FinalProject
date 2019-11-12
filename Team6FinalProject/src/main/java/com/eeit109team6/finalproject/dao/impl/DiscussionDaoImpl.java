@@ -8,11 +8,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eeit109team6.finalproject.dao.IDiscussionDAO;
+import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.Discussion;
 
 @Repository
-public class DiscussionDaoImpl implements IDiscussionDAO {
+public class DiscussionDaoImpl implements IDiscussionDao {
 
 	SessionFactory factory;
 	

@@ -34,22 +34,24 @@ public class DiscussionController {
 		this.service = service;
 	}
 
-	//查詢所有文章。  開發當前階段的討論區主頁
+	//查詢所有文章。  開發當前階段的討論區主頁 --> showDiscussion.jsp
 	@RequestMapping("/discussion")
 	public String getAllArticles(Model model) {
 		List<Discussion> list = service.getAllArticles();
-		model.addAttribute(list);//discussionList  不給定名字，則以物件首字小寫+List。也支援Map
+		model.addAttribute(list);//discussionList  不給定名字，則用物件首字小寫+型態首字大寫List。
+		//將service實作類別取得的物件，設給Spring提供的Model介面的model物件
+		//Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
 		return "showDiscussion";
 	}
 	
-	//查詢單一主題
+	//查詢單一主題 
 	//要改為查詢討論串
 	@RequestMapping("/article")
 		public String getArticleById(Model model,
 				@RequestParam("id") Integer articleId,  
 				HttpSession session,
 				HttpServletRequest request) {
-		System.out.print("articleId======" + articleId);
+		System.out.println("articleId======" + articleId);
 //		Discussion d = new Discussion();
 //		d.setArticleId(articleId);
 //		Discussion discussion = service.getArticleById(articleId);

@@ -12,4 +12,5 @@ public interface IMovieService {
 	
 	
 	List<MovieInfo> getMovieInfoByOwnerID(); //尋找使用者Owner_ID上傳的影片
+	List<MovieInfo> getMovies();
 }

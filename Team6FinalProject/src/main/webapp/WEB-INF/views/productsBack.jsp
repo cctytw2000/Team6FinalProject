@@ -32,92 +32,86 @@
 </head>
 
 <body>
-	<jsp:include page="header/manageHeader.jsp" />
-	<div class="container mt-3">
-		<h1>商品管理</h1>
-		<%-- 	<form method="GET" action="queryCategory"> --%>
-		<!-- 		商品分類<select name="category"> -->
-		<!-- 			<option value="-1">請挑選</option> -->
-		<%-- 			<c:forEach var="category" items="${categories }"> --%>
-		<%-- 				<option value="${category.category }">${category.category }</option> --%>
-		<%-- 			</c:forEach> --%>
-		<!-- 		</select> -->
-		<!-- 		<input type="submit" value="查詢"> -->
-		<%-- 	</form> --%>
-		<!-- 	<nav class="navbar navbar-expand-sm "> -->
-		<%-- 		<form class="form-inline" action="productsBack/addCategory"> --%>
-		<!-- 			<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類"> -->
-		<!-- 			<button class="btn btn-success" type="submit">送出</button> -->
-		<%-- 		</form> --%>
-		<!-- 	</nav> -->
+<jsp:include page="header/manageHeader.jsp" />
+<div class="container mt-3" style="padding: 50px 15%">
+	<h1 align="center">商品管理</h1>
+<%-- 	<form method="GET" action="queryCategory"> --%>
+<!-- 		商品分類<select name="category"> -->
+<!-- 			<option value="-1">請挑選</option> -->
+<%-- 			<c:forEach var="category" items="${categories }"> --%>
+<%-- 				<option value="${category.category }">${category.category }</option> --%>
+<%-- 			</c:forEach> --%>
+<!-- 		</select> -->
+<!-- 		<input type="submit" value="查詢"> -->
+<%-- 	</form> --%>
+<!-- 	<nav class="navbar navbar-expand-sm "> -->
+<%-- 		<form class="form-inline" action="productsBack/addCategory"> --%>
+<!-- 			<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類"> -->
+<!-- 			<button class="btn btn-success" type="submit">送出</button> -->
+<%-- 		</form> --%>
+<!-- 	</nav> -->
+	
+<!-- 	<button type="button" class="btn btn-primary" onclick="window.location.href='productsBack/add'">新增商品</button> -->
+	
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#product">架上商品</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#productCancel">架下商品</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addCategory">新增商品分類</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addProduct">新增商品</a></li>
+	</ul>
+	
+	<div class="tab-content">
+	
+	
+	<div id="product" class="container tab-pane active" style="width:800px">
+	<table border="1" style="text-align: center">
+		<tr><th>商品編號<th>商品名稱<th>商品售價<th>商品分類<th>下架
+			<c:forEach var="product" items="${products }">
 
-		<!-- 	<button type="button" class="btn btn-primary" onclick="window.location.href='productsBack/add'">新增商品</button> -->
+			<tr><td>${product.game_id }
+				<td><a href="<spring:url value='productsBack/productBack?game_id=${product.game_id }'/>">${product.name }</a>
+				<td>${product.price }元
+				<td>${product.category.category }
+				<td><button type="button" class="btn btn-warning" onclick="window.location.href='productsBack/products/delete?game_id=${product.game_id }'">下架</button>
+		
+			</c:forEach>
+	</table>
+	</div>
+	
+	<div id="productCancel" class="container tab-pane fade" style="width:800px">
+	<table border="1" style="text-align: center">
+		<tr><th>商品編號<th>商品名稱<th>商品售價<th>商品分類<th>上架
+			<c:forEach var="c_product" items="${cancelProduct }">
 
-		<ul class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active"
-				data-toggle="tab" href="#product">架上商品</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#productCancel">架下商品</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#addCategory">新增商品分類</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#addProduct">新增商品</a></li>
-		</ul>
-
-		<div class="tab-content">
-
-
-			<div id="product" class="container tab-pane active">
-				<table border="1" style="text-align: center">
-					<tr>
-						<th>商品編號
-						<th>商品名稱
-						<th>商品售價
-						<th>商品分類
-						<th>下架 <c:forEach var="product" items="${products }">
-
-								<tr>
-									<td>${product.game_id }
-									<td><a
-										href="<spring:url value='productsBack/productBack?game_id=${product.game_id }'/>">${product.name }</a>
-									<td>${product.price }元
-									<td>${product.category.category }
-									<td><button type="button" class="btn btn-warning"
-											onclick="window.location.href='productsBack/products/delete?game_id=${product.game_id }'">下架</button>
-							</c:forEach>
-				</table>
-			</div>
-
-			<div id="productCancel" class="container tab-pane fade">
-				<table border="1" style="text-align: center">
-					<tr>
-						<th>商品編號
-						<th>商品名稱
-						<th>商品售價
-						<th>商品分類
-						<th>上架 <c:forEach var="c_product" items="${cancelProduct }">
-
-								<tr>
-									<td>${c_product.game_id }
-									<td><a
-										href="<spring:url value='productsBack/productBack?game_id=${c_product.game_id }'/>">${c_product.name }</a>
-									<td>${c_product.price }元
-									<td>${c_product.category.category }
-									<td><button type="button" class="btn btn-warning"
-											onclick="window.location.href='productsBack/products/reAdd?game_id=${c_product.game_id }'">上架</button>
-							</c:forEach>
-				</table>
-			</div>
-
-			<div id="addProduct" class="container tab-pane fade">
-				<form method="POST" action="productsBack/addProduct"
-					enctype="multipart/form-data">
-					商品分類:<select name="category_id">
-						<option value="-1">請挑選</option>
-						<c:forEach var="c" items="${categoryMap}">
-							<option value="${c.key }">${c.value }
-						</c:forEach>
-					</select>
+			<tr><td>${c_product.game_id }
+				<td><a href="<spring:url value='productsBack/productBack?game_id=${c_product.game_id }'/>">${c_product.name }</a>
+				<td>${c_product.price }元
+				<td>${c_product.category.category }
+				<td><button type="button" class="btn btn-warning" onclick="window.location.href='productsBack/products/reAdd?game_id=${c_product.game_id }'">上架</button>
+		
+			</c:forEach>
+	</table>
+	</div>
+	
+	<div id="addProduct" class="container tab-pane fade">
+		<form method="POST" action="productsBack/addProduct" enctype="multipart/form-data">
+		<p>
+		商品分類:<select name="category_id">
+			<option value="-1">請挑選</option>
+				<c:forEach var="c" items="${categoryMap}">
+					<option value="${c.key }">${c.value }
+				</c:forEach>
+		</select>
+		</p>
+		<p>
+			商品名稱:
+			<input name="name" type="text" size="50px" />
+			<p>
+				廠商名稱:
+				<input name="publisher" type="text" size="50px" />
+				<p>
+					商品價格:
+					<input name="price" type="text" />
 					<p>
 						商品名稱: <input name="name" type="text" size="50px" />
 					<p>

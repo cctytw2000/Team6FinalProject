@@ -39,12 +39,12 @@ color:red
 </style>
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/manageHeader.jsp" />
 
 
 
-	<div style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
+	<div style="height:auto;">
 		<section class="container">
 			<div class="row" style="padding:50px 15%">
 				<img width='200' height='200' src="<c:url value='/getPicture/${product.game_id}'/>" />
@@ -114,8 +114,8 @@ color:red
 							<p>
 									選擇圖片:
 									<input name="productImage" type="file" />
-									<p>
-										<input type="button" class="btn btn-secondary" value="更新">
+									<p style="float:right">
+										<input type="button" class="btn btn-success" value="更新">
 		</form>
       </div>
       
@@ -129,7 +129,7 @@ color:red
     
     						<div class="media-body">
      				 			<h4 style="color: #BBFFEE">${c.member_name } 
-     				 				<small><i>Posted on ${c.time.replace(".0","")}</i></small>
+     				 				<small style="margin-left:5%"><i>Posted on ${c.time.replace(".0","")}</i></small>
      				 				<small><i id="remove" onclick="window.location.href='<spring:url value='/removeComment?game_id=${product.game_id}&comment_id=${c.comment_id}'/>'">刪除</i></small>
 								</h4>
       							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p>      
@@ -164,7 +164,7 @@ color:red
 	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
-	<jsp:include page="footer/homeFooter.jsp" />
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 </body>
 
 </html>

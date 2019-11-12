@@ -45,6 +45,14 @@
 			}
 
 		}
+		
+		function headshot(id) {
+			let chenge = ""
+			chenge += '<input name="memberId" type="hidden" value="'+id+'"/>'
+			chenge += '<input id="memberimg" name="memberimg" type="file"/> <input type="submit" />'
+			document.getElementById("Changeheadshot").innerHTML = chenge
+		
+		}
 	</script>
 
 
@@ -62,15 +70,22 @@
 		
 		<c:choose>
 				<c:when test="${sessionScope.mem.headshot != Null}">
+		
 	
-		<img width="212" height="212" src="<c:url value='/memberImages/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
-	
+		<img width="212" height="250" src="<c:url value='/memberImages/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
+						<button onclick="headshot('${sessionScope.mem.member_id}')"  type="button">換一張大頭貼吧</button>
+				<form id="Changeheadshot"action="${pageContext.request.contextPath}/member/Changeheadshot" method="post" enctype="multipart/form-data">
+
+			
+					</form>
 				</c:when>
 				<c:otherwise>
-	<form action="${pageContext.request.contextPath}/member/Changeheadshot" method="post" enctype="multipart/form-data">
-			<img width="212" height="212" src="<c:url value='/memberImages/noimage.jpg' />">
-			<input name="memberId" type='hidden' value="${sessionScope.mem.member_id}"/> 
-			<input id="memberimg" name="memberimg" type='file'/> <input type="submit" />
+
+			<img width="212" height="250" src="<c:url value='/memberImages/noimage.jpg' />">
+						<button onclick="headshot('${sessionScope.mem.member_id}')"  type="button">新增一張大頭貼</button>
+				<form id="Changeheadshot" action="${pageContext.request.contextPath}/member/Changeheadshot" method="post" enctype="multipart/form-data">
+<%-- 			<input name="memberId" type='hidden' value="${sessionScope.mem.member_id}"/>  --%>
+<!-- 			<input id="memberimg" name="memberimg" type='file'/> <input type="submit" /> -->
 					</form>
 				</c:otherwise>
 

@@ -125,13 +125,13 @@
 						<img class="card-img-top"
 							src="<c:url value='/getPicture/${product.game_id}' />"
 							alt="Card image" style="width: 90%">
-						<div class="card-body">
+						<div class="card-body" style="padding-left:0px">
 							<h6 class="card-title">
 								<a
 									href="<spring:url value='product?game_id=${product.game_id }'/>"
 									style="color: white">${product.name }</a>
 							</h6>
-							<p class="card-text">NT ${product.price }元</p>
+							<p class="card-text" style="color: #FFFFBB">NT ${product.price }元</p>
 							<a href="addToCart?game_id=${product.game_id }&count=1"
 								class="btn btn-primary">加入購物車</a>
 						</div>

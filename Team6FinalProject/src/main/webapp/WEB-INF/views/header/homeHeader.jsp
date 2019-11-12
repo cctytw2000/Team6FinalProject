@@ -21,6 +21,9 @@
 
 
 
+	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
 
 
 	<!-- Page Preloder -->
@@ -131,6 +134,7 @@
 									
 			
 										<input id="memberimg" name="memberimg" type='file'/>
+										<p>新增一張大頭貼</p>
 									
 									
 									

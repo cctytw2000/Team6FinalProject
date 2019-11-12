@@ -30,8 +30,8 @@ public class Discussion {
 	
 
 
-	public Discussion() {
-		super();
+	public Discussion() {	//子類建構子呼叫父類建構子
+		super();		
 	}	
 
 	

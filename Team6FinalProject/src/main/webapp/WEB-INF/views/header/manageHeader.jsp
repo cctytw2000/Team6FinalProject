@@ -30,10 +30,10 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/newsBack">消息管理</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">遊戲討論區</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/discussionBack">討論區管理</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="membersBack">會員管理</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/membersBack">會員管理</a>
                                 </li>
                                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
 										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -41,10 +41,13 @@
 										
 										<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
 												<a class="dropdown-item" href="${pageContext.request.contextPath}/productsBack">商品管理</a>
-												<a class="dropdown-item" href="${pageContext.request.contextPath}/#">訂單管理</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/ordersBack">訂單管理</a>
 										</div>
 								
 								</li>
+								<li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/moviepersonal">影片管理</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
