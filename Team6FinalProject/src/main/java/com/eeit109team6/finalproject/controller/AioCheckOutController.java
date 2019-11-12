@@ -83,7 +83,8 @@ System.out.println("進來了");
 		// 廠商可自行決定是否延遲撥款
 		aio.setHoldTradeAMT("0");
 		// 後端設定付款完成通知回傳網址
-		aio.setReturnURL("http://211.23.128.214:5000");
+		aio.setReturnURL("http://localhost:8080/Team6FinalProject/showOrder");
+		aio.setOrderResultURL("http://localhost:8080/Team6FinalProject/showOrder");
 		try {
 			String html = all.aioCheckOut(aio, invoice);
 
