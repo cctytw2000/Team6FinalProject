@@ -39,7 +39,7 @@
 		
 		    <section style="background-color:black" style="width:100%;height:100%">
 	            <video style="height:100%;width:100%" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-	                <source src="./Movie/BlizzCon2019.mp4" type="video/mp4">
+	                <source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />' type="video/mp4">
 	            </video> 
     </section>
 		

@@ -1,8 +1,10 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.ArticlePicture;
+import com.eeit109team6.finalproject.model.HomeMovie;
+import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.model.Product;
+import com.eeit109team6.finalproject.service.IHomeMovieService;
 import com.eeit109team6.finalproject.service.IMemberService;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -27,6 +33,8 @@ import com.eeit109team6.finalproject.service.ProductService;
 public class HomeController {
 //	IMemberService service;
 	ProductService service;
+	IHomeMovieService movieService;
+
 	@Autowired
 	public void setService(ProductService service) {
 		this.service = service;
@@ -39,17 +47,19 @@ public class HomeController {
 		this.context = context;
 	}
 
-//	@Autowired
-//	public void setService(IMemberService service) {
-//		this.service = service;
-//	}
+	@Autowired
+	public void setMovieService(IHomeMovieService movieService) {
+		this.movieService = movieService;
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
+		HomeMovie home = movieService.findById(1);
 
 		List<Product> list = service.getProductTop8();
 		session.setAttribute("productsTop8", list);
 
+		model.addAttribute("homeMovie", home);
 		return "home";
 	}
 
@@ -80,5 +90,12 @@ public class HomeController {
 		return "insertMemberDetail";
 	}
 
+//	@RequestMapping(value = "/homeMovie/{id}.json")
+//	public String homeMovie(@PathVariable("id") Integer id, Model model) {
+//		HomeMovie home = movieService.findById(id);
+//		model.addAttribute(home);
+//		return "MovieBack";
+//
+//	}
 
 }

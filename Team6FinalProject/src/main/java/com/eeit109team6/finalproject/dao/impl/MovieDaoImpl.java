@@ -2,7 +2,6 @@ package com.eeit109team6.finalproject.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +42,17 @@ public class MovieDaoImpl implements IMovieDao{
 		Session session = factory.getCurrentSession();
 		session.update(movieinfo);	
 	}
-
 	
+	@Override
+	public List<MovieInfo> getMovies() {
+		String hql = "FROM MovieInfo";  
+		List<MovieInfo> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+
+	}
+                        //	DONE
 	@Override
 	public List<MovieInfo> getMovieInfoByOwnerID() {
 		String hql = "FROM MovieInfo WHERE owner_ID = 9";  
@@ -53,5 +61,6 @@ public class MovieDaoImpl implements IMovieDao{
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
-
+	
+	
 }

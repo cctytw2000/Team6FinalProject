@@ -14,19 +14,22 @@ public class MovieInfo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
 	private Integer movie_ID;
+	
 	private String name;
 	@Transient
 	private String movie_content;
 	@Transient
-	private Date time;
-	
+	private Date date;//Time
+	@Transient
 	private Integer owner_ID;
 	@Transient
 	private Integer like_Sum;
 	@Transient
 	private Integer click_Sum;
+
+	private String location_Test;
+	
 	
 	
 	public Integer getMovie_ID() {
@@ -47,11 +50,11 @@ public class MovieInfo {
 	public void setMovie_content(String movie_content) {
 		this.movie_content = movie_content;
 	}
-	public Date getTime() {
-		return time;
+	public Date getDate() {
+		return date;
 	}
-	public void setTime(Date time) {
-		this.time = time;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public Integer getOwner_ID() {
 		return owner_ID;
@@ -71,5 +74,12 @@ public class MovieInfo {
 	public void setClick_Sum(Integer click_Sum) {
 		this.click_Sum = click_Sum;
 	}
+	public String getLocation_Test() {
+		return location_Test;
+	}
+	public void setLocation_Test(String location_Test) {
+		this.location_Test = location_Test;
+	}
+	
 	
 }
