@@ -12,6 +12,8 @@ public interface INewsService {
 	List<NewsType> getAllNewsTypes();
 	void addNews(News news); 
 	void addArticlePicture(ArticlePicture articlePicture); 
+	void updateNewsTypeById(NewsType newsType); 
+	void deleteNewsTypeById(Integer newsTypeId); 
 //====================================================未完成====================================================		
 	List<News> getAllNews(); 
 	

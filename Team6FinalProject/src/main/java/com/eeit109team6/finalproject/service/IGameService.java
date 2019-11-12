@@ -12,6 +12,8 @@ public interface IGameService {
 	GameType getGameTypeById(Integer gameTypeId);
 	List<Game> getAllGames(); 
 	Game getGameById(Integer gameId);
+	void updateGameTypeById(GameType gameType); //更新遊戲類別
+	void deleteGameTypeById(Integer gameTypeId); //刪除遊戲類別
 //====================================================未完成====================================================		
 	
 	void deleteGameById(int gameId); 
