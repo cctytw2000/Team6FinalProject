@@ -134,6 +134,7 @@
 									
 			
 										<input id="memberimg" name="memberimg" type='file'/>
+										<p>新增一張大頭貼</p>
 									
 									
 									
