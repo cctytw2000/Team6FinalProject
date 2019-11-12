@@ -104,7 +104,14 @@ ol {
     background-size: cover;
     background-position: top center;
 }
-
+.set-video {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top-centor;
+    height: 200px;
+/*     width: */
+    padding: 25px 28px;
+}
 .spad {
     padding-top: 97px;
     padding-bottom: 97px;
@@ -541,7 +548,10 @@ ol {
     height: 204px;
     padding: 25px 28px;
 }
-
+.recent-game-item .rgi-thumb-video {
+    height: 204px;
+    padding: 0;
+}
 .recent-game-item .rgi-content {
     padding: 34px 22px 20px;
     background: #fff;
