@@ -100,4 +100,5 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.defaultContentType(MediaType.APPLICATION_JSON);
 	}
+
 }

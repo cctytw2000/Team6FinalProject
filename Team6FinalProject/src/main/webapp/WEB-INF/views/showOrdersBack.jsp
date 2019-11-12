@@ -110,7 +110,7 @@
 					dataType: "json",
 					success: function (data) {
 						   message = $.parseJSON(data.jsondata);
-		                   alert(data);
+
 		                
 		              
 					},
