@@ -51,14 +51,12 @@ public class DiscussionController {
 		return "showDiscussion";
 	}
 	
-	// 本方法暫時不使用
+	// 本方法暫不使用
 	// 顯示全站討論區所有文章列表
 //	@RequestMapping("/board")		
 //	public String getAllArticles(Model model) {
 //		List<Discussion> list = discussionService.getAllArticles();
 //		model.addAttribute(list);//discussionList  不給定名字，則用物件首字小寫+型態首字大寫List。
-//		//將service實作類別取得的物件，設給Spring提供的Model介面的model物件
-//		//Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
 //	return "board";
 //	}
 	
@@ -72,22 +70,24 @@ public class DiscussionController {
 	return "board";
 	}
 	
-	
-	
-	
-	
-	//查詢單一主題 
-	//要改為查詢討論串
+	//查詢單一文章 --> article.jsp
 	@RequestMapping("/article")
 		public String getArticleById(Model model,
 				@RequestParam("id") Integer articleId,  
 				HttpSession session,
 				HttpServletRequest request) {
-		System.out.println("articleId" + articleId);
+		System.out.println("articleId:" + articleId);
 //		Discussion d = new Discussion();
 //		d.setArticleId(articleId);
-//		Discussion discussion = service.getArticleById(articleId);
-		model.addAttribute("discussion", discussionService.getArticleById(articleId));
+		Discussion discussion = discussionService.getArticleById(articleId);
+//		model.addAttribute("discussion", discussionService.getArticleById(articleId));
+		model.addAttribute("discussion", discussion);
+//		model.addAttribute("boardName", boardTypeService.getBoardTypeById(discussion.boardId));		
+		
+//		List<Reply> reply = discussionService.getReplyById(articleId);  //取得討論串
+//		model.addAttribute("reply", reply);
+//		String boardType = boardTypeService.getBoardTypeById(discussionService.getArticleById(articleId));
+
 		return "article";
 	}
 	
