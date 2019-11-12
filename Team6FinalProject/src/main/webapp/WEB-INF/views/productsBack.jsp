@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>所有商品</title>
+<meta charset="UTF-8">
+<title>所有商品</title>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
@@ -24,11 +24,11 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
-	<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
+<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-	
+
 </head>
 
 <body>
@@ -113,43 +113,46 @@
 					商品價格:
 					<input name="price" type="text" />
 					<p>
-						庫存數量:
-						<input name="stock" type="text" />
-						<p>
-							商品描述:
-							<textarea name="game_desc" style="width:400px;height:200px;" ></textarea>
-							<p>
-								是否上架:
-								<input type="radio" name="is_remove" value="0" id="0" /><label for="0">是</label>
-								<input type="radio" name="is_remove" value="1" id="1" /><label for="1">否</label>
-								<p>
-									選擇圖片:
-									<input name="productImage" type="file" />
-									<p>
-										<input type="submit" value="送出">
-		</form>
+						商品名稱: <input name="name" type="text" size="50px" />
+					<p>
+						廠商名稱: <input name="publisher" type="text" size="50px" />
+					<p>
+						商品價格: <input name="price" type="text" />
+					<p>
+						庫存數量: <input name="stock" type="text" />
+					<p>
+						商品描述:
+						<textarea name="game_desc" style="width: 400px; height: 200px;"></textarea>
+					<p>
+						是否上架: <input type="radio" name="is_remove" value="0" id="0" /><label
+							for="0">是</label> <input type="radio" name="is_remove" value="1"
+							id="1" /><label for="1">否</label>
+					<p>
+						選擇圖片: <input name="productImage" type="file" />
+					<p>
+						<input type="submit" value="送出">
+				</form>
+			</div>
+
+			<div id="addCategory" class="container tab-pane fade">
+				<nav class="navbar navbar-expand-sm ">
+					<form class="form-inline" action="productsBack/addCategory">
+						<input class="form-control mr-sm-2" type="text" name="category"
+							placeholder="新增商品分類">
+						<button class="btn btn-success" type="submit">送出</button>
+					</form>
+				</nav>
+			</div>
+
+		</div>
 	</div>
-	
-	<div id="addCategory" class="container tab-pane fade">
-		<nav class="navbar navbar-expand-sm ">
-		<form class="form-inline" action="productsBack/addCategory">
-			<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類">
-			<button class="btn btn-success" type="submit">送出</button>
-		</form>
-	</nav>
-	
-	
-	
-	</div>
-	
-</div>	
-</div>
 
 
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
-	<script	src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
 
 </body>

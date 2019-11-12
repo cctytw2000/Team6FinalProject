@@ -18,14 +18,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ArticlePicture;
+import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Game;
+import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.IGameService;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -72,19 +76,13 @@ public class NewsController {
 		return "redirect:/newsBack";
 	}
 
-	// 查詢所有遊戲類別並存入Model
+	// 查詢所有消息類別並存入Model
 	@ModelAttribute("newsTypes")
 	public List<NewsType> getNewsTypes() {
 		return newsService.getAllNewsTypes();
 	}
 
-	// 導向消息後台 --> newsBack.jsp
-	@RequestMapping("/newsBack")
-	public String addGame(Model model) {
-		return "newsBack";
-	}
-
-	// 導向新增遊戲頁面--> addNews.jsp
+	// 導向新增消息頁面--> addNews.jsp
 	@RequestMapping(value = "/newsBack/addNews", method = RequestMethod.GET)
 	public String getAddNewNewsForm(Model model, HttpSession session) {
 
@@ -115,8 +113,7 @@ public class NewsController {
 		return "addNews";
 	}
 
-//========================================未完成========================================
-	// 新增遊戲--> 消息後台 newsBack.jsp
+	// 新增消息資料--> 導向上傳圖片頁面 addArticlePicture.jsp
 	@RequestMapping(value = "/newsBack/addNews1", method = RequestMethod.POST)
 	public String processAddNewNewsForm(@ModelAttribute("news") News news, HttpServletRequest request,
 			HttpSession session, Model model) {
@@ -138,7 +135,7 @@ public class NewsController {
 		news.setNewsType(nt);
 		news.setGame(g);
 		news.setActivity(a);
-		
+
 		ArticlePicture articlePicture = new ArticlePicture();
 		articlePicture.setNews(news);
 
@@ -148,7 +145,7 @@ public class NewsController {
 		return "addArticlePicture";
 	}
 
-	// 導向新增遊戲頁面--> addNews.jsp
+	// 新增消息圖片--> 導向消息後台newsBack.jsp
 	@RequestMapping(value = "/newsBack/addArticlePicture", method = RequestMethod.POST)
 	public String getAddNewPicturesForm(@ModelAttribute("articlePicture") ArticlePicture articlePicture,
 			HttpSession session) {
@@ -156,27 +153,72 @@ public class NewsController {
 		articlePicture.setNews(news);
 		System.out.println("title=" + articlePicture.getNews().getTitle());
 		newsService.addNews(news);
-		System.out.println("newsId=" +articlePicture.getNews().getNewsId());
-	
+		System.out.println("newsId=" + articlePicture.getNews().getNewsId());
+
 //		測試上傳圖片
-				MultipartFile newsImage = articlePicture.getNewsImage();
-				String originalFilename = newsImage.getOriginalFilename();
-				if(newsImage != null && !newsImage.isEmpty()) {
-					try {
-						byte[] b = newsImage.getBytes();
-						Blob blob = new SerialBlob(b);
-						articlePicture.setPicture(blob);
-						newsService.addArticlePicture(articlePicture);
-					} catch(Exception e) {
-						e.printStackTrace();
-						throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
-					}
-				}
+		MultipartFile newsImage = articlePicture.getNewsImage();
+		String originalFilename = newsImage.getOriginalFilename();
+		if (newsImage != null && !newsImage.isEmpty()) {
+			try {
+				byte[] b = newsImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				articlePicture.setPicture(blob);
+				newsService.addArticlePicture(articlePicture);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+			}
+		}
 		System.out.println("img=" + articlePicture.getNewsImage());
-		
-		
+
 		session.removeAttribute("addNews");
 		return "redirect:/newsBack";
+	}
+
+	// 更新消息類別名稱-->newsBack.jsp
+	@RequestMapping(value = "/updateNewsType", method = RequestMethod.POST)
+	public String updateNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId,@RequestParam("newsTypeName") String newsTypeName) {
+		System.out.println("newsTypeName="+newsTypeName);
+		System.out.println("updateNewsType");
+		NewsType nt = newsService.getNewsTypeById(newsTypeId);
+		nt.setNewsTypeName(newsTypeName);
+		newsService.updateNewsTypeById(nt);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除消息類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteNewsType", method = RequestMethod.POST)
+	public String deleteNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId) {
+		newsService.deleteNewsTypeById(newsTypeId);
+		return "redirect:/newsBack";
+	}
+
+//========================================未完成========================================
+
+	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
+	@RequestMapping("/newsBack")
+	public String newsListBack(Model model) {
+		List<NewsType> newsTypeList = newsService.getAllNewsTypes();
+		model.addAttribute("newsTypeList", newsTypeList);
+		
+		List<GameType> gameTypeList = gameService.getAllGameTypes();
+		model.addAttribute("gameTypeList", gameTypeList);
+
+//			List<Product> list = service.getAllProducts();
+//			model.addAttribute("products", list);
+//			List<Product> c_list = service.getCancelProducts();
+//			model.addAttribute("cancelProduct", c_list);
+//			Product product = new Product();
+//			model.addAttribute("product", product);
+//			List<Category> categories = service.getAllCategories();
+//			Map<Integer, String> categoryMap = new HashMap<>();
+//			for(Category c : categories) {
+//				categoryMap.put(c.getCategory_id(), c.getCategory());
+//			}
+//			model.addAttribute("categoryMap", categoryMap);
+
+		return "newsBack";
 	}
 
 }

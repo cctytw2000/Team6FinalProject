@@ -8,16 +8,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>遊戲討論區</title>
+<title>看板文章列表</title>
 </head>
 <body>
 	<div align="center">
-	<h1>討論區主頁</h1>
+	<a href="#">發表新主題</a>
 <table>
-	<tr><th>看板名稱</th><th>篇數</th></tr>
-	<c:forEach var='boardType' items="${boardTypeList}">
+	<tr><th>標題</th><th>作者</th></tr>
+	<c:forEach var='discussion' items="${discussionList}">
 		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.articleId}'/>">${discussion.subject}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.author}'/>">${discussion.author}</a></td>
 		</tr>
 	</c:forEach>
 </table>

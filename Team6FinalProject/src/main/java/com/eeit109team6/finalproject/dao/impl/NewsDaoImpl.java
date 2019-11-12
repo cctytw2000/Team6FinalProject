@@ -13,6 +13,7 @@ import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
+import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class NewsDaoImpl implements INewsDao {
@@ -61,6 +62,20 @@ public class NewsDaoImpl implements INewsDao {
 		session.save(articlePicture);		
 	}
 	
+	@Override
+	public void updateNewsTypeById(NewsType newsType) {
+		Session session = factory.getCurrentSession();
+		session.clear();
+		session.update(newsType);
+	}
+	
+	@Override
+	public void deleteNewsTypeById(Integer newsTypeId) {
+		Session session = factory.getCurrentSession();
+		NewsType nt = session.get(NewsType.class, newsTypeId);
+		session.delete(nt);		
+	}
+	
 //====================================================未完成====================================================	
 	@Override
 	public List<News> getAllNews() {
@@ -81,6 +96,10 @@ public class NewsDaoImpl implements INewsDao {
 		// TODO Auto-generated method stub
 
 	}
+
+	
+
+	
 
 	
 

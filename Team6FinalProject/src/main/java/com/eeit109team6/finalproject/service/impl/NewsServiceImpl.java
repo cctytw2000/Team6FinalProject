@@ -55,6 +55,19 @@ public class NewsServiceImpl implements INewsService{
 		dao.addArticlePicture(articlePicture);		
 	}
 	
+	@Transactional
+	@Override
+	public void updateNewsTypeById(NewsType newsType) {
+		dao.updateNewsTypeById(newsType);
+	}
+	
+	@Transactional
+	@Override
+	public void deleteNewsTypeById(Integer newsTypeId) {
+		dao.deleteNewsTypeById(newsTypeId);
+	}
+
+	
 
 
 //====================================================未完成====================================================
@@ -77,6 +90,9 @@ public class NewsServiceImpl implements INewsService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	
 
 	
 

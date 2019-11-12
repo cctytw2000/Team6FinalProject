@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IGameDao;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
+import com.eeit109team6.finalproject.model.NewsType;
 import com.eeit109team6.finalproject.model.Product;
 
 @Repository
@@ -70,6 +71,20 @@ public class GameDaoImpl implements IGameDao {
 		Session session = factory.getCurrentSession();
 		session.save(game);
 	}
+	
+	@Override
+	public void updateGameTypeById(GameType gameType) {
+		Session session = factory.getCurrentSession();
+		session.clear();
+		session.update(gameType);
+	}
+
+	@Override
+	public void deleteGameTypeById(Integer gameTypeId) {
+		Session session = factory.getCurrentSession();
+		GameType gt = session.get(GameType.class, gameTypeId);
+		session.delete(gt);			
+	}
 //====================================================未完成====================================================
 
 	
@@ -87,6 +102,8 @@ public class GameDaoImpl implements IGameDao {
 		Session session = factory.getCurrentSession();
 		session.update(game);
 	}
+
+	
 
 
 }

@@ -3,7 +3,6 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ page import="java.io.*,java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,25 +10,6 @@
 <title>討論區後台</title>
 </head>
 <body>
-
-<%
-    Integer hitsCount = 
-      (Integer)application.getAttribute("hitCounter");
-    if( hitsCount ==null || hitsCount == 0 ){
-       /* First visit */
-       out.println("討論區後台");
-       hitsCount = 1;
-    }else{
-       /* return visit */
-       out.println("討論區後台");
-       hitsCount += 1;
-    }
-    application.setAttribute("hitCounter", hitsCount);
-%>
-
-<p>這個頁面的計數器: <%= hitsCount%></p>
-
-
 	<div align="center">
 	<a href="addBoard">新增討論區看板</a>
 <table>

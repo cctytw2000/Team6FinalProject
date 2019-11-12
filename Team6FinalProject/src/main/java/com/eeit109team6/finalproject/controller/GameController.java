@@ -117,5 +117,22 @@ public class GameController {
 
 		return gameMap;
 	}
+	
+	// 更新遊戲類別名稱-->newsBack.jsp
+		@RequestMapping(value = "/updateGameType", method = RequestMethod.POST)
+		public String updateGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId,@RequestParam("gmaeTypeName") String gameTypeName) {
+			GameType gt = gameService.getGameTypeById(gameTypeId);
+			gt.setGameTypeName(gameTypeName);
+			gameService.updateGameTypeById(gt);
 
+			return "redirect:/newsBack";
+		}
+
+		// 刪除遊戲類別-->newsBack.jsp
+		@RequestMapping(value = "/deleteGameType", method = RequestMethod.POST)
+		public String deleteGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId) {
+			gameService.deleteGameTypeById(gameTypeId);
+			return "redirect:/newsBack";
+		}
+	
 }
