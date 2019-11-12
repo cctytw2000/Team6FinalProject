@@ -20,7 +20,7 @@
 </head>
 
 <body
-	style="height: 100%;background-image: url(<c:url value='/Images/pattern.png'  />)"">
+	style="height: 100%;background-image: url(<c:url value='/Images/pattern.png'  />)">
 
 	<jsp:include page="header/homeHeader.jsp" />
 

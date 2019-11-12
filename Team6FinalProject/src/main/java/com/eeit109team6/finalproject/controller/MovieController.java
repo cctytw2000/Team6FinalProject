@@ -45,7 +45,7 @@ public class MovieController {
 		return "movieindex";
 	}
 	
-	
+//	後台進入           影片管理頁面
 	@RequestMapping("/moviepersonal")
 	public String addMovie(Model model, HttpSession session,MovieInfo movieinfo) {
 		System.out.println("----------------@RequestMapping(\"/moviepersonal\")     addMovie---------------");
@@ -57,33 +57,20 @@ public class MovieController {
 	// 新增商品--> 商城後台 productsBack.jsp
 	
 	
-			@RequestMapping(value = "/moviepersonal/addmovie")
-			public String addProduct(Integer movie_ID, String name, String movie_content, Date time, Integer owner_ID,
+			@RequestMapping(value = "/moviepersonal/addMovie")
+			public String addMovie( String name, String movie_content, Date time, Integer owner_ID,
 					Integer like_Sum, Integer click_Sum, String location_Test) {
+				
 				System.out.println("----------------@RequestMapping(value = \"/moviepersonal/addmovie\")     addProduct--------,MultipartFile productImage-------");
+				
 				MovieInfo  movieInfo = new MovieInfo();
+
 				movieInfo.setName(name);
 				movieInfo.setMovie_content(movie_content);
 				movieInfo.setLocation_Test(location_Test);
 				
-				
-//				movieInfo.setProductImage(productImage);
-//				Date time = new Date();
-//				movieInfo.setTime(insertTime);
-				//測試上傳圖片
-				
-//				String originalFilename = productImage.getOriginalFilename();
-//				if(productImage != null && !productImage.isEmpty()) {
-//					try {
-//						byte[] b = productImage.getBytes();
-//						Blob blob = new SerialBlob(b);
-//						movieInfo.setPhoto(blob);
-//					} catch(Exception e) {
-//						e.printStackTrace();
-//						throw new RuntimeException("檔案上傳發生異常:"+e.getMessage());
-//					}
-//				}
-				//測試上傳圖片
+				System.out.println("@RequestMapping(value = \"/moviepersonal/addMovie\")"+ movieInfo);
+
 				
 				
 				service.addMovie(movieInfo);

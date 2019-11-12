@@ -12,8 +12,6 @@
 <meta charset="UTF-8">
 
 <title>後台影片管理</title>
-<%--     <meta http-equiv="refresh" content="5;url=${pageContext.request.contextPath}"> --%>
-
 
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
@@ -29,10 +27,8 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
-
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -82,111 +78,109 @@
 
 	<jsp:include page="header/manageHeader.jsp" />
 
+	<!-- 1footer-top-section -->
 	<section class="footer-top-section" style="height: 100%;">
+		<!-- div center -->
 		<div style="text-align: center" class="container">
-			<!-- New Video 可伸縮新增表單 -->
 
-			<div class="row justify-content-start">
+			<!-- Recent game   影片區-->
+			<div class="section-title">
+				<div class="row">
+					<!-- <div class="cata new"> this is a pink TAG </div> -->
+					<h2>影片區</h2>
 
-				<!-- New Video Button 按鈕-->
-				<span class="col-1 flip">New Video</span>
-
-
-			</div>
-
-			<div class="row panel">
-
-				<!-- New Video panel 新增內容 -->
-				<div id="addmovie" class="col-lg-6 col-md-4 tab-pane fade">
-					<form method="POST" action="moviepersonal/addmovie"
-						enctype="multipart/form-data">
-						<!-- action 寫入目標 controller func -->
-						<p>
-							影片名稱: <input name="name" type="text" size="50px" />
-						<p>
-							內文描述:
-							<textarea name="game_desc" style="width: 400px; height: 200px;"></textarea>
-						<p>
-							選擇影片: <input name="productImage" type="file" />
-						<p>
-							<input type="submit" value="送出">
-					</form>
 				</div>
 
-				<!-- New Video panel 新增內容 -->
-			</div>
-			<!-- New Video 可伸縮新增表單 End-->
-
-			<!-- New Video  新增內容 -->
-			<div class="row justify-content-start">
-				<!-- New Video panel 新增內容 -->
-				<div id="addmovie" class="col-lg-6 col-md-4 tab-pane fade">
-					<form method="POST" action="moviepersonal/addmovie"
-						enctype="multipart/form-data">
-						<!-- action 寫入目標 controller func -->
-						<p>
-							影片名稱: <input name="name" type="text" size="50px" />
-						<p>
-							內文描述:
-							<textarea name="game_desc" style="width: 400px; height: 200px;"></textarea>
-						<p>
-							選擇影片: <input name="productImage" type="file" />
-						<p>
-							<input type="submit" value="送出">
-					</form>
-				</div>
-
-				<!-- New Video panel 新增內容 -->
-			</div>
-		</div>
-
-		<!-- New Video  新增內容 -->
-
-		<!-- Recent game   影片區-->
-		<div class="section-title">
-			<!-- <div class="cata new"> this is a pink TAG </div> -->
-			<h2>影片區</h2>
-		</div>
-		<div class="row">
-			<c:forEach var="allmovies" items="${allmovies}">
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<!-- 						標籤 -->
-
-						<div class="rgi-thumb-video set-bg">
-							<div class="cata racing">racing</div>
-							<video class="set-video" poster="/Images/video-Bg.jpg"
-								playsinline="playsinline" controls="controls">
-								<source src="<c:url value='/Movie/${allmovies.location_Test}'/>"
-									type="video/mp4">
-							</video>
-						</div>
-						<div class="rgi-content">
-							<!-- 							標題 -->
-							<h6>${allmovies.location_Test }</h6>
-							<h5>${allmovies.name }</h5>
-							<!-- 							內文 -->
-							<p>${allmovies.movie_content}</p>
-							<!-- 							案讚數 -->
-							<a href="#" class="comment">3 Comments</a>
-
-							<div class="rgi-extra">
-								<div class="rgi-heart">
-									<img src="Images/icons/heart.png" alt="heart.png">
+				<div class="row">
+					<c:forEach var="allmovies" items="${allmovies}">
+						<div class="col-lg-4 col-md-6">
+							<div class="recent-game-item">
+								<div class="rgi-thumb-video set-bg">
+									<!--標籤 -->
+									<div class="cata racing">racing</div>
+									<video width="320" height="240" class="set-video"
+										controls="controls"
+										poster=<c:url value='/Images/video-Bg.jpg'  />>
+										<source
+											src="<c:url value='/Movie/${allmovies.location_Test}'/>"
+											type="video/mp4">
+									</video>
+								</div>
+								<div class="rgi-content">
+									<!--標題 -->
+									<h5>${allmovies.name }</h5>
+									<!--路徑 -->
+									<h6>${allmovies.location_Test }</h6>
+									<!--內文 -->
+									<p>${allmovies.movie_content}</p>
 								</div>
 							</div>
 						</div>
+					</c:forEach>
+				</div>
+				<!-- Recent game  影片區  End -->
+			</div>
+			<!-- Recent game   End-->
+
+<!-- New Video 新增表單   ROW  -->
+			<div class="row">
+
+				<!-- New Video panel 新增內容 -->
+				<div class="col-md-6">
+
+
+					<!-- tournament-item -->
+					<div class="tournament-item mb-4 mb-lg-0">
+
+						<!-- ti-content -->
+						<div class="ti-content">
+						
+							<!-- 	ti-text-form -->
+							<div class="ti-text-form"id= "addMovie">
+							
+								<!-- action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
+								<form style="background-color:white" method="POST" action="moviepersonal/addMovie"
+									enctype="multipart/form-data">
+									<p>
+										影片標題: <input name="name" type="text" size="50px" />
+									<p>
+										內文描述:
+										<textarea name="movie_content"
+											style="width: 400px; height: 200px;"></textarea>
+									<p>
+										影片名稱: <input name="location_Test" type="text" size="50px" />
+									<p>
+										<input type="submit" value="送出">
+								</form>
+							</div>
+							<!-- 	ti-text-form -->
+							
+						</div>
+						<!-- ti-content -->
 
 					</div>
-				</div>
+					<!-- 	tournament-item End  -->
 
-			</c:forEach>
+				</div>
+				<!-- New Video panel 新增內容 End  -->
+
+			</div>
+			<!-- New Video 新增表單 End  ROW -->
+
 		</div>
-		<!-- Recent game   End-->
-		</div>
+		<!-- div center End-->
 
 		<div class="footer_div"></div>
+
 	</section>
+	<!-- 1footer-top-section End-->
+
+
+
+
+
+
+
 
 	<%--     <div style="height:auto;background-image: url(<c:url value='/Images/pattern.png'  />)"> --%>
 	<!--     </div> -->
