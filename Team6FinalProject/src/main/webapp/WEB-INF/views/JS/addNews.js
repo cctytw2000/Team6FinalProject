@@ -1,36 +1,6 @@
 function GoBack() {
 		history.go(-1)
 	}
-	// 	依照使用者選取的新聞類別來顯示遊戲或活動細節
-	function PickGOrA(id) {
-		alert(id)
-		var e = document.getElementById("pickGOrA");
-		var gOrA = e.options[e.selectedIndex].value;
-		var g = document.getElementById("game");
-		var a = document.getElementById("activity");
-		if (gOrA == 1) {
-			g.style.display = "block";
-			a.style.display = "none";
-		} else if (gOrA == 2) {
-			g.style.display = "none";
-			a.style.display = "block";
-		} else {
-			g.style.display = "none";
-			a.style.display = "none";
-		}
-		//避免活動或是遊戲id同時送出
-		if (gOrA == 1) {
-			document.getElementById("activitySelect").selectedIndex = 0;
-			$("#activityDetail").hide();
-		} else
-			(gOrA == 2)
-		{
-			document.getElementById("gameSelect").selectedIndex = 0;
-			$("#gameDetail").hide();
-		}
-
-	}
-
 // 製造newsType下拉式選單
 $(document).ready(function() {	
 	$.ajax({
