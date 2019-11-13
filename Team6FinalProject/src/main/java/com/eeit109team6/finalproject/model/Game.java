@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "game")
@@ -27,12 +28,10 @@ public class Game {
 	private String publicationDate;
 	private String publisher;
 	private String platform;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "NEWSTYPEID")
-	private NewsType newsType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GAMETYPEID")
+	@JsonIgnore
 	private GameType gameType;
 
 	public Game() {
@@ -100,14 +99,6 @@ public class Game {
 
 	public void setPlatform(String platform) {
 		this.platform = platform;
-	}
-
-	public NewsType getNewsType() {
-		return newsType;
-	}
-
-	public void setNewsType(NewsType newsType) {
-		this.newsType = newsType;
 	}
 
 }

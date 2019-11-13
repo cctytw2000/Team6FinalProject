@@ -71,15 +71,14 @@ public class GameController {
 	public String processAddNewGameForm(@ModelAttribute("game") Game game) throws ParseException {
 		Integer gt_ = game.getGameType_(); // 取回遊戲類別分類id
 		GameType gt = gameService.getGameTypeById(gt_); // 利用id取得遊戲類別
-		Integer nt_ = game.getNewsType_(); // 取回新聞類別分類id
-		NewsType nt = newsService.getNewsTypeById(nt_); // 利用id取得新聞類別
-		//改變日期格式
+		// 改變日期格式
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		String PublicationDate = format1.format((Date)format.parse(game.getPublicationDate()));
-		game.setPublicationDate(PublicationDate);
+		if (!(game.getPublicationDate() == "")) {
+			String PublicationDate = format1.format((Date) format.parse(game.getPublicationDate()));
+			game.setPublicationDate(PublicationDate);
+		}
 		game.setGameType(gt); // 設定遊戲的遊戲類別
-		game.setNewsType(nt); // 設定遊戲的新聞類別
 		gameService.addGame(game);
 		return "redirect:/newsBack";
 	}
@@ -93,20 +92,27 @@ public class GameController {
 		return "redirect:/newsBack";
 	}
 
-	// 查詢所有遊戲類別並存入Model
+	// 查詢所有遊戲類別並存入Model(for form:form)
 	@ModelAttribute("gameTypes")
 	public List<GameType> getGameTypes() {
 		return gameService.getAllGameTypes();
 	}
 
+	// 取得所有遊戲的json格式
+	@RequestMapping(value = "/newsBack/searchGameByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<Game> test() {
+		return gameService.getAllGames();
+	}
+
 	// 用ajax傳回gameDetail給addNews.jsp
-	@RequestMapping(value = "/newsBack/searchGameByAjax", method = RequestMethod.POST)
+	@RequestMapping(value = "/newsBack/searchGameByAjax1", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> test(@RequestParam("gameId") Integer gameId) {
-//		System.out.println(gameId);
+		System.out.println(gameId);
 		Game g = gameService.getGameById(gameId);
 		Map<String, String> gameMap = new HashMap<>();
+		gameMap.put("gameTypeName", g.getGameType().getGameTypeName());
 		gameMap.put("name", g.getGameName());
-		// 若未設定發售日則傳回未設定 
+		// 若未設定發售日則傳回未設定
 		if (g.getPublicationDate().equals("")) {
 			gameMap.put("publicationDate", "未設定");
 		} else {
@@ -117,22 +123,23 @@ public class GameController {
 
 		return gameMap;
 	}
-	
+
 	// 更新遊戲類別名稱-->newsBack.jsp
-		@RequestMapping(value = "/updateGameType", method = RequestMethod.POST)
-		public String updateGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId,@RequestParam("gmaeTypeName") String gameTypeName) {
-			GameType gt = gameService.getGameTypeById(gameTypeId);
-			gt.setGameTypeName(gameTypeName);
-			gameService.updateGameTypeById(gt);
+	@RequestMapping(value = "/updateGameType", method = RequestMethod.POST)
+	public String updateGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId,
+			@RequestParam("gmaeTypeName") String gameTypeName) {
+		GameType gt = gameService.getGameTypeById(gameTypeId);
+		gt.setGameTypeName(gameTypeName);
+		gameService.updateGameTypeById(gt);
 
-			return "redirect:/newsBack";
-		}
+		return "redirect:/newsBack";
+	}
 
-		// 刪除遊戲類別-->newsBack.jsp
-		@RequestMapping(value = "/deleteGameType", method = RequestMethod.POST)
-		public String deleteGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId) {
-			gameService.deleteGameTypeById(gameTypeId);
-			return "redirect:/newsBack";
-		}
-	
+	// 刪除遊戲類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteGameType", method = RequestMethod.POST)
+	public String deleteGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId) {
+		gameService.deleteGameTypeById(gameTypeId);
+		return "redirect:/newsBack";
+	}
+
 }

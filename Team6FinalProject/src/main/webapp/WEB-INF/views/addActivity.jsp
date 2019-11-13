@@ -86,9 +86,6 @@
 				活動地點:
 				<form:input path="location" type="text" />
 			<p>
-				<!-- 消息類別預設活動介紹為2 -->
-				<form:hidden path="newsType_" value="2" />
-			<p>
 				<input type="submit" value="送出">
 				<button type="button" onclick="GoBack()">取消</button>
 		</form:form>

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="newstype")
 public class NewsType {
@@ -25,11 +27,7 @@ public class NewsType {
 	private String newsTypeName;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsType", cascade = CascadeType.ALL)
-	private Set<Game> games = new HashSet<Game>();
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsType", cascade = CascadeType.ALL)
-	private Set<Activity> activities= new HashSet<Activity>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsType", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<News> newses= new HashSet<News>();
 	
 	public NewsType() {
@@ -49,22 +47,6 @@ public class NewsType {
 
 	public void setNewsTypeName(String newsTypeName) {
 		this.newsTypeName = newsTypeName;
-	}
-	
-	public Set<Game> getGames() {
-		return games;
-	}
-
-	public void setGames(Set<Game> games) {
-		this.games = games;
-	}
-
-	public Set<Activity> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(Set<Activity> activities) {
-		this.activities = activities;
 	}
 	
 	public Set<News> getNewses() {

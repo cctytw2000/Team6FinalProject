@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>新增消息</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 自訂js設定檔  -->
-<script src="${pageContext.request.contextPath}/JS/addNews.js"></script>
 <!-- 	套版用 -->
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel='stylesheet'
@@ -27,15 +21,11 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
-<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
-<style>
-#gameDetail, #activityDetail{
-height:125px;
-width:200px
-}
-</style>
+<!-- 自訂js設定檔  -->
+<script src="${pageContext.request.contextPath}/JS/addNews.js"></script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -124,18 +114,33 @@ width:200px
 				<form:input path="title" type="text" />
 			<p>
 				消息內容:
-				<form:textarea path="article" rows="5" cols="30"
-					style="resize:none;" />
+				<textarea class="form-control inline" name="article" id="article"
+					rows="30" cols="100" style="resize: none;"></textarea>
 			<p>
-				是否刊登:
-				<form:radiobutton path="isVisable" value="0" id="0" />
-				<label for="0">是</label>
-				<form:radiobutton path="isVisable" value="1" id="1" />
-				<label for="1">否</label>
+				是否需要顯示遊戲細節: <input type="radio" name="showGame" value="1"> 是
+				<input type="radio" name="showGame" value="0"> 否
+			<div id="showGame1"></div>
+			<div class="row mb-2"></div>
+			<div id="showGame2"></div>
+			<p>
+				是否需要顯示活動細節: <input type="radio" name="showActivity" value="1">
+				是 <input type="radio" name="showActivity" value="0"> 否
+			<div id="showActivity1"></div>
+			<div class="row mb-2"></div>
+			<div id="showActivity2"></div>
+			<p>
+				是否刊登: <input type="radio" name="isVisable" value="1"> 是 <input
+					type="radio" name="isVisable" value="0"> 否
 			<p>
 				<input type="submit" value="下一步:上傳圖片">
 				<button type="button" onclick="GoBack()">取消</button>
-		</form:form>
+		</form>
+
+
+
+
+
+
 	</div>
 	<!-- 	套版用 -->
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
