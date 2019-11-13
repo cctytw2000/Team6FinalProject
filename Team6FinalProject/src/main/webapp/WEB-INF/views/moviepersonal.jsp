@@ -88,9 +88,7 @@
 				<div class="row">
 					<!-- <div class="cata new"> this is a pink TAG </div> -->
 					<h2>影片區</h2>
-
 				</div>
-
 				<div class="row">
 					<c:forEach var="allmovies" items="${allmovies}">
 						<div class="col-lg-4 col-md-6">
@@ -118,9 +116,9 @@
 						</div>
 					</c:forEach>
 				</div>
-				<!-- Recent game  影片區  End -->
+
 			</div>
-			<!-- Recent game   End-->
+			<!-- Recent game   End 影片區-->
 
 			<!-- New Video 新增表單   ROW  -->
 			<div class="row">
@@ -145,7 +143,8 @@
 										影片標題: <input name="movie_name" type="text" size="50px" />
 									<p>
 										內文描述:
-										<textarea name="movie_content" style="width: 400px; height: 200px;"></textarea>
+										<textarea name="movie_content"
+											style="width: 400px; height: 200px;"></textarea>
 									<p>
 										選則檔案: <input type="file" name="video_file"><br />
 									<p>
@@ -166,6 +165,51 @@
 			</div>
 			<!-- New Video 新增表單 End  ROW -->
 
+
+			<!-- Update Video 更改表單   ROW -->
+			<div class="row">
+
+				<!-- New Video panel 新增內容 -->
+				<div class="col-md-6">
+
+
+					<!-- tournament-item -->
+					<div class="tournament-item mb-4 mb-lg-0">
+
+						<!-- ti-content -->
+						<div class="ti-content">
+
+							<!-- 	ti-text-form -->
+							<div class="ti-text-form" id="addMovie">
+
+								<!-- action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
+								<form style="background-color: white" method="POST"
+									action="moviepersonal/addMovie" enctype="multipart/form-data">
+									<p>
+										影片標題: <input name="movie_name" type="text" size="50px" />
+									<p>
+										內文描述:
+										<textarea name="movie_content"
+											style="width: 400px; height: 200px;"></textarea>
+									<p>
+										選則檔案: <input type="file" name="video_file"><br />
+									<p>
+										<input type="submit" value="送出"><br />
+								</form>
+							</div>
+							<!-- 	ti-text-form -->
+
+						</div>
+						<!-- ti-content -->
+
+					</div>
+					<!-- 	tournament-item End  -->
+
+				</div>
+				<!-- New Video panel 新增內容 End  -->
+
+			</div>
+			<!-- Update Video 更改表單 End  ROW -->
 		</div>
 		<!-- div center End-->
 
