@@ -77,10 +77,16 @@
 
 
 	</script>
-
+<style type="text/css">
+#b{
+	background-image:url(<c:url value='/Images/recent-game-bg1.png' />);
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+</style>
 </head>
 
-<body>
+<body id="b">
 	<jsp:include page="header/manageHeader.jsp" />
 	<div class="container mt-3" style="padding: 50px 15%">
 		<h1 align="center">商品管理</h1>
@@ -105,8 +111,8 @@
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#product">架上商品</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#productCancel">架下商品</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addCategory">新增商品分類</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addProduct">新增商品</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addCategory">新增功能</a></li>
+<!-- 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addProduct">新增商品</a></li> -->
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#buyCount">統計數據</a></li>
 		</ul>
 
@@ -159,52 +165,133 @@
 				</table>
 			</div>
 
-			<div id="addProduct" class="container tab-pane fade">
-				<form method="POST" action="productsBack/addProduct" enctype="multipart/form-data">
-					<p>
-						商品分類:<select name="category_id">
-							<option value="-1">請挑選</option>
-							<c:forEach var="c" items="${categoryMap}">
-								<option value="${c.key }">${c.value }
-							</c:forEach>
-						</select>
-					</p>
-					<p>
-						商品名稱:
-						<input name="name" type="text" size="50px" />
-						<p>
-							廠商名稱:
-							<input name="publisher" type="text" size="50px" />
-							<p>
-								商品價格:
-								<input name="price" type="text" />
-								<p>
-									庫存數量:
-									<input name="stock" type="text" />
-									<p>
-										商品描述:
-										<textarea name="game_desc" style="width:400px;height:200px;"></textarea>
-										<p>
-											是否上架:
-											<input type="radio" name="is_remove" value="0" id="0" /><label
-												for="0">是</label>
-											<input type="radio" name="is_remove" value="1" id="1" /><label
-												for="1">否</label>
-											<p>
-												選擇圖片:
-												<input name="productImage" type="file" />
-												<p>
-													<input type="submit" value="送出">
-				</form>
-			</div>
+<!-- 			<div id="addProduct" class="container tab-pane fade"> -->
+<%-- 				<form method="POST" action="productsBack/addProduct" enctype="multipart/form-data"> --%>
+<!-- 					<p> -->
+<!-- 						商品分類:<select name="category_id"> -->
+<!-- 							<option value="-1">請挑選</option> -->
+<%-- 							<c:forEach var="c" items="${categoryMap}"> --%>
+<%-- 								<option value="${c.key }">${c.value } --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</p> -->
+<!-- 					<p> -->
+<!-- 						商品名稱: -->
+<!-- 						<input name="name" type="text" size="50px" /> -->
+<!-- 						<p> -->
+<!-- 							廠商名稱: -->
+<!-- 							<input name="publisher" type="text" size="50px" /> -->
+<!-- 							<p> -->
+<!-- 								商品價格: -->
+<!-- 								<input name="price" type="text" /> -->
+<!-- 								<p> -->
+<!-- 									庫存數量: -->
+<!-- 									<input name="stock" type="text" /> -->
+<!-- 									<p> -->
+<!-- 										商品描述: -->
+<!-- 										<textarea name="game_desc" style="width:400px;height:200px;"></textarea> -->
+<!-- 										<p> -->
+<!-- 											是否上架: -->
+<!-- 											<input type="radio" name="is_remove" value="0" id="0" /><label -->
+<!-- 												for="0">是</label> -->
+<!-- 											<input type="radio" name="is_remove" value="1" id="1" /><label -->
+<!-- 												for="1">否</label> -->
+<!-- 											<p> -->
+<!-- 												選擇圖片: -->
+<!-- 												<input name="productImage" type="file" /> -->
+<!-- 												<p> -->
+<!-- 													<input type="submit" value="送出"> -->
+<%-- 				</form> --%>
+<!-- 			</div> -->
 
 			<div id="addCategory" class="container tab-pane fade">
-				<nav class="navbar navbar-expand-sm ">
-					<form class="form-inline" action="productsBack/addCategory">
-						<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類">
-						<button class="btn btn-success" type="submit">送出</button>
-					</form>
-				</nav>
+<!-- 				<nav class="navbar navbar-expand-sm "> -->
+<%-- 					<form class="form-inline" action="productsBack/addCategory"> --%>
+<!-- 						<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類"> -->
+<!-- 						<button class="btn btn-success" type="submit">送出</button> -->
+<%-- 					</form> --%>
+<!-- 				</nav> -->
+				
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+  					新增分類
+				</button>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">新增分類</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+								<nav class="navbar navbar-expand-sm ">
+										<form class="form-inline" action="productsBack/addCategory">
+											<input class="form-control mr-sm-2" type="text" name="category" placeholder="新增商品分類">
+											<button class="btn btn-success" type="submit">新增</button>
+										</form>
+									</nav>
+							</form>
+					      </div>
+					      
+					    </div>
+					  </div>
+					</div>
+					
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#add">
+  					新增商品
+				</button>
+				<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addProductLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="addProductLabel">新增商品</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        <form method="POST" action="productsBack/addProduct" enctype="multipart/form-data">
+									<p>
+										商品分類:<select name="category_id">
+											<option value="-1">請挑選</option>
+											<c:forEach var="c" items="${categoryMap}">
+												<option value="${c.key }">${c.value }
+											</c:forEach>
+										</select>
+									</p>
+									<p>
+										商品名稱:
+										<input name="name" type="text" size="50px" />
+										<p>
+											廠商名稱:
+											<input name="publisher" type="text" size="50px" />
+											<p>
+												商品價格:
+												<input name="price" type="text" />
+												<p>
+													庫存數量:
+													<input name="stock" type="text" />
+													<p>
+														商品描述:
+														<textarea name="game_desc" style="width:400px;height:200px;"></textarea>
+														<p>
+															是否上架:
+															<input type="radio" name="is_remove" value="0" id="0" /><label
+																for="0">是</label>
+															<input type="radio" name="is_remove" value="1" id="1" /><label
+																for="1">否</label>
+															<p>
+																選擇圖片:
+																<input name="productImage" type="file" />
+																<p style="float:right">
+																	<input type="submit" class="btn btn-success" value="新增">
+								</form>
+					      </div>
+					      
+					    </div>
+					  </div>
+					</div>
 			</div>
 
 			<div id="buyCount" class="container tab-pane fade">
@@ -228,7 +315,6 @@
 
 		</div>
 	</div>
-
 
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
