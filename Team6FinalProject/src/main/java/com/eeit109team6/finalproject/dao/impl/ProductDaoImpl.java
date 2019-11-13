@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IProductDao;
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Product;
 
 @Repository
@@ -221,7 +222,14 @@ public class ProductDaoImpl implements IProductDao {
 		String hql = "FROM Product p WHERE p.is_remove = 0 ORDER BY date DESC";
 		Session session = factory.getCurrentSession();
 		List<Product> list = session.createQuery(hql).setMaxResults(8).getResultList(); 
-	    
+		return list;
+	}
+
+	@Override
+	public List<OrderItem> getOrderItem() {
+		String hql = "FROM OrderItem";
+		Session session = factory.getCurrentSession();
+		List<OrderItem> list = session.createQuery(hql).getResultList(); 
 		return list;
 	}
 

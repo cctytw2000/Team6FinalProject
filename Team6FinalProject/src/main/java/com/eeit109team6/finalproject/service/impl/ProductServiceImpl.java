@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit109team6.finalproject.dao.IProductDao;
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Page;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
@@ -193,9 +194,16 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCancelProducts();
 	}
 
+	@Transactional
 	@Override
 	public List<Product> getProductTop8() {
 		return dao.getProductTop8();
+	}
+
+	@Transactional
+	@Override
+	public List<OrderItem> getOrderItem() {
+		return dao.getOrderItem();
 	}
 
 	

@@ -62,12 +62,6 @@ public class ActivityController {
 		return "redirect:/newsBack";
 	}
 
-	// 查詢所有活動類別並存入Model
-	@ModelAttribute("activityTypes")
-	public List<ActivityType> getActivityTypes() {
-		return activityService.getAllActivityTypes();
-	}
-
 	// 導向新增活動頁面--> addActivity.jsp
 	@RequestMapping(value = "/newsBack/addActivity", method = RequestMethod.GET)
 	public String getAddNewActivityForm(Model model) {
@@ -89,56 +83,66 @@ public class ActivityController {
 	public String processAddNewActivityForm(@ModelAttribute("activity") Activity activity) throws ParseException {
 		Integer at_ = activity.getActivityType_(); // 取回遊戲類別分類id
 		ActivityType at = activityService.getActivityTypeById(at_); // 利用id取得遊戲類別
-		Integer nt_ = activity.getNewsType_(); // 取回新聞類別分類id
-		NewsType nt = newsService.getNewsTypeById(nt_); // 利用id取得新聞類別
 		// 改變日期格式
-		if(!(activity.getStartingDate_time()).equals("")){
-		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		String StartingDate_time = format1.format((Date) format.parse(activity.getStartingDate_time()));
-		activity.setStartingDate_time(StartingDate_time);
+		if (!(activity.getStartingDate_time()).equals("")) {
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String StartingDate_time = format1.format((Date) format.parse(activity.getStartingDate_time()));
+			activity.setStartingDate_time(StartingDate_time);
 		}
-		if(!(activity.getStartingDate()).equals("")){
+		if (!(activity.getStartingDate()).equals("")) {
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String StartingDate = format1.format((Date) format.parse(activity.getStartingDate()));
 			activity.setStartingDate(StartingDate);
-			}
-		if(!(activity.getEndingDate()).equals("")){
+		}
+		if (!(activity.getEndingDate()).equals("")) {
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String EndingDate = format1.format((Date) format.parse(activity.getEndingDate()));
 			activity.setEndingDate(EndingDate);
-			}
+		}
 		activity.setActivityType(at); // 設定遊戲的遊戲類別
-		activity.setNewsType(nt); // 設定遊戲的新聞類別
 		activityService.addActivity(activity);
 		return "redirect:/newsBack";
 	}
 
+	// 查詢所有活動類別並存入Model(for form:form)
+	@ModelAttribute("activityTypes")
+	public List<ActivityType> getActivityTypes() {
+		return activityService.getAllActivityTypes();
+	}
+
+	// 取得所有活動的json格式
+	@RequestMapping(value = "/newsBack/searchActivityByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<Activity> test() {
+		return activityService.getAllActivities();
+	}
+
 	// 用ajax傳回activityDetail給addNews.jsp
-	@RequestMapping(value = "/newsBack/searchActivityByAjax", method = RequestMethod.POST)
+	@RequestMapping(value = "/newsBack/searchActivityByAjax1", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> test(@RequestParam("activityId") Integer activityId) {
 		System.out.println(activityId);
 		Activity a = activityService.getActivityById(activityId);
 		Map<String, String> activityMap = new HashMap<>();
 		activityMap.put("name", a.getActivityName());
+		activityMap.put("activityTypeName", a.getActivityType().getActivityTypeName());
 		activityMap.put("location", a.getLocation());
 		// 若未設定日期/時間則不回傳
-//		System.out.println(a.getStartingTime_date());
-//		System.out.println(a.getStartingTime_date() instanceof String);
+		System.out.println(a.getStartingTime_date());
+		System.out.println(a.getStartingTime_date() instanceof String);
 		if (!(a.getStartingDate_time().equals(""))) {
 			activityMap.put("startingDate_time", a.getStartingDate_time());
-		} 
+		}
 		if (!(a.getStartingTime_date().equals("00:00:00"))) {
 			activityMap.put("startingTime_date", a.getStartingTime_date());
-		} 
+		}
 		if (!(a.getStartingDate().equals(""))) {
 			activityMap.put("startingDate", a.getStartingDate());
-		} 
+		}
 		if (!(a.getEndingDate().equals(""))) {
 			activityMap.put("endingDate", a.getEndingDate());
-		} 
+		}
 
 		return activityMap;
 	}

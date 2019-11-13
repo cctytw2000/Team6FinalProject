@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "activity")
 public class Activity {
@@ -30,10 +32,8 @@ public class Activity {
 	private String location;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACTIVITYTYPEID")
+	@JsonIgnore
 	private ActivityType activityType;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "NEWSTYPEID")
-	private NewsType newsType;
 
 	public Activity() {
 	}
@@ -76,14 +76,6 @@ public class Activity {
 
 	public void setActivityType(ActivityType activityType) {
 		this.activityType = activityType;
-	}
-
-	public NewsType getNewsType() {
-		return newsType;
-	}
-
-	public void setNewsType(NewsType newsType) {
-		this.newsType = newsType;
 	}
 
 	public String getActivityName() {

@@ -24,7 +24,7 @@
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
 	<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 </head>
 <body style="background-image: url(<c:url value='/Images/pattern.png' />)">
@@ -72,6 +72,10 @@
 <%-- 				</c:forEach> --%>
 				
 			</table>
+			
+			        <div class="chart-container" style="position: relative; height:20vh; width:40vw">
+                <canvas id="chart"></canvas>
+            </div>
 		</div>
 	</section>
     <!--====== Javascripts & Jquery ======-->

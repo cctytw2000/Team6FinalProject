@@ -22,7 +22,7 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
-<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
 <title>新增遊戲</title>
@@ -38,7 +38,7 @@
 				<form:option value="-1">請挑選</form:option>
 				<form:options items="${gameTypeMap }"></form:options>
 			</form:select>
-			<div  class="row mb-2"></div>
+			<div class="row mb-2"></div>
 			<p>
 				遊戲名稱:
 				<form:input path="gameName" type="text" />
@@ -52,9 +52,6 @@
 			<p>
 				發行平台:
 				<form:input path="platform" type="text" />
-			<p>
-				<!-- 消息類別預設遊戲介紹為1 -->
-				<form:hidden path="newsType_" value="1" />
 			<p>
 				<input type="submit" value="送出">
 				<button type="button" onclick="GoBack()">取消</button>

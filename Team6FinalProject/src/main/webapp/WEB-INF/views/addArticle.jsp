@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>討論區後台</title>
+<title>討論區</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->
@@ -34,22 +34,17 @@
 	<jsp:include page="header/manageHeader.jsp" />
 
 	<div class="container mt-3">
-		<h1 align="center">討論區後台功能</h1>
+		<h1 align="center">張貼文章</h1>
 		<div align="center">
-			<a href="addBoard">新增討論區看板</a>
-			<table>
-				<tr>
-					<th>看板編號</th>
-					<th>看板名稱</th>
-				</tr>
-				<c:forEach var='boardType' items="${boardTypeList}">
-					<tr>
-						<td>${boardType.boardId}</td>
-						<td>${boardType.boardName}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
+	<form:form method='POST' modelAttribute="discussion">
+		<form:input path="BoardName" type="text" size="50px" />
+		<form:input path="BoardName" type="text" size="50px" />
+		<form:input path="BoardName" type="text" size="50px" />
+		<p>
+			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
+	</form:form>
+			</div>
 		</div>
 		<!-- 	套版用 -->
 		<script
