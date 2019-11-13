@@ -31,7 +31,7 @@
 <!-- 	//套版用 -->
 </head>
 <body>
-	<jsp:include page="header/manageHeader.jsp" />
+	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
 		<h2>瀏覽文章</h2>
 		<table>

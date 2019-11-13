@@ -30,16 +30,18 @@
 <!-- 	//套版用 -->
 </head>
 <body>
-	<jsp:include page="header/manageHeader.jsp" />
+	<jsp:include page="header/homeHeader.jsp" />
 	
 	<div align="center">
 	<h1>看板名稱:${boardType.boardName}</h1>
-	<a href="#">發表新主題</a>
+	
+	<a style="text-decoration:none;" href="<spring:url value='addArticle?id=${boardType.boardId}'/>">發表文章</a>
+
 <table>
 	<tr><th>標題</th><th>作者</th><th>人氣</th></tr>
-	<c:forEach var='discussion' items="${discussionList}">
+	<c:forEach var='DiscussionList' items="${DiscussionList}">
 		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.articleId}'/>">${discussion.subject}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">${DiscussionList.subject}</a></td>
 			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.author}'/>">${discussion.author}</a></td>
 			<td>${discussion.views}</td>			
 		</tr>
