@@ -11,7 +11,7 @@
         <div class="container">
             <!-- logo -->
             <a class="site-logo" href="${pageContext.request.contextPath}">
-                <img src="<c:url value='/Images/logo.png' />" alt="">
+				<img src="<c:url value='/Images/newLogo.png' />" />
             </a>
 
             <!-- responsive -->
