@@ -136,6 +136,7 @@
 
 								<div style="margin-top: 30px">
 									<table border="1" style="width: 100%">
+									<thead>
 										<tr>
 											<th>請求IP</th>
 											<th>請求類型</th>
@@ -143,6 +144,7 @@
 											<th>帳號類型</th>
 											<th>請求狀態</th>
 										</tr>
+										</thead>
 										<tbody id="infoBody">
 
 										</tbody>

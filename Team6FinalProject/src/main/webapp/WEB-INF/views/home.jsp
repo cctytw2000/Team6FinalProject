@@ -403,7 +403,7 @@
 			</div>
 			<div class="row">
 				<c:forEach var="p" items="${sessionScope.productsTop8 }">
-					<div class="col-lg-3 col-md-6"> 
+					<div class="col-lg-3 col-md-6" style="margin-top: 15px;"> 
 						<div class="review-item">
 							<div class="review-cover set-bg" data-setbg="<c:url value='/getPicture/${p.game_id}' />">
 								<div class="score yellow" style="margin-top:0px">$${p.price }</div>
