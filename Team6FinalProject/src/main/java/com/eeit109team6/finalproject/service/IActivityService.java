@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
+import com.eeit109team6.finalproject.model.GameType;
 
 public interface IActivityService {
 	void addActivityType(ActivityType activityType);
@@ -12,6 +13,8 @@ public interface IActivityService {
 	void addActivity(Activity activity); 
 	List<Activity> getAllActivities();
 	public Activity getActivityById(Integer activityId);
+	void updateActivityTypeById(ActivityType activityType); //更新活動類別
+	void deleteActivityTypeById(Integer activityTypeId); //刪除活動類別
 //====================================================未完成====================================================		
 	 
 	void deleteActivityById(Integer activityId); 

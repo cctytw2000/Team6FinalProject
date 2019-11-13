@@ -34,11 +34,12 @@
 		<form:form
 			action="${pageContext.request.contextPath}/newsBack/addGame1"
 			method="POST" modelAttribute="game">
-		遊戲類別:<form:select path="gameType_">
-				<form:option value="-1">請挑選</form:option>
-				<form:options items="${gameTypeMap }"></form:options>
-			</form:select>
-			<div class="row mb-2"></div>
+			<p>
+				遊戲類別:
+				<form:select path="gameType_">
+					<form:option value="-1">請挑選</form:option>
+					<form:options items="${gameTypeMap }"></form:options>
+				</form:select>
 			<p>
 				遊戲名稱:
 				<form:input path="gameName" type="text" />
@@ -57,16 +58,16 @@
 				<button type="button" onclick="GoBack()">取消</button>
 		</form:form>
 	</div>
-	
-<!-- 	套版用 -->
+
+	<!-- 	套版用 -->
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
-	
-<!-- 	datepicker plugin設定檔 -->
+
+	<!-- 	datepicker plugin設定檔 -->
 	<link rel="stylesheet"
 		href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 	<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>

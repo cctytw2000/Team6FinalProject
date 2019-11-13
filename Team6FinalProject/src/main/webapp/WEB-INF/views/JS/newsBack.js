@@ -40,7 +40,7 @@ function deleteNewsType(newsTypeId) {
 		+ '</form>'
 }
 
-//傳消息類別更新資訊:
+//傳遊戲類別更新資訊:
 function updateGameType(gmaeTypeId, gmaeTypeName) {
 	// alert(gmaeTypeId)
 	// alert(gmaeTypeName)
@@ -63,7 +63,7 @@ function updateGameType(gmaeTypeId, gmaeTypeName) {
 			+ '</form>'
 }
 
-// 傳消息類別刪除資訊:
+// 傳遊戲類別刪除資訊:
 function deleteGameType(gmaeTypeId) {
 //	alert(gmaeTypeId)
 	var a = gmaeTypeId;
@@ -75,6 +75,48 @@ function deleteGameType(gmaeTypeId) {
 	document.getElementById("xxx1").innerHTML = 
 		'<form method="post" action="deleteGameType">'
 		+ '<input type="hidden" name="gameTypeId" value='
+		+ a
+		+ ' />'
+		+ '<p>'
+		+ '<input type="submit" class="btn btn-warning" value="確認刪除">	'
+		+ '</form>'
+}
+
+//傳活動類別更新資訊:
+function updateActivityType(activityTypeId, activityTypeName) {
+	// alert(activityTypeId)
+	// alert(activityTypeName)
+	var a = activityTypeId;
+	var b = activityTypeName;
+	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動類別</h5>'
+			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+			+ '<span>&times;</span>' + '</button>'
+	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivityType">'
+			+ '<input type="hidden" name="activityTypeId" value='
+			+ a
+			+ ' />'
+			+ '<p>'
+			+ '活動類別名稱:'
+			+ '<input name="activityTypeName" type="text" size="50px" value='
+			+ b
+			+ ' />'
+			+ '<p>'
+			+ '<input type="submit" class="btn btn-warning" value="更新">	'
+			+ '</form>'
+}
+
+// 傳活動類別刪除資訊:
+function deleteActivityType(activityTypeId) {
+//	alert(activityTypeId)
+	var a = activityTypeId;
+	document.getElementById("xxx").innerHTML = 
+		'<h5 class="modal-title" id="exampleModalLabel">刪除活動類別</h5>'
+		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+		+ '<span>&times;</span>'
+		+  '</button>'
+	document.getElementById("xxx1").innerHTML = 
+		'<form method="post" action="deleteActivityType">'
+		+ '<input type="hidden" name="activityTypeId" value='
 		+ a
 		+ ' />'
 		+ '<p>'

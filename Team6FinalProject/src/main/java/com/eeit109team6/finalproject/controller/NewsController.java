@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Activity;
+import com.eeit109team6.finalproject.model.ActivityType;
 import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
@@ -103,7 +104,9 @@ public class NewsController {
 		news.setTitle(request.getParameter("title"));
 		System.out.println(news.getTitle());
 		news.setArticle(request.getParameter("article"));
-		if (Integer.parseInt(request.getParameter("isVisable")) == 1) {
+		if (request.getParameter("isVisable") == null) {
+			
+		} else if (Integer.parseInt(request.getParameter("isVisable")) == 1) {
 			news.setIsVisable(true);
 		} else {
 			news.setIsVisable(false);
@@ -120,7 +123,7 @@ public class NewsController {
 			HttpSession session) {
 		News news = (News) session.getAttribute("addNews");
 		newsService.addNews(news);
-		System.out.println(news.getTitle());
+//		System.out.println(news.getTitle());
 		ArticlePicture articlePicture = new ArticlePicture();
 
 //		測試上傳圖片
@@ -179,6 +182,9 @@ public class NewsController {
 
 		List<GameType> gameTypeList = gameService.getAllGameTypes();
 		model.addAttribute("gameTypeList", gameTypeList);
+		
+		List<ActivityType> activityTypeList = activityService.getAllActivityTypes();
+		model.addAttribute("activityTypeList", activityTypeList);
 
 //			List<Product> list = service.getAllProducts();
 //			model.addAttribute("products", list);
