@@ -62,7 +62,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>消息類別編號
 						<th>消息類別名稱
@@ -91,7 +91,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>遊戲類別編號
 						<th>遊戲類別名稱
@@ -121,12 +121,13 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>活動類別編號
 						<th>活動類別名稱
 						<th>更新
-						<th>刪除 <c:forEach var="activityType" items="${activityTypeList }">
+						<th>刪除 <c:forEach var="activityType"
+								items="${activityTypeList }">
 
 								<tr>
 									<td>${activityType.activityTypeId }
@@ -143,12 +144,39 @@
 			<!-- //新增活動類別 -->
 
 			<!-- 遊戲 -->
-			<div id="gameHeader" class="container tab-pane">
+			<div id="gameHeader" class="container tab-pane col">
 				<nav class="navbar navbar-expand-sm ">
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/newsBack/addGame"
 						role="button">新增遊戲</a>
 				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>遊戲編號
+						<th>遊戲名稱
+						<th>遊戲類別
+						<th>遊戲發售日
+						<th>遊戲發行商
+						<th>遊戲平台
+						<th>更新
+						<th>刪除 <c:forEach var="game" items="${gameList }">
+
+								<tr>
+									<td>${game.gameId }
+									<td>${game.gameName }
+									<td>${game.gameType.gameTypeName }
+									<td>${game.publicationDate }
+									<td>${game.publisher }
+									<td>${game.platform }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateGame('${game.gameId }', '${game.gameName }', '${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', '${game.publicationDate }', '${game.publisher }', '${game.platform }')"
+											>更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteGame(${game.gameId })">刪除</button>
+							</c:forEach>
+				</table>
 			</div>
 			<!-- //遊戲 -->
 
@@ -172,13 +200,15 @@
 			</div>
 			<!-- //消息 -->
 			<!-- 彈出式視窗		 -->
-			<div id="ooo" class="modal inmodal fade" tabindex="-1" role="dialog"
+			<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
 				aria-hidden="true" data-backdrop="static" data-keyboard="true"
 				aria-labelledby="exampleModalLabel">
-				<div class="modal-dialog modal-lg">
+				<div class="modal-dialog modal-sm" >
 					<div class="modal-content">
-						<div class="modal-header" id="xxx"></div>
-						<div class="modal-body" id="xxx1"></div>
+						<div class="modal-header" id="xxx" >
+						</div>
+						<div class="modal-body" id="xxx1">
+						</div>
 					</div>
 				</div>
 			</div>

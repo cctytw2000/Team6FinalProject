@@ -41,14 +41,16 @@ public class GameController {
 	INewsService newsService;
 
 	@Autowired
-	public void setService(IGameService gameService) {
+	public void setGameService(IGameService gameService) {
 		this.gameService = gameService;
 	}
 
 	@Autowired
-	public void setService(INewsService newsService) {
+	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
 	}
+
+//====================================================遊戲====================================================
 
 	// 導向新增遊戲頁面--> addGame.jsp
 	@RequestMapping(value = "/newsBack/addGame", method = RequestMethod.GET)
@@ -83,24 +85,9 @@ public class GameController {
 		return "redirect:/newsBack";
 	}
 
-	// 新增遊戲類別
-	@RequestMapping("/newsBack/addGameType")
-	public String addGameType(@RequestParam("gameTypeName") String gameTypeName) {
-		GameType gt = new GameType();
-		gt.setGameTypeName(gameTypeName);
-		gameService.addGameType(gt);
-		return "redirect:/newsBack";
-	}
-
-	// 查詢所有遊戲類別並存入Model(for form:form)
-	@ModelAttribute("gameTypes")
-	public List<GameType> getGameTypes() {
-		return gameService.getAllGameTypes();
-	}
-
 	// 取得所有遊戲的json格式
 	@RequestMapping(value = "/newsBack/searchGameByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<Game> test() {
+	public @ResponseBody List<Game> searchGameByAjax() {
 		return gameService.getAllGames();
 	}
 
@@ -122,6 +109,54 @@ public class GameController {
 		gameMap.put("platform", g.getPlatform());
 
 		return gameMap;
+	}
+
+	// 更新遊戲細節-->newsBack.jsp
+	@RequestMapping(value = "/updateGame", method = RequestMethod.POST)
+	public String updateGameById(@RequestParam("gameId") Integer gameId, @RequestParam("gameName") String gameName,
+			@RequestParam("gameType") String gameTypeId, @RequestParam("publicationDate") String publicationDate,
+			@RequestParam("publisher") String publisher, @RequestParam("platform") String platform) {
+		Game g = gameService.getGameById(gameId);
+		System.out.println("gameTypeId:"+gameTypeId);
+		GameType gt =gameService.getGameTypeById(Integer.parseInt(gameTypeId));
+		g.setGameName(gameName);
+		g.setGameType(gt);
+		g.setPublicationDate(publicationDate);
+		g.setPublisher(publisher);
+		g.setPlatform(platform);
+		gameService.updateGameById(g);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除遊戲-->newsBack.jsp
+	@RequestMapping(value = "/deleteGame", method = RequestMethod.POST)
+	public String deleteGameById(@RequestParam("gameId") Integer gameId) {
+		gameService.deleteGameById(gameId);
+		return "redirect:/newsBack";
+	}
+
+//====================================================遊戲類別====================================================
+
+	// 新增遊戲類別
+	@RequestMapping("/newsBack/addGameType")
+	public String addGameType(@RequestParam("gameTypeName") String gameTypeName) {
+		GameType gt = new GameType();
+		gt.setGameTypeName(gameTypeName);
+		gameService.addGameType(gt);
+		return "redirect:/newsBack";
+	}
+
+	// 取得所有遊戲類別的json格式
+	@RequestMapping(value = "/newsBack/searchGameTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<GameType> searchGameTypeByAjax() {
+		return gameService.getAllGameTypes();
+	}
+
+	// 查詢所有遊戲類別並存入Model(for form:form)
+	@ModelAttribute("gameTypes")
+	public List<GameType> getGameTypes() {
+		return gameService.getAllGameTypes();
 	}
 
 	// 更新遊戲類別名稱-->newsBack.jsp

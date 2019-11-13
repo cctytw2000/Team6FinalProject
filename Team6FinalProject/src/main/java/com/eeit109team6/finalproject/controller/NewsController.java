@@ -105,7 +105,7 @@ public class NewsController {
 		System.out.println(news.getTitle());
 		news.setArticle(request.getParameter("article"));
 		if (request.getParameter("isVisable") == null) {
-			
+
 		} else if (Integer.parseInt(request.getParameter("isVisable")) == 1) {
 			news.setIsVisable(true);
 		} else {
@@ -182,16 +182,18 @@ public class NewsController {
 
 		List<GameType> gameTypeList = gameService.getAllGameTypes();
 		model.addAttribute("gameTypeList", gameTypeList);
-		
+
 		List<ActivityType> activityTypeList = activityService.getAllActivityTypes();
 		model.addAttribute("activityTypeList", activityTypeList);
 
-//			List<Product> list = service.getAllProducts();
-//			model.addAttribute("products", list);
-//			List<Product> c_list = service.getCancelProducts();
-//			model.addAttribute("cancelProduct", c_list);
-//			Product product = new Product();
-//			model.addAttribute("product", product);
+		List<Game> gameList = gameService.getAllGames();
+		for (Game game : gameList) {
+			if (game.getPublicationDate().equals("")) {
+				game.setPublicationDate("未設定");
+			}
+		}
+		model.addAttribute("gameList", gameList);
+
 //			List<Category> categories = service.getAllCategories();
 //			Map<Integer, String> categoryMap = new HashMap<>();
 //			for(Category c : categories) {
