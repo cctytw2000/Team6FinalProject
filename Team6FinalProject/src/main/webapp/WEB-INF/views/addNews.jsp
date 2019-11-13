@@ -45,9 +45,9 @@ width:200px
 		<form:form
 			action="${pageContext.request.contextPath}/newsBack/addNews1"
 			method="POST" modelAttribute="news">
-		消息類別:<form:select path="newsType_" onchange="PickGOrA()" id="pickGOrA">
+		消息類別:<form:select path="newsType_" onchange="PickGOrA(this.value)" id="pickGOrA">
 				<form:option value="-1">請挑選</form:option>
-				<form:options items="${newsTypeMap }"></form:options>
+				<form:options items="${newsTypeMap}"></form:options>
 			</form:select>
 			<p>
 				<!-- 		依照使用者選取的消息類別來顯示遊戲或活動細節 -->
@@ -85,7 +85,7 @@ width:200px
 				<form:select path="activity_" id="activitySelect"
 					onchange="activityDetail(this.value)">
 					<form:option value="-1">請挑選</form:option>
-					<form:options items="${activityMap }"></form:options>
+					<form:options items="${activityMap}"></form:options>
 				</form:select>
 				<p>
 				<div style="display: none" id="activityDetail">

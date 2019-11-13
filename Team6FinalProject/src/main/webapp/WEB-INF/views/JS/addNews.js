@@ -2,7 +2,8 @@ function GoBack() {
 		history.go(-1)
 	}
 	// 	依照使用者選取的新聞類別來顯示遊戲或活動細節
-	function PickGOrA() {
+	function PickGOrA(id) {
+		alert(id)
 		var e = document.getElementById("pickGOrA");
 		var gOrA = e.options[e.selectedIndex].value;
 		var g = document.getElementById("game");

@@ -1,8 +1,17 @@
 package com.eeit109team6.finalproject.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +54,27 @@ public class LiLoInforDaoJdbcImpl implements ILiLoInforDao {
 		imfoList = (ArrayList<LiLoInfo>) query.getResultList();
 
 		return (ArrayList<LiLoInfo>) imfoList;
+
+	}
+
+	@Override
+	public Map countLogin(String now,String three_days_after) {
+		System.out.println("countLogin");
+		Map<String, Integer> data = new TreeMap();
+		System.out.println("data" + data);
+		Query query = sessionFactory.getCurrentSession()
+				.createSQLQuery("select CONVERT(date,loginTime) as 'time' , COUNT(loginTime) as 'count'"
+						+ "from LiLoInfo WHERE type = 'Login' and CONVERT(date,loginTime) BETWEEN '"+three_days_after+"' and '"+now+"'    GROUP BY CONVERT(date,loginTime) order by CONVERT(date,LiLoInfo.loginTime) desc");
+
+		System.out.println("query=" + query);
+		List<Object[]> rows = query.getResultList();
+		System.out.println("rows=" + rows);
+		for (Object[] row : rows) {
+			System.out.println("row[0].toString()=" + row[0].toString());
+			System.out.println("row[1].toString()=" + row[1].toString());
+			data.put(row[0].toString(), Integer.valueOf(row[1].toString()));
+		}
+		return data;
 
 	}
 

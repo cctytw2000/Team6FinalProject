@@ -8,8 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.crypto.KeyGenerator;
@@ -671,6 +675,30 @@ public class MemberController {
 		ArrayList<Member> member = MemService.findAll();
 		model.addAttribute("Memners", member);
 
+		return "membersBack";
+
+	}
+
+	@RequestMapping(value = "/memberLoginCount.json")
+	public String memberLoginCount(Model model, HttpSession session, HttpServletRequest request) {
+
+		Calendar calendar2 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
+		String now = sdf2.format(new Date());
+		calendar2.add(Calendar.DATE, -10);
+		String three_days_after = sdf2.format(calendar2.getTime());
+		
+		System.out.println(now);
+		System.out.println(three_days_after);
+
+
+		
+		System.out.println("memberLoginCount");
+		ArrayList loginData = new ArrayList();
+		Map data = LiLoInforService.countLogin(now,three_days_after);
+		System.out.println("data" + data);
+		loginData.add(data);
+		model.addAttribute("memberLoginCount", loginData);
 		return "membersBack";
 
 	}
