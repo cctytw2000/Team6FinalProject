@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +23,7 @@ public class Discussion {
 	private String subject;		//文章標題
 	private String author;		//發文者顯示名稱
 
-	private String memo;		//文章內文
+	private String articleBody;		//文章內文
 	
 	
 	@Transient					//忽略此屬性
@@ -43,13 +42,13 @@ public class Discussion {
 	}	
 
 	
-	public Discussion(Integer articleId, String subject, String author, Integer member_id, String memo) {
+	public Discussion(Integer articleId, String subject, String author, Integer member_id, String articleBody) {
 		super();
 		this.articleId = articleId;
 		this.subject = subject;
 		this.author = author;
 		this.member_id = member_id;
-		this.memo = memo;
+		this.articleBody = articleBody;
 	}
 
 
@@ -90,11 +89,11 @@ public class Discussion {
 //	public void setModifyTimeStamp(Timestamp modifyTimeStamp) {
 //		this.modifyTimeStamp = modifyTimeStamp;
 //	}
-	public String getMemo() {
-		return memo;
+	public String getarticleBody() {
+		return articleBody;
 	}
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setarticleBody(String articleBody) {
+		this.articleBody = articleBody;
 	}
 //	public String getIpAddress() {
 //		return ipAddress;

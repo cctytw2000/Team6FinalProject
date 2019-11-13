@@ -38,7 +38,7 @@
 			<tr>
 				<td><td colspan="3">標題：  ${discussion.subject}<td><td><td><td>
 			<tr><td><td colspan="3">作者：<a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.author}'/>">${discussion.author}</a><td><td><td>
-			<tr><td><td>${discussion.memo}<td><td>
+			<tr><td><td>${discussion.articleBody}<td><td>
 			<tr><td><td>人氣:${discussion.views}<td><td>
 		</table>
 	</div>
