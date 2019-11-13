@@ -54,61 +54,68 @@ public class MovieController {
 	// 後台進入 影片管理頁面
 	@RequestMapping("/moviepersonal")
 	public String addMovie(Model model, HttpSession session, MovieInfo movieinfo) {
-		System.out.println("----------------@RequestMapping(\"/moviepersonal\")     addMovie---------------");
+		System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
 		List<MovieInfo> list = service.getMovies();
 		model.addAttribute("allmovies", list);
 		return "moviepersonal";
 	}
 
+	
+	
+	
+	
 	// 新增商品--> 商城後台 productsBack.jsp
 
 	@RequestMapping(value = "/moviepersonal/addMovie", method = RequestMethod.POST)
 	public String addMovie(
 			@RequestParam("movie_name") String movie_name,
 			@RequestParam("movie_content") String movie_content,
-			@RequestParam("video_file") MultipartFile video_file
+			@RequestParam("video_file") MultipartFile video_file,
+			String videoname,HttpSession session
 			) {
 
 		System.out.println(
 				"----------------@RequestMapping(value = \"/moviepersonal/addMovie\"     addMovie---------------");
+		String path= session.getServletContext().getRealPath("/");
 
+		System.out.println("path============"+path+"\\WEB-INF\\views\\Movie");
 		MovieInfo movieInfo = new MovieInfo();
 		System.out.println(video_file.getOriginalFilename());
 		movieInfo.setName(movie_name);
 		movieInfo.setMovie_content(movie_content);
 		movieInfo.setLocation_Test(video_file.getOriginalFilename());
-
+		videoname = video_file.getOriginalFilename();
 		System.out.println("@RequestMapping(value = \"/moviepersonal/addMovie\")" + movieInfo);
 
 		service.addMovie(movieInfo);
 
-//		if (!file.isEmpty()) {
-//			try {
-//				byte[] bytes = file.getBytes();
-//
+		if (!video_file.isEmpty()) {
+			try {
+				byte[] bytes = video_file.getBytes();
+
 //				File dir = new File("C:\\Users\\User\\Desktop\\finalproject\\Team6FinalProject\\Team6FinalProject\\src\\main\\webapp\\WEB-INF\\views\\Movie");
-//
-//				System.out.println("File dir ======== "+dir);
-//				if (!dir.exists())
-//					dir.mkdirs();
-//
-//				// Create the file on server
-//				File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
-//				BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
-//				stream.write(bytes);
-//				stream.close();
-//
-//				System.out.println("You successfully uploaded file=" + videoname); 
-//				return "redirect:/moviepersonal";
-//			} catch (Exception e) {
-//				System.out.println("You failed to upload " + videoname + " => " + e.getMessage()); 
-//				return "redirect:/moviepersonal";
-//			}
-//		} else {
-//			System.out.println( "You failed to upload " + videoname + " because the file was empty.");
-//			return "redirect:/moviepersonal";
-//		}
-		return "redirect:/moviepersonal";
+				File dir = new File(path+"\\WEB-INF\\views\\Movie");
+				System.out.println("File dir ======== "+dir);
+				if (!dir.exists())
+					dir.mkdirs();
+
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+				BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				System.out.println("You successfully uploaded file=" + videoname); 
+				return "redirect:/moviepersonal";
+			} catch (Exception e) {
+				System.out.println("You failed to upload " + videoname + " => " + e.getMessage()); 
+				return "redirect:/moviepersonal";
+			}
+		} else {
+			System.out.println( "You failed to upload " + videoname + " because the file was empty.");
+			return "redirect:/moviepersonal";
+		}
+
 	}
 
 }
