@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Page;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.ProductService;
@@ -176,6 +177,21 @@ public class ProductController {
 			categoryMap.put(c.getCategory_id(), c.getCategory());
 		}
 		model.addAttribute("categoryMap", categoryMap);
+		
+		List<OrderItem> o_list = service.getOrderItem();
+		Map<String, Integer> map = new HashMap<>();
+		for(OrderItem oi : o_list) {
+			if(map.containsKey(oi.getProduct().getName())) {
+//				System.out.println("如果有"+oi.getProduct().getName());
+				int count = map.get(oi.getProduct().getName());
+				count++;
+				map.put(oi.getProduct().getName(), count);
+			}else{
+//				System.out.println("如果沒有"+oi.getProduct().getName());
+				map.put(oi.getProduct().getName(), 1);
+			}
+		}
+		model.addAttribute("countMap", map);
 		
 		return "productsBack";
 	}
@@ -560,5 +576,7 @@ public class ProductController {
 		
 		return "redirect:/productsBack/productBack?game_id="+game_id;
 	}
+	
+	
 	
 }
