@@ -9,6 +9,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>購物車</title>
+	<style>
+	#empty{
+		cursor:pointer;
+		width:455px;
+		height:373px;
+		}
+	</style>
 </head>
 
 <body style="background-image: url(<c:url value='/Images/pattern.png' />)">
@@ -46,17 +53,17 @@
 				<c:when test="${empty sessionScope.cart or fn:length(sessionScope.cart.cartItems) eq 0 }">
 					<div align="center">
 						<h3 style="color: white">您的購物車是空的，趕緊去購物</h3>
-						<img src="<c:url value='/Images/emptycart-removebg.png' />" />
+						<img id="empty" src="<c:url value='/Images/emptycart.png' />" onclick="window.location.href='findProductsByPage'"/>
 					</div>
-					<div align="center" style="color: white;">
-						<br>
-						<table cellspacing="20">
-							<tr>
-								<td><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='findProductsByPage'">繼續購物</button>
+<!-- 					<div align="center" style="color: white;"> -->
+<!-- 						<br> -->
+<!-- 						<table cellspacing="20"> -->
+<!-- 							<tr> -->
+<!-- 								<td><button type="button" class="btn btn-outline-warning" -->
+<!-- 										onclick="window.location.href='findProductsByPage'">前往購物</button> -->
 								
-						</table>
-					</div>
+<!-- 						</table> -->
+<!-- 					</div> -->
 				</c:when>
 				<c:otherwise>
 					<div align="center" style="color: white;">
