@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.model;
 
+import java.sql.Blob;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class MovieInfo {
 	private Integer movie_ID;
 	
 	private String name;
-	@Transient
+	
 	private String movie_content;
 	@Transient
 	private Date date;//Time
@@ -29,8 +30,8 @@ public class MovieInfo {
 	private Integer click_Sum;
 
 	private String location_Test;
-	
-	
+	@Transient
+	private Blob video;
 	
 	public Integer getMovie_ID() {
 		return movie_ID;
@@ -79,6 +80,12 @@ public class MovieInfo {
 	}
 	public void setLocation_Test(String location_Test) {
 		this.location_Test = location_Test;
+	}
+	public Blob getVideo() {
+		return video;
+	}
+	public void setVideo(Blob video) {
+		this.video = video;
 	}
 	
 	

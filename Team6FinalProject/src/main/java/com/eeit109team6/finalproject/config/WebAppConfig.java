@@ -70,6 +70,7 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 //		registry.addMapping("/**");
 //	}
 
+//	CommonsMultipartResolver               ***********************************************
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -77,7 +78,8 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 		resolver.setMaxUploadSize(81920000);
 		return resolver;
 	}
-
+//	CommonsMultipartResolver               ***********************************************
+	
 	@Bean
 	public MappingJackson2JsonView jsonview() {
 		MappingJackson2JsonView view = new MappingJackson2JsonView();

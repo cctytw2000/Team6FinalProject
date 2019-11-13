@@ -122,7 +122,7 @@
 			</div>
 			<!-- Recent game   End-->
 
-<!-- New Video 新增表單   ROW  -->
+			<!-- New Video 新增表單   ROW  -->
 			<div class="row">
 
 				<!-- New Video panel 新增內容 -->
@@ -134,27 +134,26 @@
 
 						<!-- ti-content -->
 						<div class="ti-content">
-						
+
 							<!-- 	ti-text-form -->
-							<div class="ti-text-form"id= "addMovie">
-							
+							<div class="ti-text-form" id="addMovie">
+
 								<!-- action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
-								<form style="background-color:white" method="POST" action="moviepersonal/addMovie"
-									enctype="multipart/form-data">
+								<form style="background-color: white" method="POST"
+									action="moviepersonal/addMovie" enctype="multipart/form-data">
 									<p>
-										影片標題: <input name="name" type="text" size="50px" />
+										影片標題: <input name="movie_name" type="text" size="50px" />
 									<p>
 										內文描述:
-										<textarea name="movie_content"
-											style="width: 400px; height: 200px;"></textarea>
+										<textarea name="movie_content" style="width: 400px; height: 200px;"></textarea>
 									<p>
-										影片名稱: <input name="location_Test" type="text" size="50px" />
+										選則檔案: <input type="file" name="video_file"><br />
 									<p>
-										<input type="submit" value="送出">
+										<input type="submit" value="送出"><br />
 								</form>
 							</div>
 							<!-- 	ti-text-form -->
-							
+
 						</div>
 						<!-- ti-content -->
 

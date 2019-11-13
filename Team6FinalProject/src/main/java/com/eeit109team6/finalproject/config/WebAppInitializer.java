@@ -11,6 +11,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -64,6 +65,35 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		 * Add Spring ContextLoaderListener
 		 */
 		servletContext.addListener(new ContextLoaderListener(rootContext));
+		
+		//用於  MovieController的"/moviepersonal/uploadFile"     Start
+		// FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
+		// multipartFilter.addMappingForUrlPatterns(null, true, "/*");
+		//用於  MovieController的"/moviepersonal/uploadFile"     End
 	}
+	
+//	@Override
+//    public void onStartup(ServletContext servletContext) throws ServletException {
+//
+//        AnnotationConfigWebApplicationContext dispatcherServletContext = new AnnotationConfigWebApplicationContext();
+//
+//        dispatcherServletContext.register(SpringConfig.class);
+//
+//        DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherServletContext);
+//
+//        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("file-upload", dispatcherServlet);
+//         
+//        /* If do not set multipartconfig in servlet 3, when you upload a file, it will throw Unable to process parts as no multi-part configuration has been provided error. */
+//        MultipartConfigElement multipartConfig = new MultipartConfigElement("/tmp");
+//        dispatcher.setMultipartConfig(multipartConfig);
+//
+//        dispatcher.setLoadOnStartup(1);
+//
+//        dispatcher.addMapping("*.html");
+//
+//        FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
+//
+//        multipartFilter.addMappingForUrlPatterns(null, true, "/*");
+//    }
 
 }
