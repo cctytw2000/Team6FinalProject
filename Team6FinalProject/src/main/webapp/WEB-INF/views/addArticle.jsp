@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>遊戲討論區</title>
+<title>討論區</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->
@@ -32,17 +32,20 @@
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
-	<div align="center">
-	<br><br><br>
-<table>
-	<tr><th>看板名稱</th><th>篇數</th></tr>
-	<c:forEach var='boardType' items="${boardTypeList}">
-		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a></td>
-		</tr>
-	</c:forEach>
-</table>
-</div>
+
+	<div class="container mt-3">
+		<h1 align="center">張貼文章</h1>
+		<div align="center">
+	<form:form method='POST' modelAttribute="discussion">
+		<form:input path="BoardName" type="text" size="50px" />
+		<form:input path="BoardName" type="text" size="50px" />
+		<form:input path="BoardName" type="text" size="50px" />
+		<p>
+			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
+	</form:form>
+			</div>
+		</div>
 		<!-- 	套版用 -->
 		<script
 			src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
@@ -55,4 +58,4 @@
 		<!-- 自訂js設定檔  -->
 		<script src="${pageContext.request.contextPath}/JS/newsBack.js"></script>
 </body>
-</html> 
+</html>
