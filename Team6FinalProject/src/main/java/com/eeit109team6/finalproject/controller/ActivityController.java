@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
 import com.eeit109team6.finalproject.model.Game;
+import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.NewsType;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -146,5 +147,23 @@ public class ActivityController {
 
 		return activityMap;
 	}
+	
+	// 更新活動類別名稱-->newsBack.jsp
+		@RequestMapping(value = "/updateActivityType", method = RequestMethod.POST)
+		public String updateActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId,
+				@RequestParam("activityTypeName") String activityTypeName) {
+			ActivityType at = activityService.getActivityTypeById(activityTypeId);
+			at.setActivityTypeName(activityTypeName);
+			activityService.updateActivityTypeById(at);
+
+			return "redirect:/newsBack";
+		}
+
+		// 刪除活動類別-->newsBack.jsp
+		@RequestMapping(value = "/deleteActivityType", method = RequestMethod.POST)
+		public String deleteActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId) {
+			activityService.deleteActivityTypeById(activityTypeId);
+			return "redirect:/newsBack";
+		}
 
 }

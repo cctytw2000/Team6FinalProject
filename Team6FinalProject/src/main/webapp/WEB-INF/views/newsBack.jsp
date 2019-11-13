@@ -121,6 +121,24 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
+				<table border="1" style="text-align: center">
+					<tr>
+						<th>活動類別編號
+						<th>活動類別名稱
+						<th>更新
+						<th>刪除 <c:forEach var="activityType" items="${activityTypeList }">
+
+								<tr>
+									<td>${activityType.activityTypeId }
+									<td>${activityType.activityTypeName }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateActivityType('${activityType.activityTypeId }', '${activityType.activityTypeName }')">更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteActivityType(${activityType.activityTypeId })">刪除</button>
+							</c:forEach>
+				</table>
 			</div>
 			<!-- //新增活動類別 -->
 
@@ -153,21 +171,21 @@
 				</nav>
 			</div>
 			<!-- //消息 -->
-
-		</div>
-	</div>
-	<!-- 彈出式視窗		 -->
-	<div id="ooo" class="modal inmodal fade" tabindex="-1" role="dialog"
-		aria-hidden="true" data-backdrop="static" data-keyboard="true"
-		aria-labelledby="exampleModalLabel">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header" id="xxx"></div>
-				<div class="modal-body" id="xxx1"></div>
+			<!-- 彈出式視窗		 -->
+			<div id="ooo" class="modal inmodal fade" tabindex="-1" role="dialog"
+				aria-hidden="true" data-backdrop="static" data-keyboard="true"
+				aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header" id="xxx"></div>
+						<div class="modal-body" id="xxx1"></div>
+					</div>
+				</div>
 			</div>
+			<!-- //彈出式視窗		 -->
 		</div>
 	</div>
-	<!-- //彈出式視窗		 -->
+
 
 	<!-- 	套版用 -->
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>

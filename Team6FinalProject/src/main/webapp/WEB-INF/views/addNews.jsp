@@ -32,31 +32,39 @@
 
 	<div class="container mt-3">
 		<h1>新增消息資料</h1>
-		<form action="${pageContext.request.contextPath}/newsBack/addNews1" method="POST" >
-		消息類別:<span id="newsType"></span>
+		<form action="${pageContext.request.contextPath}/newsBack/addNews1"
+			method="POST">
 			<p>
-				消息標題:
-				<input name="title" type="text" id="title"  />
+			消息類別:<span id="newsType"></span>
 			<p>
-				消息內容:
-				<textarea class="form-control inline" name="article" id="article"
-					rows="30" cols="100" style="resize: none;"></textarea>
-			<p>
-				是否需要顯示遊戲細節: <input type="radio" name="showGame" value="1"> 是
-				<input type="radio" name="showGame" value="0"> 否
+			
+			是否需要顯示遊戲細節: <input type="radio" name="showGame" value="1"> 是
+			<input type="radio" name="showGame" value="0"> 否
 			<div id="showGame1"></div>
 			<div class="row mb-2"></div>
 			<div id="showGame2"></div>
 			<p>
+
 				是否需要顯示活動細節: <input type="radio" name="showActivity" value="1">
 				是 <input type="radio" name="showActivity" value="0"> 否
 			<div id="showActivity1"></div>
 			<div class="row mb-2"></div>
 			<div id="showActivity2"></div>
+			<div class="row mb-2"></div>
 			<p>
+			
+			消息標題: <input name="title" type="text" id="title" />
+			<p>
+
+				消息內容:
+				<textarea class="form-control inline" name="article" id="article"
+					rows="30" cols="100" style="resize: none;"></textarea>
+			<p>
+
 				是否刊登: <input type="radio" name="isVisable" value="1"> 是 <input
 					type="radio" name="isVisable" value="0"> 否
 			<p>
+
 				<input type="submit" value="下一步:上傳圖片">
 				<button type="button" onclick="GoBack()">取消</button>
 		</form>

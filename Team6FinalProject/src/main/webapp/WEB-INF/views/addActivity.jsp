@@ -29,7 +29,7 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
-<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
 
@@ -41,11 +41,11 @@
 		<form:form
 			action="${pageContext.request.contextPath}/newsBack/addActivity1"
 			method="POST" modelAttribute="activity" >
+		<p>
 		活動類別:<form:select path="activityType_" >
 				<form:option value="-1">請挑選</form:option>
 				<form:options items="${activityTypeMap }"></form:options>
 			</form:select>
-			<div  class="row mb-2"></div>
 			<p>
 				活動名稱:
 				<form:input path="activityName" type="text" />
@@ -55,9 +55,10 @@
 			<div id="oneDayOnly">
 				<!-- 		<div id="myDIV" style="display: none"> -->
 				<p>
-				<h4>
+				<h5>
 					適用於<span style="color: red">一</span>日活動
-				</h4>
+				</h5>
+				<p>
 				<p>
 					活動日期:
 					<form:input id="datepicker1" name="startingDate_time"
@@ -67,12 +68,14 @@
 					<form:input id="timepicker" name="startingTime_date"
 						autocomplete="off" path="startingTime_date" type="text" />
 			</div>
+			<p>
 			<!-- 		<button type="button" onclick="myFunction2()">活動時間為多天適用</button> -->
 			<div id="manyDays" style="display: none">
 				<p>
-				<h4>
+				<h5>
 					適用於<span style="color: red;">多</span>日活動
-				</h4>
+				</h5>
+				<p>
 				<p>
 					活動開始日:
 					<form:input id="datepicker2" name="startingDate" autocomplete="off"
@@ -82,6 +85,7 @@
 					<form:input id="datepicker3" name="endingDate" autocomplete="off"
 						path="endingDate" type="text" />
 			</div>
+			<p>
 			<p>
 				活動地點:
 				<form:input path="location" type="text" />

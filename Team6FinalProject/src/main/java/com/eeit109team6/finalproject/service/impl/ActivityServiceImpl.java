@@ -60,6 +60,18 @@ public class ActivityServiceImpl implements IActivityService {
 	public Activity getActivityById(Integer activityId) {
 		return dao.getActivityById(activityId);
 	}
+	
+	@Transactional
+	@Override
+	public void updateActivityTypeById(ActivityType activityType) {
+		dao.updateActivityTypeById(activityType);
+	}
+
+	@Transactional
+	@Override
+	public void deleteActivityTypeById(Integer activityTypeId) {
+		dao.deleteActivityTypeById(activityTypeId);
+	}
 
 //====================================================未完成====================================================
 
@@ -81,5 +93,7 @@ public class ActivityServiceImpl implements IActivityService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

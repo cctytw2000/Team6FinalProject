@@ -71,6 +71,20 @@ public class ActivityDaoImpl implements IActivityDao {
 		Activity activity = session.get(Activity.class, activityId);
 		return activity;
 	}
+	
+	@Override
+	public void updateActivityTypeById(ActivityType activityType) {
+		Session session = factory.getCurrentSession();
+		session.clear();
+		session.update(activityType);
+	}
+
+	@Override
+	public void deleteActivityTypeById(Integer activityTypeId) {
+		Session session = factory.getCurrentSession();
+		ActivityType at = session.get(ActivityType.class, activityTypeId);
+		session.delete(at);				
+	}
 
 //====================================================未完成====================================================
 
@@ -89,5 +103,7 @@ public class ActivityDaoImpl implements IActivityDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
