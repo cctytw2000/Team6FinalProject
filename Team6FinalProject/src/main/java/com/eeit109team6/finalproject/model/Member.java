@@ -53,7 +53,7 @@ public class Member {
 
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="MEMBERLEVEL" )
 	@JsonIgnore
 	public MemberLevel getMemberlevel() {

@@ -219,15 +219,16 @@ public class MemberController {
 		lilo.setAccountType(type);
 //		System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
 		if (member != null) {
+			System.out.println("第三方登入");
 			lilo.setIsSuccess(1);
 			LiLoInforService.add(lilo);
-			session.setAttribute("username", member.getUsername());
-			session.setAttribute("token", member.getToken());
-			session.setAttribute("account", member.getAccount());
-			session.setAttribute("member_id", member.getMember_id());
+//			session.setAttribute("username", member.getUsername());
+//			session.setAttribute("token", member.getToken());
+//			session.setAttribute("account", member.getAccount());
+//			session.setAttribute("member_id", member.getMember_id());
 			session.setAttribute("mem", member);
-			session.setAttribute("type", member.getType());
-			session.setAttribute("level", member.getMemberlevel().getLevelName());
+//			session.setAttribute("type", member.getType());
+//			session.setAttribute("level", member.getMemberlevel().getLevelName());
 			return true;
 		} else {
 
@@ -383,12 +384,12 @@ public class MemberController {
 
 			if (member != null) {
 				LiLoInforService.add(lilo);
-				session.setAttribute("username", member.getUsername());
-				session.setAttribute("token", member.getToken());
-				session.setAttribute("account", member.getAccount());
-				session.setAttribute("member_id", member.getMember_id());
+//				session.setAttribute("username", member.getUsername());
+//				session.setAttribute("token", member.getToken());
+//				session.setAttribute("account", member.getAccount());
+//				session.setAttribute("member_id", member.getMember_id());
 				session.setAttribute("mem", member);
-				session.setAttribute("type", member.getType());
+//				session.setAttribute("type", member.getType());
 
 				session.setAttribute("level", member.getMemberlevel().getLevelName());
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
@@ -532,7 +533,8 @@ public class MemberController {
 	public String memberLogout(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
 			RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) {
 		Member member_ = new Member();
-		member_.setMember_id(Integer.parseInt(String.valueOf(session.getAttribute("member_id"))));
+		Member memSession = (Member) session.getAttribute("mem");
+		member_.setMember_id(memSession.getMember_id());
 		Member member = MemService.findById(member_);
 
 		LiLoInfo lilo = new LiLoInfo();
@@ -548,17 +550,17 @@ public class MemberController {
 		lilo.setLoginTime(logouttime);
 		lilo.setType("Logout");
 		lilo.setClientIP(request.getRemoteAddr());
-		lilo.setAccountType(String.valueOf(session.getAttribute("type")));
+		lilo.setAccountType(memSession.getType());
 		lilo.setIsSuccess(1);
 
 		LiLoInforService.add(lilo);
 
-		session.removeAttribute("username");
-		session.removeAttribute("token");
-		session.removeAttribute("account");
-		session.removeAttribute("member_id");
+//		session.removeAttribute("username");
+//		session.removeAttribute("token");
+//		session.removeAttribute("account");
+//		session.removeAttribute("member_id");
 		session.removeAttribute("mem");
-		session.removeAttribute("type");
+//		session.removeAttribute("type");
 		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
 		return "redirect:/jump";
 
@@ -602,21 +604,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem);
 			if (isSuccess) {
-				session.removeAttribute("username");
-				session.removeAttribute("token");
-				session.removeAttribute("account");
-				session.removeAttribute("member_id");
+//				session.removeAttribute("username");
+//				session.removeAttribute("token");
+//				session.removeAttribute("account");
+//				session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				session.removeAttribute("type");
+//				session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
-				session.removeAttribute("username");
-				session.removeAttribute("token");
-				session.removeAttribute("account");
-				session.removeAttribute("member_id");
+//				session.removeAttribute("username");
+//				session.removeAttribute("token");
+//				session.removeAttribute("account");
+//				session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				session.removeAttribute("type");
+//				session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
@@ -645,21 +647,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem, new_password_AES);
 			if (isSuccess) {
-				session.removeAttribute("username");
-				session.removeAttribute("token");
-				session.removeAttribute("account");
-				session.removeAttribute("member_id");
+//				session.removeAttribute("username");
+//				session.removeAttribute("token");
+//				session.removeAttribute("account");
+//				session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				session.removeAttribute("type");
+//				session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
-				session.removeAttribute("username");
-				session.removeAttribute("token");
-				session.removeAttribute("account");
-				session.removeAttribute("member_id");
+//				session.removeAttribute("username");
+//				session.removeAttribute("token");
+//				session.removeAttribute("account");
+//				session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				session.removeAttribute("type");
+//				session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
@@ -687,15 +689,13 @@ public class MemberController {
 		String now = sdf2.format(new Date());
 		calendar2.add(Calendar.DATE, -10);
 		String three_days_after = sdf2.format(calendar2.getTime());
-		
+
 		System.out.println(now);
 		System.out.println(three_days_after);
 
-
-		
 		System.out.println("memberLoginCount");
 		ArrayList loginData = new ArrayList();
-		Map data = LiLoInforService.countLogin(now,three_days_after);
+		Map data = LiLoInforService.countLogin(now, three_days_after);
 		System.out.println("data" + data);
 		loginData.add(data);
 		model.addAttribute("memberLoginCount", loginData);
@@ -752,12 +752,12 @@ public class MemberController {
 		System.out.println("File name  = " + memberimg.getOriginalFilename());
 		MemService.changeHeadshot(memberimg.getOriginalFilename(), memberId);
 
-		session.removeAttribute("username");
-		session.removeAttribute("token");
-		session.removeAttribute("account");
-		session.removeAttribute("member_id");
+//		session.removeAttribute("username");
+//		session.removeAttribute("token");
+//		session.removeAttribute("account");
+//		session.removeAttribute("member_id");
 		session.removeAttribute("mem");
-		session.removeAttribute("type");
+//		session.removeAttribute("type");
 		redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
 		return "redirect:/jump";
 
