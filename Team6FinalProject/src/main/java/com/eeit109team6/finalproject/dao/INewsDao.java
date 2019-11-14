@@ -17,9 +17,10 @@ public interface INewsDao {
 //====================================================消息====================================================
 	void addNews(News news); //新增消息
 	void addArticlePicture(ArticlePicture articlePicture); 
-//====================================================未完成===================================================		
 	List<News> getAllNews(); //查詢所有消息
+	void deleteNewsShow(int newsId); //隱藏消息
+	void reopenNews(int newsId); //發佈消息
+//====================================================未完成===================================================		
 	
-	void deleteNewsById(int newsId); //刪除消息
 	void updateNewsById(int newsId); //更新消息
 }

@@ -165,8 +165,8 @@ function deleteGame(gameId) {
 		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
 }
 
-// 傳活動細節更新資訊:
-function updateActivity(activityId, activityName,activityTypeId,activityTypeName,startingDate_time,startingTime_date,startingDate,endingDate,location) {
+// 傳一日活動細節更新資訊:
+function updateActivityOne(activityId, activityName,activityTypeId,activityTypeName,startingDate_time,startingTime_date,location) {
 // alert(activityId)
 // alert(activityTypeName)
 	let html;
@@ -196,7 +196,7 @@ function updateActivity(activityId, activityName,activityTypeId,activityTypeName
 	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
 			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
 			+ '<span>&times;</span>' + '</button>'
-	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivity">'
+	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivityOne">'
 			+ '<input type="hidden" name="activityId" value='
 			+ activityId
 			+ ' /><p>'
@@ -205,17 +205,11 @@ function updateActivity(activityId, activityName,activityTypeId,activityTypeName
 			+ ' /><p>'
 			+ '<span id="test"></span>'
 			+ '<p><p>'
-			+ '活動日期(適用一日活動):<input name="startingDate_time" type="text" size="20px" value='
+			+ '活動日期:<input name="startingDate_time" type="text" size="20px" value='
 			+ startingDate_time
 			+ '><p>'
-			+ '活動時間(適用一日活動):<input name="startingTime_date" type="text" size="20px" value='
+			+ '活動時間:<input name="startingTime_date" type="text" size="20px" value='
 			+ startingTime_date
-			+ '><p>'
-			+ '活動起始日(適用多日活動):<input name="startingDate" type="text" size="20px" value='
-			+ startingDate
-			+ '><p>'
-			+ '活動結束日(適用多日活動):<input name="endingDate" type="text" size="20px" value='
-			+ endingDate
 			+ '><p>'
 			+ '活動地點:<input name="location" type="text" size="20px" value='
 			+ location
@@ -223,8 +217,8 @@ function updateActivity(activityId, activityName,activityTypeId,activityTypeName
 			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
 }
 
-// 傳活動刪除資訊:
-function deleteActivity(activityId) {
+//傳一日活動刪除資訊:
+function deleteActivityOne(activityId) {
 // alert(activityId)
 	document.getElementById("xxx").innerHTML = 
 		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
@@ -238,3 +232,104 @@ function deleteActivity(activityId) {
 		+ ' /><p>'
 		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
 }
+
+//傳多日活動細節更新資訊:
+function updateActivityMore(activityId, activityName,activityTypeId,activityTypeName,startingDate,endingDate,location) {
+// alert(activityId)
+// alert(activityTypeName)
+	let html;
+	$.ajax({
+		type : "POST",
+		url : "newsBack/searchActivityTypeByAjax",
+		dataType : "json",
+		success : function(data) {
+			const activityTypeIdList = Object.values(data).map(item => item.activityTypeId);
+			const activityTypeNameList = Object.values(data).map(item => item.activityTypeName);
+//alert(data.length);
+//alert(activityTypeIdList);
+//alert(activityTypeNameList);
+			html = "活動類別:<select name='activityType'> ";
+			html += "<option value="+ activityTypeId +">"+activityTypeName+"</option>";
+			for(var i=0;i<data.length;i++){
+				var id = activityTypeIdList[i];
+				var name = activityTypeNameList[i];
+				if(id != activityTypeId){
+				html +="<option value="+ id +">"+name+"</option>";
+				}
+			}
+			html += "</select>";
+			$("#test").html(html);
+		}
+	});
+	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
+			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+			+ '<span>&times;</span>' + '</button>'
+	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivityMore">'
+			+ '<input type="hidden" name="activityId" value='
+			+ activityId
+			+ ' /><p>'
+			+ '活動名稱:<input name="activityName" type="text" size="20px" value='
+			+ activityName
+			+ ' /><p>'
+			+ '<span id="test"></span>'
+			+ '<p><p>'
+			+ '活動起始日:<input name="startingDate" type="text" size="20px" value='
+			+ startingDate
+			+ '><p>'
+			+ '活動結束日:<input name="endingDate" type="text" size="20px" value='
+			+ endingDate
+			+ '><p>'
+			+ '活動地點:<input name="location" type="text" size="20px" value='
+			+ location
+			+ ' /><p>'
+			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
+}
+
+//傳多日活動刪除資訊:
+function deleteActivityMore(activityId) {
+// alert(activityId)
+	document.getElementById("xxx").innerHTML = 
+		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
+		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+		+ '<span>&times;</span>'
+		+  '</button>'
+	document.getElementById("xxx1").innerHTML = 
+		'<form method="post" action="deleteActivity">'
+		+ '<input type="hidden" name="activityId" value='
+		+ activityId
+		+ ' /><p>'
+		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+}
+
+//將發佈消息隱藏:
+function deleteNewsShow(newsId) {
+// alert(newsId)
+	document.getElementById("xxx").innerHTML = 
+		'<h5 class="modal-title" id="exampleModalLabel">消息即將隱藏</h5>'
+		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+		+ '<span>&times;</span>'
+		+  '</button>'
+	document.getElementById("xxx1").innerHTML = 
+		'<form method="post" action="deleteNewsShow">'
+		+ '<input type="hidden" name="newsId" value='
+		+ newsId
+		+ ' /><p>'
+		+ '<input type="submit" class="btn btn-warning" value="確認隱藏"></form>'
+}
+
+//將隱藏消息發佈:
+function reopenNews(newsId) {
+// alert(newsId)
+	document.getElementById("xxx").innerHTML = 
+		'<h5 class="modal-title" id="exampleModalLabel">消息即將發佈</h5>'
+		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+		+ '<span>&times;</span>'
+		+  '</button>'
+	document.getElementById("xxx1").innerHTML = 
+		'<form method="post" action="reopenNews">'
+		+ '<input type="hidden" name="newsId" value='
+		+ newsId
+		+ ' /><p>'
+		+ '<input type="submit" class="btn btn-warning" value="確認發佈"></form>'
+}
+

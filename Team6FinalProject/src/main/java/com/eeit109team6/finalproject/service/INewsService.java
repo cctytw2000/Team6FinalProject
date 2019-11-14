@@ -16,8 +16,9 @@ public interface INewsService {
 //====================================================消息====================================================
 	void addNews(News news); 
 	void addArticlePicture(ArticlePicture articlePicture); 
+	List<News> getAllNews();
+	void deleteNewsShow(int newsId); //隱藏消息
+	void reopenNews(int newsId); //發佈消息
 //====================================================未完成===================================================	
-	List<News> getAllNews(); 
-	void deleteNewsById(int newsId); 
 	void updateNewsById(News news);
 }

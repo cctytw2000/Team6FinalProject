@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
+import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
@@ -79,24 +80,39 @@ public class NewsDaoImpl implements INewsDao {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(articlePicture);
 	}
-
-//====================================================未完成===================================================	
+	
 	@Override
 	public List<News> getAllNews() {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "FROM News";
+		List<News> list = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
 	}
 
 	@Override
-	public void deleteNewsById(int newsId) {
-		// TODO Auto-generated method stub
-
+	public void deleteNewsShow(int newsId) {
+		Session session = sessionFactory.getCurrentSession();
+		News news = session.get(News.class, newsId);
+		news.setIsVisable(false);
+		session.update(news);
 	}
-
+	
+	@Override
+	public void reopenNews(int newsId) {
+		Session session = sessionFactory.getCurrentSession();
+		News news = session.get(News.class, newsId);
+		news.setIsVisable(true);
+		session.update(news);		
+	}
+//====================================================未完成===================================================	
+	
 	@Override
 	public void updateNewsById(int newsId) {
 		// TODO Auto-generated method stub
 
 	}
+
+	
 
 }

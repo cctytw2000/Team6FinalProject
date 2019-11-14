@@ -183,14 +183,12 @@ public class ActivityController {
 		return "redirect:/newsBack";
 	}
 
-	// 更新遊戲細節-->newsBack.jsp
-	@RequestMapping(value = "/updateActivity", method = RequestMethod.POST)
-	public String updateActivityById(@RequestParam("activityId") Integer activityId,
+	// 更新一日活動細節-->newsBack.jsp
+	@RequestMapping(value = "/updateActivityOne", method = RequestMethod.POST)
+	public String updateActivityOneById(@RequestParam("activityId") Integer activityId,
 			@RequestParam("activityName") String activityName, @RequestParam("activityType") Integer activityTypeId,
 			@RequestParam("startingDate_time") String startingDate_time,
-			@RequestParam("startingTime_date") String startingTime_date,
-			@RequestParam("startingDate") String startingDate, @RequestParam("endingDate") String endingDate,
-			@RequestParam("location") String location) {
+			@RequestParam("startingTime_date") String startingTime_date, @RequestParam("location") String location) {
 		Activity a = activityService.getActivityById(activityId);
 		System.out.println("activityId:" + activityId);
 		ActivityType at = activityService.getActivityTypeById(activityTypeId);
@@ -198,6 +196,23 @@ public class ActivityController {
 		a.setActivityType(at);
 		a.setStartingDate_time(startingDate_time);
 		a.setStartingTime_date(startingTime_date);
+		a.setLocation(location);
+		activityService.updateActivityById(a);
+
+		return "redirect:/newsBack";
+	}
+
+	// 更新多日活動細節-->newsBack.jsp
+	@RequestMapping(value = "/updateActivityMore", method = RequestMethod.POST)
+	public String updateActivityMoreById(@RequestParam("activityId") Integer activityId,
+			@RequestParam("activityName") String activityName, @RequestParam("activityType") Integer activityTypeId,
+			@RequestParam("startingDate") String startingDate, @RequestParam("endingDate") String endingDate,
+			@RequestParam("location") String location) {
+		Activity a = activityService.getActivityById(activityId);
+		System.out.println("activityId:" + activityId);
+		ActivityType at = activityService.getActivityTypeById(activityTypeId);
+		a.setActivityName(activityName);
+		a.setActivityType(at);
 		a.setStartingDate(startingDate);
 		a.setEndingDate(endingDate);
 		a.setLocation(location);

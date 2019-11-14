@@ -70,33 +70,31 @@ public class NewsServiceImpl implements INewsService{
 	public void addArticlePicture(ArticlePicture articlePicture) {
 		dao.addArticlePicture(articlePicture);		
 	}
-
-//====================================================未完成====================================================
+	
+	@Transactional
 	@Override
 	public List<News> getAllNews() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getAllNews();
 	}
-
 	
-
+	@Transactional
 	@Override
-	public void deleteNewsById(int newsId) {
-		// TODO Auto-generated method stub
-		
+	public void deleteNewsShow(int newsId) {
+		dao.deleteNewsShow(newsId);
 	}
+
+	@Transactional
+	@Override
+	public void reopenNews(int newsId) {
+		dao.reopenNews(newsId);		
+	}
+
+//====================================================未完成====================================================
 
 	@Override
 	public void updateNewsById(News news) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
-
-	
-
-	
 
 }
