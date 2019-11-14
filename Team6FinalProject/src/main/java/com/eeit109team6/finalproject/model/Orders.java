@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="orders")
@@ -28,15 +30,18 @@ public class Orders {
 	private Integer total;
 	private Integer state;
 	@Transient
+	@JsonIgnore
 	private Integer member_id;
 	private String address;
 	private boolean is_remove;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id" )
 	@JsonIgnoreProperties("orders")
 	private Member member;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	

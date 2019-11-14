@@ -14,17 +14,17 @@ import com.eeit109team6.finalproject.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 
 	IOrderDao dao;
+
 	@Autowired
 	public void setDao(IOrderDao dao) {
 		this.dao = dao;
 	}
 
-
 	@Transactional
 	@Override
 	public void insertOrder(Orders order) {
 		dao.insertOrder(order);
-		
+
 	}
 
 	@Transactional
@@ -37,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Orders getOrderById(Integer order_id) {
 		return dao.getOrderById(order_id);
+	}
+
+	@Transactional
+	@Override
+	public Boolean updateOrderstate(Integer order_id) {
+		return dao.updateOrderstate(order_id);
 	}
 
 }
