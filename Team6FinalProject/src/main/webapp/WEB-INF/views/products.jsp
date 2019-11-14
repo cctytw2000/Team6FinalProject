@@ -132,8 +132,13 @@
 									style="color: white">${product.name }</a>
 							</h6>
 							<p class="card-text" style="color: #FFFFBB">NT ${product.price }元</p>
+							<c:if test="${product.stock < 1 }">
+								<button class="btn btn-primary" disabled="disabled">商品售完</button>
+							</c:if>
+							<c:if test="${product.stock >= 1 }">
 							<a href="addToCart?game_id=${product.game_id }&count=1"
 								class="btn btn-primary">加入購物車</a>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>

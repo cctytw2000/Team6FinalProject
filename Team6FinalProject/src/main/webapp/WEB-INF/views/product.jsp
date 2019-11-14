@@ -77,10 +77,15 @@ color:red
 					<div style="float: right">
 						<button type="button" class="btn btn-warning"
 							onclick="window.location.href='findProductsByPage'">返回</button>
+						<c:if test="${product.stock < 1}">
+							<button disabled="disabled" class="btn btn-warning">商品售完</button>
+						</c:if>
+						<c:if test="${product.stock >= 1}">
 						<a href='addToCart?game_id=${product.game_id }&count=1'
 							class='btn btn-warning btn-large'> <span
 							class='glyphicon-shopping-cart glyphicon'></span>加入購物車
 						</a>
+						</c:if>
 					</div>
 					</p>
 				</div>
