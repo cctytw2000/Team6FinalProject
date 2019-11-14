@@ -125,7 +125,7 @@ $(document).ready(function() {
     	}
             
     });
-});
+})
 
 //產生activityDetail
 function activityDetail(number) {
@@ -152,7 +152,7 @@ function activityDetail(number) {
 				html += '</tr></tbody></table>'	
 				$("#showActivity2").html(html);
 			} else if(!(data.startingDate == null) && !(data.endingDate == null)){
-				var html ='<table id="showActivity3" border=2 RULES=ALL><tr><th>活動名稱</th><th>活動類別</th><th>活動地點</th><th>活動開始日</th><th>活動結束日</th></tr><tbody><tr>';
+				var html ='<table id="showActivity3" border=2 RULES=ALL><tr><th>活動名稱</th><th>活動類別</th><th>活動地點</th><th>活動起始日</th><th>活動結束日</th></tr><tbody><tr>';
 				html +="<td>"+data.name+"</td>";
 				html +="<td>"+data.activityTypeName+"</td>";
 				html +="<td>"+data.location+"</td>";

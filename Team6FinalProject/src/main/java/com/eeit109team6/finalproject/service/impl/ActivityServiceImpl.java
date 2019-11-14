@@ -25,6 +25,8 @@ public class ActivityServiceImpl implements IActivityService {
 		this.dao = dao;
 	}
 
+//====================================================活動類別=================================================
+	
 	@Transactional
 	@Override
 	public void addActivityType(ActivityType activityType) {
@@ -42,6 +44,20 @@ public class ActivityServiceImpl implements IActivityService {
 	public ActivityType getActivityTypeById(Integer activityTypeId) {
 		return dao.getActivityTypeById(activityTypeId);
 	}
+
+	@Transactional
+	@Override
+	public void updateActivityTypeById(ActivityType activityType) {
+		dao.updateActivityTypeById(activityType);
+	}
+
+	@Transactional
+	@Override
+	public void deleteActivityTypeById(Integer activityTypeId) {
+		dao.deleteActivityTypeById(activityTypeId);
+	}
+
+//====================================================活動====================================================
 	
 	@Transactional
 	@Override
@@ -63,14 +79,14 @@ public class ActivityServiceImpl implements IActivityService {
 	
 	@Transactional
 	@Override
-	public void updateActivityTypeById(ActivityType activityType) {
-		dao.updateActivityTypeById(activityType);
+	public void deleteActivityById(Integer activityId) {
+		dao.deleteActivityById(activityId);			
 	}
-
+	
 	@Transactional
 	@Override
-	public void deleteActivityTypeById(Integer activityTypeId) {
-		dao.deleteActivityTypeById(activityTypeId);
+	public void updateActivityById(Activity activity) {
+		dao.updateActivityById(activity);
 	}
 
 //====================================================未完成====================================================
@@ -79,20 +95,11 @@ public class ActivityServiceImpl implements IActivityService {
 
 
 
-	@Override
-	public void updateActivityById(Activity activity) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 
 
-	@Override
-	public void deleteActivityById(Integer activityId) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 

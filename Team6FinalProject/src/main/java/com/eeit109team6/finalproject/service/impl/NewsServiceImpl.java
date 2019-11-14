@@ -24,7 +24,9 @@ public class NewsServiceImpl implements INewsService{
 	public void setDao(INewsDao dao) {
 		this.dao = dao;
 	}
-	
+
+//====================================================消息類別=================================================
+
 	@Transactional
 	@Override
 	public void addNewsType(NewsType newsType) {
@@ -45,18 +47,6 @@ public class NewsServiceImpl implements INewsService{
 	
 	@Transactional
 	@Override
-	public void addNews(News news) {
-		dao.addNews(news);	
-	}
-	
-	@Transactional
-	@Override
-	public void addArticlePicture(ArticlePicture articlePicture) {
-		dao.addArticlePicture(articlePicture);		
-	}
-	
-	@Transactional
-	@Override
 	public void updateNewsTypeById(NewsType newsType) {
 		dao.updateNewsTypeById(newsType);
 	}
@@ -67,8 +57,19 @@ public class NewsServiceImpl implements INewsService{
 		dao.deleteNewsTypeById(newsTypeId);
 	}
 
+//====================================================消息====================================================
 	
-
+	@Transactional
+	@Override
+	public void addNews(News news) {
+		dao.addNews(news);	
+	}
+	
+	@Transactional
+	@Override
+	public void addArticlePicture(ArticlePicture articlePicture) {
+		dao.addArticlePicture(articlePicture);		
+	}
 
 //====================================================未完成====================================================
 	@Override

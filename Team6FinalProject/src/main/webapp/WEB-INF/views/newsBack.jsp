@@ -170,8 +170,9 @@
 									<td>${game.platform }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
-											onclick="updateGame('${game.gameId }', '${game.gameName }', '${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', '${game.publicationDate }', '${game.publisher }', '${game.platform }')"
-											>更新</button>
+											onclick="updateGame('${game.gameId }', '${game.gameName }', 
+											'${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', 
+											'${game.publicationDate }', '${game.publisher }', '${game.platform }')">更新</button>
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="deleteGame(${game.gameId })">刪除</button>
@@ -187,6 +188,41 @@
 						href="${pageContext.request.contextPath}/newsBack/addActivity"
 						role="button">新增活動</a>
 				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>活動編號
+						<th>活動名稱
+						<th>活動類別
+						<th>活動日期(適用一日活動)
+						<th>活動時間(適用一日活動)
+						<th>活動起始日(適用多日活動)
+						<th>活動結束日(適用多日活動)
+						<th>活動地點
+						<th>更新
+						<th>刪除 <c:forEach var="activity" items="${activityList }">
+
+								<tr>
+									<td>${activity.activityId }
+									<td>${activity.activityName }
+									<td>${activity.activityType.activityTypeName }
+									<td>${activity.startingDate_time }
+									<td id="test10">${activity.startingTime_date }
+									
+									<td>${activity.startingDate }
+									<td>${activity.endingDate }
+									<td>${activity.location }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateActivity('${activity.activityId }', '${activity.activityName }',
+											'${activity.activityType.activityTypeId }',' ${activity.activityType.activityTypeName }',
+											'${activity.startingDate_time }', '${activity.startingTime_date }',
+											'${activity.startingDate }','${activity.endingDate }',
+											'${activity.location }')">更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteActivity(${activity.activityId })">刪除</button>
+							</c:forEach>
+				</table>
 			</div>
 			<!-- //活動 -->
 
@@ -203,12 +239,10 @@
 			<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
 				aria-hidden="true" data-backdrop="static" data-keyboard="true"
 				aria-labelledby="exampleModalLabel">
-				<div class="modal-dialog modal-sm" >
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
-						<div class="modal-header" id="xxx" >
-						</div>
-						<div class="modal-body" id="xxx1">
-						</div>
+						<div class="modal-header" id="xxx"></div>
+						<div class="modal-body" id="xxx1"></div>
 					</div>
 				</div>
 			</div>
