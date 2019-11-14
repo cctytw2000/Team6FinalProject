@@ -54,6 +54,18 @@ public class GameServiceImpl implements IGameService {
 		return dao.getGameById(gameId);
 	}
 	
+	@Transactional
+	@Override
+	public void updateGameTypeById(GameType gameType) {
+		dao.updateGameTypeById(gameType);		
+	}
+
+	@Transactional
+	@Override
+	public void deleteGameTypeById(Integer gameTypeId) {
+		dao.deleteGameTypeById(gameTypeId);
+	}
+	
 //====================================================未完成====================================================
 	
 
@@ -75,6 +87,8 @@ public class GameServiceImpl implements IGameService {
 		dao.updateGameById(game);
 		
 	}
+
+	
 
 	
 

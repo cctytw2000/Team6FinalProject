@@ -32,7 +32,7 @@
 <body>
 <jsp:include page="header/manageHeader.jsp" />
 
-<div class="container mt-3" style="padding: 50px 15%">
+<div class="container mt-3" style="padding: 50px 10%">
 	<h1 align="center">訂單管理</h1>
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#showorders">訂單總覽</a></li>
@@ -40,7 +40,7 @@
 		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#productCancel">會員訂單</a></li>
 	</ul>
 <div class="tab-content">
-	<div id="showorders" class="container tab-pane active" style="width:800px">
+	<div id="showorders" class="container tab-pane active" style="width:900px">
 		<table  id="table1" border="1" style="text-align: center ">
 				<tr><th>訂單編號<th>顧客名稱<th>email<th>商品名稱<th>商品小計			
 				<c:choose>				
@@ -59,7 +59,7 @@
 				</c:choose>
 		</table>
 	</div>	
-	<div id="memberorder" class="container tab-pane fade" style="width:800px">
+	<div id="memberorder" class="container tab-pane fade" style="width:900px">
 		會員:<select id="member_id">
 			<c:choose>	
 				<c:when test="${not empty members}">
@@ -119,14 +119,13 @@
 					 tableData+="<td>"+data[i].total+"元</td>";
 					 var state="";
 					 switch(data[i].state){
-						 case 1:
-							state="未付款";
+						 case 1:							
+							tableData+="<td style='color:red'>未付款</td>";
 						 	break;
-						 case 4:
-							state="已付款";
+						 case 4:						
+							tableData+="<td>已付款</td>";
 							break;
-					 }
-					 tableData+="<td>"+state+"</td>"
+					 }					 
 					 tableData+="</tr>";
 				 }				 			
 				 $("table#tbody1").html(tableData);

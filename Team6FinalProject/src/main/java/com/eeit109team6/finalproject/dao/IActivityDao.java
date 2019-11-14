@@ -12,6 +12,8 @@ public interface IActivityDao {
 	void addActivity(Activity activity); 
 	List<Activity> getAllActivities();
 	public Activity getActivityById(Integer activityId);
+	void updateActivityTypeById(ActivityType activityType); //更新活動類別
+	void deleteActivityTypeById(Integer activityTypeId); //刪除活動類別
 //====================================================未完成====================================================		
 	 
 	void deleteActivityById(Integer activityId); 

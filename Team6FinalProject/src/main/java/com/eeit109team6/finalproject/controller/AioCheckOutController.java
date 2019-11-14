@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Orders;
 import com.eeit109team6.finalproject.model.Product;
@@ -23,7 +21,6 @@ import com.eeit109team6.finalproject.service.ProductService;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import ecpay.payment.integration.domain.InvoiceObj;
-import ecpay.payment.integration.domain.QueryTradeObj;
 import ecpay.payment.integration.exception.EcpayException;
 
 @Controller
@@ -46,11 +43,11 @@ public class AioCheckOutController {
 	AllInOne all;
 
 	// 信用卡一次付清
-	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public @ResponseBody String aioCheckOutDevide(@RequestParam("order_id") Integer order_id, HttpSession session) {
 		System.out.println("進來了");
 		Orders order = service.getOrderById(order_id);
-
+		session.setAttribute("order", order);
 		all = new AllInOne("");
 
 		AioCheckOutOneTime aio = new AioCheckOutOneTime();
@@ -91,8 +88,8 @@ public class AioCheckOutController {
 		// 廠商可自行決定是否延遲撥款
 		aio.setHoldTradeAMT("0");
 		// 後端設定付款完成通知回傳網址
-		aio.setReturnURL("http://localhost:8080/Team6FinalProject/transaction?order_id=" + order_id);
-		aio.setOrderResultURL("http://localhost:8080/Team6FinalProject/transaction?order_id=" + order_id);
+		aio.setReturnURL("http://localhost:8080/Team6FinalProject/transaction");
+		aio.setOrderResultURL("http://localhost:8080/Team6FinalProject/transaction");
 		try {
 			String html = all.aioCheckOut(aio, invoice);
 
@@ -105,11 +102,10 @@ public class AioCheckOutController {
 	}
 
 	@RequestMapping(value = "/transaction")
-	public String transaction(Model model, HttpSession session, @RequestParam("order_id") Integer order_id) {
-
-		Boolean state = service.updateOrderstate(order_id);
+	public String transaction(HttpSession session, Model model) {
+		Orders order = (Orders) session.getAttribute("order");
+		Boolean state = service.updateOrderstate(order.getOrder_id());
 		if (state) {
-			Orders order = service.getOrderById(order_id);
 			for (OrderItem oitem : order.getOrderItems()) {
 				System.out.println(oitem.getProduct().getName());
 				Product p = serviceP.getProductById(oitem.getProduct().getGame_id());
@@ -117,30 +113,7 @@ public class AioCheckOutController {
 				serviceP.updateProductById(p);
 			}
 		}
-
-		Member member = (Member) session.getAttribute("mem");
-		if (member == null) {
-			Member mem = new Member();
-			mem.setAccount("sandy60108@yahoo.com.tw");
-			mem.setPassword("a14789632");
-			mem.setUsername("andy");
-			model.addAttribute("Member", mem);
-			model.addAttribute("msg", "您必須先登入!");
-			return "jump";
-		}
-
-		List<Orders> list = service.showOrder(member.getMember_id());
-		model.addAttribute("orders", list);
-
-		Member mem = new Member();
-		mem.setAccount("sandy60108@yahoo.com.tw");
-		mem.setPassword("a14789632");
-		mem.setUsername("andy");
-		model.addAttribute("Member", mem);
-
-		List<Product> listP = serviceP.getAllProducts();
-		session.setAttribute("products", listP);
-		return "showOrder";
+		return "purchaseSuccess";
 	}
 
 }

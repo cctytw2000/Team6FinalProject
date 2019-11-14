@@ -24,6 +24,11 @@ public class DiscussionServiceImpl implements IDiscussionService {
 	public List<Discussion> getAllArticles() {
 		return dao.getAllArticles();
 	}
+	
+	@Override
+	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
+		return dao.getArticleByBoardTypeId(boardId);
+	}
 
 	@Transactional
 	@Override

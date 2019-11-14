@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Page;
 import com.eeit109team6.finalproject.model.Product;
 
@@ -30,5 +31,5 @@ public interface ProductService {
 	Page<Product> findProductsByPage(Integer currentPage, Integer rows);
 	List<Product> getCancelProducts();
 	List<Product> getProductTop8();
-	
+	List<OrderItem> getOrderItem();
 }

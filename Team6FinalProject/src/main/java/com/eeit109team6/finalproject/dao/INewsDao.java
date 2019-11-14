@@ -5,16 +5,19 @@ import java.util.List;
 import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
+import com.eeit109team6.finalproject.model.Product;
 
 public interface INewsDao {
-	void addNewsType(NewsType newsType);//新增新聞類別
+	void addNewsType(NewsType newsType);//新增消息類別
 	NewsType getNewsTypeById(Integer newsTypeId);//取得newsTypeId
 	List<NewsType> getAllNewsTypes();
-	void addNews(News news); //新增新聞
+	void addNews(News news); //新增消息
 	void addArticlePicture(ArticlePicture articlePicture); 
+	void updateNewsTypeById(NewsType newsType); //更新消息類別
+	void deleteNewsTypeById(Integer newsTypeId); //刪除消息類別
 //====================================================未完成====================================================		
-	List<News> getAllNews(); //查詢所有新聞
+	List<News> getAllNews(); //查詢所有消息
 	
-	void deleteNewsById(int newsId); //刪除新聞
-	void updateNewsById(int newsId); //更新新聞
+	void deleteNewsById(int newsId); //刪除消息
+	void updateNewsById(int newsId); //更新消息
 }

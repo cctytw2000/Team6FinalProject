@@ -104,7 +104,14 @@ ol {
     background-size: cover;
     background-position: top center;
 }
-
+.set-video {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top-centor;
+    height: 200px;
+/*     width: */
+    padding: 25px 28px;
+}
 .spad {
     padding-top: 97px;
     padding-bottom: 97px;
@@ -541,7 +548,10 @@ ol {
     height: 204px;
     padding: 25px 28px;
 }
-
+.recent-game-item .rgi-thumb-video {
+    height: 204px;
+    padding: 0;
+}
 .recent-game-item .rgi-content {
     padding: 34px 22px 20px;
     background: #fff;
@@ -619,8 +629,9 @@ ol {
 }
 
 .tournament-item .ti-content {
-    padding: 38px 24px;
+    padding: 0px 0px;
     overflow: hidden;
+    background-color: black;
 }
 
 .tournament-item .ti-thumb {
@@ -663,6 +674,16 @@ ol {
     color: #ffb320;
 }
 
+.tournament-item .ti-text-form form{
+	background-color: black;
+}
+
+.tournament-item .ti-text-form form p{
+	
+	color: #ffb320;
+	font-size: 12px;
+	margin-bottom: 6px;
+}
 
 /*----------------------
   Review Section
@@ -685,8 +706,8 @@ ol {
     position: absolute;
     width: 70px;
     height: 70px;
-    top: -27px;
-    left: 26px;
+    top: -40px;
+/*     left: 26px; */
     padding-top: 20px;
     font-size: 18px;
     font-weight: 500;

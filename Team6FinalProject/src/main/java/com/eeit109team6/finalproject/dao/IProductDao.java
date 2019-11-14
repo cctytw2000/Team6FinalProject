@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eeit109team6.finalproject.model.Category;
 import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Product;
 
 public interface IProductDao {
@@ -32,5 +33,5 @@ public interface IProductDao {
 	List<Product> findByPage(int start, Integer rows); //依照頁碼查詢每頁商品
 	List<Product> getCancelProducts(); //查詢已下架商品
 	List<Product> getProductTop8(); //查詢8筆最新商品
-	
+	List<OrderItem> getOrderItem(); //查詢訂單細項，取得後可統計商品購買次數
 }

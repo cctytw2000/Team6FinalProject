@@ -148,7 +148,7 @@
 						<li class="page-item">
 					</c:otherwise>
 				</c:choose>
-					<a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${pages.currentPage - 1}&rows=3'/>">Previous</a>
+					<a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${pages.currentPage - 1}&rows=4'/>">Previous</a>
 				</li>
 				
 					<c:forEach begin="1" end="${pages.totalPage }" var="i">
@@ -156,11 +156,11 @@
 						<c:choose>
 						<c:when  test="${pages.currentPage == i}">
 							
-							<li class="page-item active"><a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${i}&rows=3'/>">${i}</a></li>
+							<li class="page-item active"><a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${i}&rows=4'/>">${i}</a></li>
 						</c:when>							
 						
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${i}&rows=3'/>">${i}</a></li>
+							<li class="page-item"><a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${i}&rows=4'/>">${i}</a></li>
 						</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -172,7 +172,7 @@
 							<li class="page-item">
 						</c:otherwise>
 				</c:choose>
-					<a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${pages.currentPage + 1}&rows=3'/>">Next</a>
+					<a class="page-link" href="<spring:url value='queryProductByLow?currentPage=${pages.currentPage + 1}&rows=4'/>">Next</a>
 				</li>
 			</ul>
 			

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "com.eeit109team6.finalproject.controller", "com.eeit109team6.finalproject.config",
@@ -70,6 +71,7 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 //		registry.addMapping("/**");
 //	}
 
+//	CommonsMultipartResolver               ***********************************************
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -77,7 +79,8 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 		resolver.setMaxUploadSize(81920000);
 		return resolver;
 	}
-
+//	CommonsMultipartResolver               ***********************************************
+	
 	@Bean
 	public MappingJackson2JsonView jsonview() {
 		MappingJackson2JsonView view = new MappingJackson2JsonView();
@@ -100,5 +103,4 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.defaultContentType(MediaType.APPLICATION_JSON);
 	}
-
 }

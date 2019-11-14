@@ -23,9 +23,9 @@ public class MovieDaoImpl implements IMovieDao{
 	
 	
 	@Override
-	public void addMovie(MovieInfo movieinfo) {
+	public void addMovie(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
-		session.save(movieinfo);
+		session.save(movieInfo);
 		
 	}
 
@@ -42,7 +42,7 @@ public class MovieDaoImpl implements IMovieDao{
 		Session session = factory.getCurrentSession();
 		session.update(movieinfo);	
 	}
-	
+						//	DONE
 	@Override
 	public List<MovieInfo> getMovies() {
 		String hql = "FROM MovieInfo";  

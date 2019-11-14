@@ -11,7 +11,7 @@
         <div class="container">
             <!-- logo -->
             <a class="site-logo" href="${pageContext.request.contextPath}">
-                <img src="<c:url value='/Images/logo.png' />" alt="">
+				<img src="<c:url value='/Images/newLogo.png' />" />
             </a>
 
             <!-- responsive -->
@@ -45,6 +45,9 @@
 										</div>
 								
 								</li>
+								<li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/moviepersonal">影片管理</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

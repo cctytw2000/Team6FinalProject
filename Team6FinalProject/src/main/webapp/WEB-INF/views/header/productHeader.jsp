@@ -31,7 +31,7 @@
 		<!-- logo -->
 		<a class="site-logo" href="${pageContext.request.contextPath}">
 			<!-- 			<img src="Images/logo.png" alt=""> -->
-			<img src="<c:url value='/Images/logo.png' />" />
+				<img src="<c:url value='/Images/newLogo.png' />" />
 		</a>
 		<c:choose>
 			<c:when test="${sessionScope.account != Null}">
