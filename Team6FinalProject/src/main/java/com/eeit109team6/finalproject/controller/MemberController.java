@@ -751,15 +751,15 @@ public class MemberController {
 		}
 		System.out.println("File name  = " + memberimg.getOriginalFilename());
 		MemService.changeHeadshot(memberimg.getOriginalFilename(), memberId);
-
+		Member memberForSession = MemService.findById(m);
 //		session.removeAttribute("username");
 //		session.removeAttribute("token");
 //		session.removeAttribute("account");
 //		session.removeAttribute("member_id");
-		session.removeAttribute("mem");
+		session.setAttribute("mem", memberForSession);
 //		session.removeAttribute("type");
-		redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
-		return "redirect:/jump";
+//		redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
+		return "redirect:/";
 
 	}
 
