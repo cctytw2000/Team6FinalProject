@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -391,7 +390,7 @@ public class MemberController {
 				session.setAttribute("mem", member);
 //				session.setAttribute("type", member.getType());
 
-				session.setAttribute("level", member.getMemberlevel().getLevelName());
+//				session.setAttribute("level", member.getMemberlevel().getLevelName());
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
@@ -425,14 +424,15 @@ public class MemberController {
 			RedirectAttributes redirectAttributes, HttpSession session) {
 //		System.out.println("account=" + account);
 		String changeType, type;
-		if (session.getAttribute("account") == null) {
+		if (session.getAttribute("mem") == null) {
 			changeType = "忘記密碼";
 			type = "forget";
 		} else {
 			changeType = "修改密碼";
 			type = "change";
 		}
-		System.out.println("忘記密碼");
+		System.out.println("changeType="+changeType);
+		System.out.println("type="+type);
 		Member mem = new Member();
 		mem.setAccount(account);
 		KeyGenerator keyGen;
@@ -526,7 +526,7 @@ public class MemberController {
 
 			return "redirect:/jump";
 		}
-
+//		return "redirect:/jump";
 	}
 
 	@RequestMapping(value = "/member/logout")
