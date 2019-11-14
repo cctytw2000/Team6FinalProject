@@ -115,7 +115,7 @@ color:red
 									選擇圖片:
 									<input name="productImage" type="file" />
 									<p style="float:right">
-										<input type="button" class="btn btn-success" value="更新">
+										<input type="submit" class="btn btn-success" value="更新">
 		</form>
       </div>
       
