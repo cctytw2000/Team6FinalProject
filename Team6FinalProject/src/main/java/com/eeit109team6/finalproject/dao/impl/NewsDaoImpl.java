@@ -20,70 +20,72 @@ public class NewsDaoImpl implements INewsDao {
 
 	public NewsDaoImpl() {
 	}
-	
-	SessionFactory factory;
+
+	SessionFactory sessionFactory;
 
 	@Autowired
-	public void setSession(SessionFactory factory) {
-		this.factory = factory;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
-	
+
+//====================================================消息類別=================================================
+
 	@Override
 	public void addNewsType(NewsType newsType) {
-		Session session = factory.getCurrentSession();
-		session.save(newsType);		
+		Session session = sessionFactory.getCurrentSession();
+		session.save(newsType);
 	}
-	
+
 	@Override
 	public NewsType getNewsTypeById(Integer newsTypeId) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		NewsType newsType = session.get(NewsType.class, newsTypeId);
 		return newsType;
 	}
-	
+
 	@Override
 	public List<NewsType> getAllNewsTypes() {
 		String hql = "From NewsType";
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<NewsType> list = new ArrayList<>();
-		list=session.createQuery(hql).getResultList();
+		list = session.createQuery(hql).getResultList();
 		return list;
 	}
-	
-	@Override
-	public void addNews(News news) {
-		Session session = factory.getCurrentSession();
-		session.save(news);
-	}
-	
-	@Override
-	public void addArticlePicture(ArticlePicture articlePicture) {
-		Session session = factory.getCurrentSession();
-		session.save(articlePicture);		
-	}
-	
+
 	@Override
 	public void updateNewsTypeById(NewsType newsType) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.clear();
 		session.update(newsType);
 	}
-	
+
 	@Override
 	public void deleteNewsTypeById(Integer newsTypeId) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		NewsType nt = session.get(NewsType.class, newsTypeId);
-		session.delete(nt);		
+		session.delete(nt);
 	}
-	
-//====================================================未完成====================================================	
+
+//====================================================消息====================================================
+
+	@Override
+	public void addNews(News news) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(news);
+	}
+
+	@Override
+	public void addArticlePicture(ArticlePicture articlePicture) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(articlePicture);
+	}
+
+//====================================================未完成===================================================	
 	@Override
 	public List<News> getAllNews() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 	@Override
 	public void deleteNewsById(int newsId) {
@@ -96,13 +98,5 @@ public class NewsDaoImpl implements INewsDao {
 		// TODO Auto-generated method stub
 
 	}
-
-	
-
-	
-
-	
-
-	
 
 }

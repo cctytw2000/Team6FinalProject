@@ -51,19 +51,21 @@ public class NewsController {
 	IActivityService activityService;
 
 	@Autowired
-	public void setService(INewsService newsService) {
+	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
 	}
 
 	@Autowired
-	public void setService(IGameService gameService) {
+	public void setGameService(IGameService gameService) {
 		this.gameService = gameService;
 	}
 
 	@Autowired
-	public void setService(IActivityService activityService) {
+	public void setActivityService(IActivityService activityService) {
 		this.activityService = activityService;
 	}
+
+//====================================================消息類別=================================================
 
 	// 新增消息類別
 	@RequestMapping("/newsBack/addNewsType")
@@ -74,6 +76,34 @@ public class NewsController {
 		// return "redirect:/newsBack";
 		return "redirect:/newsBack";
 	}
+
+	// 更新消息類別名稱-->newsBack.jsp
+	@RequestMapping(value = "/updateNewsType", method = RequestMethod.POST)
+	public String updateNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId,
+			@RequestParam("newsTypeName") String newsTypeName) {
+		System.out.println("newsTypeName=" + newsTypeName);
+		System.out.println("updateNewsType");
+		NewsType nt = newsService.getNewsTypeById(newsTypeId);
+		nt.setNewsTypeName(newsTypeName);
+		newsService.updateNewsTypeById(nt);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除消息類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteNewsType", method = RequestMethod.POST)
+	public String deleteNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId) {
+		newsService.deleteNewsTypeById(newsTypeId);
+		return "redirect:/newsBack";
+	}
+
+	// 取得所有消息類別的json格式
+	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
+		return newsService.getAllNewsTypes();
+	}
+
+//====================================================消息====================================================
 
 	// 導向新增消息頁面--> addNews.jsp
 	@RequestMapping(value = "/newsBack/addNews", method = RequestMethod.GET)
@@ -146,32 +176,6 @@ public class NewsController {
 		return "redirect:/newsBack";
 	}
 
-	// 更新消息類別名稱-->newsBack.jsp
-	@RequestMapping(value = "/updateNewsType", method = RequestMethod.POST)
-	public String updateNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId,
-			@RequestParam("newsTypeName") String newsTypeName) {
-		System.out.println("newsTypeName=" + newsTypeName);
-		System.out.println("updateNewsType");
-		NewsType nt = newsService.getNewsTypeById(newsTypeId);
-		nt.setNewsTypeName(newsTypeName);
-		newsService.updateNewsTypeById(nt);
-
-		return "redirect:/newsBack";
-	}
-
-	// 刪除消息類別-->newsBack.jsp
-	@RequestMapping(value = "/deleteNewsType", method = RequestMethod.POST)
-	public String deleteNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId) {
-		newsService.deleteNewsTypeById(newsTypeId);
-		return "redirect:/newsBack";
-	}
-
-	// 取得所有活動類別的json格式
-	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
-		return newsService.getAllNewsTypes();
-	}
-
 //========================================未完成========================================
 
 	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
@@ -187,12 +191,15 @@ public class NewsController {
 		model.addAttribute("activityTypeList", activityTypeList);
 
 		List<Game> gameList = gameService.getAllGames();
-		for (Game game : gameList) {
-			if (game.getPublicationDate().equals("")) {
-				game.setPublicationDate("未設定");
+		model.addAttribute("gameList", gameList);
+
+		List<Activity> activityList = activityService.getAllActivities();
+		for (Activity activity : activityList) {
+			if (activity.getStartingTime_date().equals("00:00:00")) {
+				activity.setStartingTime_date("");
 			}
 		}
-		model.addAttribute("gameList", gameList);
+		model.addAttribute("activityList", activityList);
 
 //			List<Category> categories = service.getAllCategories();
 //			Map<Integer, String> categoryMap = new HashMap<>();

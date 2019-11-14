@@ -139,7 +139,7 @@ function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,pub
 			+ '<p><p>'
 			+ '遊戲發售日:<input name="publicationDate" type="text" size="20px" value='
 			+ publicationDate
-			+ ' /><p>'
+			+ '><p>'
 			+ '遊戲發行商:<input name="publisher" type="text" size="20px" value='
 			+ publisher
 			+ ' /><p>'
@@ -161,6 +161,80 @@ function deleteGame(gameId) {
 		'<form method="post" action="deleteGame">'
 		+ '<input type="hidden" name="gameId" value='
 		+ gameId
+		+ ' /><p>'
+		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+}
+
+// 傳活動細節更新資訊:
+function updateActivity(activityId, activityName,activityTypeId,activityTypeName,startingDate_time,startingTime_date,startingDate,endingDate,location) {
+// alert(activityId)
+// alert(activityTypeName)
+	let html;
+	$.ajax({
+		type : "POST",
+		url : "newsBack/searchActivityTypeByAjax",
+		dataType : "json",
+		success : function(data) {
+			const activityTypeIdList = Object.values(data).map(item => item.activityTypeId);
+			const activityTypeNameList = Object.values(data).map(item => item.activityTypeName);
+//alert(data.length);
+//alert(activityTypeIdList);
+//alert(activityTypeNameList);
+			html = "活動類別:<select name='activityType'> ";
+			html += "<option value="+ activityTypeId +">"+activityTypeName+"</option>";
+			for(var i=0;i<data.length;i++){
+				var id = activityTypeIdList[i];
+				var name = activityTypeNameList[i];
+				if(id != activityTypeId){
+				html +="<option value="+ id +">"+name+"</option>";
+				}
+			}
+			html += "</select>";
+			$("#test").html(html);
+		}
+	});
+	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
+			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+			+ '<span>&times;</span>' + '</button>'
+	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivity">'
+			+ '<input type="hidden" name="activityId" value='
+			+ activityId
+			+ ' /><p>'
+			+ '活動名稱:<input name="activityName" type="text" size="20px" value='
+			+ activityName
+			+ ' /><p>'
+			+ '<span id="test"></span>'
+			+ '<p><p>'
+			+ '活動日期(適用一日活動):<input name="startingDate_time" type="text" size="20px" value='
+			+ startingDate_time
+			+ '><p>'
+			+ '活動時間(適用一日活動):<input name="startingTime_date" type="text" size="20px" value='
+			+ startingTime_date
+			+ '><p>'
+			+ '活動起始日(適用多日活動):<input name="startingDate" type="text" size="20px" value='
+			+ startingDate
+			+ '><p>'
+			+ '活動結束日(適用多日活動):<input name="endingDate" type="text" size="20px" value='
+			+ endingDate
+			+ '><p>'
+			+ '活動地點:<input name="location" type="text" size="20px" value='
+			+ location
+			+ ' /><p>'
+			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
+}
+
+// 傳活動刪除資訊:
+function deleteActivity(activityId) {
+// alert(activityId)
+	document.getElementById("xxx").innerHTML = 
+		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
+		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+		+ '<span>&times;</span>'
+		+  '</button>'
+	document.getElementById("xxx1").innerHTML = 
+		'<form method="post" action="deleteActivity">'
+		+ '<input type="hidden" name="activityId" value='
+		+ activityId
 		+ ' /><p>'
 		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
 }

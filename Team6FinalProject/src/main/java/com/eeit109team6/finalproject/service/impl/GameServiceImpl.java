@@ -24,6 +24,8 @@ public class GameServiceImpl implements IGameService {
 		this.dao = dao;
 	}
 
+//====================================================遊戲類別=================================================
+	
 	@Transactional
 	@Override
 	public void addGameType(GameType gametype) {
@@ -44,6 +46,20 @@ public class GameServiceImpl implements IGameService {
 	
 	@Transactional
 	@Override
+	public void updateGameTypeById(GameType gameType) {
+		dao.updateGameTypeById(gameType);		
+	}
+
+	@Transactional
+	@Override
+	public void deleteGameTypeById(Integer gameTypeId) {
+		dao.deleteGameTypeById(gameTypeId);
+	}
+
+//====================================================遊戲====================================================
+	
+	@Transactional
+	@Override
 	public List<Game> getAllGames() {
 		return dao.getAllGames();
 	}
@@ -56,23 +72,14 @@ public class GameServiceImpl implements IGameService {
 	
 	@Transactional
 	@Override
-	public void updateGameTypeById(GameType gameType) {
-		dao.updateGameTypeById(gameType);		
-	}
-
-	@Transactional
-	@Override
-	public void deleteGameTypeById(Integer gameTypeId) {
-		dao.deleteGameTypeById(gameTypeId);
-	}
-	
-//====================================================未完成====================================================
-	
-
-	@Transactional
-	@Override
 	public void addGame(Game game) {
 		dao.addGame(game);		
+	}
+	
+	@Transactional
+	@Override
+	public void updateGameById(Game game) {
+		dao.updateGameById(game);
 	}
 
 	@Transactional
@@ -80,14 +87,11 @@ public class GameServiceImpl implements IGameService {
 	public void deleteGameById(int gameId) {
 		dao.deleteGameById(gameId);	
 	}
+	
+//====================================================未完成====================================================
+	
 
-	@Transactional
-	@Override
-	public void updateGameById(Game game) {
-		dao.updateGameById(game);
-		
-	}
-
+	
 	
 
 	
