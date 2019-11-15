@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,6 +84,7 @@ public class MemberController {
 		LiLoInforService = liLoInforService;
 	}
 
+//===========================會員一般註冊====================================
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
 	public String registerMember(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("username") String username, @RequestParam("memberimg") MultipartFile memberimg, Model model,
@@ -139,6 +143,25 @@ public class MemberController {
 		String email = null;
 		String pwd = null;
 
+		Path p = Paths.get("C:/memberImages"); // 路徑設定
+
+		if (Files.exists(p)) {
+			System.out.print("資料夾已存在");
+		}
+		if (!Files.exists(p)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(p);
+				System.out.print("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
+			}
+		}
+
+		File dir = new File("C:/memberImages/" + mem.getAccount() + "_" + memberId);
+
+		dir.mkdir();
+
 		try {
 			BufferedReader bfr = new BufferedReader(new FileReader("C:\\sqldata\\sqldata.txt"));
 			String data;
@@ -154,7 +177,8 @@ public class MemberController {
 
 		try {
 			InputStream img = memberimg.getInputStream();
-			File file = new File("C:\\memberImages", username + memberId + memberimg.getOriginalFilename());
+			File file = new File("C:\\memberImages\\" + mem.getAccount() + "_" + memberId,
+					username + memberId + memberimg.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] buff = new byte[1024];
 			int len;
@@ -184,9 +208,10 @@ public class MemberController {
 			redirectAttributes.addFlashAttribute("msg", "有東西有問題喔");
 			return "redirect:/jump";
 		}
-
+//		return "redirect:/jump";
 	}
 
+	// ===========================會員第三方登入====================================
 	@RequestMapping(value = "/member/thirdPartyLogin", method = RequestMethod.POST)
 	public @ResponseBody Boolean thirdPartyLogin(@RequestParam("account") String account,
 			@RequestParam("type") String type, @RequestParam("username") String username, HttpSession session,
@@ -237,6 +262,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員第三方註冊====================================
 	@RequestMapping(value = "/member/thirdPartyRegister")
 	public @ResponseBody Integer registerFacebookOrGoogleMember(@RequestParam("account") String account,
 			@RequestParam("type") String type, @RequestParam("username") String username) {
@@ -285,11 +311,14 @@ public class MemberController {
 		mem.setIsactive(0);
 
 		int memberId = MemService.add(mem);
+		File dir = new File("C:/memberImages/" + mem.getAccount() + "_" + memberId);
 
+		dir.mkdir();
 		return memberId;
 
 	}
 
+	// ===========================會員第三方帳號判斷重複====================================
 	@RequestMapping(value = "/member/checkRepeat")
 	public @ResponseBody Boolean checkRepeatFacebookOrGoogleMember(@RequestParam("account") String account,
 			@RequestParam("type") String type) {
@@ -304,6 +333,7 @@ public class MemberController {
 		return repeatAnswer;
 	}
 
+	// ===========================會員一般帳號判斷重複====================================
 	@RequestMapping(value = "/member/checkGeneralRepeat")
 	public @ResponseBody Boolean checkGeneralRepeat(@RequestParam("account") String account,
 			@RequestParam("type") String type) {
@@ -318,6 +348,7 @@ public class MemberController {
 		return repeatAnswer;
 	}
 
+	// ===========================會員後台開起帳號====================================
 	@RequestMapping(value = "/member/changeActive", method = RequestMethod.POST)
 	public @ResponseBody Boolean changeActive(@RequestParam("id") Integer id, @RequestParam("type") String type,
 			@RequestParam("action") String action) {
@@ -334,6 +365,7 @@ public class MemberController {
 
 	}
 
+	// ===========================跳轉業面===================================
 	@RequestMapping(value = "/jump")
 	public String jumpWeb(Model model) {
 
@@ -345,6 +377,7 @@ public class MemberController {
 		binder.setAllowedFields("account", "password", "username");
 	}
 
+	// ===========================會員一般登入===================================
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String memberLogin(@RequestParam("login") String login, @RequestParam("loginpassword") String password,
 			@RequestParam("loginaccount") String account, Model model, RedirectAttributes redirectAttributes,
@@ -411,6 +444,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員修改密碼導向寄郵件===================================
 	@RequestMapping(value = "/member/sendChangePassWordMail", method = RequestMethod.GET)
 	public String sendChangePassWordMail(Model model) {
 		model.addAttribute("msg", "修改密碼");
@@ -419,6 +453,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員修改密碼寄郵件===================================
 	@RequestMapping(value = "/member/sendChangePassWordPage", method = RequestMethod.POST)
 	public String sendChangePassWord(@RequestParam("account") String account, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
@@ -431,8 +466,8 @@ public class MemberController {
 			changeType = "修改密碼";
 			type = "change";
 		}
-		System.out.println("changeType="+changeType);
-		System.out.println("type="+type);
+		System.out.println("changeType=" + changeType);
+		System.out.println("type=" + type);
 		Member mem = new Member();
 		mem.setAccount(account);
 		KeyGenerator keyGen;
@@ -529,6 +564,7 @@ public class MemberController {
 //		return "redirect:/jump";
 	}
 
+	// ===========================會員登出===================================
 	@RequestMapping(value = "/member/logout")
 	public String memberLogout(@ModelAttribute("Member") Member mem, Model model, BindingResult result,
 			RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) {
@@ -566,6 +602,7 @@ public class MemberController {
 
 	}
 
+	// ===========================導向修改業面===================================
 	@RequestMapping(value = "/member/InsertNewPassowrd", method = RequestMethod.GET)
 	public String insertNewPassWrod(@RequestParam("account") String account, @RequestParam("type") String type,
 			@RequestParam("token") String token, Model model, RedirectAttributes redirectAttributes) {
@@ -581,6 +618,7 @@ public class MemberController {
 
 	}
 
+	// ===========================修改密碼===================================
 	@RequestMapping(value = "/member/ChangeNewPassowrd", method = RequestMethod.POST)
 	public String ChangeNewPassowrd(@RequestParam("account") String account, @RequestParam("token") String token,
 			@RequestParam("newPassWord") String newPassWord, @RequestParam("oldpassword") String oldPassWord,
@@ -671,6 +709,7 @@ public class MemberController {
 
 	}
 
+	// ===========================導向會員後台===================================
 	@RequestMapping(value = "/membersBack")
 	public String memberBack(Model model, HttpSession session, HttpServletRequest request) {
 		System.out.println("/membersBack");
@@ -681,6 +720,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員全部登入資訊(10天間)JSON檔===================================
 	@RequestMapping(value = "/memberLoginCount.json")
 	public String memberLoginCount(Model model, HttpSession session, HttpServletRequest request) {
 
@@ -703,6 +743,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員資訊JSON檔===================================
 	@RequestMapping(value = "/member")
 	public String memberBack(@RequestParam("id") Integer id, Model model, HttpSession session,
 			HttpServletRequest request) {
@@ -715,6 +756,7 @@ public class MemberController {
 
 	}
 
+	// ===========================會員個人登入資訊JSON檔===================================
 	@RequestMapping(value = "/member/{id}.json")
 	public String loginImfo(@PathVariable("id") Integer memberId, Model model, HttpSession session,
 			HttpServletRequest request) {
@@ -725,15 +767,33 @@ public class MemberController {
 
 	}
 
+	// ===========================會員修改大頭貼===================================
 	@RequestMapping(value = "/member/Changeheadshot", method = RequestMethod.POST)
 	public String loginImfo(@RequestParam("memberimg") MultipartFile memberimg,
 			@RequestParam("memberId") Integer memberId, RedirectAttributes redirectAttributes, HttpSession session) {
 		Member m = new Member();
 		m.setMember_id(memberId);
 		Member member = MemService.findById(m);
+
+		Path p = Paths.get("C:/memberImages/" + member.getAccount() + "_" + member.getMember_id()); // 路徑設定
+
+		if (Files.exists(p)) {
+			System.out.print("資料夾已存在");
+		}
+		if (!Files.exists(p)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(p);
+				System.out.print("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
+			}
+		}
+
 		try {
 			InputStream img = memberimg.getInputStream();
-			File file = new File("C:\\memberImages", member.getUsername() + memberId + memberimg.getOriginalFilename());
+			File file = new File("C:\\memberImages\\" + member.getAccount() + "_" + member.getMember_id(),
+					member.getUsername() + memberId + memberimg.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] buff = new byte[1024];
 			int len;

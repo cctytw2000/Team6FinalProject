@@ -48,12 +48,12 @@
 				<c:when test="${sessionScope.mem.headshot != Null}">
 	
 					<img style="margin-right: 10px;" width="26px" height="26px" src="<c:url value='/memberImag
-						es/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
+						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
 	
 				</c:when>
 				<c:otherwise>
 	
-			<img width="26px" height="26px" src="<c:url value='/memberImages/noimage.jpg' />">
+			<img width="26px" height="26px" src="<c:url value='/Images/noimage.jpg' />">
 	
 				</c:otherwise>
 
