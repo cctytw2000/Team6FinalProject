@@ -15,68 +15,14 @@
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/animate.css' type="text/css" />
-	<%-- 	<script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
+		<script src="${pageContext.request.contextPath}/JS/productsBack.js"></script>
 
 	<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-	<script>
 
-		$(document).ready(function () {
-			let game = []
-			let count = []
-			let key = document.getElementsByName('key')
-			let value = document.getElementsByName('value')
-			// console.log(key)
-			// console.log(value)
-
-			for (let i = 0; i < key.length; i++) {
-				game.push(key[i].value)
-				count.push(value[i].value)
-			}
-
-			showdata(game, count)
-
-		});
-
-		function showdata(game, count) {
-
-			var ctx = document.getElementById("chart").getContext('2d');
-			var chart = new Chart(ctx, {
-				type: 'pie',
-				data: {
-					labels: game,
-					datasets: [{
-						label: '商品購買人數',
-						data: count,
-						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)'
-						],
-						borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-						],
-						borderWidth: 1
-					}]
-				}
-			});
-		}
-
-
-
-
-	</script>
 <style type="text/css">
 #b{
 	background-image:url(<c:url value='/Images/recent-game-bg1.png' />);
@@ -127,8 +73,9 @@
 						<th>商品售價
 						<th>商品分類
 						<th>下架
-							<c:forEach var="product" items="${products }">
-
+				
+<tbody id="productInfo">
+		<!-- <c:forEach var="product" items="${products }">
 					<tr>
 						<td>${product.game_id }
 						<td><a href="<spring:url value='productsBack/productBack?game_id=${product.game_id }'/>">${product.name
@@ -138,7 +85,9 @@
 						<td><button type="button" class="btn btn-warning"
 								onclick="window.location.href='productsBack/products/delete?game_id=${product.game_id }'">下架</button>
 
-							</c:forEach>
+							</c:forEach> -->
+
+						</tbody>
 				</table>
 			</div>
 
@@ -150,8 +99,8 @@
 						<th>商品售價
 						<th>商品分類
 						<th>上架
-							<c:forEach var="c_product" items="${cancelProduct }">
-
+							<tbody id="cancelProduct">
+							<!-- <c:forEach var="c_product" items="${cancelProduct }">
 					<tr>
 						<td>${c_product.game_id }
 						<td><a href="<spring:url value='productsBack/productBack?game_id=${c_product.game_id }'/>">${c_product.name
@@ -160,8 +109,8 @@
 						<td>${c_product.category.category }
 						<td><button type="button" class="btn btn-warning"
 								onclick="window.location.href='productsBack/products/reAdd?game_id=${c_product.game_id }'">上架</button>
-
-							</c:forEach>
+							</c:forEach> -->
+						</tbody>
 				</table>
 			</div>
 

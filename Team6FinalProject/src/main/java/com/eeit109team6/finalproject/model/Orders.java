@@ -30,7 +30,6 @@ public class Orders {
 	private Integer total;
 	private Integer state;
 	@Transient
-	@JsonIgnore
 	private Integer member_id;
 	private String address;
 	private boolean is_remove;

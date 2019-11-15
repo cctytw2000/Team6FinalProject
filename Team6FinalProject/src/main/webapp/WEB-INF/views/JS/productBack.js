@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 		let showComment = "";
 		$.ajax({
-			url : "productComment.json?game_id="+id,
+			url : "http://localhost:8080/Team6FinalProject/productComment.json?game_id="+id,
 			success : function(response) {
 				for (let i = 0; i < response.comments.length; i++) {
 					console.log(response.comments[i].comment_id);
@@ -24,13 +24,11 @@ $(document).ready(function () {
 					showComment += '<h4 style="color: #BBFFEE">'+ response.comments[i].member_name
 					showComment += '<small style="margin-left:15%"><i>Posted on '+response.comments[i].time.replace(".0","")+'</i></small>'
 					if(username == response.comments[i].member_name){
-						showComment += "<small style='margin-left:5%'><i id='edit' onclick='edit("
+						showComment += "<small style='margin-left:5%'><i id='remove' onclick='removeEdit("
 							+'"'+response.comments[i].comment_id+
 							'","'
-							+response.comments[i].comment+
-							'","'
 							+id+'"'+
-							")'>編輯</i></small>"
+							")'>刪除</i></small>"
 					}
 					showComment += '</h4>'
 					showComment += '<p id="'+response.comments[i].comment_id+'" style="color: #FFFFBB;margin-top:10px">'+response.comments[i].comment+'</p>'
@@ -50,30 +48,14 @@ $(document).ready(function () {
 
 
 
-function edit(comment_id, comment, game_id) {
-	let info = "";
-	info += '<form>'
-	info += '<input type="hidden" name="game_id" value="' + game_id
-			+ '"></input>'
-	info += '<input type="hidden" name="comment_id" value="' + comment_id
-			+ '"></input>'
-	info += '<input class="form-control" style="width: 200px;float:left" type="text" name="comment" value="' + comment
-			+ '"></input>'
-	info += '<input class="btn btn-success" style="width:80px;;" value="送出"  onclick="'
-	info += "sendEdit('"+comment_id+"','"+game_id+"')"
-	info += '"></input></form>'
-	document.getElementById(comment_id).innerHTML = info
-
-}
-
-function sendEdit(comment_id, game_id){
+function removeEdit(comment_id, game_id){
 	let id = document.getElementById('game_id').value;
 	let username = document.getElementById("loginusername").value;
 	let comment = $("input[name='comment']").val();
 	let showComment = "";
 	$.ajax({
 
-		url: 'http://localhost:8080/Team6FinalProject/edditComment?comment_id=' + comment_id + '&comment=' + comment + '&game_id=' + game_id,
+		url: 'http://localhost:8080/Team6FinalProject/removeComment?comment_id=' + comment_id + '&game_id=' + game_id,
 
 		success: function (response) {
 			for (let i = 0; i < response.comments.length; i++) {
@@ -85,15 +67,15 @@ function sendEdit(comment_id, game_id){
 				showComment += '<div class="media border p-3" style="width: 600px;">'
 				showComment += '<div class="media-body">'
 				showComment += '<h4 style="color: #BBFFEE">'+ response.comments[i].member_name
-				showComment += '<small style="margin-left:5%"><i>Posted on '+response.comments[i].time+'</i></small>'
+				showComment += '<small style="margin-left:5%"><i>Posted on '+response.comments[i].time.replace(".0","")+'</i></small>'
 				if(username == response.comments[i].member_name){
-					showComment += "<small style='margin-left:5%'><i id='edit' onclick='edit("
+					showComment += "<small style='margin-left:5%'><i id='remove' onclick='removeEdit("
 						+'"'+response.comments[i].comment_id+
 						'","'
 						+response.comments[i].comment+
 						'","'
 						+id+'"'+
-						")'>編輯</i></small>"
+						")'>刪除</i></small>"
 				}
 				showComment += '</h4>'
 				showComment += '<p id="'+response.comments[i].comment_id+'" style="color: #FFFFBB;margin-top:10px">'+response.comments[i].comment+'</p>'
