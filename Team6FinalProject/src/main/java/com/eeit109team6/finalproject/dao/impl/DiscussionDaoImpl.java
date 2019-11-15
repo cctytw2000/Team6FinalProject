@@ -16,7 +16,7 @@ import com.eeit109team6.finalproject.model.Discussion;
 public class DiscussionDaoImpl implements IDiscussionDao {
 
 	SessionFactory factory;
-	
+
 	@Autowired
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
@@ -25,57 +25,39 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discussion> getAllArticles() {
-		
+
 		String hql = "FROM Discussion";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
-		
+
 		String hql = "FROM Discussion WHERE boardId = :boardId";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("boardId", boardId).getResultList();
-		
+
 		return list;
 	}
-	
+
+	@Override
+	public void updateViews(Integer boardId) {
+
+		Discussion discussion = factory.getCurrentSession().get(Discussion.class, boardId);
+		discussion.setViews(discussion.getViews() + 1);
+		factory.getCurrentSession().update(discussion);
+	}
 
 	@Override
 	public Discussion getArticleById(int articleId) {
-		
-//		String hql = "UPDATE Discussion SET views = views + :seqIncrement WHERE articleId = :articleId returning views";
-//		String hql = "UPDATE Discussion d SET d.views = d.views + 1 WHERE articleId = :articleId";
-		
-//		String sql = "UPDATE Discussion SET views = views + :seqIncrement WHERE articleId = articleId";
-		Session session = factory.getCurrentSession();
-//		NativeQuery query = session.createNativeQuery(sql, Discussion.class);
-		
-//		String hql = "UPDATE Discussion SET views = views + 1 WHERE articleId = :articleId";
-//		String hql = "UPDATE Discussion SET views = views + 1 WHERE articleId = :articleId";
 
-		
-//		org.hibernate.query.Query query = session.createQuery(hql);
-//		session.createQuery(hql);
-//		Discussion discussion = session.get(Discussion.class, views);
-		
-//	======
-//		Integer views;
-//		Discussion discussion = session.get(Discussion.class, articleId);
-//		views = discussion.getViews();
-//		System.out.println("views:"+views);
-//	======
-		
-//		views = views++;
-//		(Discussion)getSession().get(Discussion.class, views);
-		
+		Session session = factory.getCurrentSession();	
 		Discussion discussion = session.get(Discussion.class, articleId);
-//		return result;
 		return discussion;
 	}
 

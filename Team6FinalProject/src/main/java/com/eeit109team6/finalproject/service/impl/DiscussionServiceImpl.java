@@ -24,7 +24,7 @@ public class DiscussionServiceImpl implements IDiscussionService {
 	public List<Discussion> getAllArticles() {
 		return dao.getAllArticles();
 	}
-	
+
 	@Override
 	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
 		return dao.getArticleByBoardTypeId(boardId);
@@ -40,6 +40,12 @@ public class DiscussionServiceImpl implements IDiscussionService {
 	@Override
 	public void addArticle(Discussion discussion) {
 		dao.addArticle(discussion);
+	}
+
+	@Override
+	public void updateViews(Integer boardId) {
+		dao.updateViews(boardId);
+
 	}
 
 }

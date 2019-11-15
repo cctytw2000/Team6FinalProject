@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>討論看板</title>
+<title>討論區後台</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->
@@ -30,25 +30,19 @@
 <!-- 	//套版用 -->
 </head>
 <body>
-	<jsp:include page="header/homeHeader.jsp" />
-	
-	<div align="center">
-	<h1>看板名稱:${boardType.boardName}</h1>
-	
-	<a style="text-decoration:none;" href="<spring:url value='addA?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
-	
+	<jsp:include page="header/manageHeader.jsp" />
 
-<table>
-	<tr><th>標題</th><th>作者</th><th>人氣</th></tr>
-	<c:forEach var='DiscussionList' items="${DiscussionList}">
-		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">${DiscussionList.subject}</a></td>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.author}'/>">${DiscussionList.author}</a></td>
-			<td>${DiscussionList.views}</td>			
-		</tr>
-	</c:forEach>
-</table>
-</div>
+	<div class="container mt-3">
+		<h1 align="center">新增發文分類</h1>
+		<div align="center">
+	<form:form method='POST' modelAttribute="subjectType">
+		<form:input path="subjectName" type="text" size="50px" />
+		<p>
+			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
+	</form:form>
+			</div>
+		</div>
 		<!-- 	套版用 -->
 		<script
 			src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
@@ -61,4 +55,4 @@
 		<!-- 自訂js設定檔  -->
 		<script src="${pageContext.request.contextPath}/JS/newsBack.js"></script>
 </body>
-</html> 
+</html>

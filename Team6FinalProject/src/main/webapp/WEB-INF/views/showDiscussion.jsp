@@ -39,7 +39,9 @@
 	<c:forEach var='boardType' items="${boardTypeList}">
 		<tr>
 			<td><a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a></td>
+			<td>${boardType.discussion.size()}</td>
 		</tr>
+	
 	</c:forEach>
 </table>
 </div>
