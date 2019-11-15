@@ -24,21 +24,24 @@ public class Discussion {
 	private String subject; // 文章標題
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "memberId")// 本方資料表關聯欄位
+	private Member member ;	// 發文會員。外來鍵，使用對方類別宣告型態
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "subjectTypeId")// 本方資料表關聯欄位
 	private SubjectType subjectType;// 發文時的標題分類
-	private String author; // 發文者顯示名稱
 	private String articleBody; // 文章內文
 	private String postTimeStamp;//發文時間戳
 	private Integer views; // 文章被瀏覽次數
 	
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name= "memberId")// 本方資料表關聯欄位
-	private Member member ;
-	
-	
-	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	public BoardType getBoardType() {
 		return boardType;
 	}
@@ -73,14 +76,6 @@ public class Discussion {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
 	}
 
 	public String getArticleBody() {

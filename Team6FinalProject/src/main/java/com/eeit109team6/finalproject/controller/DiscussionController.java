@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.SubjectType;
 import com.eeit109team6.finalproject.service.IBoardTypeService;
 import com.eeit109team6.finalproject.service.IDiscussionService;
+import com.eeit109team6.finalproject.service.IMemberService;
 import com.eeit109team6.finalproject.service.ISubjectTypeService;
 
 @Controller
@@ -30,7 +32,14 @@ public class DiscussionController {
 	IDiscussionService discussionService;
 	IBoardTypeService boardTypeService;
 	ISubjectTypeService subjectTypeService;
+
+	IMemberService memberService;
 	ServletContext context;
+
+	@Autowired
+	public void setMemberService(IMemberService memberService) {
+		this.memberService = memberService;
+	}
 
 	@Autowired
 	public void setContext(ServletContext context) {
@@ -134,13 +143,14 @@ public class DiscussionController {
 	@RequestMapping(value = "/addArticle", method = RequestMethod.POST)
 	public String processAddArticle(@RequestParam("boardId") Integer boardId, @RequestParam("subject") String subject,
 			@RequestParam("subjectTypeId") Integer subjectType, @RequestParam("body") String body,
-			@RequestParam("author") String author, Model model, HttpServletRequest request) {
+			@RequestParam("author") String author, Model model, HttpServletRequest request, HttpSession session) {
 		System.out.println("進入processAddArticle()方法");
 		BoardType type = boardTypeService.getBoardTypeById(boardId);
 
-
-		SubjectType Stype = subjectTypeService.getSubjectTypeById(subjectType);
 		
+		Member mem = (Member) session.getAttribute("mem");
+		SubjectType Stype = subjectTypeService.getSubjectTypeById(subjectType);
+
 		System.out.println("subjectType=" + subjectType);
 
 		// ==============設定發表文章時間=======================
@@ -152,11 +162,11 @@ public class DiscussionController {
 
 		Discussion discussion = new Discussion();
 		discussion.setArticleBody(body); // 填入文章
-		discussion.setAuthor(author); // 填入作者
+		discussion.setMember(mem); // 填入發文者，引數為Member型態的物件mem
 		discussion.setSubject(subject); // 填入標題
 		discussion.setSubjectType(Stype);// 填入發文分類
 		discussion.setBoardType(type); // 填入看版
-		discussion.setViews(0); // 填入人氣(計數器)
+		discussion.setViews(0); // 填入人氣(計數器)，初始值為0
 		discussion.setPostTimeStamp(createtime);// 填入時間戳
 
 		System.out.println("boardId=" + boardId);

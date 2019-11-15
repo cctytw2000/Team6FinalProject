@@ -44,6 +44,7 @@
 				<input type="hidden" name="boardId" value="${boardId}" /> <input
 					type="hidden" name="author"
 					value="${sessionScope.mem.memberdetail.nickname}" />
+					
 				<table>
 					<tr>
 						<td>作者</td>

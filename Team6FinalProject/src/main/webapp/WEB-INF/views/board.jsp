@@ -42,8 +42,8 @@
 	<tr><th>標題</th><th>作者</th><th>人氣</th></tr>
 	<c:forEach var='DiscussionList' items="${DiscussionList}">
 		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">${DiscussionList.subject}</a></td>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.author}'/>">${DiscussionList.author}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">【 ${DiscussionList.subjectType.subjectName}】  ${DiscussionList.subject}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.member.member_id}'/>">${DiscussionList.member.memberdetail.nickname}</a></td>
 			<td>${DiscussionList.views}</td>			
 		</tr>
 	</c:forEach>

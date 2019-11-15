@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -36,10 +37,10 @@
 		<h2>瀏覽文章</h2>
 		<table>
 			<tr>
-				<td><td colspan="3">標題：  ${discussion.subject}<td><td><td><td>
-			<tr><td><td colspan="3">作者：<a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.author}'/>">${discussion.author}</a><td><td><td>
+				<td><td colspan="3"><b>【 ${discussion.subjectType.subjectName}】   ${discussion.subject}</b><td><td><td><td>
+			<tr><td><td colspan="3">作者：<a style="text-decoration:none;" href="<spring:url value='article?id=${discussion.member.member_id}'/>">${discussion.member.memberdetail.nickname}</a><td><td><td>
 			<tr><td><td>${discussion.articleBody}<td><td>
-			<tr><td><td>人氣:${discussion.views}<td><td>
+			<tr><td><td>人氣:${discussion.views}<td>文章長度:${fn:length(discussion.articleBody)}字<td>
 		</table>
 	</div>
 		<!-- 	套版用 -->
