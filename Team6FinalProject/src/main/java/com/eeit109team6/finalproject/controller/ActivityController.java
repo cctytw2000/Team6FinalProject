@@ -35,14 +35,14 @@ public class ActivityController {
 	IActivityService activityService;
 
 	@Autowired
-	public void setService(IActivityService activityService) {
+	public void setActivityService(IActivityService activityService) {
 		this.activityService = activityService;
 	}
 
 	INewsService newsService;
 
 	@Autowired
-	public void setService(INewsService newsService) {
+	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
 	}
 
@@ -53,6 +53,8 @@ public class ActivityController {
 		this.context = context;
 	}
 
+//====================================================活動類別=================================================
+
 	// 新增活動類別
 	@RequestMapping("/newsBack/addActivityType")
 	public String addActivityType(@RequestParam("activityTypeName") String activityTypeName) {
@@ -62,6 +64,38 @@ public class ActivityController {
 		;
 		return "redirect:/newsBack";
 	}
+
+	// 取得所有遊戲類別的json格式
+	@RequestMapping(value = "/newsBack/searchActivityTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<ActivityType> searchGameTypeByAjax() {
+		return activityService.getAllActivityTypes();
+	}
+
+	// 查詢所有活動類別並存入Model(for form:form)
+	@ModelAttribute("activityTypes")
+	public List<ActivityType> getActivityTypes() {
+		return activityService.getAllActivityTypes();
+	}
+
+	// 更新活動類別名稱-->newsBack.jsp
+	@RequestMapping(value = "/updateActivityType", method = RequestMethod.POST)
+	public String updateActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId,
+			@RequestParam("activityTypeName") String activityTypeName) {
+		ActivityType at = activityService.getActivityTypeById(activityTypeId);
+		at.setActivityTypeName(activityTypeName);
+		activityService.updateActivityTypeById(at);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除活動類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteActivityType", method = RequestMethod.POST)
+	public String deleteActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId) {
+		activityService.deleteActivityTypeById(activityTypeId);
+		return "redirect:/newsBack";
+	}
+
+//====================================================活動====================================================
 
 	// 導向新增活動頁面--> addActivity.jsp
 	@RequestMapping(value = "/newsBack/addActivity", method = RequestMethod.GET)
@@ -108,21 +142,15 @@ public class ActivityController {
 		return "redirect:/newsBack";
 	}
 
-	// 查詢所有活動類別並存入Model(for form:form)
-	@ModelAttribute("activityTypes")
-	public List<ActivityType> getActivityTypes() {
-		return activityService.getAllActivityTypes();
-	}
-
 	// 取得所有活動的json格式
 	@RequestMapping(value = "/newsBack/searchActivityByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<Activity> test() {
+	public @ResponseBody List<Activity> searchActivityByAjax() {
 		return activityService.getAllActivities();
 	}
 
 	// 用ajax傳回activityDetail給addNews.jsp
 	@RequestMapping(value = "/newsBack/searchActivityByAjax1", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> test(@RequestParam("activityId") Integer activityId) {
+	public @ResponseBody Map<String, String> searchActivityByAjax1(@RequestParam("activityId") Integer activityId) {
 		System.out.println(activityId);
 		Activity a = activityService.getActivityById(activityId);
 		Map<String, String> activityMap = new HashMap<>();
@@ -147,23 +175,50 @@ public class ActivityController {
 
 		return activityMap;
 	}
-	
-	// 更新活動類別名稱-->newsBack.jsp
-		@RequestMapping(value = "/updateActivityType", method = RequestMethod.POST)
-		public String updateActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId,
-				@RequestParam("activityTypeName") String activityTypeName) {
-			ActivityType at = activityService.getActivityTypeById(activityTypeId);
-			at.setActivityTypeName(activityTypeName);
-			activityService.updateActivityTypeById(at);
 
-			return "redirect:/newsBack";
-		}
+	// 刪除活動-->newsBack.jsp
+	@RequestMapping(value = "/deleteActivity", method = RequestMethod.POST)
+	public String deleteActivityById(@RequestParam("activityId") Integer activityId) {
+		activityService.deleteActivityById(activityId);
+		return "redirect:/newsBack";
+	}
 
-		// 刪除活動類別-->newsBack.jsp
-		@RequestMapping(value = "/deleteActivityType", method = RequestMethod.POST)
-		public String deleteActivityTypeById(@RequestParam("activityTypeId") Integer activityTypeId) {
-			activityService.deleteActivityTypeById(activityTypeId);
-			return "redirect:/newsBack";
-		}
+	// 更新一日活動細節-->newsBack.jsp
+	@RequestMapping(value = "/updateActivityOne", method = RequestMethod.POST)
+	public String updateActivityOneById(@RequestParam("activityId") Integer activityId,
+			@RequestParam("activityName") String activityName, @RequestParam("activityType") Integer activityTypeId,
+			@RequestParam("startingDate_time") String startingDate_time,
+			@RequestParam("startingTime_date") String startingTime_date, @RequestParam("location") String location) {
+		Activity a = activityService.getActivityById(activityId);
+		System.out.println("activityId:" + activityId);
+		ActivityType at = activityService.getActivityTypeById(activityTypeId);
+		a.setActivityName(activityName);
+		a.setActivityType(at);
+		a.setStartingDate_time(startingDate_time);
+		a.setStartingTime_date(startingTime_date);
+		a.setLocation(location);
+		activityService.updateActivityById(a);
+
+		return "redirect:/newsBack";
+	}
+
+	// 更新多日活動細節-->newsBack.jsp
+	@RequestMapping(value = "/updateActivityMore", method = RequestMethod.POST)
+	public String updateActivityMoreById(@RequestParam("activityId") Integer activityId,
+			@RequestParam("activityName") String activityName, @RequestParam("activityType") Integer activityTypeId,
+			@RequestParam("startingDate") String startingDate, @RequestParam("endingDate") String endingDate,
+			@RequestParam("location") String location) {
+		Activity a = activityService.getActivityById(activityId);
+		System.out.println("activityId:" + activityId);
+		ActivityType at = activityService.getActivityTypeById(activityTypeId);
+		a.setActivityName(activityName);
+		a.setActivityType(at);
+		a.setStartingDate(startingDate);
+		a.setEndingDate(endingDate);
+		a.setLocation(location);
+		activityService.updateActivityById(a);
+
+		return "redirect:/newsBack";
+	}
 
 }

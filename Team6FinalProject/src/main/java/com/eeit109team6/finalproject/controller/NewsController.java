@@ -1,6 +1,8 @@
 package com.eeit109team6.finalproject.controller;
 
 import java.sql.Blob;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,9 +31,11 @@ import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.IGameService;
 import com.eeit109team6.finalproject.service.INewsService;
+import com.eeit109team6.finalproject.service.impl.NewsServiceImpl;
 
 @Controller
 public class NewsController {
@@ -51,19 +55,21 @@ public class NewsController {
 	IActivityService activityService;
 
 	@Autowired
-	public void setService(INewsService newsService) {
+	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
 	}
 
 	@Autowired
-	public void setService(IGameService gameService) {
+	public void setGameService(IGameService gameService) {
 		this.gameService = gameService;
 	}
 
 	@Autowired
-	public void setService(IActivityService activityService) {
+	public void setActivityService(IActivityService activityService) {
 		this.activityService = activityService;
 	}
+
+//====================================================消息類別=================================================
 
 	// 新增消息類別
 	@RequestMapping("/newsBack/addNewsType")
@@ -75,6 +81,34 @@ public class NewsController {
 		return "redirect:/newsBack";
 	}
 
+	// 更新消息類別名稱-->newsBack.jsp
+	@RequestMapping(value = "/updateNewsType", method = RequestMethod.POST)
+	public String updateNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId,
+			@RequestParam("newsTypeName") String newsTypeName) {
+		System.out.println("newsTypeName=" + newsTypeName);
+		System.out.println("updateNewsType");
+		NewsType nt = newsService.getNewsTypeById(newsTypeId);
+		nt.setNewsTypeName(newsTypeName);
+		newsService.updateNewsTypeById(nt);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除消息類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteNewsType", method = RequestMethod.POST)
+	public String deleteNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId) {
+		newsService.deleteNewsTypeById(newsTypeId);
+		return "redirect:/newsBack";
+	}
+
+	// 取得所有消息類別的json格式
+	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
+		return newsService.getAllNewsTypes();
+	}
+
+//====================================================消息====================================================
+
 	// 導向新增消息頁面--> addNews.jsp
 	@RequestMapping(value = "/newsBack/addNews", method = RequestMethod.GET)
 	public String getAddNewNewsForm() {
@@ -83,15 +117,13 @@ public class NewsController {
 
 	// 新增消息資料--> 導向上傳圖片頁面 addArticlePicture.jsp
 	@RequestMapping(value = "/newsBack/addNews1", method = RequestMethod.POST)
-	public String processAddNewNewsForm(HttpServletRequest request, HttpSession session) {
+	public String processAddNewNewsForm(HttpServletRequest request, HttpSession session) throws ParseException {
 		News news = new News();
 
-		Integer mi = (Integer) session.getAttribute("member_id");// 取得發文者id
-		Member member = new Member();
-		member.setMember_id(mi);
-		Date publicationDate = new Date();// 取得發文時間
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date publicationDate = format.parse(format.format(new Date()));// 取得發文時間
 
-		news.setMember(member);
+		news.setMember((Member) session.getAttribute("mem"));
 		news.setIpAddress(request.getRemoteAddr());// 取得發文位置
 		news.setPublicationDate(publicationDate);
 		news.setNewsType(newsService.getNewsTypeById(Integer.parseInt(request.getParameter("newsType"))));
@@ -105,7 +137,7 @@ public class NewsController {
 		System.out.println(news.getTitle());
 		news.setArticle(request.getParameter("article"));
 		if (request.getParameter("isVisable") == null) {
-			
+
 		} else if (Integer.parseInt(request.getParameter("isVisable")) == 1) {
 			news.setIsVisable(true);
 		} else {
@@ -146,58 +178,85 @@ public class NewsController {
 		return "redirect:/newsBack";
 	}
 
-	// 更新消息類別名稱-->newsBack.jsp
-	@RequestMapping(value = "/updateNewsType", method = RequestMethod.POST)
-	public String updateNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId,
-			@RequestParam("newsTypeName") String newsTypeName) {
-		System.out.println("newsTypeName=" + newsTypeName);
-		System.out.println("updateNewsType");
-		NewsType nt = newsService.getNewsTypeById(newsTypeId);
-		nt.setNewsTypeName(newsTypeName);
-		newsService.updateNewsTypeById(nt);
-
+	// 發佈消息隱藏--> 消息後台 newsBack.jsp
+	@RequestMapping("/deleteNewsShow")
+	public String deleteNewsShow(@RequestParam("newsId") Integer newsId, Model model) {
+		newsService.deleteNewsShow(newsId);
+		List<News> news = newsService.getAllNews();
+		model.addAttribute("news", news);
 		return "redirect:/newsBack";
 	}
 
-	// 刪除消息類別-->newsBack.jsp
-	@RequestMapping(value = "/deleteNewsType", method = RequestMethod.POST)
-	public String deleteNewsTypeById(@RequestParam("newsTypeId") Integer newsTypeId) {
-		newsService.deleteNewsTypeById(newsTypeId);
+	// 隱藏消息發佈--> 消息後台 newsBack.jsp
+	@RequestMapping("/reopenNews")
+	public String reopenNews(@RequestParam("newsId") Integer newsId, Model model) {
+		newsService.reopenNews(newsId);
+		List<News> news = newsService.getAllNews();
+		model.addAttribute("news", news);
 		return "redirect:/newsBack";
-	}
-
-	// 取得所有活動類別的json格式
-	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
-		return newsService.getAllNewsTypes();
 	}
 
 //========================================未完成========================================
 
 	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
 	@RequestMapping("/newsBack")
-	public String newsListBack(Model model) {
+	public String newsListBack(Model model) throws ParseException {
 		List<NewsType> newsTypeList = newsService.getAllNewsTypes();
 		model.addAttribute("newsTypeList", newsTypeList);
 
 		List<GameType> gameTypeList = gameService.getAllGameTypes();
 		model.addAttribute("gameTypeList", gameTypeList);
-		
+
 		List<ActivityType> activityTypeList = activityService.getAllActivityTypes();
 		model.addAttribute("activityTypeList", activityTypeList);
 
-//			List<Product> list = service.getAllProducts();
-//			model.addAttribute("products", list);
-//			List<Product> c_list = service.getCancelProducts();
-//			model.addAttribute("cancelProduct", c_list);
-//			Product product = new Product();
-//			model.addAttribute("product", product);
-//			List<Category> categories = service.getAllCategories();
-//			Map<Integer, String> categoryMap = new HashMap<>();
-//			for(Category c : categories) {
-//				categoryMap.put(c.getCategory_id(), c.getCategory());
-//			}
-//			model.addAttribute("categoryMap", categoryMap);
+		List<Game> gameList = gameService.getAllGames();
+		model.addAttribute("gameList", gameList);
+
+		List<Activity> activityOneList = activityService.getAllActivities();
+		for (Activity a : activityOneList) {
+			if (a.getStartingTime_date().equals("00:00:00")) {
+				a.setStartingTime_date("");
+			}
+		}
+		// for迴圈要remove List裡的項目要用倒敘刪除，不然會跳過某些值
+		for (int i = activityOneList.size() - 1; i >= 0; i--) {
+			if (!((activityOneList.get(i)).getStartingDate().equals(""))
+					&& !((activityOneList.get(i)).getEndingDate().equals(""))) {
+				activityOneList.remove(i);
+			}
+		}
+		model.addAttribute("activityOneList", activityOneList);
+
+		List<Activity> activityMoreList = activityService.getAllActivities();
+		for (int i = activityMoreList.size() - 1; i >= 0; i--) {
+			if ((!(activityMoreList.get(i)).getStartingDate_time().equals(""))
+					&& (!(activityMoreList.get(i)).getStartingTime_date().equals("00:00:00"))) {
+				activityMoreList.remove(i);
+			}
+		}
+		model.addAttribute("activityMoreList", activityMoreList);
+
+		List<News> newsShowList = newsService.getAllNews();
+		for (int i = newsShowList.size() - 1; i >= 0; i--) {
+//			newsShowList.get(i).getPublicationDate();//2019-11-14 20:00:49.0
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			String datetime =format.format(newsShowList.get(i).getPublicationDate());//2019-11-14 20:00:49
+//			format.parse(datetime);//Thu Nov 14 20:00:49 GMT+08:00 2019	
+
+			if (newsShowList.get(i).getIsVisable() == false) {
+				newsShowList.remove(i);
+			}
+		}
+		model.addAttribute("newsShowList", newsShowList);
+
+		List<News> newsHideList = newsService.getAllNews();
+		for (int i = newsHideList.size() - 1; i >= 0; i--) {
+			if (newsHideList.get(i).getIsVisable() == true) {
+				newsHideList.remove(i);
+			}
+		}
+		model.addAttribute("newsHideList", newsHideList);
 
 		return "newsBack";
 	}

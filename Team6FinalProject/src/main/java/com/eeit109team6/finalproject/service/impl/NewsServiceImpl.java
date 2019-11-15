@@ -24,7 +24,9 @@ public class NewsServiceImpl implements INewsService{
 	public void setDao(INewsDao dao) {
 		this.dao = dao;
 	}
-	
+
+//====================================================消息類別=================================================
+
 	@Transactional
 	@Override
 	public void addNewsType(NewsType newsType) {
@@ -45,6 +47,20 @@ public class NewsServiceImpl implements INewsService{
 	
 	@Transactional
 	@Override
+	public void updateNewsTypeById(NewsType newsType) {
+		dao.updateNewsTypeById(newsType);
+	}
+	
+	@Transactional
+	@Override
+	public void deleteNewsTypeById(Integer newsTypeId) {
+		dao.deleteNewsTypeById(newsTypeId);
+	}
+
+//====================================================消息====================================================
+	
+	@Transactional
+	@Override
 	public void addNews(News news) {
 		dao.addNews(news);	
 	}
@@ -57,45 +73,28 @@ public class NewsServiceImpl implements INewsService{
 	
 	@Transactional
 	@Override
-	public void updateNewsTypeById(NewsType newsType) {
-		dao.updateNewsTypeById(newsType);
+	public List<News> getAllNews() {
+		return dao.getAllNews();
 	}
 	
 	@Transactional
 	@Override
-	public void deleteNewsTypeById(Integer newsTypeId) {
-		dao.deleteNewsTypeById(newsTypeId);
+	public void deleteNewsShow(int newsId) {
+		dao.deleteNewsShow(newsId);
 	}
 
-	
-
+	@Transactional
+	@Override
+	public void reopenNews(int newsId) {
+		dao.reopenNews(newsId);		
+	}
 
 //====================================================未完成====================================================
-	@Override
-	public List<News> getAllNews() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-	@Override
-	public void deleteNewsById(int newsId) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void updateNewsById(News news) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
-
-	
-
-	
 
 }

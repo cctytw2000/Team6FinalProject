@@ -1,19 +1,16 @@
 package com.eeit109team6.finalproject.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -31,32 +28,15 @@ public class News {
 	private Integer activity_;
 
 	@Id
-	@Column(name = "NEWSID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsId;
-	
-	@Column(name = "TITLE")
 	private String title;
-	
-	@Column(name = "PUBLICATIONDATE")
 	private Date publicationDate;
-	
-	@Column(name = "ARTICLE")
 	private String article;
-	
-	@Column(name = "LIKES")
 	private Integer likes;
-	
-	@Column(name = "VIEWS")
 	private Integer views;
-	
-	@Column(name = "ISVISABLE")
 	private Boolean isVisable;
-	
-	@Column(name = "IPADDRESS")
 	private String ipAddress;
-	
-	@Column(name = "LASTUPDATED")
 	private Date lastUpdated;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)

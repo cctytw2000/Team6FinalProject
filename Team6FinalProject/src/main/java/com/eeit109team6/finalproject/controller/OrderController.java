@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit109team6.finalproject.model.Cart;
 import com.eeit109team6.finalproject.model.CartItem;
@@ -41,7 +42,7 @@ public class OrderController {
 	}
 
 	@RequestMapping("/makeOrder")
-	public String makeOrder(HttpSession session, Model model) throws ParseException {
+	public String makeOrder(HttpSession session, Model model, RedirectAttributes redirectAttributes) throws ParseException {
 		Cart cart = (Cart) session.getAttribute("cart");
 		Orders order = new Orders();
 
@@ -65,6 +66,12 @@ public class OrderController {
 
 		Set<OrderItem> orderItemSet = new LinkedHashSet<>();
 		for (CartItem cartItem : cart.getCartItems()) {
+			if(cartItem.getCount()>cartItem.getProduct().getStock()) { //如果項目數量>商品庫存
+//				System.out.println("項目數量"+cartItem.getCount()+">商品庫存"+cartItem.getProduct().getStock());
+				redirectAttributes.addFlashAttribute("msg", "很抱歉... "+cartItem.getProduct().getName()+" 庫存不足!");
+				return "redirect:/jump";
+			}
+			
 			OrderItem orderItem = new OrderItem();
 
 			orderItem.setCount(cartItem.getCount());

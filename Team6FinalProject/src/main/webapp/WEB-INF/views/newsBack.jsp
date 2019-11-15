@@ -46,14 +46,18 @@
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
 				href="#gameHeader">遊戲</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#activityHeader">活動</a></li>
+				href="#activityHeaderOne">活動(一日)</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#newsHeader">消息</a></li>
+				href="#activityHeaderMore">活動(多日)</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#newsHeaderShow">發佈消息</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#newsHeaderHide">隱藏消息</a></li>
 		</ul>
 
 		<div class="tab-content">
 
-			<!-- 新增消息類別 -->
+			<!-- 消息類別 -->
 			<div id="newsTypeHeader" class="container tab-pane active">
 				<nav class="navbar navbar-expand-sm ">
 					<form class="form-inline" action="newsBack/addNewsType">
@@ -62,7 +66,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>消息類別編號
 						<th>消息類別名稱
@@ -80,9 +84,9 @@
 							</c:forEach>
 				</table>
 			</div>
-			<!-- //新增消息類別 -->
+			<!-- //消息類別 -->
 
-			<!-- 新增遊戲類別 -->
+			<!-- 遊戲類別 -->
 			<div id="gameTypeHeader" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
 					<form class="form-inline" action="newsBack/addGameType">
@@ -91,7 +95,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>遊戲類別編號
 						<th>遊戲類別名稱
@@ -110,9 +114,9 @@
 							</c:forEach>
 				</table>
 			</div>
-			<!-- //新增遊戲類別 -->
+			<!-- //遊戲類別 -->
 
-			<!-- 新增活動類別 -->
+			<!-- 活動類別 -->
 			<div id="activityTypeHeader" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
 					<form class="form-inline" action="newsBack/addActivityType">
@@ -121,12 +125,13 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center">
+				<table border="1" style="text-align: center; width: 50%">
 					<tr>
 						<th>活動類別編號
 						<th>活動類別名稱
 						<th>更新
-						<th>刪除 <c:forEach var="activityType" items="${activityTypeList }">
+						<th>刪除 <c:forEach var="activityType"
+								items="${activityTypeList }">
 
 								<tr>
 									<td>${activityType.activityTypeId }
@@ -140,42 +145,193 @@
 							</c:forEach>
 				</table>
 			</div>
-			<!-- //新增活動類別 -->
+			<!-- //活動類別 -->
 
 			<!-- 遊戲 -->
-			<div id="gameHeader" class="container tab-pane">
+			<div id="gameHeader" class="container tab-pane col">
 				<nav class="navbar navbar-expand-sm ">
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/newsBack/addGame"
 						role="button">新增遊戲</a>
 				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>遊戲編號
+						<th>遊戲名稱
+						<th>遊戲類別
+						<th>遊戲發售日
+						<th>遊戲發行商
+						<th>遊戲平台
+						<th>更新
+						<th>刪除 <c:forEach var="game" items="${gameList }">
+
+								<tr>
+									<td>${game.gameId }
+									<td>${game.gameName }
+									<td>${game.gameType.gameTypeName }
+									<td>${game.publicationDate }
+									<td>${game.publisher }
+									<td>${game.platform }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateGame('${game.gameId }', '${game.gameName }', 
+											'${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', 
+											'${game.publicationDate }', '${game.publisher }', '${game.platform }')">更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteGame(${game.gameId })">刪除</button>
+							</c:forEach>
+				</table>
 			</div>
 			<!-- //遊戲 -->
 
-			<!-- 活動 -->
-			<div id="activityHeader" class="container tab-pane">
+			<!-- 一日活動 -->
+			<div id="activityHeaderOne" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/newsBack/addActivity"
 						role="button">新增活動</a>
 				</nav>
-			</div>
-			<!-- //活動 -->
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>活動編號
+						<th>活動名稱
+						<th>活動類別
+						<th>活動日期
+						<th>活動時間
+						<th>活動地點
+						<th>更新
+						<th>刪除 <c:forEach var="activityOne" items="${activityOneList }">
 
-			<!-- 消息 -->
-			<div id="newsHeader" class="container tab-pane">
+								<tr>
+									<td>${activityOne.activityId }
+									<td>${activityOne.activityName }
+									<td>${activityOne.activityType.activityTypeName }
+									<td>${activityOne.startingDate_time }
+									<td>${activityOne.startingTime_date }
+									<td>${activityOne.location }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateActivityOne('${activityOne.activityId }', '${activityOne.activityName }',
+											'${activityOne.activityType.activityTypeId }',' ${activityOne.activityType.activityTypeName }',
+											'${activityOne.startingDate_time }', '${activityOne.startingTime_date }',
+											'${activityOne.location }')">更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteActivityOne(${activityOne.activityId })">刪除</button>
+							</c:forEach>
+				</table>
+			</div>
+			<!-- //一日活動 -->
+			
+			<!-- 多日活動 -->
+			<div id="activityHeaderMore" class="container tab-pane">
+				<nav class="navbar navbar-expand-sm ">
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/newsBack/addActivity"
+						role="button">新增活動</a>
+				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>活動編號
+						<th>活動名稱
+						<th>活動類別
+						<th>活動起始日
+						<th>活動結束日
+						<th>活動地點
+						<th>更新
+						<th>刪除 <c:forEach var="activityMore" items="${activityMoreList }">
+
+								<tr>
+									<td>${activityMore.activityId }
+									<td>${activityMore.activityName }
+									<td>${activityMore.activityType.activityTypeName }
+									<td>${activityMore.startingDate }
+									<td>${activityMore.endingDate }
+									<td>${activityMore.location }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="updateActivityMore('${activityMore.activityId }', '${activityMore.activityName }',
+											'${activityMore.activityType.activityTypeId }',' ${activityMore.activityType.activityTypeName }',
+											'${activityMore.startingDate }','${activityMore.endingDate }',
+											'${activityMore.location }')">更新</button>
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteActivityMore(${activityMore.activityId })">刪除</button>
+							</c:forEach>
+				</table>
+			</div>
+			<!-- //多日活動 -->
+
+			<!-- 發佈消息 -->
+			<div id="newsHeaderShow" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/newsBack/addNews"
 						role="button">新增消息</a>
 				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>消息編號
+						<th>消息名稱
+						<th>消息類別
+						<th>發佈人
+						<th>發佈日期
+						<th>ip位置
+						<th>隱藏 <c:forEach var="newsShow"
+								items="${newsShowList }">
+
+								<tr>
+									<td>${newsShow.newsId }
+									<td><a href="#">${newsShow.title }</a>
+									<td>${newsShow.newsType.newsTypeName }
+									<td>${newsShow.member.username }
+									<td>${newsShow.publicationDate }
+									<td>${newsShow.ipAddress }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="deleteNewsShow(${newsShow.newsId })">隱藏</button>
+							</c:forEach>
+				</table>
 			</div>
-			<!-- //消息 -->
+			<!-- //發佈消息 -->
+			<!-- 隱藏消息 -->
+			<div id="newsHeaderHide" class="container tab-pane">
+				<nav class="navbar navbar-expand-sm ">
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/newsBack/addNews"
+						role="button">新增消息</a>
+				</nav>
+				<table border="1" style="text-align: center; width: 100%">
+					<tr>
+						<th>消息編號
+						<th>消息名稱
+						<th>消息類別
+						<th>發佈人
+						<th>發佈日期
+						<th>ip位置
+						<th>發佈 <c:forEach var="newsHide"
+								items="${newsHideList }">
+
+								<tr>
+									<td>${newsHide.newsId }
+									<td><a href="#">${newsHide.title }</a>
+									<td>${newsHide.newsType.newsTypeName }
+									<td>${newsHide.member.username }
+									<td>${newsHide.publicationDate }
+									<td>${newsHide.ipAddress }
+									<td><button type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#ooo"
+											onclick="reopenNews(${newsHide.newsId })">發佈</button>
+							</c:forEach>
+				</table>
+			</div>
+			<!-- //隱藏消息 -->
 			<!-- 彈出式視窗		 -->
-			<div id="ooo" class="modal inmodal fade" tabindex="-1" role="dialog"
+			<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
 				aria-hidden="true" data-backdrop="static" data-keyboard="true"
 				aria-labelledby="exampleModalLabel">
-				<div class="modal-dialog modal-lg">
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header" id="xxx"></div>
 						<div class="modal-body" id="xxx1"></div>

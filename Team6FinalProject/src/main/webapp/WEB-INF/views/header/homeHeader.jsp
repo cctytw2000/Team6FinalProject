@@ -40,7 +40,7 @@
 				<img src="<c:url value='/Images/newLogo.png' />" />
 			</a>
 			<c:choose>
-				<c:when test="${sessionScope.account != Null}">
+				<c:when test="${sessionScope.mem.username != Null}">
 					<div class="user-panel">
 						<span style="font-size: 18px" class="welcome">
 			
@@ -48,18 +48,18 @@
 				<c:when test="${sessionScope.mem.headshot != Null}">
 	
 					<img style="margin-right: 10px;" width="26px" height="26px" src="<c:url value='/memberImag
-						es/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
+						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
 	
 				</c:when>
 				<c:otherwise>
 	
-			<img width="26px" height="26px" src="<c:url value='/memberImages/noimage.jpg' />">
+			<img width="26px" height="26px" src="<c:url value='/Images/noimage.jpg' />">
 	
 				</c:otherwise>
 
 			</c:choose>
 						
-						${sessionScope.username}
+						${sessionScope.mem.username}
 							您好</span>
 
 					</div>
@@ -239,7 +239,7 @@
 				<i class="fa fa-bars"></i>
 			</div>
 			<c:choose>
-				<c:when test="${sessionScope.account != Null}">
+				<c:when test="${sessionScope.mem.username != Null}">
 					<nav class="navbar navbar-expand-lg navbar-dark">
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mr-auto">
@@ -267,7 +267,7 @@
 										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 會員中心 </a>
 									<c:choose>
-										<c:when test="${sessionScope.type != 'General'}">
+										<c:when test="${sessionScope.mem.type != 'General'}">
 
 											<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
 												<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
@@ -318,7 +318,7 @@
 
 
 								<c:choose>
-										<c:when test="${sessionScope.level == 'admin'}">
+										<c:when test="${sessionScope.mem.memberlevel.levelName == 'admin'}">
 
 								<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/manager">後台</a></li>
 										</c:when>

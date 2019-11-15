@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit109team6.finalproject.model.OrderItem;
 import com.eeit109team6.finalproject.model.Orders;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.OrderService;
+import com.eeit109team6.finalproject.service.ProductService;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import ecpay.payment.integration.domain.InvoiceObj;
-import ecpay.payment.integration.domain.QueryTradeObj;
 import ecpay.payment.integration.exception.EcpayException;
 
 @Controller
@@ -31,14 +33,21 @@ public class AioCheckOutController {
 		this.service = service;
 	}
 
+	ProductService serviceP;
+
+	@Autowired
+	public void setServiceP(ProductService serviceP) {
+		this.serviceP = serviceP;
+	}
+
 	AllInOne all;
 
 	// 信用卡一次付清
-	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/aioCheckOutOneTime", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public @ResponseBody String aioCheckOutDevide(@RequestParam("order_id") Integer order_id, HttpSession session) {
 		System.out.println("進來了");
 		Orders order = service.getOrderById(order_id);
-
+		session.setAttribute("order", order);
 		all = new AllInOne("");
 
 		AioCheckOutOneTime aio = new AioCheckOutOneTime();
@@ -79,8 +88,8 @@ public class AioCheckOutController {
 		// 廠商可自行決定是否延遲撥款
 		aio.setHoldTradeAMT("0");
 		// 後端設定付款完成通知回傳網址
-		aio.setReturnURL("http://localhost:8080/Team6FinalProject/showOrder");
-		aio.setOrderResultURL("http://localhost:8080/Team6FinalProject/showOrder");
+		aio.setReturnURL("http://localhost:8080/Team6FinalProject/transaction");
+		aio.setOrderResultURL("http://localhost:8080/Team6FinalProject/transaction");
 		try {
 			String html = all.aioCheckOut(aio, invoice);
 
@@ -90,6 +99,21 @@ public class AioCheckOutController {
 			throw new Error(e.getNewExceptionMessage());
 		}
 
+	}
+
+	@RequestMapping(value = "/transaction")
+	public String transaction(HttpSession session, Model model) {
+		Orders order = (Orders) session.getAttribute("order");
+		Boolean state = service.updateOrderstate(order.getOrder_id());
+		if (state) {
+			for (OrderItem oitem : order.getOrderItems()) {
+				System.out.println(oitem.getProduct().getName());
+				Product p = serviceP.getProductById(oitem.getProduct().getGame_id());
+				p.setStock(p.getStock() - 1);
+				serviceP.updateProductById(p);
+			}
+		}
+		return "purchaseSuccess";
 	}
 
 }

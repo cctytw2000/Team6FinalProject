@@ -28,7 +28,7 @@ color:red
 
 </head>
 
-<body>
+<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/homeHeader.jsp" />
 
 
@@ -77,10 +77,15 @@ color:red
 					<div style="float: right">
 						<button type="button" class="btn btn-warning"
 							onclick="window.location.href='findProductsByPage'">返回</button>
+						<c:if test="${product.stock < 1}">
+							<button disabled="disabled" class="btn btn-warning">商品售完</button>
+						</c:if>
+						<c:if test="${product.stock >= 1}">
 						<a href='addToCart?game_id=${product.game_id }&count=1'
 							class='btn btn-warning btn-large'> <span
 							class='glyphicon-shopping-cart glyphicon'></span>加入購物車
 						</a>
+						</c:if>
 					</div>
 					</p>
 				</div>
@@ -120,7 +125,13 @@ color:red
 		</section>
 
 	</div>
-	<jsp:include page="footer/homeFooter.jsp" />
+    <!--====== Javascripts & Jquery ======-->
+    <script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/main.js"></script>
+<%-- 	<jsp:include page="footer/homeFooter.jsp" /> --%>
 
 
 
