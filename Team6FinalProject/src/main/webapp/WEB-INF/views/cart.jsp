@@ -81,7 +81,7 @@
 								<td>${cartItem.count}
 								<td>${cartItem.subtotal}元
 								<td><button type="button"
-										onclick="window.location.href='removeCartItem?game_id=${cartItem.product.game_id}'">刪除</button>
+										onclick="window.location.href='removeCartItem?game_id=${cartItem.product.game_id}'"><i class="fas fa-trash-alt"></i></button>
 									</c:forEach>
 							<tr>
 								<td colspan="5" align="right">

@@ -1,22 +1,14 @@
 package com.eeit109team6.finalproject.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.eeit109team6.finalproject.model.Orders;
 import com.eeit109team6.finalproject.service.IMemberService;
 import com.eeit109team6.finalproject.service.OrderService;
 import com.eeit109team6.finalproject.service.OrderitemService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class OrderitemController {
@@ -51,21 +43,14 @@ public class OrderitemController {
 	}
 
 	// 查詢個人訂單
-	@RequestMapping(value = "/memberOrder", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> memberOrder(@RequestParam("member_id") Integer member_id) {
-		Map<String, Object> result = new HashMap<String, Object>();
-		List<Orders> list = oservice.showOrder(member_id);
-		result.put("jsondata", toJson(list));
-		return result;
+	@RequestMapping(value = "/memberOrder/{member_id}.json")
+	public void memberOrder(@PathVariable("member_id") Integer member_id, Model model) {
+		model.addAttribute("list", oservice.showOrder(member_id));
 	}
 
-	public String toJson(Object object) {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			return mapper.writeValueAsString(object);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+	// 查詢訂單細項
+	@RequestMapping(value = "/orderDeail/{order_id}.json")
+	public void orderDeail(@PathVariable("order_id") Integer order_id, Model model) {
+		model.addAttribute("order", oservice.getOrderById(order_id));
 	}
 }

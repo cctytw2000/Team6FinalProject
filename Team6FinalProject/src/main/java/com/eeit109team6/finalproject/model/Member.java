@@ -72,8 +72,31 @@ public class Member {
 	
 	
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="MEMBERLEVEL" )
+	private Set<Discussion> discussion = new LinkedHashSet<Discussion>();
+
+	
+	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	public Set<Discussion> getDiscussion() {
+		return discussion;
+	}
+
+	public void setDiscussion(Set<Discussion> discussion) {
+		this.discussion = discussion;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MEMBERLEVEL")
 	@JsonIgnore
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
@@ -82,7 +105,11 @@ public class Member {
 	public void setMemberlevel(MemberLevel memberlevel) {
 		this.memberlevel = memberlevel;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 29429b5a0f97afb786c8d9374c9443e1dbc8c7b9
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public Set<Orders> getOrders() {
@@ -113,11 +140,14 @@ public class Member {
 		this.memberdetail = memberdetail;
 	}
 
+<<<<<<< HEAD
 	
 
 	
 	
 	
+=======
+>>>>>>> 29429b5a0f97afb786c8d9374c9443e1dbc8c7b9
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
 		return account;
@@ -199,7 +229,9 @@ public class Member {
 	public void setHeadshot(String headshot) {
 		this.headshot = headshot;
 	}
-	
+
+
+
 //	================================新消息要關聯的部分================================
 //	@ManyToMany
 //	@JoinTable(name="userlike",
@@ -225,7 +257,5 @@ public class Member {
 //	public void setMessages(Set<Message> messages) {
 //		this.messages = messages;
 //	}
-
-
 
 }

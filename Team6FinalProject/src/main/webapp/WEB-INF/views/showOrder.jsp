@@ -62,8 +62,11 @@
 										style="font-size:23px;float:right">元</span>
 									<c:choose>
 										<c:when test="${order.state == 1}">
-								<td style="color:red">未付款</td>
-								</c:when>
+										<td style="color:red">未付款</td>
+										</c:when>
+										<c:otherwise>
+										<td>已付款</td>
+										</c:otherwise>
 			</c:choose>
 			</c:forEach>
 			</table>

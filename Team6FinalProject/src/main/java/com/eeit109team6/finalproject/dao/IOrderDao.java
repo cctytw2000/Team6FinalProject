@@ -8,4 +8,5 @@ public interface IOrderDao {
 	void insertOrder(Orders order);
 	public List<Orders> showOrder(Integer member_id);
 	public Orders getOrderById(Integer order_id);
+	public Boolean updateOrderstate(Integer order_id);
 }

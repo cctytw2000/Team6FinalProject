@@ -127,7 +127,7 @@ public class ProductController {
 			currentPage=1;
 		}
 		if(rows == null || "".equals(rows+"")) {
-			rows=3;
+			rows=4;
 		}
 		Page<Product> page = service.getProductsByCategory(category_id, currentPage, rows);
 		model.addAttribute("pages", page);
@@ -324,7 +324,7 @@ public class ProductController {
 			currentPage=1;
 		}
 		if(rows == null || "".equals(rows+"")) {
-			rows=3;
+			rows=4;
 		}
 
 		
@@ -353,7 +353,7 @@ public class ProductController {
 			currentPage=1;
 		}
 		if(rows == null || "".equals(rows+"")) {
-			rows=3;
+			rows=4;
 		}
 		Page<Product> page = service.getProductsByLow(currentPage, rows);
 		model.addAttribute("pages", page);
@@ -369,7 +369,7 @@ public class ProductController {
 			currentPage=1;
 		}
 		if(rows == null || "".equals(rows+"")) {
-			rows=3;
+			rows=4;
 		}
 		Page<Product> page = service.getProductsByHigh(currentPage, rows);
 		model.addAttribute("pages", page);
@@ -475,7 +475,7 @@ public class ProductController {
 			currentPage=1;
 		}
 		if(rows == null || "".equals(rows+"")) {
-			rows=3;
+			rows=4;
 		}
 		Page<Product> page = service.findProductsByPage(currentPage,rows);
 //		System.out.println(page);

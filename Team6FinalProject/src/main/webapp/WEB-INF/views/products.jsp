@@ -132,8 +132,13 @@
 									style="color: white">${product.name }</a>
 							</h6>
 							<p class="card-text" style="color: #FFFFBB">NT ${product.price }元</p>
+							<c:if test="${product.stock < 1 }">
+								<button class="btn btn-primary" disabled="disabled">商品售完</button>
+							</c:if>
+							<c:if test="${product.stock >= 1 }">
 							<a href="addToCart?game_id=${product.game_id }&count=1"
 								class="btn btn-primary">加入購物車</a>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>
@@ -149,7 +154,7 @@
 					</c:otherwise>
 				</c:choose>
 				
-					<a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${pages.currentPage - 1}&rows=3'/>">Previous</a>
+					<a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${pages.currentPage - 1}&rows=4'/>">Previous</a>
 				</li>
 				
 					<c:forEach begin="1" end="${pages.totalPage }" var="i">
@@ -157,11 +162,11 @@
 						<c:choose>
 						<c:when  test="${pages.currentPage == i}">
 							
-							<li class="page-item active"><a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${i}&rows=3'/>">${i}</a></li>
+							<li class="page-item active"><a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${i}&rows=4'/>">${i}</a></li>
 						</c:when>							
 						
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${i}&rows=3'/>">${i}</a></li>
+							<li class="page-item"><a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${i}&rows=4'/>">${i}</a></li>
 						</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -175,7 +180,7 @@
 						</c:otherwise>
 					</c:choose>
 				
-					<a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${pages.currentPage + 1}&rows=3'/>">Next</a>
+					<a class="page-link" href="<spring:url value='findProductsByPage?currentPage=${pages.currentPage + 1}&rows=4'/>">Next</a>
 				</li>
 			</ul>
 			

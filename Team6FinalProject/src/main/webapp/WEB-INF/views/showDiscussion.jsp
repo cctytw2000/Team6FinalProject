@@ -31,7 +31,7 @@
 <!-- 	//套版用 -->
 </head>
 <body>
-	<jsp:include page="header/manageHeader.jsp" />
+	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
 	<br><br><br>
 <table>
@@ -39,7 +39,9 @@
 	<c:forEach var='boardType' items="${boardTypeList}">
 		<tr>
 			<td><a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a></td>
+			<td>${boardType.discussion.size()}</td>
 		</tr>
+	
 	</c:forEach>
 </table>
 </div>

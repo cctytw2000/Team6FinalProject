@@ -50,6 +50,47 @@ public class GameController {
 		this.newsService = newsService;
 	}
 
+// ====================================================遊戲類別=================================================
+
+	// 新增遊戲類別
+	@RequestMapping("/newsBack/addGameType")
+	public String addGameType(@RequestParam("gameTypeName") String gameTypeName) {
+		GameType gt = new GameType();
+		gt.setGameTypeName(gameTypeName);
+		gameService.addGameType(gt);
+		return "redirect:/newsBack";
+	}
+
+	// 取得所有遊戲類別的json格式
+	@RequestMapping(value = "/newsBack/searchGameTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<GameType> searchGameTypeByAjax() {
+		return gameService.getAllGameTypes();
+	}
+
+	// 查詢所有遊戲類別並存入Model(for form:form)
+	@ModelAttribute("gameTypes")
+	public List<GameType> getGameTypes() {
+		return gameService.getAllGameTypes();
+	}
+
+	// 更新遊戲類別名稱-->newsBack.jsp
+	@RequestMapping(value = "/updateGameType", method = RequestMethod.POST)
+	public String updateGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId,
+			@RequestParam("gmaeTypeName") String gameTypeName) {
+		GameType gt = gameService.getGameTypeById(gameTypeId);
+		gt.setGameTypeName(gameTypeName);
+		gameService.updateGameTypeById(gt);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除遊戲類別-->newsBack.jsp
+	@RequestMapping(value = "/deleteGameType", method = RequestMethod.POST)
+	public String deleteGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId) {
+		gameService.deleteGameTypeById(gameTypeId);
+		return "redirect:/newsBack";
+	}
+
 //====================================================遊戲====================================================
 
 	// 導向新增遊戲頁面--> addGame.jsp
@@ -114,11 +155,11 @@ public class GameController {
 	// 更新遊戲細節-->newsBack.jsp
 	@RequestMapping(value = "/updateGame", method = RequestMethod.POST)
 	public String updateGameById(@RequestParam("gameId") Integer gameId, @RequestParam("gameName") String gameName,
-			@RequestParam("gameType") String gameTypeId, @RequestParam("publicationDate") String publicationDate,
+			@RequestParam("gameType") Integer gameTypeId, @RequestParam("publicationDate") String publicationDate,
 			@RequestParam("publisher") String publisher, @RequestParam("platform") String platform) {
 		Game g = gameService.getGameById(gameId);
-		System.out.println("gameTypeId:"+gameTypeId);
-		GameType gt =gameService.getGameTypeById(Integer.parseInt(gameTypeId));
+		System.out.println("gameTypeId:" + gameTypeId);
+		GameType gt = gameService.getGameTypeById(gameTypeId);
 		g.setGameName(gameName);
 		g.setGameType(gt);
 		g.setPublicationDate(publicationDate);
@@ -133,47 +174,6 @@ public class GameController {
 	@RequestMapping(value = "/deleteGame", method = RequestMethod.POST)
 	public String deleteGameById(@RequestParam("gameId") Integer gameId) {
 		gameService.deleteGameById(gameId);
-		return "redirect:/newsBack";
-	}
-
-//====================================================遊戲類別====================================================
-
-	// 新增遊戲類別
-	@RequestMapping("/newsBack/addGameType")
-	public String addGameType(@RequestParam("gameTypeName") String gameTypeName) {
-		GameType gt = new GameType();
-		gt.setGameTypeName(gameTypeName);
-		gameService.addGameType(gt);
-		return "redirect:/newsBack";
-	}
-
-	// 取得所有遊戲類別的json格式
-	@RequestMapping(value = "/newsBack/searchGameTypeByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<GameType> searchGameTypeByAjax() {
-		return gameService.getAllGameTypes();
-	}
-
-	// 查詢所有遊戲類別並存入Model(for form:form)
-	@ModelAttribute("gameTypes")
-	public List<GameType> getGameTypes() {
-		return gameService.getAllGameTypes();
-	}
-
-	// 更新遊戲類別名稱-->newsBack.jsp
-	@RequestMapping(value = "/updateGameType", method = RequestMethod.POST)
-	public String updateGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId,
-			@RequestParam("gmaeTypeName") String gameTypeName) {
-		GameType gt = gameService.getGameTypeById(gameTypeId);
-		gt.setGameTypeName(gameTypeName);
-		gameService.updateGameTypeById(gt);
-
-		return "redirect:/newsBack";
-	}
-
-	// 刪除遊戲類別-->newsBack.jsp
-	@RequestMapping(value = "/deleteGameType", method = RequestMethod.POST)
-	public String deleteGameTypeById(@RequestParam("gameTypeId") Integer gameTypeId) {
-		gameService.deleteGameTypeById(gameTypeId);
 		return "redirect:/newsBack";
 	}
 

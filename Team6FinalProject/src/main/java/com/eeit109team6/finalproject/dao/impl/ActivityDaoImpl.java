@@ -19,90 +19,91 @@ public class ActivityDaoImpl implements IActivityDao {
 
 	public ActivityDaoImpl() {
 	}
-	
-	SessionFactory factory;
+
+	SessionFactory sessionFactory;
 
 	@Autowired
-	public void setSession(SessionFactory factory) {
-		this.factory = factory;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
-	
+//====================================================活動類別=================================================
+
 	@Override
 	public void addActivityType(ActivityType activityType) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(activityType);
 	}
-	
+
 	@Override
 	public List<ActivityType> getAllActivityTypes() {
 		String hql = "FROM ActivityType";
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<ActivityType> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
 		return list;
-		}
+	}
 
 	@Override
 	public ActivityType getActivityTypeById(Integer activityTypeId) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		ActivityType activityType = session.get(ActivityType.class, activityTypeId);
 		return activityType;
 	}
-	
-	@Override
-	public void addActivity(Activity activity) {
-		Session session = factory.getCurrentSession();
-		session.save(activity);
-	}
-	
-	@Override
-	public List<Activity> getAllActivities() {
-		String hql = "FROM Activity";
-		List<Activity> list = new ArrayList<>();
-		Session session = factory.getCurrentSession();
-		list = session.createQuery(hql).getResultList();
-		return list;
-	}
-	
 
 	@Override
-	public Activity getActivityById(Integer activityId) {
-		Session session = factory.getCurrentSession();
-		Activity activity = session.get(Activity.class, activityId);
-		return activity;
-	}
-	
-	@Override
 	public void updateActivityTypeById(ActivityType activityType) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.clear();
 		session.update(activityType);
 	}
 
 	@Override
 	public void deleteActivityTypeById(Integer activityTypeId) {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		ActivityType at = session.get(ActivityType.class, activityTypeId);
-		session.delete(at);				
+		session.delete(at);
 	}
 
-//====================================================未完成====================================================
-
-
+//====================================================活動====================================================
+	
+	@Override
+	public void addActivity(Activity activity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(activity);
+	}
 
 	@Override
-	public void updateActivityById(Activity activity) {
-		// TODO Auto-generated method stub
-
+	public List<Activity> getAllActivities() {
+		String hql = "FROM Activity";
+		List<Activity> list = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
 	}
 
-
-
+	@Override
+	public Activity getActivityById(Integer activityId) {
+		Session session = sessionFactory.getCurrentSession();
+		Activity activity = session.get(Activity.class, activityId);
+		return activity;
+	}
+	
 	@Override
 	public void deleteActivityById(Integer activityId) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		Activity activity = session.get(Activity.class, activityId);
+		session.delete(activity);
 	}
+	
+	@Override
+	public void updateActivityById(Activity activity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(activity);
+	}
+
+//====================================================未完成===================================================
+
+	
 
 	
 

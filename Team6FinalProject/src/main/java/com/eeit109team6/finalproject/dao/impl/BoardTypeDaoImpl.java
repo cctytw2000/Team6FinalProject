@@ -31,16 +31,16 @@ public class BoardTypeDaoImpl implements IBoardTypeDao {
 	}
 
 	@Override
-	public void addBoardType(BoardType boardType) {
-		Session session = factory.getCurrentSession();
-		session.save(boardType);
-	}
-	
-	@Override
 	public BoardType getBoardTypeById(int boardId) {
 		Session session = factory.getCurrentSession();
 		BoardType boardType = session.get(BoardType.class, boardId);
 		return boardType;
+	}
+	
+	@Override
+	public void addBoardType(BoardType boardType) {
+		Session session = factory.getCurrentSession();
+		session.save(boardType);
 	}
 
 	@Override
