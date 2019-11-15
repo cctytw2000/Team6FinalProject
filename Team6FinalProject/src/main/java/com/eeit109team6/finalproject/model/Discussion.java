@@ -32,6 +32,13 @@ public class Discussion {
 	private Integer views; // 文章被瀏覽次數
 	
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "memberId")// 本方資料表關聯欄位
+	private Member member ;
+	
+	
+	
 	public BoardType getBoardType() {
 		return boardType;
 	}

@@ -48,13 +48,35 @@ public class Member {
 	private MemberDetail memberdetail;
 
 	private MemberLevel memberlevel;
-	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
-
+	private Set<LiLoInfo> liLoInfo = new LinkedHashSet<LiLoInfo>();
 
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
+	private Set<Discussion> discussion = new LinkedHashSet<Discussion>();
+
+	
+	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	public Set<Discussion> getDiscussion() {
+		return discussion;
+	}
+
+	public void setDiscussion(Set<Discussion> discussion) {
+		this.discussion = discussion;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="MEMBERLEVEL" )
+	@JoinColumn(name = "MEMBERLEVEL")
 	@JsonIgnore
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
@@ -63,14 +85,12 @@ public class Member {
 	public void setMemberlevel(MemberLevel memberlevel) {
 		this.memberlevel = memberlevel;
 	}
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public Set<Orders> getOrders() {
 		return orders;
 	}
-
 
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
@@ -95,8 +115,6 @@ public class Member {
 	public void setMemberdetail(MemberDetail memberdetail) {
 		this.memberdetail = memberdetail;
 	}
-
-	
 
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
@@ -179,7 +197,9 @@ public class Member {
 	public void setHeadshot(String headshot) {
 		this.headshot = headshot;
 	}
-	
+
+
+
 //	================================新消息要關聯的部分================================
 //	@ManyToMany
 //	@JoinTable(name="userlike",
@@ -205,7 +225,5 @@ public class Member {
 //	public void setMessages(Set<Message> messages) {
 //		this.messages = messages;
 //	}
-
-
 
 }
