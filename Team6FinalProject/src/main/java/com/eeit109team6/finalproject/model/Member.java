@@ -1,9 +1,8 @@
 ﻿package com.eeit109team6.finalproject.model;
 
-import java.util.HashSet;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,16 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-// Test from DavidChen-TP
-// kunalin asdasd
-// Doris
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 // Test From Git Third
 //andy is a handsome boy.
@@ -42,16 +35,42 @@ public class Member {
 	private String token;
 	private String username;
 	private String headshot;
-
 	private String type;
 	private int isactive;
+	
 	private MemberDetail memberdetail;
-
+	
 	private MemberLevel memberlevel;
+	
 	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
-
-
+	
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
+	
+	
+//	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
+//	
+//	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//	public Set<MovieInfo> getMovieInfo() {
+//		return movieInfo;
+//	}
+//	
+//	public void setMovieInfo(Set<MovieInfo> movieInfo) {
+//		this.movieInfo = movieInfo;
+//	}
+	
+//	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
+	private Set<Orders> orders = new LinkedHashSet<Orders>();
+//	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	public Set<MovieLike> getMovieLike() {
+//		return movieLike;
+//	}
+//	
+//	public void setMovieLike(Set<MovieLike> movieLike) {
+//		this.movieLike = movieLike;
+//	}
+	
+	
+	
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MEMBERLEVEL" )
@@ -59,18 +78,16 @@ public class Member {
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
 	}
-
+	
 	public void setMemberlevel(MemberLevel memberlevel) {
 		this.memberlevel = memberlevel;
 	}
-	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public Set<Orders> getOrders() {
 		return orders;
 	}
-
 
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
@@ -98,6 +115,9 @@ public class Member {
 
 	
 
+	
+	
+	
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
 		return account;

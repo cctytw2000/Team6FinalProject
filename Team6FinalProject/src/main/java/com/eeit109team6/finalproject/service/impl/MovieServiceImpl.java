@@ -35,8 +35,12 @@ public class MovieServiceImpl implements IMovieService{
 	@Override
 	public void updateMovieInfoById(MovieInfo movieinfo) {
 		dao.updateMovieInfoById(movieinfo);
-		
 	}
+	@Transactional
+	@Override
+	public void getMovieInfoByMovieID(int movie_ID) {
+		dao.getMovieInfoByMovieID(movie_ID);
+	} 
 	@Transactional
 	@Override
 	public List<MovieInfo> getMovies() {
@@ -48,7 +52,4 @@ public class MovieServiceImpl implements IMovieService{
 		return dao.getMovieInfoByOwnerID();
 	}
 	
-	
-	
-
 }

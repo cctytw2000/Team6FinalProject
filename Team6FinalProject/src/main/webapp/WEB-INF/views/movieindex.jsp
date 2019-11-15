@@ -88,13 +88,13 @@
 								<!-- 							內文 -->
 								<p>${movie.movie_content}.</p>
 								<!-- 							案讚數 -->
-								<a href="#" class="comment">3 Comments</a>
+								<a href="#" class="comment">Like</a>
 
-								<div class="rgi-extra">
-									<div class="rgi-heart">
-										<img src="Images/icons/heart.png" alt="heart.png">
-									</div>
-								</div>
+<!-- 								<div class="rgi-extra"> -->
+<!-- 									<div class="rgi-heart"> -->
+<!-- 										<img src="Images/icons/heart.png" alt="heart.png"> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 							</div>
 
 						</div>

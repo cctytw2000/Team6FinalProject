@@ -55,7 +55,7 @@ public class ProductController {
 	public void setContext(ServletContext context) {
 		this.context = context;
 	}
-
+	
 	// 查詢所有商品--> 商城前台 products.jsp
 	@RequestMapping("/products")
 	public String list(Model model, HttpSession session) {
@@ -376,7 +376,7 @@ public class ProductController {
 		
 		return "productsByPriceH";
 	}
-	
+	//********************************************************************************************member
 	//新增商品評論-> 商品後台
 	@RequestMapping("/addComment")
 	public String addComment(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,

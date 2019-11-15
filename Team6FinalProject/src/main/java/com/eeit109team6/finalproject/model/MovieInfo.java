@@ -2,36 +2,86 @@ package com.eeit109team6.finalproject.model;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
 @Entity
-@Table(name="MovieInfo")
+@Table(name="movieInfo")
 public class MovieInfo {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer movie_ID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int movie_ID;
 	
 	private String name;
 	
 	private String movie_content;
+	
 	@Transient
 	private Date date;//Time
-	@Transient
-	private Integer owner_ID;
+	
+//	@Transient
+//	private int owner_ID;
+	
 	@Transient
 	private Integer like_Sum;
+	
 	@Transient
 	private Integer click_Sum;
 
 	private String location_Test;
+	
 	@Transient
 	private Blob video;
+	
+	
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="owner_ID")
+	private Member member;
+	
+	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "movieInfo",fetch = FetchType.LAZY)
+	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
+	
+	public Set<MovieLike> getMovieLike() {
+		return movieLike;
+	}
+	
+	public void setMovieLike(Set<MovieLike> movieLike) {
+		this.movieLike = movieLike;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public Integer getMovie_ID() {
 		return movie_ID;
@@ -57,12 +107,12 @@ public class MovieInfo {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Integer getOwner_ID() {
-		return owner_ID;
-	}
-	public void setOwner_ID(Integer owner_ID) {
-		this.owner_ID = owner_ID;
-	}
+//	public Integer getOwner_ID() {
+//		return owner_ID;
+//	}
+//	public void setOwner_ID(int owner_ID) {
+//		this.owner_ID = owner_ID;
+//	}
 	public Integer getLike_Sum() {
 		return like_Sum;
 	}

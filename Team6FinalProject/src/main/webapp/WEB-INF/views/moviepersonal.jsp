@@ -111,6 +111,9 @@
 									<h6>${allmovies.location_Test }</h6>
 									<!--內文 -->
 									<p>${allmovies.movie_content}</p>
+									<a href="moviepersonal/updateMovie" class="commentUpdate">Update</a>
+
+									<a href="moviepersonal/deleteMovie" class="commentDelete">Delete</a>
 								</div>
 							</div>
 						</div>

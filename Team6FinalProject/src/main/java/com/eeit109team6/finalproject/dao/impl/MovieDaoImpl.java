@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.model.MovieInfo;
+import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.dao.IMovieDao;
 
 
@@ -17,7 +18,7 @@ public class MovieDaoImpl implements IMovieDao{
 	
 	SessionFactory factory; 
 	@Autowired
-	public void setSession(SessionFactory factory) {
+	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
 	}
 	
@@ -28,19 +29,27 @@ public class MovieDaoImpl implements IMovieDao{
 		session.save(movieInfo);
 		
 	}
-
+						//	DONE
 	@Override
 	public void deleteMovieInfoById(int movie_ID) {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieinfo = session.get(MovieInfo.class, movie_ID);
 		session.delete(movieinfo);
-		
 	}
-
+						//	DONE
 	@Override
 	public void updateMovieInfoById(MovieInfo movieinfo) {
 		Session session = factory.getCurrentSession();
 		session.update(movieinfo);	
+		session.clear();
+		session.update(movieinfo);	
+	}
+	
+	@Override
+	public void getMovieInfoByMovieID(int movie_ID) {
+		Session session = factory.getCurrentSession();
+		MovieInfo movieInfo = session.get(MovieInfo.class, movie_ID);
+		session.save(movieInfo);
 	}
 						//	DONE
 	@Override
@@ -61,6 +70,8 @@ public class MovieDaoImpl implements IMovieDao{
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
+
+
 	
-	
+
 }
