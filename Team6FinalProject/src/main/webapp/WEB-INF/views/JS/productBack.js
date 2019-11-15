@@ -23,13 +23,13 @@ $(document).ready(function () {
 					showComment += '<div class="media-body">'
 					showComment += '<h4 style="color: #BBFFEE">'+ response.comments[i].member_name
 					showComment += '<small style="margin-left:15%"><i>Posted on '+response.comments[i].time.replace(".0","")+'</i></small>'
-					if(username == response.comments[i].member_name){
+					
 						showComment += "<small style='margin-left:5%'><i id='remove' onclick='removeEdit("
 							+'"'+response.comments[i].comment_id+
 							'","'
 							+id+'"'+
 							")'>刪除</i></small>"
-					}
+					
 					showComment += '</h4>'
 					showComment += '<p id="'+response.comments[i].comment_id+'" style="color: #FFFFBB;margin-top:10px">'+response.comments[i].comment+'</p>'
 					showComment += '</div></div>'
@@ -68,7 +68,7 @@ function removeEdit(comment_id, game_id){
 				showComment += '<div class="media-body">'
 				showComment += '<h4 style="color: #BBFFEE">'+ response.comments[i].member_name
 				showComment += '<small style="margin-left:5%"><i>Posted on '+response.comments[i].time.replace(".0","")+'</i></small>'
-				if(username == response.comments[i].member_name){
+				
 					showComment += "<small style='margin-left:5%'><i id='remove' onclick='removeEdit("
 						+'"'+response.comments[i].comment_id+
 						'","'
@@ -76,7 +76,7 @@ function removeEdit(comment_id, game_id){
 						'","'
 						+id+'"'+
 						")'>刪除</i></small>"
-				}
+				
 				showComment += '</h4>'
 				showComment += '<p id="'+response.comments[i].comment_id+'" style="color: #FFFFBB;margin-top:10px">'+response.comments[i].comment+'</p>'
 				showComment += '</div></div>'

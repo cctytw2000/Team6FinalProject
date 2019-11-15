@@ -85,7 +85,7 @@ function sendEdit(comment_id, game_id){
 				showComment += '<div class="media border p-3" style="width: 600px;">'
 				showComment += '<div class="media-body">'
 				showComment += '<h4 style="color: #BBFFEE">'+ response.comments[i].member_name
-				showComment += '<small style="margin-left:5%"><i>Posted on '+response.comments[i].time+'</i></small>'
+				showComment += '<small style="margin-left:5%"><i>Posted on '+response.comments[i].time.replace(".0","")+'</i></small>'
 				if(username == response.comments[i].member_name){
 					showComment += "<small style='margin-left:5%'><i id='edit' onclick='edit("
 						+'"'+response.comments[i].comment_id+
