@@ -131,10 +131,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		// ==============/設定token====================
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd HHmmssSSS");
+		String createtime = sf.format(new Date());
+
 		mem.setAccount(account);
 		mem.setUsername(username);
 		mem.setPassword(password_AES);
-		mem.setHeadshot(memberimg.getOriginalFilename());
+		mem.setHeadshot(createtime + memberimg.getOriginalFilename());
 		mem.setType("General");
 		mem.setMemberlevel(level);
 		mem.setRegisteredtime(registeredtime);
@@ -178,7 +181,7 @@ public class MemberController {
 		try {
 			InputStream img = memberimg.getInputStream();
 			File file = new File("C:\\memberImages\\" + mem.getAccount() + "_" + memberId,
-					username + memberId + memberimg.getOriginalFilename());
+					username + memberId + createtime + memberimg.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] buff = new byte[1024];
 			int len;
@@ -778,22 +781,26 @@ public class MemberController {
 		Path p = Paths.get("C:/memberImages/" + member.getAccount() + "_" + member.getMember_id()); // 路徑設定
 
 		if (Files.exists(p)) {
-			System.out.print("資料夾已存在");
+			System.out.println("資料夾已存在");
 		}
 		if (!Files.exists(p)) {
 			/* 不存在的話,直接建立資料夾 */
 			try {
 				Files.createDirectory(p);
-				System.out.print("已成功建立資料夾");
+				System.out.println("已成功建立資料夾");
 			} catch (IOException e) {
 				System.out.println("發生錯誤");
 			}
 		}
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd HHmmssSSS");
+		String createtime = sf.format(new Date());
+
+		System.out.println("createtime=" + createtime);
 
 		try {
 			InputStream img = memberimg.getInputStream();
 			File file = new File("C:\\memberImages\\" + member.getAccount() + "_" + member.getMember_id(),
-					member.getUsername() + memberId + memberimg.getOriginalFilename());
+					member.getUsername() + memberId + createtime + memberimg.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] buff = new byte[1024];
 			int len;
@@ -810,7 +817,7 @@ public class MemberController {
 			e2.printStackTrace();
 		}
 		System.out.println("File name  = " + memberimg.getOriginalFilename());
-		MemService.changeHeadshot(memberimg.getOriginalFilename(), memberId);
+		MemService.changeHeadshot(createtime + memberimg.getOriginalFilename(), memberId);
 		Member memberForSession = MemService.findById(m);
 //		session.removeAttribute("username");
 //		session.removeAttribute("token");
