@@ -59,7 +59,7 @@ public class Member {
 //	}
 	
 //	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
-	private Set<Orders> orders = new LinkedHashSet<Orders>();
+
 //	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //	public Set<MovieLike> getMovieLike() {
 //		return movieLike;
@@ -105,11 +105,7 @@ public class Member {
 	public void setMemberlevel(MemberLevel memberlevel) {
 		this.memberlevel = memberlevel;
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 29429b5a0f97afb786c8d9374c9443e1dbc8c7b9
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public Set<Orders> getOrders() {
@@ -140,14 +136,6 @@ public class Member {
 		this.memberdetail = memberdetail;
 	}
 
-<<<<<<< HEAD
-	
-
-	
-	
-	
-=======
->>>>>>> 29429b5a0f97afb786c8d9374c9443e1dbc8c7b9
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
 		return account;
