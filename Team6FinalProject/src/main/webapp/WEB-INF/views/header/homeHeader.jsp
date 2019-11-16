@@ -133,7 +133,9 @@
 									
 									
 			
-										<input id="memberimg" name="memberimg" type='file'/>
+										<input id="memberimg" name="memberimg" type='file' onchange="readURL(this)"/>
+										<img id="preview_progressbarTW_img" width="212" height="250" src="<c:url value='/Images/noimage.jpg' />">
+
 										<p>新增一張大頭貼</p>
 									
 									

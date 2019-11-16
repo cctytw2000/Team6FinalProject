@@ -79,6 +79,7 @@ public class Member {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnore
 	public Set<Discussion> getDiscussion() {
 		return discussion;
 	}

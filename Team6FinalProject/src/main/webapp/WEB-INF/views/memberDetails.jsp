@@ -34,36 +34,13 @@
 	src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
 <script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
 
+
+<script src="${pageContext.request.contextPath}/JS/memberDetail.js"></script>
+
 <script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-<script>
-	let open = 0
-	function openUpdate() {
-		if (open == 0) {
-			document.getElementById("nickname").innerHTML = "<label>暱稱：</label> <br><input type='text'"
-					+ "name='nickname' placeholder='來個新名字吧(ゝ∀･)'"
-					+ "value='${MemberDetial.memberdetail.nickname}'></input> <br><input type='submit' value='更新'> <button id='update'"
-					+ "type='button' onclick='openUpdate()'>編輯</button>"
-			open = 1
-		} else {
-			document.getElementById("nickname").innerHTML = "<label>暱稱：</label> <br><input style='border-width: 0; background-color: white' type='text'"
-					+ "name='nickname' placeholder='來個新名字吧(ゝ∀･)' disabled='disabled' readonly='readonly'"
-					+ "value='${MemberDetial.memberdetail.nickname}'></input> <button id='update'"
-					+ "type='button' onclick='openUpdate()'>取消</button>"
-			open = 0
-		}
 
-	}
-
-	function headshot(id) {
-		let chenge = ""
-		chenge += '<input name="memberId" type="hidden" value="'+id+'"/>'
-		chenge += '<input id="memberimg" name="memberimg" type="file"/> <input type="submit" />'
-		document.getElementById("Changeheadshot").innerHTML = chenge
-
-	}
-</script>
 
 
 </head>
@@ -85,7 +62,7 @@
 				<c:when test="${sessionScope.mem.headshot != Null}">
 
 
-					<img width="212" height="250"
+					<img id="preview_progressbarTW_img" width="212" height="250"
 						src="<c:url value='/memberImag
 						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
 					<button onclick="headshot('${sessionScope.mem.member_id}')"
@@ -96,16 +73,13 @@
 				</c:when>
 				<c:otherwise>
 
-					<img width="212" height="250"
-						src="<c:url value='/memberImages/noimage.jpg' />">
+					<img id="preview_progressbarTW_img" width="212" height="250"
+						src="<c:url value='/Images/noimage.jpg' />">
 					<button onclick="headshot('${sessionScope.mem.member_id}')"
 						type="button">新增一張大頭貼</button>
 					<form id="Changeheadshot"
 						action="${pageContext.request.contextPath}/member/Changeheadshot"
-						method="post" enctype="multipart/form-data">
-						<%-- 			<input name="memberId" type='hidden' value="${sessionScope.mem.member_id}"/>  --%>
-						<!-- 			<input id="memberimg" name="memberimg" type='file'/> <input type="submit" /> -->
-					</form>
+						method="post" enctype="multipart/form-data"></form>
 				</c:otherwise>
 
 			</c:choose>
