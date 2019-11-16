@@ -62,7 +62,7 @@
 				<c:when test="${sessionScope.mem.headshot != Null}">
 
 
-					<img id="preview_progressbarTW_img" width="212" height="250"
+					<img id="previewHeadShot" width="212" height="250"
 						src="<c:url value='/memberImag
 						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
 					<button onclick="headshot('${sessionScope.mem.member_id}')"
@@ -73,7 +73,7 @@
 				</c:when>
 				<c:otherwise>
 
-					<img id="preview_progressbarTW_img" width="212" height="250"
+					<img id="previewHeadShot" width="212" height="250"
 						src="<c:url value='/Images/noimage.jpg' />">
 					<button onclick="headshot('${sessionScope.mem.member_id}')"
 						type="button">新增一張大頭貼</button>
