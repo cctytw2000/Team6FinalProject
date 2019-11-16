@@ -794,6 +794,21 @@ public class MemberController {
 		m.setMember_id(memberId);
 		Member member = MemService.findById(m);
 
+		Path p_ = Paths.get("C:/memberImages/"); // 路徑設定
+
+		if (Files.exists(p_)) {
+			System.out.println("資料夾已存在");
+		}
+		if (!Files.exists(p_)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(p_);
+				System.out.println("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
+			}
+		}
+
 		Path p = Paths.get("C:/memberImages/" + member.getAccount() + "_" + member.getMember_id()); // 路徑設定
 
 		if (Files.exists(p)) {
