@@ -107,7 +107,8 @@ public class DiscussionController {
 
 		Discussion discussion = discussionService.getArticleById(articleId);
 
-		discussionService.updateViews(articleId);
+		discussionService.updateViews(articleId); 
+
 		Discussion discussion_sessDiscussion = discussionService.getArticleById(articleId);
 		model.addAttribute("discussion", discussion_sessDiscussion);
 

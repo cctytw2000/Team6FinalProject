@@ -46,9 +46,9 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	}
 
 	@Override
-	public void updateViews(Integer id) {
+	public void updateViews(Integer articleId) {
 
-		Discussion discussion = factory.getCurrentSession().get(Discussion.class, id);
+		Discussion discussion = factory.getCurrentSession().get(Discussion.class, articleId);
 		discussion.setViews(discussion.getViews() + 1);
 		factory.getCurrentSession().update(discussion);
 	}

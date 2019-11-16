@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Discussion")
 public class Discussion {
@@ -20,15 +22,18 @@ public class Discussion {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "boardId")// 本方資料表關聯欄位
+	@JsonIgnore
 	private BoardType boardType; // 所屬看板編號。外來鍵，使用對方類別宣告型態
 	private String subject; // 文章標題
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "memberId")// 本方資料表關聯欄位
+	@JsonIgnore
 	private Member member ;	// 發文會員。外來鍵，使用對方類別宣告型態
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "subjectTypeId")// 本方資料表關聯欄位
+	@JsonIgnore
 	private SubjectType subjectType;// 發文時的標題分類
 	private String articleBody; // 文章內文
 	private String postTimeStamp;//發文時間戳
