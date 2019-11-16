@@ -14,7 +14,9 @@
 
 
 <script src="${pageContext.request.contextPath}/JS/product.js"></script>
+<script type="text/javascript">
 
+</script>
 <style>
 #edit{
 cursor:pointer;
@@ -110,13 +112,13 @@ color:red
 </div>				
 				<div class="form-group">
 					<nav class="navbar navbar-expand-sm " style="padding-left: 0px">
-						<form class="form-inline" action="addComment">
+						
 							<input type="hidden" id="game_id" name="game_id" value="${product.game_id }">
 							<input type="hidden" id="loginusername" value="${sessionScope.mem.username }">
-							<textarea class="form-control" rows="1" id="comment"
+							<textarea class="form-control" rows="1" id="addComment"
 								name="comment" style="width: 600px" placeholder="請輸入評論..."></textarea>
-							<button class="btn btn-success" type="submit">Comment</button>
-						</form>
+							<button class="btn btn-success" onclick="addComment()">Comment</button>
+						
 					</nav>
 				</div>
 

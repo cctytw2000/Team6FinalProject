@@ -72,8 +72,6 @@ function removeEdit(comment_id, game_id){
 					showComment += "<small style='margin-left:5%'><i id='remove' onclick='removeEdit("
 						+'"'+response.comments[i].comment_id+
 						'","'
-						+response.comments[i].comment+
-						'","'
 						+id+'"'+
 						")'>刪除</i></small>"
 				
@@ -86,3 +84,7 @@ function removeEdit(comment_id, game_id){
 		}
 	});
 }
+
+
+
+
