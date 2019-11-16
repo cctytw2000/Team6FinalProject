@@ -52,8 +52,10 @@ import com.eeit109team6.finalproject.javaUtils.CipherUtils;
 import com.eeit109team6.finalproject.javaUtils.Mail;
 import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.MemberHeadShot;
 import com.eeit109team6.finalproject.model.MemberLevel;
 import com.eeit109team6.finalproject.service.ILiLoInforService;
+import com.eeit109team6.finalproject.service.IMemberHeadShotService;
 import com.eeit109team6.finalproject.service.IMemberLevelService;
 import com.eeit109team6.finalproject.service.IMemberService;
 
@@ -63,6 +65,12 @@ public class MemberController {
 	ServletContext context;
 	ILiLoInforService LiLoInforService;
 	IMemberLevelService IMemberLevelService;
+	IMemberHeadShotService MhsService;
+
+	@Autowired
+	public void setMhsService(IMemberHeadShotService mhsService) {
+		MhsService = mhsService;
+	}
 
 	@Autowired
 	public void setIMemberLevelService(IMemberLevelService iMemberLevelService) {
@@ -145,6 +153,14 @@ public class MemberController {
 		Integer memberId = MemService.add(mem);
 		String email = null;
 		String pwd = null;
+
+		Member memberForHS = MemService.findById(memberId);
+
+		MemberHeadShot mhs = new MemberHeadShot();
+		mhs.setMember(memberForHS);
+		mhs.setHeadshotname(createtime + memberimg.getOriginalFilename());
+
+		MhsService.add(mhs);
 
 		Path p = Paths.get("C:/memberImages"); // 路徑設定
 

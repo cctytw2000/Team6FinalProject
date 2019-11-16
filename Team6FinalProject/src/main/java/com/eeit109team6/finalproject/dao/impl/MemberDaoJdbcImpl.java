@@ -83,6 +83,15 @@ public class MemberDaoJdbcImpl implements IMemberDao {
 	}
 
 	@Override
+	public Member findById(Integer id) {
+
+		Member member = (Member) sessionFactory.getCurrentSession().get(Member.class, id);
+
+		return member;
+
+	}
+
+	@Override
 	public Member findByAccount(Member m) {
 
 		Query query = sessionFactory.getCurrentSession().createQuery("from Member where account = ?1 ");

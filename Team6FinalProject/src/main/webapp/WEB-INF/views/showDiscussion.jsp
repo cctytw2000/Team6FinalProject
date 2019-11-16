@@ -48,7 +48,7 @@
 								<!-- 								</tr> -->
 								<c:forEach var='boardType' items="${boardTypeList}">
 
-									<tr class="row">
+									<tr class="row" style="margin-bottom: 15px;">
 
 										<td class="col-md-5"><img alt="${boardType.boardName}"
 											src='<c:url value='/Images/board.png' />'></td>
