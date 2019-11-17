@@ -9,12 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
-import com.eeit109team6.finalproject.model.Activity;
-import com.eeit109team6.finalproject.model.ArticlePicture;
-import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
-import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class NewsDaoImpl implements INewsDao {
@@ -76,12 +72,6 @@ public class NewsDaoImpl implements INewsDao {
 	}
 
 	@Override
-	public void addArticlePicture(ArticlePicture articlePicture) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(articlePicture);
-	}
-	
-	@Override
 	public List<News> getAllNews() {
 		String hql = "FROM News";
 		List<News> list = new ArrayList<>();
@@ -91,28 +81,60 @@ public class NewsDaoImpl implements INewsDao {
 	}
 
 	@Override
-	public void deleteNewsShow(int newsId) {
+	public void deleteNewsShow(Integer newsId) {
 		Session session = sessionFactory.getCurrentSession();
 		News news = session.get(News.class, newsId);
 		news.setIsVisable(false);
 		session.update(news);
 	}
-	
+
 	@Override
-	public void reopenNews(int newsId) {
+	public void reopenNews(Integer newsId) {
 		Session session = sessionFactory.getCurrentSession();
 		News news = session.get(News.class, newsId);
 		news.setIsVisable(true);
-		session.update(news);		
+		session.update(news);
 	}
-//====================================================未完成===================================================	
+
+	@Override
+	public List<News> getAllNewsByTime() {
+		String hql = "FROM News ORDER BY newsId DESC";
+		List<News> list = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
 	
 	@Override
-	public void updateNewsById(int newsId) {
-		// TODO Auto-generated method stub
-
+	public News getNewsById(Integer newsId) {
+		Session session = sessionFactory.getCurrentSession();
+		News news = session.get(News.class, newsId);
+		return news;
+	}
+	
+	@Override
+	public void updateNewsById(News news) {
+		Session session = sessionFactory.getCurrentSession();
+		session.clear();
+		session.update(news);
 	}
 
+	@Override
+	public List<News> getAllNewsByViews() {
+		String hql = "FROM News ORDER BY Views DESC";
+		List<News> list = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	
+	
+//====================================================未完成===================================================	
+
+	
+
+	
 	
 
 }

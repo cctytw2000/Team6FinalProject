@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IActivityDao;
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
-import com.eeit109team6.finalproject.model.Game;
-import com.eeit109team6.finalproject.model.GameType;
 
 @Repository
 public class ActivityDaoImpl implements IActivityDao {

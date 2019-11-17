@@ -15,9 +15,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "game")
 public class Game {
-
+	@JsonIgnore
 	@Transient
 	private Integer gameType_;
+	@JsonIgnore
 	@Transient
 	private Integer newsType_;
 
@@ -31,7 +32,6 @@ public class Game {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GAMETYPEID")
-	@JsonIgnore
 	private GameType gameType;
 
 	public Game() {

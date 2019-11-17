@@ -1,8 +1,14 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +16,18 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
-import com.eeit109team6.finalproject.model.ArticlePicture;
+import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.Member;
@@ -35,7 +46,6 @@ import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.IGameService;
 import com.eeit109team6.finalproject.service.INewsService;
-import com.eeit109team6.finalproject.service.impl.NewsServiceImpl;
 
 @Controller
 public class NewsController {
@@ -102,7 +112,7 @@ public class NewsController {
 	}
 
 	// 取得所有消息類別的json格式
-	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", produces = "application/json")
 	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
 		return newsService.getAllNewsTypes();
 	}
@@ -115,9 +125,10 @@ public class NewsController {
 		return "addNews";
 	}
 
-	// 新增消息資料--> 導向上傳圖片頁面 addArticlePicture.jsp
+	// 新增消息資料--> 導向消息後台newsBack.jsp
 	@RequestMapping(value = "/newsBack/addNews1", method = RequestMethod.POST)
-	public String processAddNewNewsForm(HttpServletRequest request, HttpSession session) throws ParseException {
+	public String processAddNewNewsForm(@RequestParam("newsImage") MultipartFile newsImage, HttpServletRequest request,
+			HttpSession session) throws ParseException {
 		News news = new News();
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -134,7 +145,6 @@ public class NewsController {
 			news.setActivity(activityService.getActivityById(Integer.parseInt(request.getParameter("activity"))));
 		}
 		news.setTitle(request.getParameter("title"));
-		System.out.println(news.getTitle());
 		news.setArticle(request.getParameter("article"));
 		if (request.getParameter("isVisable") == null) {
 
@@ -144,37 +154,22 @@ public class NewsController {
 			news.setIsVisable(false);
 		}
 
-		session.setAttribute("addNews", news);
-
-		return "addArticlePicture";
-	}
-
-	// 新增消息圖片--> 導向消息後台newsBack.jsp
-	@RequestMapping(value = "/newsBack/addArticlePicture", method = RequestMethod.POST)
-	public String getAddNewPicturesForm(@RequestParam("newsImage") MultipartFile newsImage, HttpServletRequest request,
-			HttpSession session) {
-		News news = (News) session.getAttribute("addNews");
-		newsService.addNews(news);
-//		System.out.println(news.getTitle());
-		ArticlePicture articlePicture = new ArticlePicture();
-
 //		測試上傳圖片
+		System.out.println("newsImage=" + newsImage);
 		String originalFilename = newsImage.getOriginalFilename();
 		if (newsImage != null && !newsImage.isEmpty()) {
 			try {
 				byte[] b = newsImage.getBytes();
 				Blob blob = new SerialBlob(b);
-				articlePicture.setPicture(blob);
-				articlePicture.setNews(news);
-				newsService.addArticlePicture(articlePicture);
+				news.setPicture(blob);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
 			}
 		}
-		System.out.println("img=" + articlePicture.getNewsImage());
 
-		session.removeAttribute("addNews");
+		newsService.addNews(news);
+
 		return "redirect:/newsBack";
 	}
 
@@ -195,6 +190,70 @@ public class NewsController {
 		model.addAttribute("news", news);
 		return "redirect:/newsBack";
 	}
+
+	// 讀取圖片
+	@RequestMapping(value = "/getNewsPicture/{newsid}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getPicture(HttpServletResponse resp, @PathVariable Integer newsid) {
+		String filePath = "resources/images/NoImage.jpg";
+		byte[] media = null;
+		HttpHeaders headers = new HttpHeaders();
+		int len = 0;
+		News news = newsService.getNewsById(newsid);
+		if (news != null) {
+			Blob blob = news.getPicture();
+			if (blob != null) { // 資料庫有圖片
+				try {
+					len = (int) blob.length();
+					media = blob.getBytes(1, len);
+				} catch (SQLException e) {
+					throw new RuntimeException("ProductController的getPicture()發生SQLException:" + e.getMessage());
+				}
+			} else { // 資料庫沒圖片
+				media = toByteArray(filePath);
+			}
+		}
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		return responseEntity;
+	}
+
+	// 讀取圖片
+	private byte[] toByteArray(String filePath) {
+		byte[] b = null;
+		String realPath = context.getRealPath(filePath);
+		try {
+			File file = new File(realPath);
+			long size = file.length();
+			b = new byte[(int) size];
+			InputStream fis = context.getResourceAsStream(filePath);
+			fis.read(b);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+	
+	// 用ajax給viewsx欄位加一
+		@RequestMapping(value = "/countForNews", method = RequestMethod.POST)
+		public void countForNews(@RequestParam("newsId") Integer newsId, @RequestParam("count") Integer views) {
+//			System.out.println("newsId=" + newsId);
+//			System.out.println("views=" + views);
+			News news = newsService.getNewsById(newsId);
+//			System.out.println("views2="+news.getViews());
+			Integer i =  news.getViews();
+			if(i == null) {
+				i = 0;
+				news.setViews(i + views);
+//				System.out.println("views3="+news.getViews());
+			} else {
+				news.setViews(i + views);
+//				System.out.println("views4="+news.getViews());
+			}
+			newsService.updateNewsById(news);
+			
+		}
 
 //========================================未完成========================================
 
@@ -260,5 +319,39 @@ public class NewsController {
 
 		return "newsBack";
 	}
+
+	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
+	@RequestMapping("/newsPage")
+	public String newsPage(Model model) {
+		List<News> newsList = newsService.getAllNewsByTime();
+		model.addAttribute("newsList", newsList);
+		return "newsPage";
+	}
+
+	// 取得所有消息的json格式(某部分東西會取不到!!!!!)
+	@RequestMapping(value = "/searchNewsByAjax.json")
+	public String searchNewsByAjax(Model model) {
+		ArrayList<News> news = (ArrayList<News>) newsService.getAllNewsByTime();
+		model.addAttribute("newsList", news);
+		ArrayList<News> list = (ArrayList<News>) newsService.getAllNewsByViews();
+		model.addAttribute("newses", list);
+		return "newsPage";
+	}
+
+	// 查詢單筆消息詳細資料--> news.jsp
+	@RequestMapping("/newsDetail")
+	public String getProductById(@RequestParam("newsId") Integer newsId, Model model, HttpSession session) {
+		List<News> list = newsService.getAllNewsByViews();
+		session.setAttribute("newses", list);
+		News news = newsService.getNewsById(newsId);
+		model.addAttribute("news", news);
+
+//			List<Comment> comment = service.getCommentById(game_id);
+//			model.addAttribute("comments", comment);
+
+		return "newsDetail";
+	}
+
+	
 
 }

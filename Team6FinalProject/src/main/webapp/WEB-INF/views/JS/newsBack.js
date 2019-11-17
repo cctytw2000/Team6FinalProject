@@ -103,9 +103,7 @@ function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,pub
 // alert(gameTypeName)
 	let html;
 	$.ajax({
-		type : "POST",
 		url : "newsBack/searchGameTypeByAjax",
-		dataType : "json",
 		success : function(data) {
 			const gameTypeIdList = Object.values(data).map(item => item.gameTypeId);
 			const gameTypeNameList = Object.values(data).map(item => item.gameTypeName);
@@ -171,9 +169,7 @@ function updateActivityOne(activityId, activityName,activityTypeId,activityTypeN
 // alert(activityTypeName)
 	let html;
 	$.ajax({
-		type : "POST",
 		url : "newsBack/searchActivityTypeByAjax",
-		dataType : "json",
 		success : function(data) {
 			const activityTypeIdList = Object.values(data).map(item => item.activityTypeId);
 			const activityTypeNameList = Object.values(data).map(item => item.activityTypeName);
@@ -239,9 +235,7 @@ function updateActivityMore(activityId, activityName,activityTypeId,activityType
 // alert(activityTypeName)
 	let html;
 	$.ajax({
-		type : "POST",
 		url : "newsBack/searchActivityTypeByAjax",
-		dataType : "json",
 		success : function(data) {
 			const activityTypeIdList = Object.values(data).map(item => item.activityTypeId);
 			const activityTypeNameList = Object.values(data).map(item => item.activityTypeName);

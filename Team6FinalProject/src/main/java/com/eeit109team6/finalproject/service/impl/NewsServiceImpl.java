@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
-import com.eeit109team6.finalproject.model.ArticlePicture;
-import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -67,34 +65,52 @@ public class NewsServiceImpl implements INewsService{
 	
 	@Transactional
 	@Override
-	public void addArticlePicture(ArticlePicture articlePicture) {
-		dao.addArticlePicture(articlePicture);		
-	}
-	
-	@Transactional
-	@Override
 	public List<News> getAllNews() {
 		return dao.getAllNews();
 	}
 	
 	@Transactional
 	@Override
-	public void deleteNewsShow(int newsId) {
+	public void deleteNewsShow(Integer newsId) {
 		dao.deleteNewsShow(newsId);
 	}
 
 	@Transactional
 	@Override
-	public void reopenNews(int newsId) {
+	public void reopenNews(Integer newsId) {
 		dao.reopenNews(newsId);		
+	}
+	
+	@Transactional
+	@Override
+	public List<News> getAllNewsByTime() {
+		return dao.getAllNewsByTime();
+	}
+	
+	@Transactional
+	@Override
+	public News getNewsById(Integer newsId) {
+		return dao.getNewsById(newsId);
+	}
+	
+	@Transactional
+	@Override
+	public void updateNewsById(News news) {
+		dao.updateNewsById(news);
+	}
+
+	@Transactional
+	@Override
+	public List<News> getAllNewsByViews() {
+		return dao.getAllNewsByViews();
 	}
 
 //====================================================未完成====================================================
 
-	@Override
-	public void updateNewsById(News news) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
+
+
+	
 
 }

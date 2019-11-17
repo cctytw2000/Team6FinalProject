@@ -14,24 +14,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="newstype")
+@Table(name = "newstype")
 public class NewsType {
 
 	@Id
-	@Column(name="NEWSTYPEID")
+	@Column(name = "NEWSTYPEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsTypeId;
-	@Column(name="NEWSTYPENAME", columnDefinition = "nvarchar")
+	@Column(name = "NEWSTYPENAME", columnDefinition = "nvarchar")
 	private String newsTypeName;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsType", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "newsType", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Set<News> newses= new HashSet<News>();
-	
-	public NewsType() {
-	}
+	private Set<News> newses = new HashSet<News>();
 
 	public Integer getNewsTypeId() {
 		return newsTypeId;
@@ -48,7 +45,7 @@ public class NewsType {
 	public void setNewsTypeName(String newsTypeName) {
 		this.newsTypeName = newsTypeName;
 	}
-	
+
 	public Set<News> getNewses() {
 		return newses;
 	}
@@ -56,7 +53,5 @@ public class NewsType {
 	public void setNewses(Set<News> newses) {
 		this.newses = newses;
 	}
-	
-	
 
 }
