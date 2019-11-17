@@ -6,8 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.model.MovieInfo;
-import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.dao.IMovieDao;
 
 
@@ -22,7 +23,7 @@ public class MovieDaoImpl implements IMovieDao{
 		this.factory = factory;
 	}
 	
-	
+						//	DONE
 	@Override
 	public void addMovie(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
@@ -38,18 +39,28 @@ public class MovieDaoImpl implements IMovieDao{
 	}
 						//	DONE
 	@Override
-	public void updateMovieInfoById(MovieInfo movieinfo) {
+	public void updateMovieInfoById(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
-		session.update(movieinfo);	
-		session.clear();
-		session.update(movieinfo);	
+		session.update(movieInfo);	
+//		factory.getCurrentSession().update(movieInfo);
+//		session.clear();
+//		session.update(movieInfo);	
 	}
 	
+//	@Override
+//	public void updateViews(Integer boardId) {
+//
+//		Discussion discussion = factory.getCurrentSession().get(Discussion.class, boardId);
+//		discussion.setViews(discussion.getViews() + 1);
+//		factory.getCurrentSession().update(discussion);
+//	}
+	
 	@Override
-	public void getMovieInfoByMovieID(int movie_ID) {
+	public MovieInfo getMovieInfoByMovieID(Integer movie_ID) {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieInfo = session.get(MovieInfo.class, movie_ID);
-		session.save(movieInfo);
+//		session.save(movieInfo);
+		return (MovieInfo) movieInfo;
 	}
 						//	DONE
 	@Override

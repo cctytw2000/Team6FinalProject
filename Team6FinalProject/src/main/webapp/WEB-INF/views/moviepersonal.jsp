@@ -113,9 +113,11 @@
 									<p>${allmovies.movie_content}</p>
 									<!-- Time -->
 									<p>${allmovies.date}</p>
-									<a href="moviepersonal/updateMovie" class="commentUpdate">Update</a>
-
-									<a href="moviepersonal/deleteMovie" class="commentDelete">Delete</a>
+									<a href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"  class="commentUpdate" >Update</a>
+									<!-- href="moviepersonal/updateMovie" -->
+									
+									<%-- onclick="window.location.href='moviepersonal/updateMovie?movie_ID=${allmovies.movie_ID }'" --%>
+									<a href="moviepersonal/deleteMovie?movie_ID=${allmovies.movie_ID }" class="commentDelete">Delete</a>
 								</div>
 							</div>
 						</div>
@@ -170,51 +172,6 @@
 			</div>
 			<!-- New Video 新增表單 End  ROW -->
 
-
-			<!-- Update Video 更改表單   ROW -->
-			<div class="row">
-
-				<!-- New Video panel 新增內容 -->
-				<div class="col-md-6">
-
-
-					<!-- tournament-item -->
-					<div class="tournament-item mb-4 mb-lg-0">
-
-						<!-- ti-content -->
-						<div class="ti-content">
-
-							<!-- 	ti-text-form -->
-							<div class="ti-text-form" id="addMovie">
-
-								<!-- action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
-								<form style="background-color: white" method="POST"
-									action="moviepersonal/addMovie" enctype="multipart/form-data">
-									<p>
-										影片標題: <input name="movie_name" type="text" size="50px" />
-									<p>
-										內文描述:
-										<textarea name="movie_content"
-											style="width: 400px; height: 200px;"></textarea>
-									<p>
-										選則檔案: <input type="file" name="video_file"><br />
-									<p>
-										<input type="submit" value="送出"><br />
-								</form>
-							</div>
-							<!-- 	ti-text-form -->
-
-						</div>
-						<!-- ti-content -->
-
-					</div>
-					<!-- 	tournament-item End  -->
-
-				</div>
-				<!-- New Video panel 新增內容 End  -->
-
-			</div>
-			<!-- Update Video 更改表單 End  ROW -->
 		</div>
 		<!-- div center End-->
 

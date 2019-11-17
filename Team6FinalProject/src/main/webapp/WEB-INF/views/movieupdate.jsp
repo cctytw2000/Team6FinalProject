@@ -45,23 +45,28 @@
 						<div class="tournament-item mb-4 mb-lg-0">
 
 							<!-- ti-content -->
-							<div class="ti-content">
+							<div class="ti-content" >
 
 								<!-- ti-text-form -->
-								<div class="ti-text-form" id="addMovie">
+								<div class="ti-text-form" >
+								<!-- id="updateMovie" -->
 									<form style="background-color: white" method="POST"
-										action="movieupdate/update" enctype="multipart/form-data">
+										action="updateMovie" enctype="multipart/form-data">
+										<!-- 	method="POST" 對應 controller 的@RequestMapping( method = RequestMethod.POST) -->
+										<!--    action="movieupdate/update" 對應 controller 的@RequestMapping(  value = "/moviepersonal/addMovie" ) -->
+										<p type="hidden" name="movie_ID" value="${movieInfo.movie_ID }">
+										
 										<p>
 											影片標題: <input name="movie_name" type="text" size="50px"
-												placeholder="${movieInfo.name }" />
+												value="${movieInfo.name }" />
 										<p>
 											內文描述:
 											<textarea name="movie_content"
 												style="width: 400px; height: 200px;"
-												placeholder="${movieInfo.movie_content}"></textarea>
+												>${movieInfo.movie_content}</textarea>
 										<p>
 											選則檔案: <input type="file" name="video_file"
-												placeholder="${movieInfo.location_Test }"><br />
+												value="${movieInfo.location_Test }"><br />
 										<p>
 											<input type="submit" value="送出"><br />
 									</form>

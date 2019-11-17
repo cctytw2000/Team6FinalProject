@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletContext;
@@ -61,7 +62,7 @@ public class MovieController {
 	@RequestMapping("/moviepersonal")
 	public String addMovie(Model model, HttpSession session, MovieInfo movieinfo) {
 		
-		System.out.println("---------------------------------  (\"/moviepersonal\")         moviepersonal------------------------------");
+		System.out.println("---------------------------------  (\"/moviepersonal\")         moviepersonal.jsp------------------------------");
 		List<MovieInfo> list = service.getMovies();
 		model.addAttribute("allmovies", list);
 		
@@ -69,12 +70,13 @@ public class MovieController {
 		
 //		測試用
 		Member member = (Member)session.getAttribute("mem");
-		System.out.println("session.getAttribute(\"mem\")==============================="+session.getAttribute("mem"));
-		System.out.println("member======================================================"+member);
+//		System.out.println("session.getAttribute(\"mem\")==============================="+session.getAttribute("mem"));
+//		System.out.println("member======================================================"+member);
 		System.out.println("member.getMember_id()======================================="+member.getMember_id());
 		System.out.println("member.getAccount()========================================="+member.getAccount());
 		System.out.println("member.getUsername()========================================"+member.getUsername());
-
+		System.out.println("member.getPassword()========================================"+member.getPassword());
+		
 		return "moviepersonal";
 
 	}
@@ -86,7 +88,8 @@ public class MovieController {
 			@RequestParam("movie_name") String movie_name,
 			@RequestParam("movie_content") String movie_content,
 			@RequestParam("video_file") MultipartFile video_file,
-			String videoname,HttpSession session
+			String videoname,
+			HttpSession session
 			) {
 
 		System.out.println("-----------------------------(\"/moviepersonal/addMovie\")     addMovie----------------------------");
@@ -147,32 +150,113 @@ public class MovieController {
 
 	}
 	// moviepersonal.jsp UpdateClick --> /moviepersonal/updateMovie --> movieupdate.jsp
-			@RequestMapping("/moviepersonal/updateMovie")
+			@RequestMapping("/moviepersonal/viewUpdateMovie")
 			public String selectOneMovie(Model model, HttpSession session, MovieInfo movieinfo, @RequestParam("movie_ID") Integer movie_id) {
 				
-				System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
-				 service.getMovieInfoByMovieID(movie_id);
-				
+				System.out.println("----------------\"/moviepersonal/viewUpdateMovie\"   -->  movieupdate.jsp---------------");
+				MovieInfo movieInfo = service.getMovieInfoByMovieID(movie_id);
+				List<MovieInfo> list = new ArrayList<>();
+
 //				List<MovieInfo> list = service.getMovies();
+				list.add(movieInfo);
+
+
+				model.addAttribute("movieInfo", list);
 				
-//				model.addAttribute("movieInfo", list);
-				
-//				System.out.println(list.);
-//				System.out.println(movieInfo);
-//				System.out.println();
-//				System.out.println();
-//				System.out.println();
-				
-				
+				System.out.println("movieInfo.getMovie_ID() ============="+movieInfo.getMovie_ID());
+				System.out.println("movieInfo.getName()=================="+movieInfo.getName());
+				System.out.println("movieInfo.getMovie_content()========="+movieInfo.getMovie_content());
+//				System.out.println("movieInfo.getMember()================"+movieInfo.getMember());
+//				System.out.println("movieInfo.getDate()=================="+movieInfo.getDate());
+
 				return "movieupdate";
 			
 			}
 	
 	// movieupdate.jsp SubmitClick --> /movieupdate/update --> redirect:/moviepersonal --> moviepersonal.jsp
-		@RequestMapping("/movieupdate/update")
-		public String updateMovie(Model model, HttpSession session, MovieInfo movieinfo) {
-			System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
+		@RequestMapping(value = "/moviepersonal/updateMovie", method = RequestMethod.POST)
+		public String updateMovie(
+				HttpSession session,
+				MovieInfo movieInfo,
+				@RequestParam("movie_ID") int movie_ID,
+				@RequestParam("movie_name") String movie_name,
+				@RequestParam("movie_content") String movie_content,
+				@RequestParam("video_file") MultipartFile video_file,
+				String videoname) {
+			System.out.println("----------------\"/moviepersonal/update\"    -->    \"redirect:/moviepersonal\"---------------");
+			//檢查 movieInfo
+			System.out.println("movieInfo.getMovie_ID()=========== "+movie_ID);
+			System.out.println("movieInfo.getName()=============== "+movie_name);
+			System.out.println("movieInfo.getMovie_content()====== "+movie_content);
+//			System.out.println("movieInfo.getMember()============= "+movieInfo.getMember());
+			System.out.println("movieInfo.getLocation_Test()====== "+video_file);
+			//檢查 movieInfo End
+			String path= session.getServletContext().getRealPath("/");  //找到影片上傳路徑
+			System.out.println("path============"+path+"\\WEB-INF\\views\\Movie");
+			movieInfo.setMovie_ID(movie_ID);
+			movieInfo.setName(movie_name);
+			movieInfo.setMovie_content(movie_content);
+//			movieInfo.setMember((Member) session.getAttribute("mem"));// session.getAttribute("mem") //再用 (Member) 做強轉型別
+//			movieInfo.setLocation_Test(video_file.getOriginalFilename());//設定MsSQL的檔名
+			//檢查 movieInfo Set
+			System.out.println("movieInfo.getMovie_ID()=========== "+movieInfo.getMovie_ID());
+			System.out.println("movieInfo.getName()=============== "+movieInfo.getName());
+			System.out.println("movieInfo.getMovie_content()====== "+movieInfo.getMovie_content());
+			System.out.println("movieInfo.getMember()============= "+movieInfo.getMember());
+			System.out.println("movieInfo.getLocation_Test()====== "+movieInfo.getLocation_Test());
+			//檢查 movieInfo Set End
+			
+			service.updateMovieInfoById(movieInfo);
+//			MovieInfo movieInfo = new MovieInfo();
 
+//			System.out.println(video_file.getOriginalFilename());//video_file(xxx.mp4)
+
+			//檢查 updateMovieInfoById
+			System.out.println("movieInfo.getMovie_ID()=========== "+movieInfo.getMovie_ID());
+			System.out.println("movieInfo.getName()=============== "+movieInfo.getName());
+			System.out.println("movieInfo.getMovie_content()====== "+movieInfo.getMovie_content());
+			System.out.println("movieInfo.getMember()============= "+movieInfo.getMember());
+			System.out.println("movieInfo.getLocation_Test()====== "+movieInfo.getLocation_Test());
+			//檢查 updateMovieInfoById End
+
+
+
+
+			videoname = video_file.getOriginalFilename();
+
+//			System.out.println("@RequestMapping(value = \"/moviepersonal/addMovie\")" + movieInfo);
+//
+//			service.addMovie(movieInfo);
+
+//			System.out.println("========================================="+member.getMember_id());
+//			System.out.println("========================================="+member.getUsername());
+//			System.out.println("session.getAttribute(\"mem\")========================================="+ session.getAttribute("mem") );
+			
+			
+//			if (!video_file.isEmpty()) {
+//				try {
+//					byte[] bytes = video_file.getBytes();
+//					File dir = new File(path+"\\WEB-INF\\views\\Movie");
+//					System.out.println("File dir ======== "+dir);
+//					if (!dir.exists())
+//						dir.mkdirs();
+//
+//					// Create the file on server
+//					File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+//					BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
+//					stream.write(bytes);
+//					stream.close();
+//					
+//					System.out.println("You successfully uploaded file=" + videoname); 
+//					return "redirect:/moviepersonal";
+//				} catch (Exception e) {
+//					System.out.println("You failed to upload " + videoname + " => " + e.getMessage()); 
+//					return "redirect:/moviepersonal";
+//				}
+//			} else {
+//				System.out.println( "You failed to upload " + videoname + " because the file was empty.");
+//				return "redirect:/moviepersonal";
+//			}
 
 //			List<MovieInfo> list = service.getMovies();
 //			model.addAttribute("allmovies", list);
@@ -182,10 +266,11 @@ public class MovieController {
 		
 		// moviepersonal.jsp DeleteClick --> moviepersonal.jsp
 				@RequestMapping("/moviepersonal/deleteMovie")
-				public String deleteMovie(Model model, HttpSession session, MovieInfo movieinfo) {
+				public String deleteMovie(Model model, HttpSession session, MovieInfo movieinfo,@RequestParam("movie_ID") int movie_ID) {
 					System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
-					List<MovieInfo> list = service.getMovies();
-					model.addAttribute("allmovies", list);
+					service.deleteMovieInfoById(movie_ID);
+//					List<MovieInfo> list = service.getMovies();
+//					model.addAttribute("allmovies", list);
 					return "redirect:/moviepersonal";
 				}
 }

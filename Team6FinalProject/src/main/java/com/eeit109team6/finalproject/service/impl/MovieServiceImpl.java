@@ -38,8 +38,8 @@ public class MovieServiceImpl implements IMovieService{
 	}
 	@Transactional
 	@Override
-	public void getMovieInfoByMovieID(int movie_ID) {
-		dao.getMovieInfoByMovieID(movie_ID);
+	public MovieInfo getMovieInfoByMovieID(Integer movie_ID) {
+		return dao.getMovieInfoByMovieID(movie_ID);
 	} 
 	@Transactional
 	@Override
