@@ -13,4 +13,6 @@ public interface IMemberHeadShotService {
 	ArrayList<MemberHeadShot> findAll();
 
 	ArrayList<MemberHeadShot> findByMemberId(Integer id);
+
+	MemberHeadShot findById(Integer id);
 }
