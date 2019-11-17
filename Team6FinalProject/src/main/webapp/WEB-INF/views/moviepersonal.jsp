@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<!-- movieindex.jsp -->
+<!-- moviepersonal.jsp -->
 <html>
 
 <head>
@@ -111,6 +111,8 @@
 									<h6>${allmovies.location_Test }</h6>
 									<!--內文 -->
 									<p>${allmovies.movie_content}</p>
+									<!-- Time -->
+									<p>${allmovies.date}</p>
 									<a href="moviepersonal/updateMovie" class="commentUpdate">Update</a>
 
 									<a href="moviepersonal/deleteMovie" class="commentDelete">Delete</a>

@@ -45,11 +45,11 @@ public class MovieController {
 	}
 
 	
-	// movieindex 撈出Page Section 的影片
+	// 影片區Click  -->  "/movies"  --> movieindex.jsp
 	@RequestMapping("/movies")
 	public String findMovies(Model model, HttpSession session) {
 		
-		System.out.println("----------------@RequestMapping(\"/movies\")     findMovies---------------");
+		System.out.println("------------------------------------@(\"/movies\")     findMovies-----------------------------------");
 		List<MovieInfo> list = service.getMovieInfoByOwnerID();
 		model.addAttribute("movies", list);
 		return "movieindex";
@@ -57,22 +57,26 @@ public class MovieController {
 	}
 
 	
-	// 後台進入 影片管理頁面
+	// 後台Click  -->  影片管理  --> "/moviepersonal" --> moviepersonal.jsp
 	@RequestMapping("/moviepersonal")
 	public String addMovie(Model model, HttpSession session, MovieInfo movieinfo) {
-		Member member = (Member)session.getAttribute("mem");
-		System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
+		
+		System.out.println("---------------------------------  (\"/moviepersonal\")         moviepersonal------------------------------");
 		List<MovieInfo> list = service.getMovies();
 		model.addAttribute("allmovies", list);
-//		System.out.println("========================================="+member.getMember_id());
-//		System.out.println("========================================="+member.getAccount());
-//		System.out.println("========================================="+member.getHeadshot());
-//		System.out.println("========================================="+member.getPassword());
-//		System.out.println("========================================="+member.getType());
-//		System.out.println("========================================="+member.getUsername());
-//		System.out.println("========================================="+member.getMemberdetail());
-//		System.out.println("========================================="+member.getMemberlevel());
+		
+		
+		
+//		測試用
+		Member member = (Member)session.getAttribute("mem");
+		System.out.println("session.getAttribute(\"mem\")==============================="+session.getAttribute("mem"));
+		System.out.println("member======================================================"+member);
+		System.out.println("member.getMember_id()======================================="+member.getMember_id());
+		System.out.println("member.getAccount()========================================="+member.getAccount());
+		System.out.println("member.getUsername()========================================"+member.getUsername());
+
 		return "moviepersonal";
+
 	}
 
 
@@ -85,22 +89,23 @@ public class MovieController {
 			String videoname,HttpSession session
 			) {
 
-		System.out.println("----------------@RequestMapping(value = \"/moviepersonal/addMovie\"     addMovie---------------");
-		String path= session.getServletContext().getRealPath("/");
-
+		System.out.println("-----------------------------(\"/moviepersonal/addMovie\")     addMovie----------------------------");
+		
+		String path= session.getServletContext().getRealPath("/");  //找到影片上傳路徑
 		System.out.println("path============"+path+"\\WEB-INF\\views\\Movie");
+		
 		
 		MovieInfo movieInfo = new MovieInfo();
 
-		System.out.println(video_file.getOriginalFilename());
+//		System.out.println(video_file.getOriginalFilename());//video_file(xxx.mp4)
 
 		movieInfo.setName(movie_name);
 		movieInfo.setMovie_content(movie_content);
-		movieInfo.setMember((Member) session.getAttribute("mem"));
+		movieInfo.setMember((Member) session.getAttribute("mem"));// session.getAttribute("mem") //再用 (Member) 做強轉型別
 		movieInfo.setLocation_Test(video_file.getOriginalFilename());
-//		movieInfo.setOwner_ID(member.getMember_id());
 
-//      session.getAttribute("mem")
+
+
 
 		videoname = video_file.getOriginalFilename();
 
@@ -144,18 +149,33 @@ public class MovieController {
 	// moviepersonal.jsp UpdateClick --> /moviepersonal/updateMovie --> movieupdate.jsp
 			@RequestMapping("/moviepersonal/updateMovie")
 			public String selectOneMovie(Model model, HttpSession session, MovieInfo movieinfo, @RequestParam("movie_ID") Integer movie_id) {
+				
 				System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
-				List<MovieInfo> list = service.getMovies();
-				model.addAttribute("movieInfo", list);
+				 service.getMovieInfoByMovieID(movie_id);
+				
+//				List<MovieInfo> list = service.getMovies();
+				
+//				model.addAttribute("movieInfo", list);
+				
+//				System.out.println(list.);
+//				System.out.println(movieInfo);
+//				System.out.println();
+//				System.out.println();
+//				System.out.println();
+				
+				
 				return "movieupdate";
+			
 			}
 	
 	// movieupdate.jsp SubmitClick --> /movieupdate/update --> redirect:/moviepersonal --> moviepersonal.jsp
 		@RequestMapping("/movieupdate/update")
 		public String updateMovie(Model model, HttpSession session, MovieInfo movieinfo) {
 			System.out.println("----------------@RequestMapping(\"/moviepersonal\")     moviepersonal---------------");
-			List<MovieInfo> list = service.getMovies();
-			model.addAttribute("allmovies", list);
+
+
+//			List<MovieInfo> list = service.getMovies();
+//			model.addAttribute("allmovies", list);
 			return "redirect:/moviepersonal";
 		}
 	

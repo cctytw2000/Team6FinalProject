@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<!-- movieindex.jsp -->
+<!-- movieupdate.jsp -->
 <html>
 
 <head>
@@ -47,7 +47,7 @@
 							<!-- ti-content -->
 							<div class="ti-content">
 
-								<!-- 	ti-text-form -->
+								<!-- ti-text-form -->
 								<div class="ti-text-form" id="addMovie">
 									<form style="background-color: white" method="POST"
 										action="movieupdate/update" enctype="multipart/form-data">
