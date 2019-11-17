@@ -54,7 +54,8 @@
 										action="updateMovie" enctype="multipart/form-data">
 										<!-- 	method="POST" 對應 controller 的@RequestMapping( method = RequestMethod.POST) -->
 										<!--    action="movieupdate/update" 對應 controller 的@RequestMapping(  value = "/moviepersonal/addMovie" ) -->
-										<p type="hidden" name="movie_ID" value="${movieInfo.movie_ID }">
+										<p  name="movie_ID" value="${movieInfo.movie_ID }" />
+										<!-- type="hidden" -->
 										
 										<p>
 											影片標題: <input name="movie_name" type="text" size="50px"
@@ -65,8 +66,7 @@
 												style="width: 400px; height: 200px;"
 												>${movieInfo.movie_content}</textarea>
 										<p>
-											選則檔案: <input type="file" name="video_file"
-												value="${movieInfo.location_Test }"><br />
+											選則檔案: <input type="file" name="video_file" value="${movieInfo.location_Test }" /><br />
 										<p>
 											<input type="submit" value="送出"><br />
 									</form>

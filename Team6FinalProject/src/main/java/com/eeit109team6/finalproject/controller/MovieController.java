@@ -178,10 +178,10 @@ public class MovieController {
 		public String updateMovie(
 				HttpSession session,
 				MovieInfo movieInfo,
-				@RequestParam("movie_ID") int movie_ID,
-				@RequestParam("movie_name") String movie_name,
-				@RequestParam("movie_content") String movie_content,
-				@RequestParam("video_file") MultipartFile video_file,
+				int movie_ID,
+				String movie_name,
+				String movie_content,
+				MultipartFile video_file,
 				String videoname) {
 			System.out.println("----------------\"/moviepersonal/update\"    -->    \"redirect:/moviepersonal\"---------------");
 			//檢查 movieInfo
