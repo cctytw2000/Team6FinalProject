@@ -15,9 +15,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "activity")
 public class Activity {
-
+	@JsonIgnore
 	@Transient
 	private Integer activityType_;
+	@JsonIgnore
 	@Transient
 	private Integer newsType_;
 
@@ -32,7 +33,6 @@ public class Activity {
 	private String location;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACTIVITYTYPEID")
-	@JsonIgnore
 	private ActivityType activityType;
 
 	public Activity() {

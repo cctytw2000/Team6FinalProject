@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "gametype")
 public class GameType {
@@ -23,8 +25,8 @@ public class GameType {
 	@Column(name = "GAMETYPENAME")
 	private String gameTypeName;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gameType", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Game> games = new HashSet<Game>();
-	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gameType", cascade = CascadeType.ALL)
 	private Set<AD> ADs= new HashSet<AD>();

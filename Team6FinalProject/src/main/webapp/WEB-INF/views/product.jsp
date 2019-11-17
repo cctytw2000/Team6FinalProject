@@ -57,7 +57,7 @@ color:red
 		style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
 		<section class="container">
 			<div class="row" style="padding: 50px 15%">
-				<img width='200' height='200'
+				<img width='200' height='200' style="float:left"
 					src="<c:url value='/getPicture/${product.game_id}'/>" />
 				<h5 style="color: white; font-size: 23px">${product.name }
 					<div style="padding-left: 15px; margin-top: 30px">

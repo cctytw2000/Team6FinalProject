@@ -256,7 +256,7 @@
 							<li class="nav-item active"><a class="nav-link"
 								href="${pageContext.request.contextPath}">首頁<span
 									class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="#">最新消息</a></li>
+							<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/newsPage">最新消息</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="${pageContext.request.contextPath}/discussion">遊戲討論區</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -364,7 +364,7 @@
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item active"><a class="nav-link" href="#">首頁<span
 									class="sr-only">(current)</span></a></li>
-							<li class="nav-item"><a class="nav-link" href="#">最新消息</a></li>
+							<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/newsPage">最新消息</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="${pageContext.request.contextPath}/discussion">遊戲討論區</a></li>
 							<li class="nav-item"><a class="nav-link"

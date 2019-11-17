@@ -1,32 +1,23 @@
 package com.eeit109team6.finalproject.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.eeit109team6.finalproject.model.ArticlePicture;
 import com.eeit109team6.finalproject.model.HomeMovie;
-import com.eeit109team6.finalproject.model.LiLoInfo;
-import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberDetail;
+import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IHomeMovieService;
-import com.eeit109team6.finalproject.service.IMemberService;
+import com.eeit109team6.finalproject.service.INewsService;
 import com.eeit109team6.finalproject.service.ProductService;
 
 @Controller
@@ -34,7 +25,13 @@ public class HomeController {
 //	IMemberService service;
 	ProductService service;
 	IHomeMovieService movieService;
+	INewsService newsService;
 
+	@Autowired
+	public void setNewsService(INewsService newsService) {
+		this.newsService = newsService;
+	}
+	
 	@Autowired
 	public void setService(ProductService service) {
 		this.service = service;
@@ -60,6 +57,10 @@ public class HomeController {
 		session.setAttribute("productsTop8", list);
 
 		model.addAttribute("homeMovie", home);
+		
+		List<News> newslist = newsService.getAllNewsByViews();
+		session.setAttribute("newses", newslist);
+		
 		return "home";
 	}
 

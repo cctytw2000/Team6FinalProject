@@ -33,7 +33,7 @@
 	<div class="container mt-3">
 		<h1>新增消息資料</h1>
 		<form action="${pageContext.request.contextPath}/newsBack/addNews1"
-			method="POST">
+			method="POST" enctype="multipart/form-data">
 			<p>
 			消息類別:<span id="newsType"></span>
 			<p>
@@ -53,19 +53,20 @@
 			<div class="row mb-2"></div>
 			<p>
 			
-			消息標題: <input name="title" type="text" id="title" />
+			消息標題: <input name="title" type="text" id="title" style="width:100%"/>
 			<p>
 
 				消息內容:
 				<textarea class="form-control inline" name="article" id="article"
 					rows="30" cols="100" style="resize: none;"></textarea>
 			<p>
-
+				選擇圖片:<input id="newsImage" type="file" name="newsImage" />
+			<p>
 				是否刊登: <input type="radio" name="isVisable" value="1"> 是 <input
 					type="radio" name="isVisable" value="0"> 否
 			<p>
 
-				<input type="submit" value="下一步:上傳圖片">
+				<input type="submit" value="送出">
 				<button type="button" onclick="GoBack()">取消</button>
 		</form>
 

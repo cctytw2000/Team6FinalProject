@@ -4,9 +4,7 @@ function GoBack() {
 // 製造newsType下拉式選單
 $(document).ready(function() {	
 	$.ajax({
-		type : "POST",
 		url : "searchNewsTypeByAjax",
-		dataType : "json",
 		success : function(data) {
 			const newsTypeIdList = Object.values(data).map(item => item.newsTypeId);
 			const newsTypenameList = Object.values(data).map(item => item.newsTypeName);
@@ -35,9 +33,7 @@ $(document).ready(function() {
     	var status=this.value;
     	if(status == 1){
     		$.ajax({
-    			type : "POST",
     			url : "searchGameByAjax",
-    			dataType : "json",
     			success : function(data) {
     				const gameIdList = Object.values(data).map(item => item.gameId);
     				const gameNameList = Object.values(data).map(item => item.gameName);
@@ -97,9 +93,7 @@ $(document).ready(function() {
     	var status=this.value;
     	if(status == 1){
     		$.ajax({
-    			type : "POST",
     			url : "searchActivityByAjax",
-    			dataType : "json",
     			success : function(data) {
     				const activityIdList = Object.values(data).map(item => item.activityId);
     				const activityNameList = Object.values(data).map(item => item.activityName);
