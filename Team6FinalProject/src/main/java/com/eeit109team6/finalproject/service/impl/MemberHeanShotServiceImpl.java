@@ -38,4 +38,10 @@ public class MemberHeanShotServiceImpl implements IMemberHeadShotService {
 
 		return dao.findByMemberId(id);
 	}
+
+	@Override
+	public MemberHeadShot findById(Integer id) {
+
+		return dao.findById(id);
+	}
 }

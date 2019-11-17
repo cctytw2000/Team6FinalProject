@@ -12,5 +12,7 @@ public interface IMemberHeadShotDao {
 
 	ArrayList<MemberHeadShot> findByMemberId(Integer id);
 
+	MemberHeadShot findById(Integer id);
+
 
 }

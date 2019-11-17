@@ -34,6 +34,12 @@ public class MemberHeanShotImpl implements IMemberHeadShotDao {
 	}
 
 	@Override
+	public MemberHeadShot findById(Integer id) {
+		MemberHeadShot mhs = sessionFactory.getCurrentSession().get(MemberHeadShot.class, id);
+		return mhs;
+	}
+
+	@Override
 	public ArrayList<MemberHeadShot> findByMemberId(Integer id) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from MemberHeadShot where memberId = ?1");
 		query.setParameter(1, id);

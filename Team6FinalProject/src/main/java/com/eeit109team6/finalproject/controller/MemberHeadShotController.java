@@ -21,15 +21,22 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberHeadShot;
 import com.eeit109team6.finalproject.service.IMemberHeadShotService;
+import com.eeit109team6.finalproject.service.IMemberService;
 
 @Controller
 public class MemberHeadShotController {
+	IMemberService MemService;
 
 	IMemberHeadShotService MhsService;
 
 	@Autowired
 	public void setMhsService(IMemberHeadShotService mhsService) {
 		MhsService = mhsService;
+	}
+
+	@Autowired
+	public void setMemService(IMemberService memService) {
+		MemService = memService;
 	}
 
 	// 增加照片
@@ -39,7 +46,7 @@ public class MemberHeadShotController {
 		Member mem = (Member) session.getAttribute("mem");
 		MemberHeadShot mhs = new MemberHeadShot();
 		mhs.setMember(mem);
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd HHmmssSSS");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String createtime = sf.format(new Date());
 
 		mhs.setHeadshotname(createtime + headshotImg.getOriginalFilename());
@@ -74,8 +81,20 @@ public class MemberHeadShotController {
 	public String HeadShotList(HttpSession session, Model model) {
 		Member mem = (Member) session.getAttribute("mem");
 		ArrayList<MemberHeadShot> mhs = MhsService.findByMemberId(mem.getMember_id());
-		System.out.println("mhs="+mhs.get(0).getHeadshotname());
+		System.out.println("mhs=" + mhs.get(0).getHeadshotname());
 		model.addAttribute("memberheadshots", mhs);
 		return "HeadShotList";
+	}
+
+	// 更改大頭貼
+	@RequestMapping(value = "/member/changeHeadShot", method = RequestMethod.POST)
+	public String changeHeadShot(HttpSession session, Model model, @RequestParam("id") Integer id) {
+		System.out.println("id=====" + id);
+		MemberHeadShot mhs = MhsService.findById(id);
+		Member mem = (Member) session.getAttribute("mem");
+		MemService.changeHeadshot(mhs.getHeadshotname(), mem.getMember_id());
+		Member member = MemService.findById(mem);
+		session.setAttribute("mem", member);
+		return "redirect:/member/PhotoList";
 	}
 }
