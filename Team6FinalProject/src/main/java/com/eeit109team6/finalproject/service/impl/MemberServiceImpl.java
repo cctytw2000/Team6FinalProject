@@ -27,6 +27,12 @@ public class MemberServiceImpl implements IMemberService {
 		return dao.add(m);
 	}
 
+	@Transactional
+	@Override
+	public Member findById(Integer id) {
+		return dao.findById(id);
+	}
+
 	@Override
 	public void update(Member m) {
 		// TODO Auto-generated method stub
@@ -123,6 +129,7 @@ public class MemberServiceImpl implements IMemberService {
 	public void updateLevel(Integer id, MemberLevel level) {
 		dao.updateLevel(id, level);
 	}
+
 	@Transactional
 	@Override
 	public void changeHeadshot(String file, Integer memberId) {

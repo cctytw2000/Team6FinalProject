@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.config;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-//		String url = request.getRequestURI();
-
+		String url = request.getRequestURI();
 
 		// /project/member/login
 //
@@ -47,10 +47,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 //
 //		String username = (String) session.getAttribute("username");
 //
-//		if (url.indexOf("/member/logout") > 0 && username == null) {
-//			System.out.println("url.indexOf(\"/member/logout\")" + url.indexOf("/member/logout"));
-//			System.out.println("username == null" + username == null);
-//			return false;
+		HttpSession session = request.getSession();
+		if (url.indexOf("/member/logout") > 0 && session.getAttribute("mem") == null) {
+
+			return false;
+		}
 //		}else {
 //			System.out.println("url.indexOf(\"/member/logout\")" + url.indexOf("/member/logout"));
 //			System.out.println("username == null" + username == null);

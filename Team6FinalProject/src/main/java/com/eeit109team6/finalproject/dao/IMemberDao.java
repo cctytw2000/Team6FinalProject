@@ -41,4 +41,6 @@ public interface IMemberDao {
 
 	void changeHeadshot(String file, Integer memberId);
 
+	Member findById(Integer id);
+
 }

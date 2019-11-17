@@ -38,4 +38,6 @@ public interface IMemberService {
 
 	void changeHeadshot(String file, Integer memberId);
 
+	Member findById(Integer id);
+
 }
