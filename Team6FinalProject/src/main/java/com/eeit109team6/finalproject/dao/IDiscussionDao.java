@@ -11,7 +11,7 @@ public interface IDiscussionDao {
 	List<Discussion> getArticleByBoardTypeId(Integer boardId);//取得指定看板的所有文章
 	Discussion getArticleById(int articleId);//瀏覽單筆文章
 	void addArticle(Discussion discussion);  //新增一筆文章(樓主)
-	void updateViews(Integer boardId);
+	void updateViews(Integer id);
 	
 	
 	//=================以下尚未撰寫

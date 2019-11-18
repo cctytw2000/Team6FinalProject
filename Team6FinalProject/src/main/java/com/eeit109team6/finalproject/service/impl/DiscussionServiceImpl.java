@@ -43,8 +43,8 @@ public class DiscussionServiceImpl implements IDiscussionService {
 	}
 
 	@Override
-	public void updateViews(Integer boardId) {
-		dao.updateViews(boardId);
+	public void updateViews(Integer id) {
+		dao.updateViews(id);
 
 	}
 

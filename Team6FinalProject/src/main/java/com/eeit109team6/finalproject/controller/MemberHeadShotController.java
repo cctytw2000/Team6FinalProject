@@ -41,22 +41,27 @@ public class MemberHeadShotController {
 
 	// 增加照片
 	@RequestMapping(value = "/member/addHeadShot", method = RequestMethod.POST)
-	public String addHeadShot(@RequestParam("headshotImg") MultipartFile headshotImg, HttpSession session) {
-		System.out.println("headshotImg=" + headshotImg.getOriginalFilename());
+	public String addHeadShot(@RequestParam("headshotImg") ArrayList<MultipartFile> headshotImg, HttpSession session) {
+
+		for (int i = 0; i < headshotImg.size(); i++) {
+
+	
+	
+
 		Member mem = (Member) session.getAttribute("mem");
 		MemberHeadShot mhs = new MemberHeadShot();
 		mhs.setMember(mem);
 		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String createtime = sf.format(new Date());
 
-		mhs.setHeadshotname(createtime + headshotImg.getOriginalFilename());
+		mhs.setHeadshotname(createtime + headshotImg.get(i).getOriginalFilename());
 
 		MhsService.add(mhs);
 
 		try {
-			InputStream img = headshotImg.getInputStream();
+			InputStream img = headshotImg.get(i).getInputStream();
 			File file = new File("C:\\memberImages\\" + mem.getAccount() + "_" + mem.getMember_id(),
-					mem.getUsername() + mem.getMember_id() + createtime + headshotImg.getOriginalFilename());
+					mem.getUsername() + mem.getMember_id() + createtime + headshotImg.get(i).getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] buff = new byte[1024];
 			int len;
@@ -72,7 +77,7 @@ public class MemberHeadShotController {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-
+		}
 		return "redirect:/member/PhotoList";
 	}
 
@@ -81,7 +86,7 @@ public class MemberHeadShotController {
 	public String HeadShotList(HttpSession session, Model model) {
 		Member mem = (Member) session.getAttribute("mem");
 		ArrayList<MemberHeadShot> mhs = MhsService.findByMemberId(mem.getMember_id());
-		System.out.println("mhs=" + mhs.get(0).getHeadshotname());
+//		System.out.println("mhs=" + mhs.get(0).getHeadshotname());
 		model.addAttribute("memberheadshots", mhs);
 		return "HeadShotList";
 	}
