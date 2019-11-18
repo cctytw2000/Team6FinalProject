@@ -7,6 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>最新消息</title>
+<!-- 輪播 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- //輪播 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -30,6 +40,14 @@
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- //套版用 -->
+
+<style>
+.btn-group {
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+</style>
+
 </head>
 
 <body
@@ -44,7 +62,7 @@
 				<c:forEach var="news" items="${sessionScope.newses }" begin="0"
 					end="4">
 					<div class="nt-item">
-						<span class="strategy">${news.newsType.newsTypeName }</span><a
+						<span class="strategy">${news.newsType.newsTypeName }</span> <a
 							onclick="countView(${news.newsId })"
 							href="newsDetail?newsId=${news.newsId }">${news.title }</a>
 					</div>
@@ -63,36 +81,56 @@
 					<button type="button" class="btn btn-info dropdown-toggle"
 						data-toggle="dropdown" style="margin-top: 10px">依熱門程度排序</button>
 					<div id="viewsSort" class="dropdown-menu">
-						<a class="dropdown-item" id="low" onclick="viewsSort(this.id)">由低到高</a> 
+						<a class="dropdown-item" id="low" onclick="viewsSort(this.id)">由低到高</a>
 						<a class="dropdown-item" id="High" onclick="viewsSort(this.id)">由高到低</a>
 					</div>
 				</div>
-				
+
 				<div class="btn-group">
 					<button type="button" class="btn btn-info dropdown-toggle"
 						data-toggle="dropdown" style="margin-top: 10px">依新聞分類排序</button>
 					<div id="newsTypeSort" class='dropdown-menu'></div>
 				</div>
-				
+
 				<div class="btn-group">
 					<button type="button" class="btn btn-info dropdown-toggle"
 						data-toggle="dropdown" style="margin-top: 10px">依發佈時間排序</button>
 					<div id="viewsSort" class="dropdown-menu">
-						<a class="dropdown-item" id="old" onclick="timeSort(this.id)">由舊到新</a> 
+						<a class="dropdown-item" id="old" onclick="timeSort(this.id)">由舊到新</a>
 						<a class="dropdown-item" id="new" onclick="timeSort(this.id)">由新到舊</a>
 					</div>
 				</div>
-				
+
 			</div>
 
 			<div id="newsCenter" class="col-6">
 				<table
-					style="border: none; text-align: left; color:white; width: 100%; table-layout: fixed; word-wrap: break-word;"
+					style="border: none; text-align: left; color: white; width: 100%; table-layout: fixed; word-wrap: break-word;"
 					id="newsOrderByTime">
 				</table>
 			</div>
 			<div id="newsAD" class="col-4">
-				<p style="color: white">我要放圖</p>
+				<%-- 				<img style="padding-top: 7px;padding-left: 15%" src="${pageContext.request.contextPath}/Images/AD/廣告11.PNG"> --%>
+				<div style="padding-top: 7px; padding-left: 15%" id="circleContent"
+					class="carousel slide" data-ride="carousel" data-interval="3000">
+					<ol class="carousel-indicators">
+						<li data-target="#circleContent" data-slide-to="0" class="active"></li>
+						<c:forEach varStatus="i" begin="1" end="4">
+							<li data-target="#circleContent" data-slide-to="${i.index }+1"></li>
+						</c:forEach>
+					</ol>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<a><img src="${pageContext.request.contextPath}/Images/AD/廣告1.PNG"></a>
+						</div>
+						<c:forEach varStatus="i" begin="1" end="4">
+							<div class="carousel-item">
+								<a><img
+									src="${pageContext.request.contextPath}/Images/AD/廣告${(i.index)+1 }.PNG"></a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
