@@ -226,19 +226,21 @@
 				<h2>熱門新聞</h2>
 			</div>
 			<div class="row">
-				<c:forEach var="news" items="${sessionScope.newses }" begin="0" end="3">
+				<c:forEach var="news" items="${sessionScope.newses }" varStatus="i"
+					begin="0" end="3">
 					<div class='col-lg-3 col-md-6 p-0'>
 						<div class='feature-item set-bg'
 							data-setbg="<c:url value='/getNewsPicture/${news.newsId}' />">
-							<span class='cata strategy'>${news.newsType.newsTypeName}</span>
-							<div class='fi-content text-white'>
-								<h5>
-									<a onclick='countView(${news.newsId})'
+							<span class='cata strategy'>${news.newsType.newsTypeName}</span><br>
+							<h5 class='cata text-white' style="margin-left:0">
+									<a style="font-size:20px" onclick='countView(${news.newsId})'
 										href='newsDetail?newsId=${news.newsId }'>${news.title }</a>
 								</h5>
-								<span class="test">${news.article }</span>
-								<span>...<a onclick='countView(${news.newsId})'
-										href='newsDetail?newsId=${news.newsId }'>繼續閱讀</a>
+							<div class='fi-content text-white'>
+								
+								<span id="${i.index}">${news.article}</span> <span>...<a
+									onclick='countView(${news.newsId})'
+									href='newsDetail?newsId=${news.newsId }'>繼續閱讀</a>
 								</span>
 							</div>
 						</div>

@@ -40,10 +40,12 @@
 		<div class="ln-title">熱門消息</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				<c:forEach var="news" items="${sessionScope.newses }" begin="0" end="4"> 
+				<c:forEach var="news" items="${sessionScope.newses }" begin="0"
+					end="4">
 					<div class="nt-item">
-						<span class="strategy">${news.newsType.newsTypeName }</span><a onclick="countView(${news.newsId })"
-						href="newsDetail?newsId=${news.newsId }">${news.title }</a>
+						<span class="strategy">${news.newsType.newsTypeName }</span><a
+							onclick="countView(${news.newsId })"
+							href="newsDetail?newsId=${news.newsId }">${news.title }</a>
 					</div>
 				</c:forEach>
 			</div>
@@ -54,9 +56,25 @@
 
 	<div class="container-fluid ">
 		<div class="row">
+
 			<div id="newsWhite" class="col-2">
-				<p style="color: white">我是列表欄</p>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown" style="margin-top: 10px">依新聞分類排序</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#"></a>
+					</div>
+				</div>
+
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown" style="margin-top: 10px">依熱門程度排序</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#"></a>
+					</div>
+				</div>
 			</div>
+
 			<div id="newsCenter" class="col-6">
 				<table
 					style="border: none; text-align: left; width: 100%; color: white; table-layout: fixed; word-wrap: break-word;"
