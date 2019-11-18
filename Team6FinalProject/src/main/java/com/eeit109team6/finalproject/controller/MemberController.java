@@ -446,7 +446,7 @@ public class MemberController {
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
-				member = MemService.checkAccount(mem.getAccount());
+				member = MemService.checkAccount(mem.getAccount(),"General");
 
 				lilo.setIsSuccess(0);
 				lilo.setMember(member);
