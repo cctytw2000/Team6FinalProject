@@ -51,7 +51,8 @@
 									<tr class="row" style="margin-bottom: 15px;">
 
 										<td class="col-md-5"><img alt="${boardType.boardName}"
-											src='<c:url value='/Images/board.png' />'></td>
+											src="<c:url value='/getBoardImage/${boardType.boardId}'/>">
+											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
 											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
 											<p>
