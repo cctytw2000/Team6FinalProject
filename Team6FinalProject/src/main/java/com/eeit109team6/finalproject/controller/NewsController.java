@@ -320,7 +320,7 @@ public class NewsController {
 		return "newsBack";
 	}
 
-	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
+	// 前台查詢所有消息類別--> 消息後台 newsPage.jsp
 	@RequestMapping("/newsPage")
 	public String newsPage(Model model) {
 		List<News> newsList = newsService.getAllNewsByTime();
@@ -341,8 +341,6 @@ public class NewsController {
 	// 查詢單筆消息詳細資料--> news.jsp
 	@RequestMapping("/newsDetail")
 	public String getProductById(@RequestParam("newsId") Integer newsId, Model model, HttpSession session) {
-		List<News> list = newsService.getAllNewsByViews();
-		session.setAttribute("newses", list);
 		News news = newsService.getNewsById(newsId);
 		model.addAttribute("news", news);
 
