@@ -9,6 +9,8 @@
 <title>最新消息</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!-- 套版用 -->
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
@@ -28,7 +30,6 @@
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- //套版用 -->
-
 </head>
 
 <body
@@ -59,25 +60,34 @@
 
 			<div id="newsWhite" class="col-2">
 				<div class="btn-group">
-					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" style="margin-top: 10px">依新聞分類排序</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#"></a>
-					</div>
-				</div>
-
-				<div class="btn-group">
-					<button type="button" class="btn btn-primary dropdown-toggle"
+					<button type="button" class="btn btn-info dropdown-toggle"
 						data-toggle="dropdown" style="margin-top: 10px">依熱門程度排序</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#"></a>
+					<div id="viewsSort" class="dropdown-menu">
+						<a class="dropdown-item" id="low" onclick="viewsSort(this.id)">由低到高</a> 
+						<a class="dropdown-item" id="High" onclick="viewsSort(this.id)">由高到低</a>
 					</div>
 				</div>
+				
+				<div class="btn-group">
+					<button type="button" class="btn btn-info dropdown-toggle"
+						data-toggle="dropdown" style="margin-top: 10px">依新聞分類排序</button>
+					<div id="newsTypeSort" class='dropdown-menu'></div>
+				</div>
+				
+				<div class="btn-group">
+					<button type="button" class="btn btn-info dropdown-toggle"
+						data-toggle="dropdown" style="margin-top: 10px">依發佈時間排序</button>
+					<div id="viewsSort" class="dropdown-menu">
+						<a class="dropdown-item" id="old" onclick="timeSort(this.id)">由舊到新</a> 
+						<a class="dropdown-item" id="new" onclick="timeSort(this.id)">由新到舊</a>
+					</div>
+				</div>
+				
 			</div>
 
 			<div id="newsCenter" class="col-6">
 				<table
-					style="border: none; text-align: left; width: 100%; color: white; table-layout: fixed; word-wrap: break-word;"
+					style="border: none; text-align: left; color:white; width: 100%; table-layout: fixed; word-wrap: break-word;"
 					id="newsOrderByTime">
 				</table>
 			</div>

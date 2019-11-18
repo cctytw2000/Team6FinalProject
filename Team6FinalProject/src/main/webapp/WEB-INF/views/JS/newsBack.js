@@ -16,20 +16,20 @@ function updateNewsType(newsTypeId, newsTypeName) {
 }
 
 // 傳消息類別刪除資訊:
-function deleteNewsType(newsTypeId) {
-// alert(newsTypeId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除消息類別</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteNewsType">'
-		+ '<input type="hidden" name="newsTypeId" value='
-		+ newsTypeId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteNewsType(newsTypeId) {
+//// alert(newsTypeId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除消息類別</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteNewsType">'
+//		+ '<input type="hidden" name="newsTypeId" value='
+//		+ newsTypeId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 // 傳遊戲類別更新資訊:
 function updateGameType(gmaeTypeId, gmaeTypeName) {
@@ -49,20 +49,20 @@ function updateGameType(gmaeTypeId, gmaeTypeName) {
 }
 
 // 傳遊戲類別刪除資訊:
-function deleteGameType(gmaeTypeId) {
-// alert(gmaeTypeId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除遊戲類別</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteGameType">'
-		+ '<input type="hidden" name="gameTypeId" value='
-		+ gmaeTypeId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteGameType(gmaeTypeId) {
+//// alert(gmaeTypeId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除遊戲類別</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteGameType">'
+//		+ '<input type="hidden" name="gameTypeId" value='
+//		+ gmaeTypeId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 // 傳活動類別更新資訊:
 function updateActivityType(activityTypeId, activityTypeName) {
@@ -82,20 +82,20 @@ function updateActivityType(activityTypeId, activityTypeName) {
 }
 
 // 傳活動類別刪除資訊:
-function deleteActivityType(activityTypeId) {
-// alert(activityTypeId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除活動類別</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteActivityType">'
-		+ '<input type="hidden" name="activityTypeId" value='
-		+ activityTypeId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteActivityType(activityTypeId) {
+//// alert(activityTypeId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除活動類別</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteActivityType">'
+//		+ '<input type="hidden" name="activityTypeId" value='
+//		+ activityTypeId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 // 傳遊戲細節更新資訊:
 function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,publisher,platform) {
@@ -148,20 +148,20 @@ function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,pub
 }
 
 // 傳遊戲刪除資訊:
-function deleteGame(gameId) {
-// alert(gameId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除遊戲</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteGame">'
-		+ '<input type="hidden" name="gameId" value='
-		+ gameId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteGame(gameId) {
+//// alert(gameId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除遊戲</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteGame">'
+//		+ '<input type="hidden" name="gameId" value='
+//		+ gameId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 // 傳一日活動細節更新資訊:
 function updateActivityOne(activityId, activityName,activityTypeId,activityTypeName,startingDate_time,startingTime_date,location) {
@@ -214,20 +214,20 @@ function updateActivityOne(activityId, activityName,activityTypeId,activityTypeN
 }
 
 //傳一日活動刪除資訊:
-function deleteActivityOne(activityId) {
-// alert(activityId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteActivity">'
-		+ '<input type="hidden" name="activityId" value='
-		+ activityId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteActivityOne(activityId) {
+//// alert(activityId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteActivity">'
+//		+ '<input type="hidden" name="activityId" value='
+//		+ activityId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 //傳多日活動細節更新資訊:
 function updateActivityMore(activityId, activityName,activityTypeId,activityTypeName,startingDate,endingDate,location) {
@@ -280,20 +280,20 @@ function updateActivityMore(activityId, activityName,activityTypeId,activityType
 }
 
 //傳多日活動刪除資訊:
-function deleteActivityMore(activityId) {
-// alert(activityId)
-	document.getElementById("xxx").innerHTML = 
-		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
-		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-		+ '<span>&times;</span>'
-		+  '</button>'
-	document.getElementById("xxx1").innerHTML = 
-		'<form method="post" action="deleteActivity">'
-		+ '<input type="hidden" name="activityId" value='
-		+ activityId
-		+ ' /><p>'
-		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
-}
+//function deleteActivityMore(activityId) {
+//// alert(activityId)
+//	document.getElementById("xxx").innerHTML = 
+//		'<h5 class="modal-title" id="exampleModalLabel">刪除活動</h5>'
+//		+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+//		+ '<span>&times;</span>'
+//		+  '</button>'
+//	document.getElementById("xxx1").innerHTML = 
+//		'<form method="post" action="deleteActivity">'
+//		+ '<input type="hidden" name="activityId" value='
+//		+ activityId
+//		+ ' /><p>'
+//		+ '<input type="submit" class="btn btn-warning" value="確認刪除"></form>'
+//}
 
 //將發佈消息隱藏:
 function deleteNewsShow(newsId) {
