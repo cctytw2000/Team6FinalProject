@@ -47,18 +47,11 @@ public class MovieDaoImpl implements IMovieDao{
 //		session.update(movieInfo);	
 	}
 	
-//	@Override
-//	public void updateViews(Integer boardId) {
-//
-//		Discussion discussion = factory.getCurrentSession().get(Discussion.class, boardId);
-//		discussion.setViews(discussion.getViews() + 1);
-//		factory.getCurrentSession().update(discussion);
-//	}
-	
 	@Override
 	public MovieInfo getMovieInfoByMovieID(Integer movie_ID) {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieInfo = session.get(MovieInfo.class, movie_ID);
+		//get 不管 movie_ID的名稱，強制使用Table PK 作為條件
 //		session.save(movieInfo);
 		return (MovieInfo) movieInfo;
 	}
