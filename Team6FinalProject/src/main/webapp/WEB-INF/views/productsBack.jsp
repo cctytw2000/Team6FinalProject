@@ -194,7 +194,7 @@
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="addProductLabel">新增商品</h5>
+					        <h5 class="modal-title" id="addProductLabel" onclick="add()">新增商品</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -211,19 +211,19 @@
 									</p>
 									<p>
 										商品名稱:
-										<input name="name" type="text" size="50px" />
+										<input id="addname" name="name" type="text" size="50px" />
 										<p>
 											廠商名稱:
-											<input name="publisher" type="text" size="50px" />
+											<input id="addpublisher" name="publisher" type="text" size="50px" />
 											<p>
 												商品價格:
-												<input name="price" type="text" />
+												<input id="addprice" name="price" type="text" />
 												<p>
 													庫存數量:
-													<input name="stock" type="text" />
+													<input id="addstock" name="stock" type="text" />
 													<p>
 														商品描述:
-														<textarea name="game_desc" style="width:400px;height:200px;"></textarea>
+														<textarea id="adddesc" name="game_desc" style="width:400px;height:200px;"></textarea>
 														<p>
 															是否上架:
 															<input type="radio" name="is_remove" value="0" id="0" /><label
