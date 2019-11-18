@@ -11,5 +11,5 @@ public interface IDiscussionService {
 	Discussion getArticleById(int articleId);//瀏覽單筆文章
 	void addArticle(Discussion discussion);  //新增一筆文章(樓主)
 	
-	void updateViews(Integer boardId); //增加觀看次數
+	void updateViews(Integer articleId); //增加觀看次數
 }

@@ -34,14 +34,23 @@ public class MemberHeanShotServiceImpl implements IMemberHeadShotService {
 	}
 
 	@Override
+	@Transactional
 	public ArrayList<MemberHeadShot> findByMemberId(Integer id) {
 
 		return dao.findByMemberId(id);
 	}
 
 	@Override
+	@Transactional
 	public MemberHeadShot findById(Integer id) {
 
 		return dao.findById(id);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Integer id) {
+		dao.delete(id);
+
 	}
 }

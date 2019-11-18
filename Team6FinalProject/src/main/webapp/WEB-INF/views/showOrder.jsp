@@ -65,7 +65,7 @@
 										<td style="color:red">未付款</td>
 										</c:when>
 										<c:otherwise>
-										<td>已付款</td>
+										<td style="color:green">已付款</td>
 										</c:otherwise>
 			</c:choose>
 			</c:forEach>

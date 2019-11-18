@@ -1,9 +1,14 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,38 +46,71 @@ public class MemberHeadShotController {
 
 	// 增加照片
 	@RequestMapping(value = "/member/addHeadShot", method = RequestMethod.POST)
-	public String addHeadShot(@RequestParam("headshotImg") MultipartFile headshotImg, HttpSession session) {
-		System.out.println("headshotImg=" + headshotImg.getOriginalFilename());
+	public String addHeadShot(@RequestParam("headshotImg") ArrayList<MultipartFile> headshotImg, HttpSession session) {
+
 		Member mem = (Member) session.getAttribute("mem");
-		MemberHeadShot mhs = new MemberHeadShot();
-		mhs.setMember(mem);
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		String createtime = sf.format(new Date());
 
-		mhs.setHeadshotname(createtime + headshotImg.getOriginalFilename());
+//		Path p = Paths.get("C:/memberImages"); // 路徑設定
+//
+//		if (Files.exists(p)) {
+//			System.out.print("資料夾已存在");
+//		}
+//		if (!Files.exists(p)) {
+//			/* 不存在的話,直接建立資料夾 */
+//			try {
+//				Files.createDirectory(p);
+//				System.out.print("已成功建立資料夾");
+//			} catch (IOException e) {
+//				System.out.println("發生錯誤");
+//			}
+//		}
 
-		MhsService.add(mhs);
+		Path dir = Paths.get("C:/memberImages/" + mem.getAccount() + "_" + mem.getMember_id());
 
-		try {
-			InputStream img = headshotImg.getInputStream();
-			File file = new File("C:\\memberImages\\" + mem.getAccount() + "_" + mem.getMember_id(),
-					mem.getUsername() + mem.getMember_id() + createtime + headshotImg.getOriginalFilename());
-			FileOutputStream fos = new FileOutputStream(file);
-			byte[] buff = new byte[1024];
-			int len;
-
-			while ((len = img.read(buff)) != -1) {
-				fos.write(buff, 0, len);
+		if (Files.exists(dir)) {
+			System.out.print("資料夾已存在");
+		}
+		if (!Files.exists(dir)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(dir);
+				System.out.print("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
 			}
-
-			fos.close();
-			img.close();
-
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
 		}
 
+		for (int i = 0; i < headshotImg.size(); i++) {
+
+			MemberHeadShot mhs = new MemberHeadShot();
+			mhs.setMember(mem);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String createtime = sf.format(new Date());
+
+			mhs.setHeadshotname(createtime + headshotImg.get(i).getOriginalFilename());
+
+			MhsService.add(mhs);
+
+			try {
+				InputStream img = headshotImg.get(i).getInputStream();
+				File file = new File("C:\\memberImages\\" + mem.getAccount() + "_" + mem.getMember_id(),
+						mem.getUsername() + mem.getMember_id() + createtime + headshotImg.get(i).getOriginalFilename());
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] buff = new byte[1024];
+				int len;
+
+				while ((len = img.read(buff)) != -1) {
+					fos.write(buff, 0, len);
+				}
+
+				fos.close();
+				img.close();
+
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
 		return "redirect:/member/PhotoList";
 	}
 
@@ -81,7 +119,7 @@ public class MemberHeadShotController {
 	public String HeadShotList(HttpSession session, Model model) {
 		Member mem = (Member) session.getAttribute("mem");
 		ArrayList<MemberHeadShot> mhs = MhsService.findByMemberId(mem.getMember_id());
-		System.out.println("mhs=" + mhs.get(0).getHeadshotname());
+//		System.out.println("mhs=" + mhs.get(0).getHeadshotname());
 		model.addAttribute("memberheadshots", mhs);
 		return "HeadShotList";
 	}
@@ -97,4 +135,13 @@ public class MemberHeadShotController {
 		session.setAttribute("mem", member);
 		return "redirect:/member/PhotoList";
 	}
+
+	// 刪除大頭貼
+	@RequestMapping(value = "/member/deleteImg", method = RequestMethod.POST)
+	public String deleteImg(HttpSession session, Model model, @RequestParam("imgId") Integer id) {
+
+		MhsService.delete(id);
+		return "redirect:/member/PhotoList";
+	}
+
 }

@@ -55,31 +55,79 @@
 			style="width: 30%; height: 100%; background-color: white; border-radius: 15px 15px;"
 			class="container">
 
-
+<!-- margin: 15px 25%; -->
 
 
 			<c:choose>
 				<c:when test="${sessionScope.mem.headshot != Null}">
 
 
-					<img id="previewHeadShot" width="212" height="250"
+					<img data-toggle="modal" data-target="#${sessionScope.mem.username}${memberheadshot.id}" style="cursor: pointer;margin: 15px 25%;" id="previewHeadShot" width="212" height="250"
 						src="<c:url value='/memberImag
 						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
-					<button onclick="headshot('${sessionScope.mem.member_id}')"
-						type="button">換一張大頭貼吧</button>
-					<form id="Changeheadshot"
-						action="${pageContext.request.contextPath}/member/Changeheadshot"
-						method="post" enctype="multipart/form-data"></form>
+
+
+      <div class="modal fade" id="${sessionScope.mem.username}${memberheadshot.id}"
+                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">瀏覽我的大頭貼</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img style="width:50%;margin:5px 100px" height="250"
+                                                        src="<c:url value='/memberImag
+						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />"">
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">取消</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<%-- 					<button onclick="headshot('${sessionScope.mem.member_id}')" --%>
+<!-- 						type="button">換一張大頭貼吧</button> -->
+<%-- 					<form id="Changeheadshot" --%>
+<%-- 						action="${pageContext.request.contextPath}/member/Changeheadshot" --%>
+<%-- 						method="post" enctype="multipart/form-data"></form> --%>
 				</c:when>
 				<c:otherwise>
 
-					<img id="previewHeadShot" width="212" height="250"
+					<img style="margin: 15px 25%;" id="previewHeadShot" width="212" height="250"
 						src="<c:url value='/Images/noimage.jpg' />">
-					<button onclick="headshot('${sessionScope.mem.member_id}')"
-						type="button">新增一張大頭貼</button>
-					<form id="Changeheadshot"
-						action="${pageContext.request.contextPath}/member/Changeheadshot"
-						method="post" enctype="multipart/form-data"></form>
+<%-- 					<button onclick="headshot('${sessionScope.mem.member_id}')" --%>
+<!-- 						type="button">新增一張大頭貼</button> -->
+<%-- 					<form id="Changeheadshot" --%>
+<%-- 						action="${pageContext.request.contextPath}/member/Changeheadshot" --%>
+<%-- 						method="post" enctype="multipart/form-data"></form> --%>
 				</c:otherwise>
 
 			</c:choose>

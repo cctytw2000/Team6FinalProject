@@ -15,4 +15,6 @@ public interface IMemberHeadShotService {
 	ArrayList<MemberHeadShot> findByMemberId(Integer id);
 
 	MemberHeadShot findById(Integer id);
+	
+	void delete(Integer id);
 }

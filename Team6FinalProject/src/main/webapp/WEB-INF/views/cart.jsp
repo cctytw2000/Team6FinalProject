@@ -67,13 +67,15 @@
 				</c:when>
 				<c:otherwise>
 					<div align="center" style="color: white;">
-						<table border="1" style="text-align: center">
-							<tr>
+						<table style="text-align: center">
+						
+							<tr style="border-bottom:2px solid white">
 								<th>商品編號
 								<th>商品名稱
 								<th>數量
 								<th>金額
-								<th>刪除 <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
+								<th>刪除 
+									<c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
 							<tr>
 								<td><input type="hidden" name="game_id"
 										value="${cartItem.product.game_id}">${cartItem.product.game_id}

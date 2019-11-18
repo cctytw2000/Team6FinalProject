@@ -107,7 +107,8 @@ public class DiscussionController {
 
 		Discussion discussion = discussionService.getArticleById(articleId);
 
-		discussionService.updateViews(articleId);
+		discussionService.updateViews(articleId); 
+
 		Discussion discussion_sessDiscussion = discussionService.getArticleById(articleId);
 		model.addAttribute("discussion", discussion_sessDiscussion);
 
@@ -146,9 +147,11 @@ public class DiscussionController {
 			@RequestParam("author") String author, Model model, HttpServletRequest request, HttpSession session) {
 		System.out.println("進入processAddArticle()方法");
 		BoardType type = boardTypeService.getBoardTypeById(boardId);
-
 		
-		Member mem = (Member) session.getAttribute("mem");
+		String articleBody = request.getParameter("body").replaceAll("\n", "<br>");//換行處理
+		
+		Member mem = (Member) session.getAttribute("mem");//從Session取得使用者會員
+		//以addArticle.jsp下拉選單subjectTypeId，被選取的${subjectType.subjectTypeId}值，呼叫DAO取得對應的SubjectType物件
 		SubjectType Stype = subjectTypeService.getSubjectTypeById(subjectType);
 
 		System.out.println("subjectType=" + subjectType);
@@ -161,7 +164,7 @@ public class DiscussionController {
 		// ==============/設定創建帳號時間=======================
 
 		Discussion discussion = new Discussion();
-		discussion.setArticleBody(body); // 填入文章
+		discussion.setArticleBody(articleBody); // 填入文章
 		discussion.setMember(mem); // 填入發文者，引數為Member型態的物件mem
 		discussion.setSubject(subject); // 填入標題
 		discussion.setSubjectType(Stype);// 填入發文分類
@@ -171,7 +174,7 @@ public class DiscussionController {
 
 		System.out.println("boardId=" + boardId);
 		System.out.println("subject=" + subject);
-		System.out.println("body=" + body);
+		System.out.println("body=" + articleBody);
 		discussionService.addArticle(discussion);
 		return "redirect:/board?id=" + boardId; // 重定向至看板，留意key值的用法
 	}

@@ -27,6 +27,13 @@ public class MemberHeanShotImpl implements IMemberHeadShotDao {
 	}
 
 	@Override
+	public void delete(Integer id) {
+
+		MemberHeadShot mhs = sessionFactory.getCurrentSession().get(MemberHeadShot.class, id);
+		sessionFactory.getCurrentSession().delete(mhs);
+	}
+
+	@Override
 	public ArrayList<MemberHeadShot> findAll() {
 		Query query = sessionFactory.getCurrentSession().createQuery("from MemberHeadShot");
 		ArrayList<MemberHeadShot> member = (ArrayList<MemberHeadShot>) query.getResultList();
