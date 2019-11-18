@@ -14,5 +14,7 @@ public interface IMemberHeadShotDao {
 
 	MemberHeadShot findById(Integer id);
 
+	void delete(Integer id);
+
 
 }

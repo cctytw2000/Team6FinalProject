@@ -477,13 +477,15 @@ public class MemberController {
 	public String sendChangePassWord(@RequestParam("account") String account, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 //		System.out.println("account=" + account);
-		String changeType, type;
+		String changeType, type,msh_;
 		if (session.getAttribute("mem") == null) {
 			changeType = "忘記密碼";
 			type = "forget";
+			msh_="Please click URL to change Password";
 		} else {
 			changeType = "修改密碼";
 			type = "change";
+			msh_="Please click URL to change Password";
 		}
 		System.out.println("changeType=" + changeType);
 		System.out.println("type=" + type);
@@ -560,8 +562,11 @@ public class MemberController {
 						+ mem.getAccount() + "&token=" + mem.getToken() + "&type=" + type;
 
 				message.setSubject(changeType);
-				message.setText("please click this url to change your password\n" + url);
-
+//				message.setText();
+//				changeType
+				
+//				<a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+				message.setContent("<h2>please click this url to change your password</h2>\n" +"<a href='"+ url+"'>"+msh_+"</a>",  "text/html");
 				Transport transport = session_.getTransport("smtp");
 				transport.connect(host, port, Email, EmailPwd);
 

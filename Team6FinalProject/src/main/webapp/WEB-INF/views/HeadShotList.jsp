@@ -33,63 +33,25 @@
     <jsp:include page="header/homeHeader.jsp" />
 
 
-    <!--                                                             <button type="button" id="addnewimg">新增新的大頭貼</button> -->
-    <!-- Button trigger modal -->
-    <button type="button" id="addnewimg" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        新增新的大頭貼
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">新增一張大頭貼</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="addHeadShot" action="${pageContext.request.contextPath}/member/addHeadShot" method='POST'
-                        enctype="multipart/form-data">
-
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <section class="container">
+    <h2 style="font-family: inherit;font-size:25px;text-align:center;margin:25px">大頭貼</h2>
         <div class="row">
+          <div class="" style="width: 230px; height:230px;">
+            <form id="addHeadShot" action="${pageContext.request.contextPath}/member/addHeadShot" method='POST'
+                enctype="multipart/form-data">
+                <img width="205" height="205" src="<c:url value='/Images/upload.png' />" id="upfile1"
+                    style="cursor:pointer" />
+                <input type="file" name="headshotImg" id="headshotImg" multiple="multiple" style="display:none">
+                <button type="submit" class="btn btn-primary" id="addHeadShot" style="display:none">新增大頭貼</button>
+            </form>
+            </div>
             <c:choose>
                 <c:when test="${fn:length(memberheadshots) != 0 }">
 
                     <c:forEach var="memberheadshot" items="${memberheadshots}">
-                        <div class="col-sm-3" style="width: 400px; height:250px;">
+                        <div class="" style="width: 230px; height:230px;">
 
                             <c:choose>
                                 <c:when test="${sessionScope.mem.headshot == memberheadshot.headshotname }">
@@ -97,7 +59,7 @@
                                         data-target="#${sessionScope.mem.username}${memberheadshot.id}" width="205"
                                         height="205"
                                         src="<c:url value='/memberImages/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${memberheadshot.headshotname}' />">
-                                    <h2>哈哈哈</h2>
+                                    <!--                                     <h2>哈哈哈</h2> -->
 
                                     <div class="modal fade" id="${sessionScope.mem.username}${memberheadshot.id}"
                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -155,7 +117,9 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-
+        									
+                                                        <button type="button" onclick="deleteImg('${memberheadshot.id}')" class="btn btn-primary">刪除此照片</button>
+                                                  
                                                     <form
                                                         action="${pageContext.request.contextPath}/member/changeHeadShot"
                                                         method="post">
@@ -196,7 +160,10 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <img src="<c:url value='/Images/noproduct.png' />" />
+                    <div style="width:80%">
+                        <img src="<c:url value='/Images/noproduct.png' />" />
+                        <h1>你沒有大圖貼!!</h1>
+                    </div>
                 </c:otherwise>
             </c:choose>
 
@@ -214,11 +181,11 @@
 
 
 
-    <form id="addHeadShot" action="${pageContext.request.contextPath}/member/addHeadShot" method='POST'
-        enctype="multipart/form-data">
+    <%--     <form id="addHeadShot" action="${pageContext.request.contextPath}/member/addHeadShot" method='POST' --%>
+    <%--         enctype="multipart/form-data"> --%>
 
 
-    </form>
+    <%--     </form> --%>
     <script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
