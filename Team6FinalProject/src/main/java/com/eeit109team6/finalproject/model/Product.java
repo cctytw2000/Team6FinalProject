@@ -22,12 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
 	@Transient
-	private Integer category_ ; 
+	private Integer category_;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer game_id;
 	private String name;
 	private String publisher;
@@ -36,108 +36,131 @@ public class Product {
 	private Date date;
 	private Integer stock;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="CATEGORY_ID" )
+	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
+	@JsonIgnore
 	private Blob photo;
 	private Integer is_remove;
-	
-	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
-	
-	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Comment> comment = new LinkedHashSet<>();
-	
-	
-	
-	
-	
-	
+
 	public Set<Comment> getComment() {
 		return comment;
 	}
+
 	public void setComment(Set<Comment> comment) {
 		this.comment = comment;
 	}
+
 	@Transient
 	public Integer getCategory_() {
 		return category_;
 	}
+
 	public void setCategory_(Integer category_) {
 		this.category_ = category_;
 	}
+
 	@Transient
 	private MultipartFile productImage;
-	
+
 	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
+
 	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+
 	public MultipartFile getProductImage() {
 		return productImage;
 	}
+
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
 	}
+
 	public Integer getGame_id() {
 		return game_id;
 	}
+
 	public void setGame_id(Integer game_id) {
 		this.game_id = game_id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getPublisher() {
 		return publisher;
 	}
+
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
+
 	public Integer getPrice() {
 		return price;
 	}
+
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+
 	public String getGame_desc() {
 		return game_desc;
 	}
+
 	public void setGame_desc(String game_desc) {
 		this.game_desc = game_desc;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public Integer getStock() {
 		return stock;
 	}
+
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
+
 	public Blob getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
+
 	public Category getCategory() {
 		return category;
 	}
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
 	public Integer getIs_remove() {
 		return is_remove;
 	}
+
 	public void setIs_remove(Integer is_remove) {
 		this.is_remove = is_remove;
 	}

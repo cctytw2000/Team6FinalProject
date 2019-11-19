@@ -564,12 +564,33 @@ ol {
     margin-bottom: 20px;
     line-height: 1.5;
 }
-
 .recent-game-item .rgi-content .comment {
     font-size: 12px;
     color: #737373;
 }
-
+.recent-game-item .rgi-content .commentUpdate {
+    font-size: 12px;
+/*     left:2px; */
+/*     color: black; */
+/*     height: 35px; */
+/*     width: 35px; */
+    float: left;
+/*     display: block; */
+    padding: 6px 8px 0;
+}
+.recent-game-item .rgi-content .commentspace {
+    width: 20px;
+}
+.recent-game-item .rgi-content .commentDelete {
+        font-size: 12px;
+/*     left:2px; */
+/*     color: black; */
+    height: 35px;
+    width: 35px;
+    float: right;
+/*     display: block; */
+    padding: 6px 8px 0;
+}
 .recent-game-item .rgi-extra {
     position: absolute;
     right: 0;

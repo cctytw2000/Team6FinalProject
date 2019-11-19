@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="category")
 public class Category {
@@ -20,6 +22,7 @@ public class Category {
 	private Integer category_id;
 	private String category;
 	@OneToMany(cascade=CascadeType.ALL , mappedBy = "category",fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Product> product = new LinkedHashSet<>();
 	
 	public Integer getCategory_id() {

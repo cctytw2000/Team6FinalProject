@@ -14,7 +14,9 @@
 
 
 <script src="${pageContext.request.contextPath}/JS/product.js"></script>
+<script type="text/javascript">
 
+</script>
 <style>
 #edit{
 cursor:pointer;
@@ -55,7 +57,7 @@ color:red
 		style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
 		<section class="container">
 			<div class="row" style="padding: 50px 15%">
-				<img width='200' height='200'
+				<img width='200' height='200' style="float:left"
 					src="<c:url value='/getPicture/${product.game_id}'/>" />
 				<h5 style="color: white; font-size: 23px">${product.name }
 					<div style="padding-left: 15px; margin-top: 30px">
@@ -90,32 +92,33 @@ color:red
 					</p>
 				</div>
 
+<div id="commentInfo">
+<%-- 				<c:forEach var="c" items="${comments }"> --%>
+<!-- 					<div class="media border p-3" style="width: 600px;"> -->
 
-				<c:forEach var="c" items="${comments }">
-					<div class="media border p-3" style="width: 600px;">
-
-						<div class="media-body">
-							<h4 style="color: #BBFFEE">${c.member_name }
-								<small style="margin-left:5%"><i>Posted on ${c.time.replace(".0","")}</i></small>
-								<c:choose>
-									<c:when test="${sessionScope.mem.username == c.member_name}">
-										<small><i id="edit" onclick="update('${c.comment_id}','${c.comment }','${product.game_id }')">編輯</i></small>
-									</c:when>
-								</c:choose>
-							</h4>
-							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p>
-						</div>
-					</div>
-				</c:forEach>
-				
+<!-- 						<div class="media-body"> -->
+<%-- 							<h4 style="color: #BBFFEE">${c.member_name } --%>
+<%-- 								<small style="margin-left:5%"><i>Posted on ${c.time.replace(".0","")}</i></small> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${sessionScope.mem.username == c.member_name}"> --%>
+<%-- 										<small><i id="edit" onclick="update('${c.comment_id}','${c.comment }','${product.game_id }')">編輯</i></small> --%>
+<%-- 									</c:when> --%>
+<%-- 								</c:choose> --%>
+<!-- 							</h4> -->
+<%-- 							<p id="${c.comment_id}" style="color: #FFFFBB;margin-top:10px">${c.comment }</p> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<%-- 				</c:forEach> --%>
+</div>				
 				<div class="form-group">
 					<nav class="navbar navbar-expand-sm " style="padding-left: 0px">
-						<form class="form-inline" action="addComment">
-							<input type="hidden" name="game_id" value="${product.game_id }">
-							<textarea class="form-control" rows="1" id="comment"
+						
+							<input type="hidden" id="game_id" name="game_id" value="${product.game_id }">
+							<input type="hidden" id="loginusername" value="${sessionScope.mem.username }">
+							<textarea class="form-control" rows="1" id="addComment"
 								name="comment" style="width: 600px" placeholder="請輸入評論..."></textarea>
-							<button class="btn btn-success" type="submit">Comment</button>
-						</form>
+							<button class="btn btn-success" onclick="addComment()">Comment</button>
+						
 					</nav>
 				</div>
 

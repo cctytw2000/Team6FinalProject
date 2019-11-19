@@ -8,24 +8,34 @@
 <html>
 
 <head>
-	<link href="./favicon.ico" rel="shortcut icon">
-	<meta charset="UTF-8">
-	<title>Gamily</title>
+<link href="./favicon.ico" rel="shortcut icon">
+<meta charset="UTF-8">
+<title>Gamily</title>
 
-	<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/animate.css' type="text/css" />
+<!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/font-awesome.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/owl.carousel.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/animate.css'
+	type="text/css" />
 
 
-	<script src="https://kit.fontawesome.com/685268963f.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/login.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
+<script src="https://kit.fontawesome.com/685268963f.js"></script>
+<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/JS/login.js"></script>
+<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script>
+<script
+	src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script>
+<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script>
 
 
 </head>
@@ -35,43 +45,39 @@
 
 
 	<!-- Hero section -->
-<!-- 	<section class="hero-section"> -->
-		
-		    <section style="background-color:black" style="width:100%;height:100%">
-	            <video style="height:100%;width:100%" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-	                <source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />' type="video/mp4">
-	            </video> 
-    </section>
-		
-		
-		
-		
-<!-- 	</section> -->
+	<!-- 	<section class="hero-section"> -->
+
+	<section style="background-color: black" style="width:100%;height:100%">
+		<video style="height: 100%; width: 100%" playsinline="playsinline"
+			autoplay="autoplay" muted="muted" loop="loop">
+			<source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />'
+				type="video/mp4">
+		</video>
+	</section>
+
+
+
+
+	<!-- 	</section> -->
 	<!-- Hero section end -->
 	<!-- Latest news section -->
 	<div class="latest-news-section">
-		<div class="ln-title">重要消息</div>
+		<div class="ln-title">熱門消息</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				<div class="nt-item">
-					<span class="new">新聞</span> <a href="#">台灣獲得 LOL S2 冠軍</a>
-				</div>
-				<div class="nt-item">
-					<span class="strategy">重要訊息</span> <a href="#">LOL 即將倒閉</a>
-				</div>
-				<div class="nt-item">
-					<span class="racing">賽事</span><a href="#">台灣 練笑話 準決賽</a>
-				</div>
-				<div class="nt-item">
-					<span class="racing">賽事</span><a href="#">台灣 講幹話 準決賽</a>
-				</div>
-				<div class="nt-item">
-					<span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a>
-				</div>
+				<c:forEach var="news" items="${sessionScope.newses }" begin="0"
+					end="4">
+					<div class="nt-item">
+						<span class="strategy">${news.newsType.newsTypeName }</span><a
+							onclick="countView(${news.newsId })"
+							href="newsDetail?newsId=${news.newsId }">${news.title }</a>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
 	<!-- Latest news section end -->
+
 	<!-- Footer top section -->
 	<section class="footer-top-section">
 		<div class="container">
@@ -93,7 +99,8 @@
 						</h4>
 						<div class="latest-blog">
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="Images/latest-blog/1.jpg"></div>
+								<div class="lb-thumb set-bg"
+									data-setbg="Images/latest-blog/1.jpg"></div>
 								<div class="lb-content">
 									<div class="lb-date">PUBG</div>
 									<p>昨日人氣：60000</p>
@@ -101,7 +108,8 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="Images/latest-blog/2.jpg"></div>
+								<div class="lb-thumb set-bg"
+									data-setbg="Images/latest-blog/2.jpg"></div>
 								<div class="lb-content">
 									<div class="lb-date">殭屍生存</div>
 									<p>昨日人氣：54000</p>
@@ -109,7 +117,8 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="Images/latest-blog/2.jpg"></div>
+								<div class="lb-thumb set-bg"
+									data-setbg="Images/latest-blog/2.jpg"></div>
 								<div class="lb-content">
 									<div class="lb-date">殭屍生存</div>
 									<p>昨日人氣：54000</p>
@@ -117,7 +126,8 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="Images/latest-blog/2.jpg"></div>
+								<div class="lb-thumb set-bg"
+									data-setbg="Images/latest-blog/2.jpg"></div>
 								<div class="lb-content">
 									<div class="lb-date">殭屍生存</div>
 									<p>昨日人氣：54000</p>
@@ -125,7 +135,8 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="Images/latest-blog/3.jpg"></div>
+								<div class="lb-thumb set-bg"
+									data-setbg="Images/latest-blog/3.jpg"></div>
 								<div class="lb-content">
 									<div class="lb-date">魔獸世界</div>
 									<p>昨日人氣：46000</p>
@@ -209,55 +220,32 @@
 	<!-- Feature section -->
 	<section class="feature-section spad">
 		<div class="container">
+			<div class="section-title">
+				<button type="button" class="btn btn-danger"
+					onclick="window.location.href='newsPage'">最新消息</button>
+				<h2>熱門新聞</h2>
+			</div>
 			<div class="row">
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="Images/features/1.jpg">
-						<span class="cata new">new</span>
-						<div class="fi-content text-white">
-							<h5>
-								<a href="#">Suspendisse ut justo tem por, rutrum</a>
-							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<a href="#" class="fi-comment">3 Comments</a>
+				<c:forEach var="news" items="${sessionScope.newses }" varStatus="i"
+					begin="0" end="3">
+					<div class='col-lg-3 col-md-6 p-0'>
+						<div class='feature-item set-bg'
+							data-setbg="<c:url value='/getNewsPicture/${news.newsId}' />">
+							<span class='cata strategy'>${news.newsType.newsTypeName}</span><br>
+							<h5 class='cata text-white' style="margin-left:0">
+									<a style="font-size:20px" onclick='countView(${news.newsId})'
+										href='newsDetail?newsId=${news.newsId }'>${news.title }</a>
+								</h5>
+							<div class='fi-content text-white'>
+								
+								<span id="${i.index}">${news.article}</span> <span>...<a
+									onclick='countView(${news.newsId})'
+									href='newsDetail?newsId=${news.newsId }'>繼續閱讀</a>
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="Images/features/2.jpg">
-						<span class="cata strategy">strategy</span>
-						<div class="fi-content text-white">
-							<h5>
-								<a href="#">Justo tempor, rutrum erat id, molestie</a>
-							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="Images/features/3.jpg">
-						<span class="cata new">new</span>
-						<div class="fi-content text-white">
-							<h5>
-								<a href="#">Nullam lacinia ex eleifend orci porttitor</a>
-							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="Images/features/4.jpg">
-						<span class="cata racing">racing</span>
-						<div class="fi-content text-white">
-							<h5>
-								<a href="#">Lacinia ex eleifend orci suscipit</a>
-							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -265,7 +253,8 @@
 
 
 	<!-- Recent game section  -->
-	<section class="recent-game-section spad set-bg" data-setbg="Images/recent-game-bg.png">
+	<section class="recent-game-section spad set-bg"
+		data-setbg="Images/recent-game-bg.png">
 		<div class="container">
 			<div class="section-title">
 				<div class="cata new">new</div>
@@ -274,7 +263,8 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="Images/recent-game/1.jpg">
+						<div class="rgi-thumb set-bg"
+							data-setbg="Images/recent-game/1.jpg">
 							<div class="cata new">new</div>
 						</div>
 						<div class="rgi-content">
@@ -295,7 +285,8 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="Images/recent-game/2.jpg">
+						<div class="rgi-thumb set-bg"
+							data-setbg="Images/recent-game/2.jpg">
 							<div class="cata racing">racing</div>
 						</div>
 						<div class="rgi-content">
@@ -316,7 +307,8 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="Images/recent-game/3.jpg">
+						<div class="rgi-thumb set-bg"
+							data-setbg="Images/recent-game/3.jpg">
 							<div class="cata adventure">Adventure</div>
 						</div>
 						<div class="rgi-content">
@@ -340,73 +332,22 @@
 	</section>
 	<!-- Recent game section end -->
 
-
-	<!-- Tournaments section -->
-	<section class="tournaments-section spad">
-		<div class="container">
-			<div class="tournament-title">Tournaments</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="tournament-item mb-4 mb-lg-0">
-						<div class="ti-notic">Premium Tournament</div>
-						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="Images/tournament/1.jpg"></div>
-							<div class="ti-text">
-								<h4>World Of WarCraft</h4>
-								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
-								</ul>
-								<p>
-									<span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd
-									place: $500
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="tournament-item">
-						<div class="ti-notic">Premium Tournament</div>
-						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="Images/tournament/2.jpg"></div>
-							<div class="ti-text">
-								<h4>DOOM</h4>
-								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
-								</ul>
-								<p>
-									<span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd
-									place: $500
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Tournaments section bg -->
-
-
 	<!-- Review section -->
 	<section class="review-section spad set-bg" data-setbg="#">
 		<div class="container">
 			<div class="section-title">
-				<button type="button" class="btn btn-danger" onclick="window.location.href='findProductsByPage'">遊戲商城</button>
+				<button type="button" class="btn btn-danger"
+					onclick="window.location.href='findProductsByPage'">遊戲商城</button>
 				<h2>最新商品</h2>
 			</div>
 			<div class="row">
 				<c:forEach var="p" items="${sessionScope.productsTop8 }">
-					<div class="col-lg-3 col-md-6" style="margin-top: 15px;"> 
+					<div class="col-lg-3 col-md-6" style="margin-top: 15px;">
 						<div class="review-item">
-							<div class="review-cover set-bg" data-setbg="<c:url value='/getPicture/${p.game_id}' />">
-								<div class="score yellow" style="margin-top:0px">$${p.price }</div>
+							<div class="review-cover set-bg"
+								data-setbg="<c:url value='/getPicture/${p.game_id}' />">
+								<div class="score yellow" style="margin-top: 0px">$${p.price
+									}</div>
 							</div>
 							<div class="review-text">
 								<h5>
@@ -421,11 +362,9 @@
 	</section>
 	<!-- Review section end -->
 
-
-
-
 	<jsp:include page="footer/homeFooter.jsp" />
-
+	<!-- 自訂js設定檔  -->
+	<script src="${pageContext.request.contextPath}/JS/home.js"></script>
 
 
 </body>

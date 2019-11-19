@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Category;
@@ -55,7 +56,7 @@ public class ProductController {
 	public void setContext(ServletContext context) {
 		this.context = context;
 	}
-
+	
 	// 查詢所有商品--> 商城前台 products.jsp
 	@RequestMapping("/products")
 	public String list(Model model, HttpSession session) {
@@ -161,10 +162,22 @@ public class ProductController {
 		
 		return "product";
 	}
+	
+	// 查詢單筆商品詳細資料--> product.jsp
+		@RequestMapping("/productComment.json")
+		public String getProductComment(@RequestParam("game_id") Integer game_id, Model model, HttpSession session) {
+			
+			List<Comment> comment = service.getCommentById(game_id);
+			model.addAttribute("comments", comment);
+			
+			return "product";
+		}
+	
 
 	// 查詢所有商品--> 商城後台 productsBack.jsp
 	@RequestMapping("/productsBack")
 	public String listBack(Model model) {
+		System.out.println("productsBack");
 		List<Product> list = service.getAllProducts();
 		model.addAttribute("products", list);
 		List<Product> c_list = service.getCancelProducts();
@@ -196,6 +209,19 @@ public class ProductController {
 		return "productsBack";
 	}
 
+	
+	//所有商品的json格式--> 商城後台 productsBack.jsp
+	@RequestMapping("/productsBackjson.json")
+	public String productsBackJson(Model model) {
+		System.out.println("productsBackjson");
+	
+		ArrayList<Product> list = (ArrayList<Product>) service.getAll();
+		model.addAttribute("ProductJson", list);
+
+		return "productsBack";
+	}
+	
+	
 	// 商品下架--> 商城後台 productsBack.jsp
 	@RequestMapping("/productsBack/products/delete")
 	public String deleteProductById(@RequestParam("game_id") Integer game_id, Model model) {
@@ -377,7 +403,7 @@ public class ProductController {
 		return "productsByPriceH";
 	}
 	
-	//新增商品評論-> 商品後台
+	//新增商品評論-> 商品前台
 	@RequestMapping("/addComment")
 	public String addComment(@RequestParam("comment") String comment, @RequestParam("game_id") Integer game_id,
 			Model model, HttpSession session) {

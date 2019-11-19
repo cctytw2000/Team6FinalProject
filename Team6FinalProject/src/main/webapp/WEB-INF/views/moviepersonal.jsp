@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<!-- movieindex.jsp -->
+<!-- moviepersonal.jsp -->
 <html>
 
 <head>
@@ -88,9 +88,7 @@
 				<div class="row">
 					<!-- <div class="cata new"> this is a pink TAG </div> -->
 					<h2>影片區</h2>
-
 				</div>
-
 				<div class="row">
 					<c:forEach var="allmovies" items="${allmovies}">
 						<div class="col-lg-4 col-md-6">
@@ -113,14 +111,21 @@
 									<h6>${allmovies.location_Test }</h6>
 									<!--內文 -->
 									<p>${allmovies.movie_content}</p>
+									<!-- Time -->
+									<p>${allmovies.date}</p>
+									<a href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"  class="commentUpdate" >Update</a>
+									<!-- href="moviepersonal/updateMovie" -->
+									
+									<%-- onclick="window.location.href='moviepersonal/updateMovie?movie_ID=${allmovies.movie_ID }'" --%>
+									<a href="moviepersonal/deleteMovie?movie_ID=${allmovies.movie_ID }" class="commentDelete">Delete</a>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
-				<!-- Recent game  影片區  End -->
+
 			</div>
-			<!-- Recent game   End-->
+			<!-- Recent game   End 影片區-->
 
 			<!-- New Video 新增表單   ROW  -->
 			<div class="row">
@@ -145,7 +150,8 @@
 										影片標題: <input name="movie_name" type="text" size="50px" />
 									<p>
 										內文描述:
-										<textarea name="movie_content" style="width: 400px; height: 200px;"></textarea>
+										<textarea name="movie_content"
+											style="width: 400px; height: 200px;"></textarea>
 									<p>
 										選則檔案: <input type="file" name="video_file"><br />
 									<p>

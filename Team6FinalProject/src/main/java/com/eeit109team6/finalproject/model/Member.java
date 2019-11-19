@@ -1,9 +1,7 @@
 ﻿package com.eeit109team6.finalproject.model;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,20 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-// Test from DavidChen-TP
-// kunalin asdasd
-// Doris
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-// Test From Git Third
-//andy is a handsome boy.
-//test git abc
 @Component(value = "member")
 @Scope(value = "prototype")
 @Entity
@@ -42,19 +30,55 @@ public class Member {
 	private String token;
 	private String username;
 	private String headshot;
-
 	private String type;
 	private int isactive;
+
 	private MemberDetail memberdetail;
 
 	private MemberLevel memberlevel;
-	private Set<LiLoInfo> liLoInfo = new  LinkedHashSet<LiLoInfo>();
 
+	private Set<LiLoInfo> liLoInfo = new LinkedHashSet<LiLoInfo>();
 
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
+	private Set<MemberHeadShot> memberheadshot = new LinkedHashSet<MemberHeadShot>();
+
+//	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
+//	
+//	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//	public Set<MovieInfo> getMovieInfo() {
+//		return movieInfo;
+//	}
+//	
+//	public void setMovieInfo(Set<MovieInfo> movieInfo) {
+//		this.movieInfo = movieInfo;
+//	}
+
+//	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
+
+//	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	public Set<MovieLike> getMovieLike() {
+//		return movieLike;
+//	}
+//	
+//	public void setMovieLike(Set<MovieLike> movieLike) {
+//		this.movieLike = movieLike;
+//	}
+
+	private Set<Discussion> discussion = new LinkedHashSet<Discussion>();
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnore
+	public Set<Discussion> getDiscussion() {
+		return discussion;
+	}
+
+	public void setDiscussion(Set<Discussion> discussion) {
+		this.discussion = discussion;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="MEMBERLEVEL" )
+	@JoinColumn(name = "MEMBERLEVEL")
 	@JsonIgnore
 	public MemberLevel getMemberlevel() {
 		return memberlevel;
@@ -63,14 +87,12 @@ public class Member {
 	public void setMemberlevel(MemberLevel memberlevel) {
 		this.memberlevel = memberlevel;
 	}
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public Set<Orders> getOrders() {
 		return orders;
 	}
-
 
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
@@ -95,8 +117,6 @@ public class Member {
 	public void setMemberdetail(MemberDetail memberdetail) {
 		this.memberdetail = memberdetail;
 	}
-
-	
 
 	@Column(name = "ACCOUNT")
 	public String getAccount() {
@@ -179,7 +199,17 @@ public class Member {
 	public void setHeadshot(String headshot) {
 		this.headshot = headshot;
 	}
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
+//	@JsonIgnore
+	public Set<MemberHeadShot> getMemberheadshot() {
+		return memberheadshot;
+	}
+
+	public void setMemberheadshot(Set<MemberHeadShot> memberheadshot) {
+		this.memberheadshot = memberheadshot;
+	}
+
 //	================================新消息要關聯的部分================================
 //	@ManyToMany
 //	@JoinTable(name="userlike",
@@ -205,7 +235,5 @@ public class Member {
 //	public void setMessages(Set<Message> messages) {
 //		this.messages = messages;
 //	}
-
-
 
 }

@@ -13,20 +13,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="activitytype")
 public class ActivityType {
 
+	@Id
+	@Column(name="ACTIVITYTYPEID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer activityTypeId;
+	@Column(name="ACTIVITYTYPENAME")
 	private String activityTypeName;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "activityType", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Activity> activities = new HashSet<Activity>();
 	
 	public ActivityType() {
 	}
 
-	@Id
-	@Column(name="ACTIVITYTYPEID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getActivityTypeId() {
 		return activityTypeId;
 	}
@@ -35,7 +40,6 @@ public class ActivityType {
 		this.activityTypeId = activityTypeId;
 	}
 
-	@Column(name="ACTIVITYTYPENAME")
 	public String getActivityTypeName() {
 		return activityTypeName;
 	}
@@ -44,7 +48,6 @@ public class ActivityType {
 		this.activityTypeName = activityTypeName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "activityType", cascade = CascadeType.ALL)
 	public Set<Activity> getActivities() {
 		return activities;
 	}

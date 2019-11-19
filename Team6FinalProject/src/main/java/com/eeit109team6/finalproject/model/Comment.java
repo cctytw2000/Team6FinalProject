@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="comment")
 public class Comment {
@@ -21,6 +23,7 @@ public class Comment {
 	private String time;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="GAME_ID" )
+	@JsonIgnore
 	private Product product;
 	private String member_name;
 	private boolean is_remove;

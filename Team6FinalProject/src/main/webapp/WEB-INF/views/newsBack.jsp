@@ -71,16 +71,17 @@
 						<th>消息類別編號
 						<th>消息類別名稱
 						<th>更新
-						<th>刪除 <c:forEach var="newsType" items="${newsTypeList }">
+<!-- 						<th>刪除  -->
+							<c:forEach var="newsType" items="${newsTypeList }">
 								<tr>
 									<td>${newsType.newsTypeId }
 									<td>${newsType.newsTypeName }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateNewsType('${newsType.newsTypeId }', '${newsType.newsTypeName }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteNewsType(${newsType.newsTypeId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteNewsType(${newsType.newsTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -100,17 +101,17 @@
 						<th>遊戲類別編號
 						<th>遊戲類別名稱
 						<th>更新
-						<th>刪除 <c:forEach var="gameType" items="${gameTypeList }">
-
+<!-- 						<th>刪除  -->
+							<c:forEach var="gameType" items="${gameTypeList }">
 								<tr>
 									<td>${gameType.gameTypeId }
 									<td>${gameType.gameTypeName }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateGameType('${gameType.gameTypeId }', '${gameType.gameTypeName }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteGameType(${gameType.gameTypeId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteGameType(${gameType.gameTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -130,7 +131,8 @@
 						<th>活動類別編號
 						<th>活動類別名稱
 						<th>更新
-						<th>刪除 <c:forEach var="activityType"
+<!-- 						<th>刪除  -->
+							<c:forEach var="activityType"
 								items="${activityTypeList }">
 
 								<tr>
@@ -139,9 +141,9 @@
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateActivityType('${activityType.activityTypeId }', '${activityType.activityTypeName }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteActivityType(${activityType.activityTypeId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteActivityType(${activityType.activityTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -163,8 +165,8 @@
 						<th>遊戲發行商
 						<th>遊戲平台
 						<th>更新
-						<th>刪除 <c:forEach var="game" items="${gameList }">
-
+<!-- 						<th>刪除  -->
+							<c:forEach var="game" items="${gameList }">
 								<tr>
 									<td>${game.gameId }
 									<td>${game.gameName }
@@ -177,9 +179,9 @@
 											onclick="updateGame('${game.gameId }', '${game.gameName }', 
 											'${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', 
 											'${game.publicationDate }', '${game.publisher }', '${game.platform }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteGame(${game.gameId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteGame(${game.gameId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -201,8 +203,8 @@
 						<th>活動時間
 						<th>活動地點
 						<th>更新
-						<th>刪除 <c:forEach var="activityOne" items="${activityOneList }">
-
+<!-- 						<th>刪除  -->
+							<c:forEach var="activityOne" items="${activityOneList }">
 								<tr>
 									<td>${activityOne.activityId }
 									<td>${activityOne.activityName }
@@ -216,9 +218,9 @@
 											'${activityOne.activityType.activityTypeId }',' ${activityOne.activityType.activityTypeName }',
 											'${activityOne.startingDate_time }', '${activityOne.startingTime_date }',
 											'${activityOne.location }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteActivityOne(${activityOne.activityId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteActivityOne(${activityOne.activityId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -240,8 +242,8 @@
 						<th>活動結束日
 						<th>活動地點
 						<th>更新
-						<th>刪除 <c:forEach var="activityMore" items="${activityMoreList }">
-
+<!-- 						<th>刪除  -->
+							<c:forEach var="activityMore" items="${activityMoreList }">
 								<tr>
 									<td>${activityMore.activityId }
 									<td>${activityMore.activityName }
@@ -255,9 +257,9 @@
 											'${activityMore.activityType.activityTypeId }',' ${activityMore.activityType.activityTypeName }',
 											'${activityMore.startingDate }','${activityMore.endingDate }',
 											'${activityMore.location }')">更新</button>
-									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
-											onclick="deleteActivityMore(${activityMore.activityId })">刪除</button>
+<!-- 									<td><button type="button" class="btn btn-warning" -->
+<!-- 											data-toggle="modal" data-target="#ooo" -->
+<%-- 											onclick="deleteActivityMore(${activityMore.activityId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>

@@ -28,7 +28,8 @@ public interface IMemberService {
 
 	public boolean checkAccount(Member m);
 
-	public Member checkAccount(String account);
+
+	Member checkAccount(String account, String type);
 
 	void openActive(Integer id);
 
@@ -37,5 +38,7 @@ public interface IMemberService {
 	void updateLevel(Integer id, MemberLevel level);
 
 	void changeHeadshot(String file, Integer memberId);
+
+	Member findById(Integer id);
 
 }

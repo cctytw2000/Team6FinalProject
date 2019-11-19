@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.model;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,23 +15,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "news")
 public class News {
-
+	@JsonIgnore
 	@Transient
 	private Integer game_;
+	@JsonIgnore
 	@Transient
 	private Integer newsType_;
+	@JsonIgnore
 	@Transient
 	private Integer activity_;
+	@JsonIgnore
+	@Transient
+	private MultipartFile newsImage;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsId;
 	private String title;
+	@Temporal(TemporalType.TIMESTAMP)  
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date publicationDate;
 	private String article;
 	private Integer likes;
@@ -38,24 +54,36 @@ public class News {
 	private Boolean isVisable;
 	private String ipAddress;
 	private Date lastUpdated;
-	
+	@JsonIgnore
+	private Blob picture;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
 	private Set<Message> messages = new HashSet<Message>();
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
-	private Set<ArticlePicture> articlePictures = new HashSet<ArticlePicture>();
-	//單向多對一
+	// 單向多對一
 	@JoinColumn(name = "GAMEID")
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Game game;
 	@JoinColumn(name = "ACTIVITYID")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Activity activity;	
-	
+	@JsonIgnore
+	private Activity activity;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="MEMBER_ID")
+	@JoinColumn(name = "MEMBER_ID")
+	@JsonIgnore
 	private Member member;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "NEWSTYPEID")
+	private NewsType newsType;
 
+	public MultipartFile getNewsImage() {
+		return newsImage;
+	}
+
+	public void setNewsImage(MultipartFile newsImage) {
+		this.newsImage = newsImage;
+	}
+	
 	public Member getMember() {
 		return member;
 	}
@@ -63,7 +91,7 @@ public class News {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
+
 	public Game getGame() {
 		return game;
 	}
@@ -71,7 +99,7 @@ public class News {
 	public void setGame(Game game) {
 		this.game = game;
 	}
-		
+
 	public Activity getActivity() {
 		return activity;
 	}
@@ -79,13 +107,6 @@ public class News {
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
-
-//	@ManyToMany(mappedBy = "likedNewses")
-//	private Set<Member> memberLikes =new HashSet<Member>();
-	@JoinColumn(name = "NEWSTYPEID")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private NewsType newsType;
-	
 
 	public News() {
 	}
@@ -202,12 +223,12 @@ public class News {
 		this.messages = messages;
 	}
 
-	public Set<ArticlePicture> getArticlePictures() {
-		return articlePictures;
+	public Blob getPicture() {
+		return picture;
 	}
 
-	public void setArticlePictures(Set<ArticlePicture> articlePictures) {
-		this.articlePictures = articlePictures;
+	public void setPicture(Blob picture) {
+		this.picture = picture;
 	}
 
 //	public Set<Member> getMemberLikes() {

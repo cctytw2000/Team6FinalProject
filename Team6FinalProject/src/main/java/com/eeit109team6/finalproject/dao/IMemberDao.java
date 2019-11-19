@@ -29,7 +29,6 @@ public interface IMemberDao {
 
 	public boolean checkAccount(Member m);
 
-	public Member checkAccount(String account);
 
 	public Member findByAccount(Member m);
 
@@ -40,5 +39,9 @@ public interface IMemberDao {
 	void updateLevel(Integer id, MemberLevel level);
 
 	void changeHeadshot(String file, Integer memberId);
+
+	Member findById(Integer id);
+
+	Member checkAccount(String account, String type);
 
 }

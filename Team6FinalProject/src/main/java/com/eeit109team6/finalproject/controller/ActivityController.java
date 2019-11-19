@@ -66,8 +66,8 @@ public class ActivityController {
 	}
 
 	// 取得所有遊戲類別的json格式
-	@RequestMapping(value = "/newsBack/searchActivityTypeByAjax", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<ActivityType> searchGameTypeByAjax() {
+	@RequestMapping(value = "/newsBack/searchActivityTypeByAjax", produces = "application/json")
+	public @ResponseBody List<ActivityType> searchActivityTypeByAjax() {
 		return activityService.getAllActivityTypes();
 	}
 
@@ -143,7 +143,7 @@ public class ActivityController {
 	}
 
 	// 取得所有活動的json格式
-	@RequestMapping(value = "/newsBack/searchActivityByAjax", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/newsBack/searchActivityByAjax", produces = "application/json")
 	public @ResponseBody List<Activity> searchActivityByAjax() {
 		return activityService.getAllActivities();
 	}

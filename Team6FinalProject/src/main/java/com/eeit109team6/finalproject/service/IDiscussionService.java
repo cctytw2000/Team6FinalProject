@@ -10,4 +10,10 @@ public interface IDiscussionService {
 	List<Discussion> getArticleByBoardTypeId(Integer boardId);//取得指定看板的所有文章
 	Discussion getArticleById(int articleId);//瀏覽單筆文章
 	void addArticle(Discussion discussion);  //新增一筆文章(樓主)
+	
+	void updateViews(Integer articleId); //增加觀看次數
+	
+	//List<Discussion> getArticleTopN(); //查詢瀏覽次數最高的一批文章
+	//List<BoardType> getBoardTopN();//查詢文章最多的一批看板
+	
 }

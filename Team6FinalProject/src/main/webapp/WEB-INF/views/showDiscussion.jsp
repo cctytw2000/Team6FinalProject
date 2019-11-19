@@ -5,6 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>遊戲討論區</title>
@@ -30,29 +31,185 @@
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
 </head>
+
 <body>
-	<jsp:include page="header/manageHeader.jsp" />
+	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
-	<br><br><br>
-<table>
-	<tr><th>看板名稱</th><th>篇數</th></tr>
-	<c:forEach var='boardType' items="${boardTypeList}">
-		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a></td>
-		</tr>
-	</c:forEach>
-</table>
-</div>
-		<!-- 	套版用 -->
-		<script
-			src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
-		<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
-		<script src="${pageContext.request.contextPath}/JS/main.js"></script>
-		<!-- 自訂js設定檔  -->
-		<script src="${pageContext.request.contextPath}/JS/newsBack.js"></script>
+		<!-- Page section -->
+		<section class="page-section recent-game-page spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div>
+							<table style="width: 100%">
+								<!-- 								<tr> -->
+								<!-- 									<th>看板名稱</th> -->
+								<!-- 									<th style="text-align: right">篇數</th> -->
+								<!-- 								</tr> -->
+								<c:forEach var='boardType' items="${boardTypeList}">
+
+									<tr class="row" style="margin-bottom: 15px;">
+
+										<td class="col-md-5"><img alt="${boardType.boardName}"
+											src="<c:url value='/getBoardImage/${boardType.boardId}'/>">
+											 </td>
+										<td class="col-md-7"><a style="text-decoration: none;"
+											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
+											<p>
+												<c:forEach var='discussion' begin="0" end="0"
+													items="${boardType.discussion}">
+
+													<a style="text-decoration: none;"
+														href="<spring:url value='article?id=${discussion.articleId}'/>">【
+														${discussion.subjectType.subjectName}】
+														${discussion.subject}</a>
+													<p>
+													<div style="padding-left:15px">
+														<span><i id="eye" class="fas fa-eye"></i>${boardType.discussion.size()}</span>&nbsp;&nbsp;<span><i
+															class="fas fa-list-alt"></i>2598</span>
+													</div>
+
+												</c:forEach></td>
+										<%-- 										<td class="col-md-1">${boardType.discussion.size()}</td> --%>
+
+									</tr>
+
+								</c:forEach>
+
+							</table>
+						</div>
+
+
+					</div>
+
+
+
+
+
+
+
+					<!-- sidebar -->
+					<div class="col-md-4 sidebar pt-5 pt-lg-0">
+						<!-- widget -->
+
+						<!-- widget -->
+						<div class="widget-item">
+							<h4 class="widget-title">Latest Posts</h4>
+							<div class="latest-blog">
+								<div class="lb-item">
+									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
+									<div class="lb-content">
+										<div class="lb-date">June 21, 2018</div>
+										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+										<a href="#" class="lb-author">By Admin</a>
+									</div>
+								</div>
+								<div class="lb-item">
+									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/2.jpg"></div>
+									<div class="lb-content">
+										<div class="lb-date">June 21, 2018</div>
+										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+										<a href="#" class="lb-author">By Admin</a>
+									</div>
+								</div>
+								<div class="lb-item">
+									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/3.jpg"></div>
+									<div class="lb-content">
+										<div class="lb-date">June 21, 2018</div>
+										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+										<a href="#" class="lb-author">By Admin</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- widget -->
+						<div class="widget-item">
+							<h4 class="widget-title">Top Comments</h4>
+							<div class="top-comment">
+								<div class="tc-item">
+									<div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>
+									<div class="tc-content">
+										<p>
+											<a href="#">James Smith</a> <span>on</span> Lorem consec
+											ipsum dolor sit amet, co
+										</p>
+										<div class="tc-date">June 21, 2018</div>
+									</div>
+								</div>
+								<div class="tc-item">
+									<div class="tc-thumb set-bg" data-setbg="img/authors/2.jpg"></div>
+									<div class="tc-content">
+										<p>
+											<a href="#">Michael James</a> <span>on</span>Cras sit amet
+											sapien aliquam
+										</p>
+										<div class="tc-date">June 21, 2018</div>
+									</div>
+								</div>
+								<div class="tc-item">
+									<div class="tc-thumb set-bg" data-setbg="img/authors/3.jpg"></div>
+									<div class="tc-content">
+										<p>
+											<a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor
+											consecsit amet, co
+										</p>
+										<div class="tc-date">June 21, 2018</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- widget -->
+						<div class="widget-item">
+							<div class="feature-item set-bg" data-setbg="img/features/1.jpg">
+								<span class="cata new">new</span>
+								<div class="fi-content text-white">
+									<h5>
+										<a href="#">Suspendisse ut justo tem por, rutrum</a>
+									</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									</p>
+									<a href="#" class="fi-comment">3 Comments</a>
+								</div>
+							</div>
+						</div>
+						<!-- widget -->
+						<div class="widget-item">
+							<div class="review-item">
+								<div class="review-cover set-bg" data-setbg="img/review/1.jpg">
+									<div class="score yellow">9.3</div>
+								</div>
+								<div class="review-text">
+									<h5>Assasin’’s Creed</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing
+										ipsum dolor sit ame.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+				</div>
+
+			</div>
+	</div>
+	</section>
+	<!-- Page section end -->
+
+	<!-- 	套版用 -->
+	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
+	<!-- 自訂js設定檔  -->
+	<script src="${pageContext.request.contextPath}/JS/newsBack.js"></script>
 </body>
-</html> 
+
+</html>

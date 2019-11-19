@@ -39,17 +39,6 @@ public class OrderItem {
 	public void setOrder(Orders order) {
 		this.order = order;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public Integer getItem_id() {
 		return item_id;
 	}

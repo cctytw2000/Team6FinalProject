@@ -66,10 +66,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		 */
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 		
-		//用於  MovieController的"/moviepersonal/uploadFile"     Start
+		//用於  MovieController的"/moviepersonal/uploadFile"                             Start
 		// FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
 		// multipartFilter.addMappingForUrlPatterns(null, true, "/*");
-		//用於  MovieController的"/moviepersonal/uploadFile"     End
+		//用於  MovieController的"/moviepersonal/uploadFile"                             End
 	}
 	
 //	@Override
