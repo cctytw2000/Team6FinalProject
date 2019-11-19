@@ -113,15 +113,60 @@
 							<br>
 							<h5 style="color: white; font-size: 23px">
 								帳號ID:${member.member_id}
-								<div style="margin-top: 30px">
-									<p style="color: pink">身分證字號:
-										${member.memberdetail.idnumber}</p>
-									<p style="color: pink">性別: ${member.memberdetail.sex}</p>
-									<p style="color: pink">電話: ${member.memberdetail.tel}</p>
-									<p style="color: pink">地址: ${member.memberdetail.address}</p>
-									<p style="color: pink">生日:${member.memberdetail.birth}</p>
+								
+								<table id="accountInfo" border="1" style="width: 100%; text-align: center">
+										<tbody>
+											<tr>
+												<td>身分證字號:</td>
+												<td>${member.memberdetail.idnumber}</td>
+											</tr>
+											<tr>
+												<td>性別</td>
+												<c:choose>
+												<c:when test="${member.memberdetail.sex == 'male'}">
+												<td>男</td>
+												</c:when>
+												<c:otherwise>
+												<td>女</td>
+												</c:otherwise>
+												</c:choose>
+												
 
-								</div>
+											</tr>
+											<tr>
+												<td>電話</td>
+												<td>${member.memberdetail.tel.substring(0,4)}-${member.memberdetail.tel.substring(4,7)}-${member.memberdetail.tel.substring(7)}</td>
+											</tr>
+											<tr>
+												<td>地址</td>
+												<td>${member.memberdetail.address}</td>
+
+											</tr>	
+											<tr>
+												<td>生日</td>
+												<td>${member.memberdetail.birth}</td>
+
+											</tr>
+										</tbody>
+									</table>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+<!-- 								<div style="margin-top: 30px"> -->
+<!-- 									<p style="color: pink">身分證字號: -->
+<%-- 										${member.memberdetail.idnumber}</p> --%>
+<%-- 									<p style="color: pink">性別: ${member.memberdetail.sex}</p> --%>
+<%-- 									<p style="color: pink">電話: ${member.memberdetail.tel}</p> --%>
+<%-- 									<p style="color: pink">地址: ${member.memberdetail.address}</p> --%>
+<%-- 									<p style="color: pink">生日:${member.memberdetail.birth}</p> --%>
+
+<!-- 								</div> -->
 							</h5>
 						</div>
 

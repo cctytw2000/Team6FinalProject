@@ -1,16 +1,17 @@
 let open = 0
-function openUpdate() {
+let telopen = 0
+function openUpdate(nickname) {
 	if (open == 0) {
-		document.getElementById("nickname").innerHTML = "<label>暱稱：</label> <br><input type='text'"
-				+ "name='nickname' placeholder='來個新名字吧(ゝ∀･)'"
-				+ "value='${MemberDetial.memberdetail.nickname}'></input> <br><input type='submit' value='更新'> <button id='update'"
-				+ "type='button' onclick='openUpdate()'>編輯</button>"
+		document.getElementById("nickname").innerHTML = '<label>暱稱：</label> <br><input type="text"\
+				 name="nickname" placeholder="來個新名字吧(ゝ∀･)"\
+				 value="'+nickname+'"></input> <br><input type="submit" value="更新"> <button id="update"\
+				 type="button" onclick="openUpdate('+"'"+nickname+"'"+')">取消</button>'
 		open = 1
 	} else {
 		document.getElementById("nickname").innerHTML = "<label>暱稱：</label> <br><input style='border-width: 0; background-color: white' type='text'"
 				+ "name='nickname' placeholder='來個新名字吧(ゝ∀･)' disabled='disabled' readonly='readonly'"
-				+ "value='${MemberDetial.memberdetail.nickname}'></input> <button id='update'"
-				+ "type='button' onclick='openUpdate()'>取消</button>"
+				+ "value='"+nickname+"'></input> <button id='update'"
+				+ "type='button' onclick='openUpdate("+'"'+nickname+'"'+")'>編輯</button>"
 		open = 0
 	}
 
@@ -33,4 +34,19 @@ function readURL(input) {
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
+}
+
+function showall(allTel,tel){
+	if(telopen == 0){
+		document.getElementById("showTel").innerHTML=allTel
+		document.getElementById("tel").innerHTML="取消"
+		tel
+		telopen=1
+	}else {
+
+		document.getElementById("showTel").innerHTML=tel
+		document.getElementById("tel").innerHTML="查看"
+		telopen=0
+	}
+	
 }
