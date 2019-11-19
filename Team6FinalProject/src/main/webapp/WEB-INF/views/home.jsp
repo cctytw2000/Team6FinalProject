@@ -362,9 +362,10 @@
 						<div class="review-item">
 							<div class="review-cover set-bg"
 								data-setbg="<c:url value='/getPicture/${p.game_id}' />">
-								<div class="score yellow" style="margin-top: 0px">$${p.price
-									}</div>
+								
+								<div class="score yellow" style="margin-top: 0px">$${p.price}</div>
 							</div>
+							
 							<div class="review-text">
 								<h5>
 									<a href="<spring:url value='product?game_id=${p.game_id }'/>">${p.name }</a>
