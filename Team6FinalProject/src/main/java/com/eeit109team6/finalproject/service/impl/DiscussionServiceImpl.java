@@ -55,4 +55,9 @@ public class DiscussionServiceImpl implements IDiscussionService {
 		dao.updateBoardViews(boardId);	
 	}
 
+	@Override
+	public List<Discussion> getArticleTop6() {
+		return dao.getArticleTop6();
+	}
+
 }

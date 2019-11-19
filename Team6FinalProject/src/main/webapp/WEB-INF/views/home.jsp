@@ -150,65 +150,23 @@
 					<div class="footer-widget">
 						<h4 class="fw-title">熱門文章</h4>
 						<div class="top-comment">
-							<div class="tc-item">
+
+								<c:forEach var="discussion" items="${sessionScope.articleTop6}" varStatus="i"
+								begin="0" end="5">
+									<div class="tc-date"><a href="article?id=${discussion.articleId}"><p style="color:white;">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a></div>
+								
+								<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="Images/authors/1.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> PUBG
+										<a href="member?id=${discussion.member.member_id}"> ${discussion.member.memberdetail.nickname}</a> <span>於</span> ${discussion.boardType.boardName}看板
 									</p>
-									<div class="tc-date">[問題] 怎樣才能變強阿?</div>
+									<div class="tc-date">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</div>
 								</div>
 							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/2.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/3.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
+				
+								</c:forEach>
+
 						</div>
 					</div>
 				</div>

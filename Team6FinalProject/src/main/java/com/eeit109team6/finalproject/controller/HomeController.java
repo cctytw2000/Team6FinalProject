@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.model.HomeMovie;
 import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.model.MovieInfo;
@@ -23,7 +24,6 @@ import com.eeit109team6.finalproject.service.IHomeMovieService;
 import com.eeit109team6.finalproject.service.IMovieService;
 import com.eeit109team6.finalproject.service.INewsService;
 import com.eeit109team6.finalproject.service.ProductService;
-import com.eeit109team6.finalproject.service.impl.DiscussionServiceImpl;
 
 @Controller
 public class HomeController {
@@ -31,8 +31,7 @@ public class HomeController {
 	ProductService service;
 	IHomeMovieService homeMovieService;
 	INewsService newsService;
-
-	IDiscussionService DiscussionService;
+	IDiscussionService discussionService;
 	IMovieService movieservice;
 
 	@Autowired
@@ -45,11 +44,14 @@ public class HomeController {
 		this.movieservice = movieservice;
 	}
 
-
-
 	@Autowired
 	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
+	}
+	
+	@Autowired
+	public void setDiscussionService(IDiscussionService discussionService) {
+		this.discussionService = discussionService;
 	}
 
 	@Autowired
@@ -81,6 +83,8 @@ public class HomeController {
 		List<News> newslist = newsService.getAllNewsByViews();
 		session.setAttribute("newses", newslist);
 
+		List<Discussion> articlelist = discussionService.getArticleTop6();
+		session.setAttribute("articleTop6", articlelist);
 
 		ArrayList<MovieInfo> newMovies = movieservice.getNewMovieInfo(3);
 		System.out.println("newMovies=" + newMovies.get(0).getMember().getAccount());

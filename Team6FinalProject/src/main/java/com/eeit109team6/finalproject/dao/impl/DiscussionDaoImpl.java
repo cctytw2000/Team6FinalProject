@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
-import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class DiscussionDaoImpl implements IDiscussionDao {
@@ -78,10 +77,13 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 
 	@Override
 	public List<Discussion> getArticleTop6() {
-		String hql = "FROM Discusstion d ORDER BY views DESC";
+		String hql = "FROM Discussion d ORDER BY views DESC";
 		Session session = factory.getCurrentSession();
-		List<Discussion> list = session.createQuery(hql).setMaxResults(6).getResultList(); 
-		return list;
+		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(6).getResultList(); 
+		
+//		System.out.println("***********Dlist.size():"+Dlist.size());
+//		System.out.println("***********Dlist."+Dlist.charAt(1));
+		return Dlist;
 	}
 	
 

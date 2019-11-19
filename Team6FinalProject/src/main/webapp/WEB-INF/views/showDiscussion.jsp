@@ -32,8 +32,7 @@
 <!-- 	//套版用 -->
 </head>
 
-<body
-	style="background-image: url(<c:url value='/Images/pattern.png' />)">
+<body>
 	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
 		<!-- Page section -->
@@ -51,8 +50,8 @@
 
 									<tr class="row" style="margin-bottom: 15px;">
 
-										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img alt="${boardType.boardName}"
-											src="<c:url value='/getBoardImage/${boardType.boardId}'/>"></a>
+										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img width="300" height="90" alt="${boardType.boardName}"
+											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
 											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
