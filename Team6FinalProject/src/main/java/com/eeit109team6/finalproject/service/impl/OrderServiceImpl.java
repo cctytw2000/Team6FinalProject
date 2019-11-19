@@ -45,4 +45,16 @@ public class OrderServiceImpl implements OrderService {
 		return dao.updateOrderstate(order_id);
 	}
 
+	@Transactional
+	@Override
+	public List<Orders> findAll() {
+		return dao.findAll();
+	}
+
+	@Transactional
+	@Override
+	public void deleteOrderById(Integer order_id) {
+		dao.deleteOrderById(order_id);
+	}
+	
 }

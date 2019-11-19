@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="product")
 public class Product {
@@ -38,7 +40,9 @@ public class Product {
 	private Category category;
 	private Blob photo;
 	private Integer is_remove;
-	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore	
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)

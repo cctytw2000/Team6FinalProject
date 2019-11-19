@@ -64,9 +64,9 @@
 										<c:when test="${order.state == 1}">
 										<td style="color:red">未付款</td>
 										</c:when>
-										<c:otherwise>
+										<c:when test="${order.state == 4}">
 										<td>已付款</td>
-										</c:otherwise>
+										</c:when>										
 			</c:choose>
 			</c:forEach>
 			</table>
