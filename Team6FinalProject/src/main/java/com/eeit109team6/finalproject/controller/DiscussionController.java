@@ -89,6 +89,10 @@ public class DiscussionController {
 //		List<Discussion> allArticlelist = discussionService.getAllArticles();
 //		List<Integer> viewsByBoardType = By;
 		
+		// 取得最新發表的三篇文章
+		List<Discussion> articlelist = discussionService.getLatestArticle();
+		session.setAttribute("articleLatest3", articlelist);
+		
 		List<BoardType> list = boardTypeService.getAllBoardType();
 		System.out.println("抓取看板列表");
 		model.addAttribute(list);
@@ -130,6 +134,7 @@ public class DiscussionController {
 	public String getArticleById(Model model, @RequestParam("id") Integer articleId) {
 		System.out.println("articleId:" + articleId);
 
+		@SuppressWarnings("unused")
 		Discussion discussion = discussionService.getArticleById(articleId);
 		discussionService.updateViews(articleId); 
 		Discussion discussion_sessDiscussion = discussionService.getArticleById(articleId);
@@ -235,10 +240,7 @@ public class DiscussionController {
 		reply.setPostTimeStamp(postTimeStamp);// 填入時間戳
 		
 //		System.out.println("reply.getMember():"+reply.getMember()); 
-//		System.out.println("======================");
 //		System.out.println("articleId=" + discussion);
-//		System.out.println("mem=" + mem);
-//		System.out.println("replybody=" + replyBody);
 		
 		//===============呼叫Reply Service，將裝好資料的屬性物件，交給DAO以Hibernate塞進資料庫
 		replyService.addReply(reply);

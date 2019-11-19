@@ -98,51 +98,22 @@
 							人氣排行 <a style="font-size: 10px" href="#">看更多...</a>
 						</h4>
 						<div class="latest-blog">
+						
+							<c:forEach var="boardtype" items="${sessionScope.boardTop5}" varStatus="i"
+								begin="0" end="4">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/1.jpg"></div>
+									data-setbg="<c:url value='/getBoardImage/${boardtype.boardId}' />"></div>
+									
 								<div class="lb-content">
-									<div class="lb-date">PUBG</div>
-									<p>昨日人氣：60000</p>
+									<div class="lb-date">${boardtype.boardName}</div>
+									<p>累積人氣：${boardtype.boardViews}</p>
 									<a href="#" class="lb-author">討論區</a>
 								</div>
 							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/3.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">魔獸世界</div>
-									<p>昨日人氣：46000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
+							
+							</c:forEach>
+							
 						</div>
 					</div>
 				</div>

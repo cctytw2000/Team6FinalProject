@@ -80,11 +80,22 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		String hql = "FROM Discussion d ORDER BY views DESC";
 		Session session = factory.getCurrentSession();
 		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(6).getResultList(); 
-		
-//		System.out.println("***********Dlist.size():"+Dlist.size());
-//		System.out.println("***********Dlist."+Dlist.charAt(1));
 		return Dlist;
 	}
-	
 
+	@Override
+	public List<Discussion> getLatestArticle() {
+		String hql = "FROM Discussion d ORDER BY articleId DESC";
+		Session session = factory.getCurrentSession();
+		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(3).getResultList(); 
+		return Dlist;
+	}
+
+	@Override
+	public List<BoardType> getBoardTopN() {		
+		String hql = "FROM BoardType ORDER BY boardViews DESC";
+		Session session = factory.getCurrentSession();
+		List<BoardType> Blist = session.createQuery(hql).setMaxResults(5).getResultList(); 
+		return Blist;
+	}
 }
