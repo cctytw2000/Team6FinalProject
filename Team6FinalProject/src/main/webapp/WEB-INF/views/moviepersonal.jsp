@@ -112,7 +112,7 @@
 									<!--內文 -->
 									<p>${allmovies.movie_content}</p>
 									<!-- Time -->
-									<p>${allmovies.date}</p>
+									<p>${allmovies.time}</p>
 									<a href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"  class="commentUpdate" >Update</a>
 									<!-- href="moviepersonal/updateMovie" -->
 									

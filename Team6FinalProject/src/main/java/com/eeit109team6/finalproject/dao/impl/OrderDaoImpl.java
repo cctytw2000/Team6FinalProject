@@ -31,7 +31,7 @@ public class OrderDaoImpl implements IOrderDao {
 
 	@Override
 	public List<Orders> showOrder(Integer member_id) {
-		String hql = "FROM Orders  WHERE member_id = :member_id";
+		String hql = "FROM Orders  WHERE member_id = :member_id and is_remove = 0";
 		Session session = factory.getCurrentSession();
 		List<Orders> list = session.createQuery(hql).setParameter("member_id", member_id).getResultList();
 		return list;
@@ -48,7 +48,7 @@ public class OrderDaoImpl implements IOrderDao {
 	@Override
 	public Boolean updateOrderstate(Integer order_id) {
 		String hql = "FROM Orders  WHERE order_id = :order_id AND state = 1";
-		Query query=factory.getCurrentSession().createQuery(hql).setParameter("order_id", order_id);		
+		Query query = factory.getCurrentSession().createQuery(hql).setParameter("order_id", order_id);
 		try {
 			Orders ordersList = (Orders) query.getSingleResult();
 			ordersList.setState(4);
@@ -59,4 +59,19 @@ public class OrderDaoImpl implements IOrderDao {
 			return false;
 		}
 	}
+
+	@Override
+	public List<Orders> findAll() {
+		Query query = factory.getCurrentSession().createQuery("from Orders where is_remove = 0");
+		return query.getResultList();
+	}
+
+	@Override
+	public void deleteOrderById(Integer order_id) {
+		Session session = factory.getCurrentSession();
+		Orders order = factory.getCurrentSession().get(Orders.class, order_id);
+		order.setIs_remove(true);
+		session.update(order);
+	}
+
 }

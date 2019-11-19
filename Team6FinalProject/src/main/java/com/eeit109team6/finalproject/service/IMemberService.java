@@ -28,7 +28,8 @@ public interface IMemberService {
 
 	public boolean checkAccount(Member m);
 
-	public Member checkAccount(String account);
+
+	Member checkAccount(String account, String type);
 
 	void openActive(Integer id);
 

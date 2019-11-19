@@ -61,7 +61,7 @@
 			</div>	
 			<hr style="border-bottom:2px dashed #F8F8FF;margin-top: 30px">
 			<div>  
-				<img width='200' height='200' src="<c:url value='/getNewsPicture/${news.newsId}' />">
+				<img width='400' height='400' src="<c:url value='/getNewsPicture/${news.newsId}' />">
 			</div>
 			<div>
 				<p id="article" style="color:white;font-size:large;text-align:left">${news.article}</p>

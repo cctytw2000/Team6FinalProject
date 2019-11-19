@@ -26,4 +26,10 @@ public class OrderitemServiceImpl implements OrderitemService {
 		return dao.showOrder();
 	}
 
+	@Override
+	public List<OrderItem> getOrderItemsById(Integer order_id) {
+		return dao.getOrderItemsById(order_id);
+	}
+
+	
 }

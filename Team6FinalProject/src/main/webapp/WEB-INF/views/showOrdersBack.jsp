@@ -78,12 +78,7 @@
 			</table>
 			<table  id="tbody2" border="1" style="text-align: center;float:right;width:50%">
 			</table>			
-		</div>
-		<style>
-			a:hover {
-				color:bule
-			}
-		</style>		
+		</div>			
 		<script>		
 			$(document).ready(function(){
 				memberOrderajax();

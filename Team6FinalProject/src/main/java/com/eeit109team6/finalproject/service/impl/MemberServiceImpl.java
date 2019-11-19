@@ -103,9 +103,9 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Transactional
 	@Override
-	public Member checkAccount(String account) {
+	public Member checkAccount(String account,String type) {
 		// TODO Auto-generated method stub
-		return dao.checkAccount(account);
+		return dao.checkAccount(account,type);
 	}
 
 	@Transactional

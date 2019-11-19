@@ -325,6 +325,10 @@ public class NewsController {
 	public String newsPage(Model model) {
 		List<News> newsList = newsService.getAllNewsByTime();
 		model.addAttribute("newsList", newsList);
+		
+		List<NewsType> newsTypeList = newsService.getAllNewsTypes();
+		model.addAttribute("newsTypeList", newsTypeList);
+		
 		return "newsPage";
 	}
 

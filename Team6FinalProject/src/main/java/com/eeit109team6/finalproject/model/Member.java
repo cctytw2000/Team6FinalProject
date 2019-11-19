@@ -42,7 +42,6 @@ public class Member {
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
 	private Set<MemberHeadShot> memberheadshot = new LinkedHashSet<MemberHeadShot>();
-
 	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
 	
 	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)

@@ -48,8 +48,8 @@
 
 				<c:otherwise>
 					<div align="center" style="width:60%;margin:15px auto">
-						<table border="1" style="text-align:center;width:100%">
-							<tr>
+						<table style="text-align:center;width:100%" class="table table-sm">
+							<tr style="border-bottom:2px solid white;background-color: white;color:black">
 								<th>訂單編號
 								<th>訂單時間
 								<th>訂單金額
@@ -64,9 +64,9 @@
 										<c:when test="${order.state == 1}">
 										<td style="color:red">未付款</td>
 										</c:when>
-										<c:otherwise>
-										<td style="color:green">已付款</td>
-										</c:otherwise>
+										<c:when test="${order.state == 4}">
+										<<td style="color:green">已付款</td>
+										</c:when>										
 			</c:choose>
 			</c:forEach>
 			</table>

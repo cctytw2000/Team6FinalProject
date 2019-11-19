@@ -1,8 +1,10 @@
 $(document).ready(function() {
-	var article = $(".test").text();
-	console.log(article)
-	console.log(article.substr(0, 30))
-	$(".test").text(article.substr(0, 30));
+	
+	for(let i = 0 ; i<3;i++){
+		var article1 = $("#"+i).text();
+		$("#"+i).text(article1.substr(0, 30))
+	}
+
 })
 
 function countView(newsId) {

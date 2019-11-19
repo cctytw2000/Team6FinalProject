@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="orderItem")
 public class OrderItem {
@@ -16,12 +18,13 @@ public class OrderItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer item_id;   //商品細項編號
 	private Integer count;  //商品數量
-	private Integer subtotal;  //小計
+	private Integer subtotal;  //小計	
 	@ManyToOne
-	@JoinColumn(name = "GAME_ID")
-	private Product product;   //購買的遊戲
+	@JoinColumn(name = "game_id")
+	private Product product;   //購買的遊戲	
+	@JsonIgnore	
 	@ManyToOne
-	@JoinColumn(name = "ORDER_ID")
+	@JoinColumn(name = "order_id")
 	private Orders order;  //所屬訂單
 //	private Integer game_id;
 //	@Transient

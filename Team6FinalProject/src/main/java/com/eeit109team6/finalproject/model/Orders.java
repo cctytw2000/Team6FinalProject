@@ -29,15 +29,15 @@ public class Orders {
 	private String ordertime;
 	private Integer total;
 	private Integer state;
-	@Transient
+	@JsonIgnore	
+	@Transient	
 	private Integer member_id;
 	private String address;
 	private boolean is_remove;
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id" )
-	@JsonIgnoreProperties("orders")
+	//@JsonIgnoreProperties("orders")
 	private Member member;
 	
 	@JsonIgnore

@@ -81,7 +81,7 @@ public class AioCheckOutController {
 		System.out.println("games:" + items);
 		System.out.println("time:" + time);
 		System.out.println("pay:" + s);
-		System.out.println("game:" + order.getOrder_id().toString());
+		System.out.println("order:" + order.getOrder_id().toString());
 		aio.setItemName(items);
 		aio.setTotalAmount(order.getTotal().toString());
 		aio.setTradeDesc("item desc");

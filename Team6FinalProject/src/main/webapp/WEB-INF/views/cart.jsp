@@ -47,7 +47,7 @@
 
 
 
-			<h2 align="center" style="color: white;">購物車</h2>
+			<h2 align="center" style="color: white;">${sessionScope.mem.username }的購物車</h2>
 			<br>
 			<c:choose>
 				<c:when test="${empty sessionScope.cart or fn:length(sessionScope.cart.cartItems) eq 0 }">
@@ -67,9 +67,9 @@
 				</c:when>
 				<c:otherwise>
 					<div align="center" style="color: white;">
-						<table style="text-align: center">
+						<table style="text-align: center;width:700px"  class="table table-sm">
 						
-							<tr style="border-bottom:2px solid white">
+							<tr style="border-bottom:2px solid white;background-color: white;color:black">
 								<th>商品編號
 								<th>商品名稱
 								<th>數量

@@ -36,8 +36,9 @@
 	<div class="container mt-3">
 		<h1 align="center">新增討論看板</h1>
 		<div align="center">
-	<form:form method='POST' modelAttribute="boardType">
-		<form:input path="BoardName" type="text" size="50px" />
+	<form:form method='POST' modelAttribute="boardType" enctype="multipart/form-data">
+		<form:input path="boardName" type="text" size="50px" />
+		<form:input path="bImage" type='file'/>
 		<p>
 			<input type="submit" value="送出">
 			<button type="button" onclick="GoBack()">取消</button>

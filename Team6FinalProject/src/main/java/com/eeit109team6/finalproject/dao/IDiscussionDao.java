@@ -17,6 +17,8 @@ public interface IDiscussionDao {
 	//=================以下尚未撰寫
 	//updateArticle();//修改文章
 	//deleteArticle();//刪除文章
+	//List<Discussion> getArticleTopN(); //查詢瀏覽次數最高的一批文章
+	//List<BoardType> getBoardTopN();//查詢文章最多的一批看板
 	
 	
 }
