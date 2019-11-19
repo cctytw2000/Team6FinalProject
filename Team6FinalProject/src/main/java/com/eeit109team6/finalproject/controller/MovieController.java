@@ -30,7 +30,7 @@ import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IMemberService;
 import com.eeit109team6.finalproject.service.IMovieService;
-import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference;
+
 
 @Controller
 public class MovieController {

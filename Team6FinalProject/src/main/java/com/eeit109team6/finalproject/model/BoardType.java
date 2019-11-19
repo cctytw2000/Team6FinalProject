@@ -32,6 +32,7 @@ public class BoardType {
 	@Transient
 	private MultipartFile bImage; //除了Blob，也要另設一個MultipartFile型態的屬性，控制器方法才能使用
 	
+	private Integer boardViews; // 看板被瀏覽次數
 
 	//mappedBy="對方變數名稱"
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "boardType", fetch = FetchType.LAZY)
@@ -78,6 +79,13 @@ public class BoardType {
 	public void setbImage(MultipartFile bImage) {
 		this.bImage = bImage;
 	}
-	
+
+	public Integer getBoardViews() {
+		return boardViews;
+	}
+
+	public void setBoardViews(Integer boardViews) {
+		this.boardViews = boardViews;
+	}
 
 }

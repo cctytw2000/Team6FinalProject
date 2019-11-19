@@ -29,13 +29,14 @@
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
 </head>
-<body>
+<body
+	style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/homeHeader.jsp" />
 	
 	<div align="center">
 	<h1>看板名稱:${boardType.boardName}</h1>
 	
-	<a style="text-decoration:none;" href="<spring:url value='addA?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
+	<a style="text-decoration:none;" href="<spring:url value='addArticle?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
 	
 
 <table>

@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.BoardType;
-import com.eeit109team6.finalproject.model.News;
-import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IBoardTypeService;
 
 @Controller
@@ -65,22 +63,22 @@ public class BoardTypeController {
 	public String getAddBoardTypeForm(Model model) {
 
 		BoardType boardType = new BoardType();
-		model.addAttribute("boardType", boardType);
+		model.addAttribute("boardType", boardType);//將boardType物件裝入model，model內的識別字串為boardType
 
 		return "addBoard";
 	}
 
 	// 新增討論看板 -->重定向至討論區後台 discussionBack.jsp
 	@RequestMapping(value = "addBoard", method = RequestMethod.POST)
-	public String processAddBoardType(@ModelAttribute("boardType") BoardType boardType
-//			Model model
-//			@RequestParam("BoardImage") MultipartFile boardImage,
-//			@ModelAttribute("boardType") BoardType boardType
+	public String processAddBoardType(
+			@ModelAttribute("boardType") BoardType boardType    //特別指定引入Model中的其中一個鍵值
+//			Model model											//引入整個model
+//			@RequestParam("BoardImage") MultipartFile boardImage,//非form:form表單傳遞參數方法
 	) {
 		System.out.println("進入processAddBoardType()方法");
-//		BoardType boardType = new BoardType();
+//		BoardType boardType = new BoardType();			//new一個BoardType實體指給boardType變數
 
-		MultipartFile boardImage = boardType.getbImage();
+		MultipartFile boardImage = boardType.getbImage(); //boardType物件
 		String originalFilename = boardImage.getOriginalFilename();
 		// 建立Blob物件，交由Hibernate寫入資料庫
 		if (boardImage != null && !boardImage.isEmpty()) {

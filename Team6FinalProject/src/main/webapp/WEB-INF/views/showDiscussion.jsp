@@ -32,7 +32,8 @@
 <!-- 	//套版用 -->
 </head>
 
-<body>
+<body
+	style="background-image: url(<c:url value='/Images/pattern.png' />)">
 	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
 		<!-- Page section -->
@@ -50,8 +51,8 @@
 
 									<tr class="row" style="margin-bottom: 15px;">
 
-										<td class="col-md-5"><img alt="${boardType.boardName}"
-											src="<c:url value='/getBoardImage/${boardType.boardId}'/>">
+										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img alt="${boardType.boardName}"
+											src="<c:url value='/getBoardImage/${boardType.boardId}'/>"></a>
 											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
 											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
@@ -64,28 +65,26 @@
 														${discussion.subjectType.subjectName}】
 														${discussion.subject}</a>
 													<p>
-													<div style="padding-left:15px">
-														<span><i id="eye" class="fas fa-eye"></i>${boardType.discussion.size()}</span>&nbsp;&nbsp;<span><i
-															class="fas fa-list-alt"></i>2598</span>
-													</div>
+<!-- 													<div style="padding-left:15px"> -->
+<%-- 														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i --%>
+<%-- 															class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span> --%>
+<!-- 													</div> -->
 
-												</c:forEach></td>
+												</c:forEach>
+												<div style="padding-left:15px">
+														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i
+															class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span>
+													</div>
+												</td>
 										<%-- 										<td class="col-md-1">${boardType.discussion.size()}</td> --%>
 
 									</tr>
 
 								</c:forEach>
-
 							</table>
 						</div>
 
-
 					</div>
-
-
-
-
-
 
 
 					<!-- sidebar -->
