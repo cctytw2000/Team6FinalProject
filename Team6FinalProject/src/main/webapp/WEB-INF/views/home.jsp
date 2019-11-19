@@ -257,21 +257,27 @@
 		data-setbg="Images/recent-game-bg.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Games</h2>
+				<div class="cata new">New</div>
+				<h2>New Viedio</h2>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-6">
+			
+			<c:forEach var="newMovie" items="${newMovies}" begin="0" end="2">
+					<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg"
-							data-setbg="Images/recent-game/1.jpg">
+						<div class="rgi-thumb set-bg">
+							<video id="${newMovie.movie_ID}" onclick="updateviews('${newMovie.movie_ID}')" width="320" height="240" class="set-video"
+									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg"
+									playsinline="playsinline" controls="controls">
+									<source src="<c:url value='/memberMovies/${newMovie.member.account}${newMovie.member.member_id}/${newMovie.movie_ID}${newMovie.location_Test}'/>"
+										type="video/mp4">
+								</video>
 							<div class="cata new">new</div>
 						</div>
 						<div class="rgi-content">
-							<h5>Suspendisse ut justo tem por, rutrum</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit amet, consectetur elit.</p>
-							<a href="#" class="comment">3 Comments</a>
+							<h5>${newMovie.name }</h5>
+							<p>${newMovie.movie_content}</p>
+							<a href="#" class="comment">觀看次數：${newMovie.click_Sum}</a>
 							<div class="rgi-extra">
 								<div class="rgi-star">
 									<img src="Images/icons/star.png" alt="">
@@ -283,6 +289,13 @@
 						</div>
 					</div>
 				</div>
+			</c:forEach>
+			
+		
+				
+				
+				
+<!-- 				
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
 						<div class="rgi-thumb set-bg"
@@ -305,6 +318,9 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
 						<div class="rgi-thumb set-bg"
@@ -326,7 +342,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>

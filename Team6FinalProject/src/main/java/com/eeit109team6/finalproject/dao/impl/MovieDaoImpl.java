@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,71 +12,96 @@ import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.dao.IMovieDao;
 
-
-
 @Repository
-public class MovieDaoImpl implements IMovieDao{
-	
-	
-	SessionFactory factory; 
+public class MovieDaoImpl implements IMovieDao {
+
+	SessionFactory factory;
+
 	@Autowired
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
 	}
-	
-						//	DONE
+
+	// DONE
 	@Override
-	public void addMovie(MovieInfo movieInfo) {
+	public Integer addMovie(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
-		session.save(movieInfo);
-		
+		Integer id = (Integer) session.save(movieInfo);
+		return id;
 	}
-						//	DONE
+	// DONE
+
+	@Override
+	public void updateMovieViews(Integer id) {
+		System.out.println("updateMovieViews=" + id);
+		MovieInfo movie = factory.getCurrentSession().get(MovieInfo.class, id);
+
+		movie.setClick_Sum(movie.getClick_Sum() + 1);
+	}
+
 	@Override
 	public void deleteMovieInfoById(int movie_ID) {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieinfo = session.get(MovieInfo.class, movie_ID);
 		session.delete(movieinfo);
 	}
-						//	DONE
+
+	// DONE
 	@Override
 	public void updateMovieInfoById(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
-		session.update(movieInfo);	
+		session.update(movieInfo);
 //		factory.getCurrentSession().update(movieInfo);
 //		session.clear();
 //		session.update(movieInfo);	
 	}
-	
+
 	@Override
 	public MovieInfo getMovieInfoByMovieID(Integer movie_ID) {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieInfo = session.get(MovieInfo.class, movie_ID);
-		//get 不管 movie_ID的名稱，強制使用Table PK 作為條件
+		// get 不管 movie_ID的名稱，強制使用Table PK 作為條件
 //		session.save(movieInfo);
 		return (MovieInfo) movieInfo;
 	}
-						//	DONE
+
+	// DONE
 	@Override
 	public List<MovieInfo> getMovies() {
-		String hql = "FROM MovieInfo";  
+		String hql = "FROM MovieInfo";
 		List<MovieInfo> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
 		return list;
 
 	}
-                        //	DONE
+
+	// DONE
 	@Override
 	public List<MovieInfo> getMovieInfoByOwnerID() {
-		String hql = "FROM MovieInfo WHERE owner_ID = 9";  
+		String hql = "FROM MovieInfo WHERE owner_ID = 9";
 		List<MovieInfo> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
 
+	@Override
+	public ArrayList<MovieInfo> getMovieInfoByOwnerID(Integer id) {
+		String hql = "FROM MovieInfo WHERE owner_ID = ?1";
 
-	
+		Query query = factory.getCurrentSession().createQuery(hql).setParameter(1, id);
+		ArrayList<MovieInfo> MovieInfoArrayList = (ArrayList<MovieInfo>) query.getResultList();
+		return MovieInfoArrayList;
+	}
+
+	@Override
+	public ArrayList<MovieInfo> getNewMovieInfo(Integer dateLength) {
+		String hql = "FROM MovieInfo order by Time desc";
+
+		Query query = factory.getCurrentSession().createQuery(hql);
+		ArrayList<MovieInfo> MovieInfoArrayList = (ArrayList<MovieInfo>) query.getResultList();
+		return MovieInfoArrayList;
+	}
 
 }

@@ -288,7 +288,8 @@
 												href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
 											<a class="dropdown-item"
 												href="${pageContext.request.contextPath}/member/PhotoList">照片清單</a>
-
+	<a class="dropdown-item"
+												href="${pageContext.request.contextPath}/member/movies">影片清單</a>
 
 
 											<div class="dropdown-divider"></div>
@@ -307,6 +308,8 @@
 												href="${pageContext.request.contextPath}/member/memberdetail">會員資料</a>
 											<a class="dropdown-item"
 												href="${pageContext.request.contextPath}/member/PhotoList">照片清單</a>
+													<a class="dropdown-item"
+												href="${pageContext.request.contextPath}/member/movies">影片清單</a>
 											<a class="dropdown-item"
 												href="${pageContext.request.contextPath}/member/sendChangePassWordMail">修改密碼</a>
 											<div class="dropdown-divider"></div>

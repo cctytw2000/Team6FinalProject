@@ -70,8 +70,7 @@ public class LiLoInforDaoJdbcImpl implements ILiLoInforDao {
 		List<Object[]> rows = query.getResultList();
 		System.out.println("rows=" + rows);
 		for (Object[] row : rows) {
-			System.out.println("row[0].toString()=" + row[0].toString());
-			System.out.println("row[1].toString()=" + row[1].toString());
+
 			data.put(row[0].toString(), Integer.valueOf(row[1].toString()));
 		}
 		return data;

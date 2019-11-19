@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit109team6.finalproject.model.HomeMovie;
 import com.eeit109team6.finalproject.model.MemberDetail;
+import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IHomeMovieService;
+import com.eeit109team6.finalproject.service.IMovieService;
 import com.eeit109team6.finalproject.service.INewsService;
 import com.eeit109team6.finalproject.service.ProductService;
 
@@ -24,14 +27,25 @@ import com.eeit109team6.finalproject.service.ProductService;
 public class HomeController {
 //	IMemberService service;
 	ProductService service;
-	IHomeMovieService movieService;
+	IHomeMovieService homeMovieService;
 	INewsService newsService;
+	IMovieService movieservice;
+
+	@Autowired
+	public void setHomeMovieService(IHomeMovieService homeMovieService) {
+		this.homeMovieService = homeMovieService;
+	}
+
+	@Autowired
+	public void setMovieservice(IMovieService movieservice) {
+		this.movieservice = movieservice;
+	}
 
 	@Autowired
 	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
 	}
-	
+
 	@Autowired
 	public void setService(ProductService service) {
 		this.service = service;
@@ -44,23 +58,26 @@ public class HomeController {
 		this.context = context;
 	}
 
-	@Autowired
-	public void setMovieService(IHomeMovieService movieService) {
-		this.movieService = movieService;
-	}
+//	@Autowired
+//	public void setMovieService(IHomeMovieService movieService) {
+//		this.homeMovieService = movieService;
+//	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
-		HomeMovie home = movieService.findById(1);
+		HomeMovie home = homeMovieService.findById(1);
 
 		List<Product> list = service.getProductTop8();
 		session.setAttribute("productsTop8", list);
 
 		model.addAttribute("homeMovie", home);
-		
+
 		List<News> newslist = newsService.getAllNewsByViews();
 		session.setAttribute("newses", newslist);
-		
+
+		ArrayList<MovieInfo> newMovies = movieservice.getNewMovieInfo(3);
+		System.out.println("newMovies=" + newMovies.get(0).getMember().getAccount());
+		model.addAttribute("newMovies", newMovies);
 		return "home";
 	}
 
