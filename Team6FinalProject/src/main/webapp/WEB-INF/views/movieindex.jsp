@@ -68,7 +68,7 @@
 				<c:forEach var="movie" items="${movies}">
 					<div class="col-lg-4 col-md-6">
 						<div class="recent-game-item">
-							<!-- 						標籤 -->
+							<!-- 標籤 -->
 
 							<div class="rgi-thumb set-bg">
 								<div class="cata racing">racing</div>

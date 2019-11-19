@@ -67,8 +67,8 @@ public class MovieDaoImpl implements IMovieDao{
 	}
                         //	DONE
 	@Override
-	public List<MovieInfo> getMovieInfoByOwnerID() {
-		String hql = "FROM MovieInfo WHERE owner_ID = 9";  
+	public List<MovieInfo> getMovieInfoByOwnerID(int owner_ID) {
+		String hql = "FROM MovieInfo WHERE owner_ID = owner_ID";  
 		List<MovieInfo> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();

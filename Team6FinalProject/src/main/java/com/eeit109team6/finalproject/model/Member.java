@@ -43,16 +43,16 @@ public class Member {
 
 	private Set<MemberHeadShot> memberheadshot = new LinkedHashSet<MemberHeadShot>();
 
-//	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
-//	
-//	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-//	public Set<MovieInfo> getMovieInfo() {
-//		return movieInfo;
-//	}
-//	
-//	public void setMovieInfo(Set<MovieInfo> movieInfo) {
-//		this.movieInfo = movieInfo;
-//	}
+	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
+	
+	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+	public Set<MovieInfo> getMovieInfo() {
+		return movieInfo;
+	}
+	
+	public void setMovieInfo(Set<MovieInfo> movieInfo) {
+		this.movieInfo = movieInfo;
+	}
 
 //	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
 

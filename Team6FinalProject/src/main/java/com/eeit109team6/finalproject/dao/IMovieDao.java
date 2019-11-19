@@ -13,7 +13,7 @@ public interface IMovieDao {
 	MovieInfo getMovieInfoByMovieID(Integer movie_ID); //查詢指定影片ID資訊
 
 	
-	List<MovieInfo> getMovieInfoByOwnerID(); //尋找使用者Owner_ID上傳的影片
+	List<MovieInfo> getMovieInfoByOwnerID(int owner_ID); //尋找使用者Owner_ID上傳的影片
 	List<MovieInfo> getMovies();
 	
 	
