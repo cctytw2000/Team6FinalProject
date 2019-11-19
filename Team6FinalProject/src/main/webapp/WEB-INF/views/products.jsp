@@ -43,7 +43,7 @@
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
 
-				<c:forEach var="newsTypeList" items="${newsTypeList }">
+				<c:forEach var="product" items="${sessionScope.products }">
 					<div class="nt-item">
 						<span class="new">${product.category.category }</span><a
 							href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span>
