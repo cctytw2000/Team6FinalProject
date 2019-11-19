@@ -60,7 +60,7 @@ public class MovieServiceImpl implements IMovieService {
 
 	@Transactional
 	@Override
-	public ArrayList<MovieInfo> getMovieInfoByOwnerID(Integer id) {
+	public ArrayList<MovieInfo> getMovieInfoByID(Integer id) {
 		// TODO Auto-generated method stub
 		return dao.getMovieInfoByOwnerID(id);
 	}

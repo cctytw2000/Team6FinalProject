@@ -7,7 +7,7 @@ import com.eeit109team6.finalproject.model.MovieInfo;
 
 public interface IMovieService {
 	
-	void addMovie(MovieInfo movieinfo); //新增影片
+	Integer addMovie(MovieInfo movieinfo); //新增影片
 
 	void deleteMovieInfoById(int movie_ID); //刪除影片
 
@@ -19,7 +19,7 @@ public interface IMovieService {
 	
 	List<MovieInfo> getMovies();
 
-	ArrayList<MovieInfo> getMovieInfoByOwnerID(Integer id);
+	ArrayList<MovieInfo> getMovieInfoByID(Integer id);
 
 	void updateMovieViews(Integer id);
 

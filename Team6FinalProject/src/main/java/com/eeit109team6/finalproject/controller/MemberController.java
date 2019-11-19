@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -188,7 +189,8 @@ public class MemberController {
 	public String memberMovies(Model model, HttpSession session) {
 		Member mem = (Member) session.getAttribute("mem");
 
-		ArrayList<MovieInfo> list = movieservice.getMovieInfoByOwnerID(mem.getMember_id());
+		ArrayList<MovieInfo> list = (ArrayList<MovieInfo>) movieservice.getMovieInfoByID(mem.getMember_id());
+//		List<MovieInfo> list = movieservice.getMovieInfoByOwnerID(mem.getMember_id());
 		model.addAttribute("movies", list);
 		return "memberMovieIndex";
 
