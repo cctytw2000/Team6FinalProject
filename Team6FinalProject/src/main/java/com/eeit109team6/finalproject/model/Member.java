@@ -42,6 +42,7 @@ public class Member {
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
 	private Set<MemberHeadShot> memberheadshot = new LinkedHashSet<MemberHeadShot>();
+	private Set<Reply> reply = new LinkedHashSet<Reply>();
 	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
 	
 	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
@@ -52,6 +53,21 @@ public class Member {
 	public void setMovieInfo(Set<MovieInfo> movieInfo) {
 		this.movieInfo = movieInfo;
 	}
+
+	
+
+
+//	private Set<MovieInfo> movieInfo = new LinkedHashSet<MovieInfo>();
+//	
+//	@OneToMany( mappedBy = "member" ,cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//	public Set<MovieInfo> getMovieInfo() {
+//		return movieInfo;
+//	}
+//	
+//	public void setMovieInfo(Set<MovieInfo> movieInfo) {
+//		this.movieInfo = movieInfo;
+//	}
+
 
 //	private Set<MovieLike> movieLike = new LinkedHashSet<MovieLike>();
 
@@ -207,6 +223,16 @@ public class Member {
 
 	public void setMemberheadshot(Set<MemberHeadShot> memberheadshot) {
 		this.memberheadshot = memberheadshot;
+	}
+	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.LAZY)
+	public Set<Reply> getReply() {
+		return reply;
+	}
+
+	public void setReply(Set<Reply> reply) {
+		this.reply = reply;
 	}
 
 //	================================新消息要關聯的部分================================

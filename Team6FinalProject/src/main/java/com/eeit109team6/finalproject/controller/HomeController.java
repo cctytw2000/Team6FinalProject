@@ -18,10 +18,12 @@ import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.Product;
+import com.eeit109team6.finalproject.service.IDiscussionService;
 import com.eeit109team6.finalproject.service.IHomeMovieService;
 import com.eeit109team6.finalproject.service.IMovieService;
 import com.eeit109team6.finalproject.service.INewsService;
 import com.eeit109team6.finalproject.service.ProductService;
+import com.eeit109team6.finalproject.service.impl.DiscussionServiceImpl;
 
 @Controller
 public class HomeController {
@@ -29,6 +31,8 @@ public class HomeController {
 	ProductService service;
 	IHomeMovieService homeMovieService;
 	INewsService newsService;
+
+	IDiscussionService DiscussionService;
 	IMovieService movieservice;
 
 	@Autowired
@@ -40,6 +44,8 @@ public class HomeController {
 	public void setMovieservice(IMovieService movieservice) {
 		this.movieservice = movieservice;
 	}
+
+
 
 	@Autowired
 	public void setNewsService(INewsService newsService) {
@@ -75,9 +81,11 @@ public class HomeController {
 		List<News> newslist = newsService.getAllNewsByViews();
 		session.setAttribute("newses", newslist);
 
+
 		ArrayList<MovieInfo> newMovies = movieservice.getNewMovieInfo(3);
 		System.out.println("newMovies=" + newMovies.get(0).getMember().getAccount());
 		model.addAttribute("newMovies", newMovies);
+
 		return "home";
 	}
 
