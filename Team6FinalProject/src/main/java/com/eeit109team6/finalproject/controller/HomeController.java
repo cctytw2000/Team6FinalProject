@@ -23,7 +23,6 @@ import com.eeit109team6.finalproject.service.IHomeMovieService;
 import com.eeit109team6.finalproject.service.IMovieService;
 import com.eeit109team6.finalproject.service.INewsService;
 import com.eeit109team6.finalproject.service.ProductService;
-import com.eeit109team6.finalproject.service.impl.DiscussionServiceImpl;
 
 @Controller
 public class HomeController {
@@ -68,9 +67,12 @@ public class HomeController {
 //	public void setMovieService(IHomeMovieService movieService) {
 //		this.homeMovieService = movieService;
 //	}
-
+	
+	
+	// moviepersonal.jsp UpdateClick --> /moviepersonal/updateMovie -->
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
+//		找出首頁影片 預定ID = 1
 		HomeMovie home = homeMovieService.findById(1);
 
 		List<Product> list = service.getProductTop8();
