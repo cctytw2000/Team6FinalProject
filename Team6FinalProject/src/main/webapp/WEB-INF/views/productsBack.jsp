@@ -25,16 +25,17 @@
 
 <style type="text/css">
 #b{
-	background-image:url(<c:url value='/Images/recent-game-bg1.png' />);
+ 	background-image:url(<c:url value='/Images/recent-game-bg1.png' />); 
     background-repeat:no-repeat;
     background-size:cover;
+    height:100%
 }
 </style>
 </head>
 
 <body id="b">
 	<jsp:include page="header/manageHeader.jsp" />
-	<div class="container mt-3" style="padding: 50px 15%">
+	<div class="container mt-3" style="padding: 50px 15%;">
 		<h1 align="center">商品管理</h1>
 		<%-- 	<form method="GET" action="queryCategory"> --%>
 		<!-- 		商品分類<select name="category"> -->
@@ -89,6 +90,9 @@
 
 						</tbody>
 				</table>
+				<div  align="center" id="totalspan" style="text-align: center"></div>
+				<ul id="pageBottom" style="width: 40%; margin-left: 25%;" class="pagination">
+				</ul>
 			</div>
 
 			<div id="productCancel" class="container tab-pane fade" style="width:800px">

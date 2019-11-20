@@ -215,9 +215,12 @@ public class ProductController {
 	public String productsBackJson(Model model) {
 		System.out.println("productsBackjson");
 	
-		ArrayList<Product> list = (ArrayList<Product>) service.getAll();
-		model.addAttribute("ProductJson", list);
+		ArrayList<Product> list = (ArrayList<Product>) service.getAllProducts();
+		model.addAttribute("ProductJson", list); //送架上商品的json
 
+		ArrayList<Product> c_list = (ArrayList<Product>) service.getCancelProducts();
+		model.addAttribute("CanProductJson", c_list); //送架下商品的json
+		
 		return "productsBack";
 	}
 	
