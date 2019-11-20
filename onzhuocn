@@ -1,0 +1,642 @@
+[33mcommit 495b64fb02b8b345a5f96958f9f552f417300fc7[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/work[m[33m)[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Thu Nov 21 14:40:36 2019 +0800
+
+    john201911211440
+    
+    版面更新
+
+[33mcommit efe701f08d49626229a4e867c32b073cf916b95f[m
+Merge: 9636869 84f4640
+Author: darren811101 <darren811101@gmail.com>
+Date:   Thu Nov 21 11:05:48 2019 +0800
+
+    darren201911211103
+    
+    後台訂單會員編號搜尋
+
+[33mcommit 96368696263ccd6a85e9cbfa3195e67481010982[m
+Author: darren811101 <darren811101@gmail.com>
+Date:   Thu Nov 21 11:02:35 2019 +0800
+
+    darren201911211059
+    
+    後台訂單會員編號搜尋
+
+[33mcommit 84f464060b147864c3470aee2cc3826f27ba4073[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Wed Nov 20 11:06:18 2019 +0800
+
+    john201911201106
+    
+    版片資訊更新
+
+[33mcommit 3d17c56fc8c23ebe2571d03bfa18f46b41eb5480[m
+Merge: 76fc268 dc90364
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Wed Nov 20 15:42:01 2019 +0800
+
+    Jasonzhuocn201911201541
+    
+    再一次
+
+[33mcommit 76fc2683944110153f26ec66dcac5a6e3eb8a405[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Wed Nov 20 15:40:08 2019 +0800
+
+    Jasonzhuocn201911201536
+    
+    修改討論區看板路徑，修改後台。
+
+[33mcommit dc90364efbdcc8f17db49b1a06c251492f4d45fa[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Wed Nov 20 15:08:29 2019 +0800
+
+    andy201911201508
+    
+    商城後台架上商品分頁
+
+[33mcommit aecc717b003c5597c85ef45d98860293afcd256d[m
+Merge: b03fff1 1f36db0
+Author: darren811101 <darren811101@gmail.com>
+Date:   Wed Nov 20 11:33:41 2019 +0800
+
+    darren201911201131
+    
+    每日銷售金額
+
+[33mcommit b03fff1c0b17dc23086cc4f2be6325663510b3b9[m
+Author: darren811101 <darren811101@gmail.com>
+Date:   Wed Nov 20 11:31:02 2019 +0800
+
+    darren201911201128
+    
+    每日銷售金額
+
+[33mcommit 1f36db01bca6c619eab0a526179993b9b3f861c9[m
+Merge: 3e8929d 8daadd8
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Wed Nov 20 11:20:32 2019 +0800
+
+    davidchen201911201120
+    
+    git pull checked
+
+[33mcommit 3e8929d2759c4d44e49b21a749c556446d0d1ff0[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Wed Nov 20 11:19:52 2019 +0800
+
+    davidchen201911201118
+    
+    dao service CRUD movie and homeMovie Done
+    and update homeMovie by id Done
+
+[33mcommit 8daadd8def676b1f8dae727506ae06fea50c14db[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Tue Nov 19 16:05:13 2019 +0800
+
+    john201911191604
+    
+    ForPull
+
+[33mcommit 639282252cfeb68cf0985464a7c80933baf4a27c[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Tue Nov 19 22:59:10 2019 +0800
+
+    Jasonzhuocn201911192257
+    
+    首頁人氣看板榜功能啟用，連結尚未開通。
+    討論區主頁右側最新發表欄位啟用。
+
+[33mcommit 9e81989791c8b23ae3294d7cf6ae72dbf513ee9c[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Tue Nov 19 19:40:54 2019 +0800
+
+    Jasonzhuocn201911191940
+    
+    首頁熱門文章功能啟用，討論區底色恢復白色
+
+[33mcommit 89bbffa596771f9546f7897a3503eeef3fcc0647[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Tue Nov 19 18:36:08 2019 +0800
+
+    andy201911191835
+    
+    更改商品後台頁面CSS
+
+[33mcommit 5519983809df9e8f3435be5b1a8117dcf359822a[m
+Author: Doris <online1216@gmail.com>
+Date:   Tue Nov 19 18:22:39 2019 +0800
+
+    Doris201911191822
+    
+    新增消息評論、改變廣告名稱
+
+[33mcommit 6d1a22f1b5faa9f6a5ee306cffb34402ea181eda[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Tue Nov 19 17:50:25 2019 +0800
+
+    andy201911181750
+    
+    改訂單明細頁面CSS
+
+[33mcommit cbffb3703d93a9ce111c43b069cc03147d458658[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Tue Nov 19 15:41:13 2019 +0800
+
+    andy201911191541
+    
+    拉一個
+
+[33mcommit d1f91290219028d9903f61a1e7d277c4212fc5c5[m
+Merge: eeab627 7ba4b39
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Tue Nov 19 16:36:01 2019 +0800
+
+    davidchen201911191635
+    
+    git pull checked
+
+[33mcommit eeab627e475993b3051c025bc922b4357cad4a3a[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Tue Nov 19 16:33:54 2019 +0800
+
+    davidchen201911191633
+    
+    git pull checked
+
+[33mcommit 7ba4b39e24c55b178dbfc33c2fad7a67da8091e3[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Tue Nov 19 16:10:20 2019 +0800
+
+    Jasonzhuocn201911191608
+    
+    再一次commit
+
+[33mcommit db1a824d360fc80d132fbb4f54380dfcb2a49b09[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Tue Nov 19 15:43:08 2019 +0800
+
+    Jasonzhuocn201911191540
+    
+    修改Reply以及討論區控制器，新增文章回覆功能。設置Reply  Discussion Memeber三表關聯
+
+[33mcommit 8e873bbffb1f27e7ecfabce6047242230c748e33[m
+Merge: 3faea17 d77adeb
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Tue Nov 19 15:25:35 2019 +0800
+
+    DavidChen201911191525
+    
+    Git pull Checked
+
+[33mcommit 3faea170eb5fa490c8f9372ffaf508bf53f77680[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Tue Nov 19 15:13:57 2019 +0800
+
+    DavidChen201911191510
+    
+    Date date set
+
+[33mcommit d77adeb57bfe45eb14e43611ddef6c7b8cf3e7e4[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Tue Nov 19 15:10:57 2019 +0800
+
+    john201911191510
+    
+    會員新增應片、首頁影片、排序
+
+[33mcommit 82b4e934b38c450352e05efb75667ffaebb742a2[m
+Merge: 495ca15 7362026
+Author: darren811101 <darren811101@gmail.com>
+Date:   Tue Nov 19 13:37:59 2019 +0800
+
+    darrren201911190133
+    
+    後台訂單更改
+
+[33mcommit 495ca15634a2490e7fe8868d09e636c19e27c5b2[m
+Author: darren811101 <darren811101@gmail.com>
+Date:   Tue Nov 19 13:31:54 2019 +0800
+
+    darren201911190130
+    
+    後台訂單更改
+
+[33mcommit 7362026a35717df71a35e4f1cb58c32a12defc76[m
+Author: Doris <online1216@gmail.com>
+Date:   Tue Nov 19 02:43:23 2019 +0800
+
+    Doris201911190243
+    
+    修正排序按鈕點不出的問題
+
+[33mcommit 550fac2c02c8b64fd3d9334f976092ba5146140b[m
+Author: Doris <online1216@gmail.com>
+Date:   Tue Nov 19 02:26:30 2019 +0800
+
+    Doris201911190225
+    
+    消息總攬頁面新增寫死的廣告輪播
+
+[33mcommit 64df3f9916e1d85314d9909f98f274d1d117c00d[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 19:26:32 2019 +0800
+
+    Doris201911181926
+    
+    新增消息的排序方式
+
+[33mcommit ccd62274988e3a1b60c7f32b934064e86d236cc7[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Mon Nov 18 19:19:44 2019 +0800
+
+    andy201911181919
+    
+    更改購物車及訂單的CSS
+
+[33mcommit 50c451917afd230ddd18f79ed4939530fd5cff13[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Mon Nov 18 17:47:24 2019 +0800
+
+    Jasonzhuocn201911181746
+    
+    新增看板圖片，可以在討論區主頁的看板列表顯示。後台相應的上傳功能。
+
+[33mcommit eb59c57756150e334c0f628edb06d3428f26797b[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Mon Nov 18 16:42:29 2019 +0800
+
+    john201911181642
+    
+    登入失敗會BUG
+
+[33mcommit 39c23fa87978e6a69d61ed90a4bf3e795f0be86e[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 16:32:26 2019 +0800
+
+    Doris201911181631
+    
+    更改home消息排版、修改newDetail圖片大小
+
+[33mcommit a718b69180eab473b1c4e4b09455e84ec56df5a7[m
+Merge: a300b71 002df4d
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Mon Nov 18 16:21:39 2019 +0800
+
+    DavidChen201911181621
+    
+    Git pull Checked
+
+[33mcommit a300b7150b045397ffee2c4b143ec12856f14218[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Mon Nov 18 16:18:25 2019 +0800
+
+    DavidChen20191118
+    
+    Update Delete Done
+
+[33mcommit 002df4da633406abd0492db373a118157ce602f1[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Mon Nov 18 15:27:19 2019 +0800
+
+    andy201911181526
+    
+    新增商品可一鍵帶入
+
+[33mcommit 165ce7eb0e8ed7e3c9fb26e30fe1e9a0fff3f2a6[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Mon Nov 18 15:02:16 2019 +0800
+
+    john201911181501
+    
+    版面調整、大頭貼刪除、寄信版面
+
+[33mcommit 5495734955c99636d0761127f2029c61feed51d1[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 14:11:54 2019 +0800
+
+    Doris201911181411
+    
+    剛剛傳的不見了
+
+[33mcommit 7adedb198b310d1aeb940ce17e6eadda5daf61ec[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 14:08:07 2019 +0800
+
+    Doris201911181407
+    
+    home新增熱門消息
+
+[33mcommit f69e26838be1f14dfa7d855e9b92dc8639c795e0[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Mon Nov 18 14:15:22 2019 +0800
+
+    Jasonzhuocn201911181413
+    
+    修改討論區控制器，為新增文章補上換行處理
+
+[33mcommit e35fdddb42cab95cab7003a68a31b790f6b2dc7b[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Mon Nov 18 12:44:40 2019 +0800
+
+    Jasonzhuocn201911181244
+    
+    為了pull
+
+[33mcommit 7447a7b7ca3cc7c87dea8c96481bc841e52f317a[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Sat Nov 16 15:45:09 2019 +0800
+
+    Jasonzhuocn201911161543
+    
+    修正人氣方法傳入引數，調整視圖
+
+[33mcommit 61b48a1f15e283142e231b5cb76aecad44b9dcb7[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Mon Nov 18 11:39:35 2019 +0800
+
+    john201911181139
+    
+    大頭照上傳多張
+
+[33mcommit d312767390c038561162b5eb84e88701a10fe8c5[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Mon Nov 18 10:21:49 2019 +0800
+
+    andy201911181021
+    
+    拉一個
+
+[33mcommit 42d9d25605059f8e599636f72e33c2bd35086965[m
+Merge: c1a3b06 eded10b
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Mon Nov 18 03:40:32 2019 +0800
+
+    DavidChen201911180339
+    
+    git pull Checked
+
+[33mcommit c1a3b06ecd52418c0a92753c3d7d0ae6b723e088[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Mon Nov 18 03:38:43 2019 +0800
+
+    DavidChen20191118
+    
+    Will it is a bug 400 in Moviecontroller is changed to 500 ...
+
+[33mcommit eded10b81e75206ad34908b0527698fe71b6fc43[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 02:05:02 2019 +0800
+
+    Doris201911180204
+    
+    homeHeader新增連結至最新消息
+
+[33mcommit 3fc6a37137c874b4993f336a54d428603cf42b9d[m
+Author: Doris <online1216@gmail.com>
+Date:   Mon Nov 18 01:53:14 2019 +0800
+
+    Doris201911180152
+    
+    消息前台套版、刪除articlepicture資料表、新增picture欄位至news資料表
+
+[33mcommit 7117cb71c6cdc8dedad9880b0112230b28a6919d[m
+Merge: 4901909 f8ebbad
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Sun Nov 17 23:48:32 2019 +0800
+
+    DavidChen201911172348
+    
+    git pull checked
+
+[33mcommit 4901909a1c24981cdd50508ad8cf3f22475bf3fd[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Sun Nov 17 23:47:35 2019 +0800
+
+    DavidChen201911172346
+    
+    Movie Update 400 can't get movie_ID
+               Delete Done
+
+[33mcommit f8ebbada96d1ac7e95dc218fb0fabd7f906f33a6[m
+Author: JohnYeh <cctytw2000@gmail.com>
+Date:   Sun Nov 17 20:44:55 2019 +0800
+
+    john201911172044
+    
+    修改既有大頭貼的圖片
+
+[33mcommit b867a8ff18e076a7bd374b316e762832a8701ce8[m
+Merge: dd774e7 68e8471
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Sun Nov 17 14:25:04 2019 +0800
+
+    davidchen20191117
+    
+    git pull checked
+
+[33mcommit dd774e7324d6e7e63228dc476fc50b22f3edc33a[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Sun Nov 17 14:23:55 2019 +0800
+
+    davidchen20191117
+    
+    movieupdate setting
+
+[33mcommit 68e84713a93d0c80f4257845cd0fd95548a94832[m
+Author: JohnYeh <cctytw2000@gmail.com>
+Date:   Sat Nov 16 18:11:40 2019 +0800
+
+    john201911161811
+    
+    修正更換大頭貼會失敗找不到路徑
+
+[33mcommit 3053bbef81e898af8fb437bd159cab3492746738[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Sat Nov 16 17:45:10 2019 +0800
+
+    john201911161744
+    
+    會員大頭照清單。討論區模板調整
+
+[33mcommit c65877b7c68d198907d1cae272b48aa3ddaf816f[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Sat Nov 16 14:52:26 2019 +0800
+
+    john201911161452
+    
+    修改討論區套版
+
+[33mcommit 98c451ed35e14912bca82dae69ea21e0083d185b[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Sat Nov 16 12:24:13 2019 +0800
+
+    andy201911161223
+    
+    新增評論改以ajax
+
+[33mcommit d551ece41551b0066e41810aeec19a28f9080f4e[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Sat Nov 16 11:14:33 2019 +0800
+
+    john201911161114
+    
+    修改，會員清單無法顯示上傳圖片BUG
+
+[33mcommit 36eb854f550a9a97a149b7dcaa281303c63a9fe3[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Sat Nov 16 11:00:12 2019 +0800
+
+    john201911161100
+    
+    上傳圖片會顯示圖片
+
+[33mcommit 2c430ceeb06bc64d54e5ed48634a11837a336b40[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Fri Nov 15 16:11:07 2019 +0800
+
+    john201911151610
+    
+    攔截器，攔截登出沒有session
+
+[33mcommit 0f97dc922ffb38806f968b04f373b2cc439ba406[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Fri Nov 15 16:49:21 2019 +0800
+
+    andy201911151648
+    
+    管理者可刪除所有人的評論
+
+[33mcommit ec0f4e6eb0120ae06c5fa0df6b5275404cb46c0e[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Fri Nov 15 16:33:56 2019 +0800
+
+    andy201911151632
+    
+    1、商品後台的商品以ajax顯示
+    2、商品評論編輯、刪除改以ajax
+
+[33mcommit 3242ca9127f51d10bdf30c286e62cd78c7ccd143[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Fri Nov 15 16:10:48 2019 +0800
+
+    Davidchen20191115
+    
+    合併變更 Model/Member.java
+
+[33mcommit 71455e3b38e071e48f462f9cb2be43486f42b81a[m
+Merge: 8fc8bab 29429b5
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Fri Nov 15 16:07:18 2019 +0800
+
+    Davidchen 20191115
+    
+    合併變更
+
+[33mcommit 8fc8babd26218c5e4b6e6eaff44a8d30156388f4[m
+Author: DavidChen <gasturtw@gmail.com>
+Date:   Fri Nov 15 16:05:11 2019 +0800
+
+    Davidchen20191115
+    
+    Owner_ID Done
+
+[33mcommit 29429b5a0f97afb786c8d9374c9443e1dbc8c7b9[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Fri Nov 15 16:00:18 2019 +0800
+
+    Jasonzhuocn201911151556
+    
+    討論表與會員表關聯之後，修正相關顯示表單。改為由會員表提取關聯欄位過來顯示
+
+[33mcommit 95b64786f805d7944874181cc4a0ea6065ff5e66[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Fri Nov 15 14:44:42 2019 +0800
+
+    john201911151444
+    
+    會員討論版主題關聯
+
+[33mcommit 29215703a6777150459109275b69525c077c96b9[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Fri Nov 15 12:43:06 2019 +0800
+
+    john201911151242
+    
+    修改大頭貼檔名重複
+
+[33mcommit 6a74dd1e5c2f56b52814fbbf028e8b5b2e56bb45[m
+Merge: 0925384 491dedd
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Fri Nov 15 11:25:24 2019 +0800
+
+    Jasonzhuocn201911151125
+    
+    為了pull
+
+[33mcommit 09253849c7ac85d89038b21e93caa0674f5b8849[m
+Author: Jasonzhuocn <jasonzhuocn@gmail.com>
+Date:   Fri Nov 15 11:19:11 2019 +0800
+
+    Jasonzhuocn201911151118
+    
+    新增發文分類功能，修正發文表單，修正看板顯示細節
+
+[33mcommit 491deddca9e61041c75fa70235efbea715218629[m
+Author: unknown <cctytw2000@gmail.com>
+Date:   Fri Nov 15 10:57:31 2019 +0800
+
+    john201911151057
+    
+    大頭貼修改，細分資料夾
+
+[33mcommit c267c8c1777ef2f63fa04b34ac6b18af7cb66d0c[m
+Author: Doris <online1216@gmail.com>
+Date:   Fri Nov 15 00:53:41 2019 +0800
+
+    Doris201911150053
+    
+    修改活動後台、新增消息後台刪除功能
+
+[33mcommit ab192cd38f95afe0838f57d7156e206947aa8deb[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Thu Nov 14 19:48:21 2019 +0800
+
+    andy201911141947
+    
+    修正價格排序每頁顯示的商品數
+
+[33mcommit 603764c152a9ffced4cc4e282260e75642a14a6b[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Thu Nov 14 17:59:11 2019 +0800
+
+    andy201911141758
+    
+    判斷商品庫存<1時無法購物
+
+[33mcommit 7081d9edd9536900842e5eec6131b3313a603312[m
+Author: Andy <andy41003a029@gmail.com>
+Date:   Thu Nov 14 17:39:51 2019 +0800
+
+    andy201911141739
+    
+    若庫存不足則導回跳轉頁面
+
+[33mcommit 7d60ab874c6012648393166dbabeb5c455ea03d1[m
+Merge: 5bd7ed8 bcfdadf
+Author: darren811101 <darren811101@gmail.com>
+Date:   Thu Nov 14 17:26:26 2019 +0800
+
+    darren201911140518
+    
+    更改訂單狀態
+
+[33mcommit 5bd7ed8ecc5f34d9b268aed93ba3d665e638df53[m
+Merge: fa84a28 cb392bf
+Author: darren811101 <darren811101@gmail.com>
+Date:   Thu Nov 14 17:18:20 2019 +0800
+
+    darren20191114
+    
+    更改訂單狀態，庫存
