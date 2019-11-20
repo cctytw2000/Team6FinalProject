@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
+import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
 
 @Repository
@@ -67,4 +67,35 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.save(discussion);
 	}
 
+	@Override
+	public void updateBoardViews(Integer boardId) {
+		BoardType boardType = factory.getCurrentSession().get(BoardType.class, boardId);
+		boardType.setBoardViews(boardType.getBoardViews() + 1);
+		factory.getCurrentSession().update(boardType);
+		
+	}
+
+	@Override
+	public List<Discussion> getArticleTop6() {
+		String hql = "FROM Discussion d ORDER BY views DESC";
+		Session session = factory.getCurrentSession();
+		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(6).getResultList(); 
+		return Dlist;
+	}
+
+	@Override
+	public List<Discussion> getLatestArticle() {
+		String hql = "FROM Discussion d ORDER BY articleId DESC";
+		Session session = factory.getCurrentSession();
+		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(3).getResultList(); 
+		return Dlist;
+	}
+
+	@Override
+	public List<BoardType> getBoardTopN() {		
+		String hql = "FROM BoardType ORDER BY boardViews DESC";
+		Session session = factory.getCurrentSession();
+		List<BoardType> Blist = session.createQuery(hql).setMaxResults(5).getResultList(); 
+		return Blist;
+	}
 }

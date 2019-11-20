@@ -112,7 +112,7 @@
 									<!--內文 -->
 									<p>${allmovies.movie_content}</p>
 									<!-- Time -->
-									<p>${allmovies.date}</p>
+									<p>${allmovies.time}</p>
 									<a href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"  class="commentUpdate" >Update</a>
 									<!-- href="moviepersonal/updateMovie" -->
 									
@@ -154,6 +154,8 @@
 											style="width: 400px; height: 200px;"></textarea>
 									<p>
 										選則檔案: <input type="file" name="video_file"><br />
+									<p>
+										
 									<p>
 										<input type="submit" value="送出"><br />
 								</form>

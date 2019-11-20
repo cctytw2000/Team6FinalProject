@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
+import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -103,6 +104,20 @@ public class NewsServiceImpl implements INewsService{
 	@Override
 	public List<News> getAllNewsByViews() {
 		return dao.getAllNewsByViews();
+	}
+
+//====================================================消息評論=================================================
+	
+	@Transactional
+	@Override
+	public void addMemo(Message message) {
+		dao.addMemo(message);		
+	}
+	
+	@Transactional
+	@Override
+	public List<Message> getMessagesByNewsId(Integer newsId) {
+		return dao.getMessagesByNewsId(newsId);
 	}
 
 //====================================================未完成====================================================

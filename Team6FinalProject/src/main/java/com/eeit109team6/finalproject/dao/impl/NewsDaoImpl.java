@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.INewsDao;
+import com.eeit109team6.finalproject.model.Comment;
+import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 
@@ -125,6 +127,22 @@ public class NewsDaoImpl implements INewsDao {
 		List<News> list = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+//====================================================消息評論=================================================
+
+	@Override
+	public void addMemo(Message message) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(message);		
+	}
+
+	@Override
+	public List<Message> getMessagesByNewsId(Integer newsId) {
+		String hql = "FROM Message WHERE newsId = :newsId";
+		Session session = sessionFactory.getCurrentSession();
+		List<Message> list = session.createQuery(hql).setParameter("newsId", newsId).getResultList();
 		return list;
 	}
 

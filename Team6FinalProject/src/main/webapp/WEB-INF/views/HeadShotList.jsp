@@ -56,12 +56,12 @@
                             <c:choose>
                                 <c:when test="${sessionScope.mem.headshot == memberheadshot.headshotname }">
                                     <img style="border:5px solid red;cursor: pointer;" data-toggle="modal"
-                                        data-target="#${sessionScope.mem.username}${memberheadshot.id}" width="205"
+                                        data-target="#${memberheadshot.id}" width="205"
                                         height="205"
                                         src="<c:url value='/memberImages/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${memberheadshot.headshotname}' />">
-                                    <!--                                     <h2>哈哈哈</h2> -->
 
-                                    <div class="modal fade" id="${sessionScope.mem.username}${memberheadshot.id}"
+
+                                    <div class="modal fade" id="${memberheadshot.id}"
                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">

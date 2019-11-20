@@ -35,15 +35,14 @@
 	<div align="center">
 	<h1>看板名稱:${boardType.boardName}</h1>
 	
-	<a style="text-decoration:none;" href="<spring:url value='addA?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
+	<a style="text-decoration:none;" href="<spring:url value='addArticle?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
 	
-
 <table>
 	<tr><th>標題</th><th>作者</th><th>人氣</th></tr>
 	<c:forEach var='DiscussionList' items="${DiscussionList}">
 		<tr>
 			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">【 ${DiscussionList.subjectType.subjectName}】  ${DiscussionList.subject}</a></td>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.member.member_id}'/>">${DiscussionList.member.memberdetail.nickname}</a></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='member?id=${DiscussionList.member.member_id}'/>">${DiscussionList.member.memberdetail.nickname}</a></td>
 			<td>${DiscussionList.views}</td>			
 		</tr>
 	</c:forEach>

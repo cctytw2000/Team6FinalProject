@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -54,10 +56,12 @@ import com.eeit109team6.finalproject.model.LiLoInfo;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.MemberHeadShot;
 import com.eeit109team6.finalproject.model.MemberLevel;
+import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.service.ILiLoInforService;
 import com.eeit109team6.finalproject.service.IMemberHeadShotService;
 import com.eeit109team6.finalproject.service.IMemberLevelService;
 import com.eeit109team6.finalproject.service.IMemberService;
+import com.eeit109team6.finalproject.service.IMovieService;
 
 @Controller
 public class MemberController {
@@ -66,6 +70,12 @@ public class MemberController {
 	ILiLoInforService LiLoInforService;
 	IMemberLevelService IMemberLevelService;
 	IMemberHeadShotService MhsService;
+	IMovieService movieservice;
+
+	@Autowired
+	public void setMovieservice(IMovieService movieservice) {
+		this.movieservice = movieservice;
+	}
 
 	@Autowired
 	public void setMhsService(IMemberHeadShotService mhsService) {
@@ -90,6 +100,110 @@ public class MemberController {
 	@Autowired
 	public void setLiLoInforService(ILiLoInforService liLoInforService) {
 		LiLoInforService = liLoInforService;
+	}
+
+	@RequestMapping(value = "/member/addMovie", method = RequestMethod.POST)
+	public String memberAddMovie(@RequestParam("movie_name") String movie_name,
+			@RequestParam("movie_content") String movie_content, @RequestParam("video_file") MultipartFile video_file,
+			HttpSession session) {
+
+		Member mem = (Member) session.getAttribute("mem");
+
+		MovieInfo movieInfo = new MovieInfo();
+
+		// ==============設定創建時間=======================
+		Calendar rightNow = Calendar.getInstance();
+		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+				+ ":" + rightNow.get(Calendar.SECOND);
+		// ==============/設定創建時間=======================
+
+		movieInfo.setTime(registeredtime);
+		movieInfo.setName(movie_name);
+		movieInfo.setMovie_content(movie_content);
+		movieInfo.setMember(mem);
+		movieInfo.setLocation_Test(video_file.getOriginalFilename());
+		movieInfo.setClick_Sum(0);
+		movieInfo.setLike_Sum(0);
+
+		String videoname = video_file.getOriginalFilename();
+
+		System.out.println("@RequestMapping(value = \"/moviepersonal/addMovie\")" + movieInfo);
+
+		Integer movieId = movieservice.addMovie(movieInfo);
+
+		Path p = Paths.get("C:/memberMovies"); // 路徑設定
+
+		if (Files.exists(p)) {
+			System.out.print("資料夾已存在");
+		}
+		if (!Files.exists(p)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(p);
+				System.out.print("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
+			}
+		}
+
+		p = Paths.get("C:/memberMovies/" + mem.getAccount() + mem.getMember_id()); // 路徑設定
+
+		if (Files.exists(p)) {
+			System.out.print("資料夾已存在");
+		}
+		if (!Files.exists(p)) {
+			/* 不存在的話,直接建立資料夾 */
+			try {
+				Files.createDirectory(p);
+				System.out.print("已成功建立資料夾");
+			} catch (IOException e) {
+				System.out.println("發生錯誤");
+			}
+		}
+
+		String path = "C:/memberMovies/" + mem.getAccount() + mem.getMember_id();
+
+		if (!video_file.isEmpty()) {
+			try {
+				byte[] bytes = video_file.getBytes();
+
+				File dir = new File(path, movieId + video_file.getOriginalFilename());
+
+//					File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir));
+				stream.write(bytes);
+				stream.close();
+
+				return "redirect:/member/movies";
+			} catch (Exception e) {
+				return "redirect:/member/movies";
+			}
+		} else {
+			return "redirect:/member/movies";
+		}
+
+	}
+
+	@RequestMapping("/member/movies")
+	public String memberMovies(Model model, HttpSession session) {
+		Member mem = (Member) session.getAttribute("mem");
+
+		ArrayList<MovieInfo> list = (ArrayList<MovieInfo>) movieservice.getMovieInfoByID(mem.getMember_id());
+//		List<MovieInfo> list = movieservice.getMovieInfoByOwnerID(mem.getMember_id());
+		model.addAttribute("movies", list);
+		return "memberMovieIndex";
+
+	}
+
+	@RequestMapping("/member/updateMoviesViews")
+	public String updateMoviesViews(@RequestParam("movieId") Integer id, Model model, HttpSession session) {
+		Member mem = (Member) session.getAttribute("mem");
+		System.out.println("updateMoviesViews====" + id);
+		movieservice.updateMovieViews(id);
+
+		return "memberMovieIndex";
+
 	}
 
 //===========================會員一般註冊====================================
@@ -446,7 +560,7 @@ public class MemberController {
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
-				member = MemService.checkAccount(mem.getAccount(),"General");
+				member = MemService.checkAccount(mem.getAccount(), "General");
 
 				lilo.setIsSuccess(0);
 				lilo.setMember(member);
@@ -477,15 +591,15 @@ public class MemberController {
 	public String sendChangePassWord(@RequestParam("account") String account, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 //		System.out.println("account=" + account);
-		String changeType, type,msh_;
+		String changeType, type, msh_;
 		if (session.getAttribute("mem") == null) {
 			changeType = "忘記密碼";
 			type = "forget";
-			msh_="Please click URL to change Password";
+			msh_ = "Please click URL to change Password";
 		} else {
 			changeType = "修改密碼";
 			type = "change";
-			msh_="Please click URL to change Password";
+			msh_ = "Please click URL to change Password";
 		}
 		System.out.println("changeType=" + changeType);
 		System.out.println("type=" + type);
@@ -564,9 +678,10 @@ public class MemberController {
 				message.setSubject(changeType);
 //				message.setText();
 //				changeType
-				
+
 //				<a href="https://www.w3schools.com">Visit W3Schools.com!</a>
-				message.setContent("<h2>please click this url to change your password</h2>\n" +"<a href='"+ url+"'>"+msh_+"</a>",  "text/html");
+				message.setContent("<h2>please click this url to change your password</h2>\n" + "<a href='" + url + "'>"
+						+ msh_ + "</a>", "text/html");
 				Transport transport = session_.getTransport("smtp");
 				transport.connect(host, port, Email, EmailPwd);
 

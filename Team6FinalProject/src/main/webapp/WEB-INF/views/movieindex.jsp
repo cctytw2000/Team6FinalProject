@@ -68,12 +68,12 @@
 				<c:forEach var="movie" items="${movies}">
 					<div class="col-lg-4 col-md-6">
 						<div class="recent-game-item">
-							<!-- 						標籤 -->
+							<!-- 標籤 -->
 
 							<div class="rgi-thumb set-bg">
 								<div class="cata racing">racing</div>
 								<video width="320" height="240" class="set-video"
-									poster="/Images/video-Bg.jpg" playsinline="playsinline"
+									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg" playsinline="playsinline"
 									controls="controls">
 									<source src="<c:url value='/Movie/${movie.location_Test}'/>"
 										type="video/mp4">
@@ -81,7 +81,7 @@
 
 								</video>
 							</div>
-							<div style="margin-top: 100px;" class="rgi-content">
+							<div style="margin-top: 50px;" class="rgi-content">
 								<!-- 							標題 -->
 								<h6>${movie.location_Test }</h6>
 								<h5>${movie.name }</h5>

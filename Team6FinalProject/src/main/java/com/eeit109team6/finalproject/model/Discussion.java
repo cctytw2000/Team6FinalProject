@@ -1,5 +1,9 @@
 package com.eeit109team6.finalproject.model;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,34 +44,23 @@ public class Discussion {
 	private String postTimeStamp;//發文時間戳
 	private Integer views; // 文章被瀏覽次數
 	
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-	public BoardType getBoardType() {
-		return boardType;
-	}
-
-	public void setBoardType(BoardType boardType) {
-		this.boardType = boardType;
-	}	
-
-	public SubjectType getSubjectType() {
-		return subjectType;
-	}
-
-	public void setSubjectType(SubjectType subjectType) {
-		this.subjectType = subjectType;
-	}
-
+	//mappedBy="對方變數名稱"
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion", fetch = FetchType.LAZY)
+	private Set<Reply> reply = new LinkedHashSet<Reply>();
+	
+	
 	public Discussion() { // 子類建構子呼叫父類建構子
 		super();
 	}
+	
+	public Set<Reply> getReply() {
+		return reply;
+	}
 
+	public void setReply(Set<Reply> reply) {
+		this.reply = reply;
+	}
+	
 	public Integer getArticleId() {
 		return articleId;
 	}
@@ -75,12 +69,36 @@ public class Discussion {
 		this.articleId = articleId;
 	}
 
+	public BoardType getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(BoardType boardType) {
+		this.boardType = boardType;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public SubjectType getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(SubjectType subjectType) {
+		this.subjectType = subjectType;
 	}
 
 	public String getArticleBody() {
@@ -106,4 +124,5 @@ public class Discussion {
 	public void setViews(Integer views) {
 		this.views = views;
 	}
+
 }

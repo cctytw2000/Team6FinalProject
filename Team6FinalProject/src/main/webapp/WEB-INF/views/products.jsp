@@ -15,6 +15,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
 <title>所有商品</title>
 
 <style>
@@ -42,7 +43,7 @@
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
 
-				<c:forEach var="newsTypeList" items="${newsTypeList }">
+				<c:forEach var="product" items="${sessionScope.products }">
 					<div class="nt-item">
 						<span class="new">${product.category.category }</span><a
 							href="<spring:url value='product?game_id=${product.game_id }'/>">${product.name }</a><span>
