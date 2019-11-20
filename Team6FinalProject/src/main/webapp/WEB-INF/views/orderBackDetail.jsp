@@ -68,8 +68,6 @@
 					</tr>
 				</c:forEach>				
 	</table>	
-	<ul id="pageBottom" style="width: 30%; margin: 15px auto;" class="pagination">
-		</ul>
 	</div>
 	</div>
 	</section>

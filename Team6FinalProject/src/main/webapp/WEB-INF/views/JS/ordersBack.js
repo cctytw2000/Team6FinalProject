@@ -7,7 +7,7 @@ $(document).ready(function () {
 			data = response;
 			if (response.Orders.length > 0) {
 				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");				
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
 			}
 			else {
 				$("tbody#ordersInfo").html("沒訂單資料");
@@ -15,6 +15,7 @@ $(document).ready(function () {
 		}
 	});
 	ordermember();
+	ordersales();
 });
 // function showOrdersInfoall(response) {
 // 	let info = "";
@@ -137,21 +138,21 @@ function nextChenge() {
 	showOrdersInfo(data, pagebotNO);
 }
 
-function ordermember() {	
+function ordermember() {
 	$.ajax({
 		url: "memberOrdercount.json",
 		success: function (response) {
-			console.log(response);
+			//console.log(response);
 			console.log(response.countlist);
 			let date = [];
 			let count = [];
-			for (let i = 0; i < response.countlist.length; i++) {				
-				date.push(response.countlist[i].name);
+			for (let i = 0; i < response.countlist.length; i++) {
+				date.push(response.countlist[i].id + "_" + response.countlist[i].name);
 				count.push(response.countlist[i].count);
-			}	
+			}
 			console.log(date);
-			console.log(count);	
-			showorderCount(date, count);	
+			console.log(count);
+			showorderCount(date, count);
 		}
 	});
 }
@@ -163,6 +164,40 @@ function showorderCount(date, count) {
 			labels: date,
 			datasets: [{
 				label: '訂單數量',
+				data: count,
+				backgroundColor: 'blue',
+				borderColor: 'brack',
+				borderWidth: 1
+			}]
+		}
+	});
+}
+function ordersales() {
+	$.ajax({
+		url: "dailySales.json",
+		success: function (response) {
+			//console.log(response);
+			console.log(response.sales);
+			let date = [];
+			let count = [];
+			for (let i = 0; i < response.sales.length; i++){
+				date.push(response.sales[i][0]);
+				count.push(response.sales[i][1]);
+			}			
+			console.log(date);
+			console.log(count);			
+			showorderCount1(date, count);
+		}
+	});
+}
+function showorderCount1(date, count) {
+	var ctx = document.getElementById("chart1").getContext('2d');
+	var chart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: date,
+			datasets: [{
+				label: '元',
 				data: count,
 				backgroundColor: 'blue',
 				borderColor: 'brack',
