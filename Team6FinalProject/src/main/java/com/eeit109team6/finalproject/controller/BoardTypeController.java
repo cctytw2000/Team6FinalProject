@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -26,7 +27,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.BoardType;
+import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.SubjectType;
 import com.eeit109team6.finalproject.service.IBoardTypeService;
+import com.eeit109team6.finalproject.service.IDiscussionService;
+import com.eeit109team6.finalproject.service.ISubjectTypeService;
 
 @Controller
 public class BoardTypeController {
@@ -34,7 +39,9 @@ public class BoardTypeController {
 	public BoardTypeController() {
 	}
 
-	IBoardTypeService service;
+	IBoardTypeService boardTypeservice;
+	IDiscussionService discussionService;
+	ISubjectTypeService subjectTypeService;
 	ServletContext context;
 
 	@Autowired
@@ -44,28 +51,29 @@ public class BoardTypeController {
 
 	@Autowired
 	public void setService(IBoardTypeService service) {
-		this.service = service;
+		this.boardTypeservice = service;
 	}
 
 	// 討論區後台，顯示討論區看板列表 --> discussionBack.jsp
 	@RequestMapping("/discussionBack")
 	public String getAllBoardType(Model model) {
-		List<BoardType> list = service.getAllBoardType();
-		System.out.println("進入討論區後台   getAllBoardType()");
-
-		model.addAttribute(list);
+		BoardType boardType = new BoardType();
+		boardType.setBoardName("aaaaaa");
+		model.addAttribute("boardType", boardType);//將boardType物件裝入model，model內的識別字串為boardType
+		List<BoardType> list = boardTypeservice.getAllBoardType();
+		System.out.println("進入討論區後台   getAllBoardType()");	
+		
+		model.addAttribute("Blist",list);
 		return "discussionBack";
 	}
 
 	// 提供新增討論看板時的表單 --> addBoard.jsp
-	@RequestMapping(value = "addBoard", method = RequestMethod.GET)
-	public String getAddBoardTypeForm(Model model) {
-
-		BoardType boardType = new BoardType();
-		model.addAttribute("boardType", boardType);//將boardType物件裝入model，model內的識別字串為boardType
-
-		return "addBoard";
-	}
+//	@RequestMapping(value = "addBoard", method = RequestMethod.GET)
+//	public String getAddBoardTypeForm(Model model) {
+//		BoardType boardType = new BoardType();
+//		model.addAttribute("boardType", boardType);//將boardType物件裝入model，model內的識別字串為boardType
+//		return "addBoard";
+//	}
 
 	// 新增討論看板 -->重定向至討論區後台 discussionBack.jsp
 	@RequestMapping(value = "addBoard", method = RequestMethod.POST)
@@ -76,7 +84,7 @@ public class BoardTypeController {
 	) {
 		System.out.println("進入processAddBoardType()方法");
 //		BoardType boardType = new BoardType();			//new一個BoardType實體指給boardType變數
-
+		boardType.setBoardViews(0);
 		MultipartFile boardImage = boardType.getbImage(); //boardType物件
 		String originalFilename = boardImage.getOriginalFilename();
 		// 建立Blob物件，交由Hibernate寫入資料庫
@@ -91,7 +99,7 @@ public class BoardTypeController {
 			}
 		}
 
-		service.addBoardType(boardType);
+		boardTypeservice.addBoardType(boardType);
 		return "redirect:/discussionBack";
 	}
 
@@ -102,7 +110,7 @@ public class BoardTypeController {
 		byte[] media = null;
 		HttpHeaders headers = new HttpHeaders();
 		int len = 0;
-		BoardType boardType = service.getBoardTypeById(boardId);
+		BoardType boardType = boardTypeservice.getBoardTypeById(boardId);
 		if (boardType != null) {
 			Blob blob = boardType.getBoardImage();
 			if (blob != null) { // 資料庫有圖片
@@ -138,6 +146,46 @@ public class BoardTypeController {
 		}
 		return b;
 	}
+	
+	// bug
+	// 提供新增發文分類時的表單 --> addBoard.jsp
+	@RequestMapping(value = "addSubjectType", method = RequestMethod.GET)
+	public String getAddSubjectTypeForm(Model model) {
+		SubjectType subjectType = new SubjectType();
+		model.addAttribute("subjectType", subjectType);//將boardType物件裝入model，model內的識別字串為boardType
+		return "addSubjectType";
+	}
+	
+	// bug
+	// 新增發文分類 -->重定向至討論區後台 discussionBack.jsp
+	@RequestMapping(value = "addSubjectType", method = RequestMethod.POST)
+	public String processAddSubjectType(
+			@ModelAttribute("subjectType") SubjectType subjectType    //特別指定引入Model中的其中一個鍵值
+//			Model model											//引入整個model
+//			@RequestParam("BoardImage") MultipartFile boardImage,//非form:form表單傳遞參數方法
+	) {
+		System.out.println("進入processAddSubjectType()方法");
+
+		MultipartFile subjectImage = subjectType.getsImage(); 
+		String originalFilename = subjectImage.getOriginalFilename();
+		// 建立Blob物件，交由Hibernate寫入資料庫
+		if (subjectImage != null && !subjectImage.isEmpty()) {
+			try {
+				byte[] b = subjectImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				subjectType.setSubjectImage(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+			}
+		}
+
+		subjectTypeService.addSubjectType(subjectType);
+		return "redirect:/discussionBack";
+	}
+	
+	
+	
 	
 	
 

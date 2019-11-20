@@ -22,7 +22,6 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		this.factory = factory;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discussion> getAllArticles() {
 

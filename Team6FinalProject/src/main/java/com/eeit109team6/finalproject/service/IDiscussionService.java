@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Reply;
 
 public interface IDiscussionService {
 
@@ -14,11 +15,9 @@ public interface IDiscussionService {
 	
 	void updateViews(Integer articleId);	//更新文章瀏覽次數
 	void updateBoardViews(Integer boardId);	//更新看板瀏覽次數
-	List<Discussion> getArticleTop6(); //首頁展示；熱門文章。查詢瀏覽次數最高的6篇文章
-	List<Discussion> getLatestArticle(); //討論區主頁展示；最新文章。查詢最後發表的3篇文章
+	List<Discussion> getArticleTop6(); 		//首頁展示；熱門文章。查詢瀏覽次數最高的6篇文章
+	List<Discussion> getLatestArticle(); 	//討論區主頁展示；最新文章。查詢最後發表的3篇文章
 	
 	List<BoardType> getBoardTopN();			//首頁展示；人氣排行。查詢文章最多的一批看板
-	
-
 	
 }

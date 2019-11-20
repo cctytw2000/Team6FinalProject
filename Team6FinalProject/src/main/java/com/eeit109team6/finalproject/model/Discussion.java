@@ -43,6 +43,7 @@ public class Discussion {
 	private String articleBody; // 文章內文
 	private String postTimeStamp;//發文時間戳
 	private Integer views; // 文章被瀏覽次數
+
 	
 	//mappedBy="對方變數名稱"
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion", fetch = FetchType.LAZY)

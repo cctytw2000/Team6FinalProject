@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Reply;
 import com.eeit109team6.finalproject.service.IDiscussionService;
 
 @Service
@@ -67,7 +68,8 @@ public class DiscussionServiceImpl implements IDiscussionService {
 	public List<Discussion> getLatestArticle() {
 		return dao.getLatestArticle();
 	}
-
+	
+	@Transactional
 	@Override
 	public List<BoardType> getBoardTopN() {
 		return dao.getBoardTopN();

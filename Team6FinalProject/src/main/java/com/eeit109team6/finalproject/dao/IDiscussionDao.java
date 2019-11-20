@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Reply;
 
 
 public interface IDiscussionDao {
@@ -20,9 +21,6 @@ public interface IDiscussionDao {
 	
 	List<BoardType> getBoardTopN();			//首頁展示；人氣排行。查詢文章最多的一批看板
 
-	
-	
-	
 	//=================以下尚未撰寫
 	//updateArticle();//修改文章
 	//deleteArticle();//刪除文章

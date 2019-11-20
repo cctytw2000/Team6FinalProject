@@ -28,6 +28,16 @@
 	type="text/css" />
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
+    <style type="text/css">
+
+td {
+    background-color:#F5F9F9 ;
+    height:90px;
+}
+tr:hover td {
+    background-color:#FFF6DE ;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header/homeHeader.jsp" />
@@ -36,16 +46,20 @@
 	<h1>看板名稱:${boardType.boardName}</h1>
 	
 	<a style="text-decoration:none;" href="<spring:url value='addArticle?id=${boardType.boardId}&name=${boardType.boardName}'/>">發表文章</a>
-	<a style="text-decoration:none;" href="<spring:url value='board-Rich?id=${boardType.boardId}'/>">縮圖版</a>
-<table>
-	<tr><th>標題</th><th>作者</th><th>人氣</th><th>回文</th><th>發表時間</th></tr>
+	<a style="text-decoration:none;" href="<spring:url value='board?id=${boardType.boardId}'/>">清單版</a>
+	
+<table style="width:100%">
+	<tr><th><th>標題</th><th>作者</th><th><span style="font-size:small;"><font color="grey">人氣/互動</font></span></th><th>發表時間</th><th></th></tr>
 	<c:forEach var='DiscussionList' items="${DiscussionList}">
 		<tr>
-			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">【 ${DiscussionList.subjectType.subjectName}】  ${DiscussionList.subject}</a></td>
+			<td><div><img style="width: 100%;height: 90px;" src="<c:url value="Images/${DiscussionList.subjectType.subjectName}.png"/>"></div></td>
+			<td><a style="text-decoration:none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>">【${DiscussionList.subjectType.subjectName}】  ${DiscussionList.subject}</a>
+				<br><a style="text-decoration: none;" href="<spring:url value='article?id=${DiscussionList.articleId}'/>"><span style="font-size:small;"><font color="grey">${DiscussionList.articleBody.split("<br>")[0]}......</font></span></a></td>
 			<td><a style="text-decoration:none;" href="<spring:url value='member?id=${DiscussionList.member.member_id}'/>">${DiscussionList.member.memberdetail.nickname}</a></td>
-			<td>${DiscussionList.views}</td>
-			<td>${DiscussionList.reply.size()}</td>	
+			<td><span style="font-size:small;">${DiscussionList.views}/
+			${DiscussionList.reply.size()}</span></td>	
 			<td>${DiscussionList.postTimeStamp}</td>	
+
 		</tr>
 	</c:forEach>
 </table>

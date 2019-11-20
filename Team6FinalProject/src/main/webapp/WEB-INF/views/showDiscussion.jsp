@@ -54,7 +54,7 @@
 											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
-											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
+											href="<spring:url value='board-Rich?id=${boardType.boardId}'/>">${boardType.boardName}</a>
 											<p>
 												<c:forEach var='discussion' begin="0" end="0"
 													items="${boardType.discussion}">
