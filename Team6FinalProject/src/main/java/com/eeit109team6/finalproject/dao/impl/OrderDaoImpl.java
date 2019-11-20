@@ -74,4 +74,20 @@ public class OrderDaoImpl implements IOrderDao {
 		session.update(order);
 	}
 
+	@Override
+	public List<Object[]> dailySalescount() {
+		String hql = "SELECT CONVERT(date,ordertime) as 'time' , SUM(total) as 'Sales' "
+				+ "FROM Orders WHERE is_remove = 0 and state = 4 " + "GROUP BY CONVERT(date,ordertime) "
+				+ "ORDER BY CONVERT(date,ordertime) asc";
+		Query query = factory.getCurrentSession().createSQLQuery(hql);
+		List<Object[]> rows = query.getResultList();
+		for (Object[] row : rows) {
+			System.out.println("row[0].toString()=" + row[0].toString());
+			System.out.println("row[1].toString()=" + row[1].toString());
+			row[0] = row[0].toString();
+			row[1] = row[1].toString();
+		}
+		return rows;
+	}
+
 }

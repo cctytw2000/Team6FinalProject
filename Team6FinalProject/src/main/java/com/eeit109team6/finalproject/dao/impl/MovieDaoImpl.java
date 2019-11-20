@@ -29,7 +29,7 @@ public class MovieDaoImpl implements IMovieDao {
 		Integer id = (Integer) session.save(movieInfo);
 		return id;
 	}
-	// DONE
+	// 設定 點擊率加一   getClick_Sum() + 1
 
 	@Override
 	public void updateMovieViews(Integer id) {
@@ -38,7 +38,7 @@ public class MovieDaoImpl implements IMovieDao {
 
 		movie.setClick_Sum(movie.getClick_Sum() + 1);
 	}
-
+//刪除單一影片
 	@Override
 	public void deleteMovieInfoById(int movie_ID) {
 		Session session = factory.getCurrentSession();
@@ -89,7 +89,7 @@ public class MovieDaoImpl implements IMovieDao {
 	@Override
 	public ArrayList<MovieInfo> getMovieInfoByOwnerID(Integer id) {
 		String hql = "FROM MovieInfo WHERE owner_ID = ?1";
-
+		//指定 ? 帶入值為 setParameter(1, id) 的 id
 		Query query = factory.getCurrentSession().createQuery(hql).setParameter(1, id);
 		ArrayList<MovieInfo> MovieInfoArrayList = (ArrayList<MovieInfo>) query.getResultList();
 		return MovieInfoArrayList;

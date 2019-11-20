@@ -155,7 +155,7 @@
 							style="border-width: 0; background-color: white" type="text"
 							name="nickname" placeholder="來個新名字吧(ゝ∀･)" disabled="disabled"
 							readonly="readonly" value="${MemberDetial.memberdetail.nickname}"></input>
-						<button id="openupdate" type="button" onclick="openUpdate()">編輯</button>
+						<button id="openupdate" type="button" onclick="openUpdate('${MemberDetial.memberdetail.nickname}')">編輯</button>
 					</div>
 
 
@@ -172,7 +172,9 @@
 
 					<div>
 						<label>電話：</label>
-						<p>${MemberDetial.memberdetail.tel}</p>
+						<p id="showTel">${MemberDetial.memberdetail.tel.substring(0,4)}-***-${MemberDetial.memberdetail.tel.substring(7)}</p>
+						<button id="tel" type="button" onclick="showall('${MemberDetial.memberdetail.tel.substring(0,4)}-${MemberDetial.memberdetail.tel.substring(4,7)}-${MemberDetial.memberdetail.tel.substring(7)}','${MemberDetial.memberdetail.tel.substring(0,4)}-***-${MemberDetial.memberdetail.tel.substring(7)}')">查看</button>
+
 					</div>
 
 
@@ -182,10 +184,10 @@
 						<label>生日：</label>
 						<p>${MemberDetial.memberdetail.birth}</p>
 					</div>
-					<div>
-						<label>身分證字號：</label>
-						<p>${MemberDetial.memberdetail.idnumber}</p>
-					</div>
+<!-- 					<div> -->
+<!-- 						<label>身分證字號：</label> -->
+<%-- 						<p>${MemberDetial.memberdetail.idnumber}</p> --%>
+<!-- 					</div> -->
 
 				</div>
 			</form>

@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<!-- memberMovieIndex.jsp -->
+<!-- moviehome.jsp -->
 <html>
 
 <head>

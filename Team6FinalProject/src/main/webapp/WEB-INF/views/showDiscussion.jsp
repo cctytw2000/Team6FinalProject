@@ -100,11 +100,11 @@
 							
 							
 								<div class="lb-item">
-									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
+									<div class="lb-thumb set-bg"></div>
 									<div class="lb-content">
 										<div class="lb-date">發表時間  ${discussion.postTimeStamp}</div>
 										<a href="article?id=${discussion.articleId}"><p>【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a>
-										<a href="member?id=${discussion.member.member_id}" class="lb-author">By ${discussion.member.memberdetail.nickname}</a>
+										<div><img width="50" height="50" src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">By ${discussion.member.memberdetail.nickname}</div>
 									</div>
 								</div>
 								

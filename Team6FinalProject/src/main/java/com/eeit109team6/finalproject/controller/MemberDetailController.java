@@ -97,7 +97,7 @@ public class MemberDetailController {
 		Member member = MEMservice.findById(mem);
 		session.setAttribute("mem", member);
 		redirectAttributes.addFlashAttribute("msg", "已修改完成會員暱稱");
-		return "redirect:/jump";
+		return "redirect:/member/memberdetail";
 	}
 
 }

@@ -1,3 +1,6 @@
+let page = 1
+let data;
+let dateint = 0 ;
 $(document).ready(function () {
 
 	// document.getElementById("productInfo").innerHTML = ""
@@ -5,46 +8,86 @@ $(document).ready(function () {
 
 
 
-
+	let pagebottom = "";
 	let productOnInfo = ""
 	let productOffInfo = ""
 	$.ajax({
 		url: "productsBackjson.json",
 
 		success: function (response) {
-			for (let i = 0; i < response.ProductJson.length; i++) {
-				console.log(response.ProductJson[i].game_id);
-				console.log(response.ProductJson[i].name);
-				console.log(response.ProductJson[i].price);
-				console.log(response.ProductJson[i].category.category);
-				if (response.ProductJson[i].is_remove == "0") {
-					productOnInfo += "<tr>"
-					productOnInfo += "<td>" + response.ProductJson[i].game_id + "</td>"
-					productOnInfo += '<td><a href="productsBack/productBack?game_id=' + response.ProductJson[i].game_id + '">' + response.ProductJson[i].name + '</a>'
+			pagebottom += '<li class="page-item"><a class="page-link" href="#">Previous</a></li>'
+//				console.log(response.ProductJson.length)
+//				console.log(response.ProductJson.length / 5)
 
-					productOnInfo += "<td>" + response.ProductJson[i].price + "元</td>"
-					productOnInfo += "<td>" + response.ProductJson[i].category.category + "</td>"
-					productOnInfo += '<td><button type="button" class="btn btn-warning" onclick="offProduct (' + response.ProductJson[i].game_id + ')">下架</button>'
-					productOnInfo += "</tr>"
-				} else {
-					productOffInfo += "<tr>"
-					productOffInfo += "<td>" + response.ProductJson[i].game_id + "</td>"
-					productOffInfo += '<td><a href="productsBack/productBack?game_id=' + response.ProductJson[i].game_id + '">' + response.ProductJson[i].name + '</a>'
+				for (let i = 1; i <= response.ProductJson.length / 5 + 1; i++) {
+					pagebottom += '<li class="page-item"><a id="' + i
+						+ '" class="page-link" href="#">' + i
+						+ '</a></li>'
+				}
+				pagebottom += '<li class="page-item"><a class="page-link" href="#">Next</a></li>'
 
-					productOffInfo += "<td>" + response.ProductJson[i].price + "元</td>"
-					productOffInfo += "<td>" + response.ProductJson[i].category.category + "</td>"
-					productOffInfo += '<td><button type="button" class="btn btn-warning" onclick="onProduct (' + response.ProductJson[i].game_id + ')">上架</button>'
-					productOffInfo += "</tr>"
+				document.getElementById("pageBottom").innerHTML = pagebottom
 
+				data = response
+				for (let i = 1; i <= response.ProductJson.length / 5 + 1; i++) {
+					document.getElementById(i).addEventListener("click",chengeInfo)
 				}
 
-
-				document.getElementById("productInfo").innerHTML = productOnInfo
-				document.getElementById("cancelProduct").innerHTML = productOffInfo
-			}
+				showData();
+				showCanProductData();
 		}
 	});
 });
+
+
+function chengeInfo() {
+	let productOnInfo = ""
+	let productOffInfo = ""
+	showpage = this.id * 5 - 1
+
+//	document.getElementById("infoBody").innerHTML = ""
+	let info = "";
+	let count = 0 ;
+
+
+	for (let i = showpage-4; i < data.ProductJson.length; i++) {
+console.log("showpage===",showpage)
+		if (i < data.ProductJson.length  ) {
+			if (data.ProductJson[i].is_remove == "0") {
+				count++;
+				productOnInfo += "<tr>"
+				productOnInfo += "<td>" + data.ProductJson[i].game_id + "</td>"
+				productOnInfo += '<td><a href="productsBack/productBack?game_id=' + data.ProductJson[i].game_id + '">' + data.ProductJson[i].name + '</a>'
+
+				productOnInfo += "<td>" + data.ProductJson[i].price + "元</td>"
+				productOnInfo += "<td>" + data.ProductJson[i].category.category + "</td>"
+				productOnInfo += '<td><button type="button" class="btn btn-warning" onclick="offProduct (' + data.ProductJson[i].game_id + ')">下架</button>'
+				productOnInfo += "</tr>"
+					if(count == 5){
+						break ;
+					}
+			} else {
+				productOffInfo += "<tr>"
+				productOffInfo += "<td>" + data.ProductJson[i].game_id + "</td>"
+				productOffInfo += '<td><a href="productsBack/productBack?game_id=' + data.ProductJson[i].game_id + '">' + data.ProductJson[i].name + '</a>'
+
+				productOffInfo += "<td>" + data.ProductJson[i].price + "元</td>"
+				productOffInfo += "<td>" + data.ProductJson[i].category.category + "</td>"
+				productOffInfo += '<td><button type="button" class="btn btn-warning" onclick="onProduct (' + data.ProductJson[i].game_id + ')">上架</button>'
+				productOffInfo += "</tr>"
+
+			}
+		} else {
+			break
+		}
+
+	}
+	document.getElementById("productInfo").innerHTML = productOnInfo
+
+}
+
+
+
 
 function onProduct(id) {
 
@@ -55,6 +98,8 @@ function onProduct(id) {
 		success: function (response) {
 
 			showData()
+			showCanProductData()
+			chengeInfo()
 		}
 	});
 
@@ -72,6 +117,8 @@ function offProduct(id) {
 
 		success: function (response) {
 			showData()
+			showCanProductData()
+			chengeInfo()
 		}
 	});
 
@@ -80,24 +127,21 @@ function offProduct(id) {
 
 
 function showData() {
-	// document.getElementById("productInfo").innerHTML = ""
-	// document.getElementById("cancelProduct").innerHTML = ""
 
-
-
-
+let count = 0
 	let productOnInfo = ""
 	let productOffInfo = ""
 	$.ajax({
 		url: "productsBackjson.json",
 
 		success: function (response) {
+//			console.log(response);
 			for (let i = 0; i < response.ProductJson.length; i++) {
-				console.log(response.ProductJson[i].game_id);
-				console.log(response.ProductJson[i].name);
-				console.log(response.ProductJson[i].price);
-				console.log(response.ProductJson[i].category.category);
+
+//				console.log("===============",response.ProductJson[i].name);
+//				console.log("i========", i);
 				if (response.ProductJson[i].is_remove == "0") {
+					count++;
 					productOnInfo += "<tr>"
 					productOnInfo += "<td>" + response.ProductJson[i].game_id + "</td>"
 					productOnInfo += '<td><a href="productsBack/productBack?game_id=' + response.ProductJson[i].game_id + '">' + response.ProductJson[i].name + '</a>'
@@ -106,6 +150,9 @@ function showData() {
 					productOnInfo += "<td>" + response.ProductJson[i].category.category + "</td>"
 					productOnInfo += '<td><button type="button" class="btn btn-warning" onclick="offProduct (' + response.ProductJson[i].game_id + ')">下架</button>'
 					productOnInfo += "</tr>"
+						if(count == 6){
+							break ;
+						}
 				} else {
 					productOffInfo += "<tr>"
 					productOffInfo += "<td>" + response.ProductJson[i].game_id + "</td>"
@@ -121,6 +168,7 @@ function showData() {
 
 				document.getElementById("productInfo").innerHTML = productOnInfo
 				document.getElementById("cancelProduct").innerHTML = productOffInfo
+				dateint = i
 			}
 		}
 	});
@@ -128,7 +176,26 @@ function showData() {
 
 
 
+function showCanProductData(){
+	let productOffInfo = ""
+	$.ajax({
+		url: "productsBackjson.json",
 
+		success: function (response) {
+			for (let i = 0; i < response.CanProductJson.length; i++) {
+				productOffInfo += "<tr>"
+				productOffInfo += "<td>" + response.CanProductJson[i].game_id + "</td>"
+				productOffInfo += '<td><a href="productsBack/productBack?game_id=' + response.CanProductJson[i].game_id + '">' + response.CanProductJson[i].name + '</a>'
+
+				productOffInfo += "<td>" + response.CanProductJson[i].price + "元</td>"
+				productOffInfo += "<td>" + response.CanProductJson[i].category.category + "</td>"
+				productOffInfo += '<td><button type="button" class="btn btn-warning" onclick="onProduct (' + response.CanProductJson[i].game_id + ')">上架</button>'
+				productOffInfo += "</tr>"
+			}
+			document.getElementById("cancelProduct").innerHTML = productOffInfo
+		}
+	});
+}
 
 
 

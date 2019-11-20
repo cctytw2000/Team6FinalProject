@@ -73,9 +73,12 @@ public class HomeController {
 //	public void setMovieService(IHomeMovieService movieService) {
 //		this.homeMovieService = movieService;
 //	}
-
+	
+	
+	// moviepersonal.jsp UpdateClick --> /moviepersonal/updateMovie -->
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
+//		找出首頁影片 預定ID = 1
 		HomeMovie home = homeMovieService.findById(1);
 
 		List<Product> list = service.getProductTop8();

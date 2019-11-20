@@ -11,4 +11,5 @@ public interface OrderService {
 	public Boolean updateOrderstate(Integer order_id);
 	public List<Orders> findAll();
 	public void deleteOrderById(Integer order_id);
+	public List<Object[]> dailySalescount();
 }

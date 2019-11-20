@@ -41,8 +41,7 @@ public class OrderitemController {
 		this.oservice = oservice;
 	}
 
-	// 訂單總覽-->後台showOrdersBack.jsp
-	@RequestMapping("/ordersBacksss")
+	// showOrdersBack.jsp測試
 	public String showOrdersBack(Model model) {
 		model.addAttribute("orders", observice.showOrders());
 		model.addAttribute("members", mservice.findAll());
@@ -131,5 +130,12 @@ public class OrderitemController {
 			this.count = count;
 		}
 
+	}
+
+	// 銷售金額
+	@RequestMapping("/dailySales")
+	public void dailySales(Model model) {
+		System.out.println("/dailySales");
+		model.addAttribute("sales", oservice.dailySalescount());
 	}
 }

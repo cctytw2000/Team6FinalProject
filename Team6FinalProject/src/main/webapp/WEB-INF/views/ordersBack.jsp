@@ -35,8 +35,8 @@
 	<h1 align="center">訂單管理</h1>
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#showorders">訂單總覽</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#orderchart">統計數據</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#memberorder">會員訂單</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#orderchart">會員訂單統計</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#dailySalesAmount">每日銷售金額</a></li>
 	</ul>
 	<div class="tab-content">
 	<div id="showorders" class="container tab-pane active" style="width:900px">
@@ -61,7 +61,10 @@
                 <canvas id="chart"></canvas>
     	</div>
 	</div>	
-	<div id="memberorder" class="container tab-pane fade" style="width:900px">
+	<div id="dailySalesAmount" class="container tab-pane fade" style="width:900px">
+		<div class="chart-container" style="position: relative; height:30vh; width:50vw">
+                <canvas id="chart1"></canvas>
+    	</div>
 	</div>
 	</div>
 	</div>

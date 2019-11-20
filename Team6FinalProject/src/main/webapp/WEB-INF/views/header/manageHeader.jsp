@@ -45,9 +45,19 @@
 										</div>
 								
 								</li>
-								<li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/moviepersonal">影片管理</a>
-                                </li>
+<!-- 								<li class="nav-item"> -->
+<%--                                     <a class="nav-link" href="${pageContext.request.contextPath}/moviepersonal">影片管理</a> --%>
+<!--                                 </li> -->
+                                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+										id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">影片管理</a>
+										
+										<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/moviepersonal">影片區</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/moviehome">首頁</a>
+										</div>
+								
+								</li>
                             </ul>
                         </div>
                     </nav>

@@ -56,5 +56,11 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrderById(Integer order_id) {
 		dao.deleteOrderById(order_id);
 	}
-	
+
+	@Transactional
+	@Override
+	public List<Object[]> dailySalescount() {		
+		return dao.dailySalescount();
+	}
+
 }

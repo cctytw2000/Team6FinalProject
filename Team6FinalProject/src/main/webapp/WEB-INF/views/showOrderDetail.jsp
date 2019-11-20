@@ -55,18 +55,20 @@
 					</tr>
 					</c:forEach>
 				</table><br>
-				
-				總金額${order.total }元<p>
+				<div style="display: inline-block;">
+				<button type="button" class="btn btn-outline-warning"
+										onclick="window.location.href='showOrder'">返回訂單列表</button>			
+				</div>
+				總金額${order.total }元
 				<c:choose>
 										<c:when test="${order.state == 1}">
-										<form action="aioCheckOutOneTime" method="POST">	
+										<div style="display: inline-block;"><form action="aioCheckOutOneTime" method="POST">	
 										<input type="hidden" name="order_id" value="${order.order_id}">																			
-										<button class="btn btn-outline-warning" type="submit">確定付款</button><p>
-										</form>
+										<button class="btn btn-outline-warning" type="submit">確定付款</button>
+										</form></div>
 										</c:when>										
-				</c:choose>	
-				<p><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='showOrder'">返回訂單列表</button>			
+				</c:choose>				
+				
 			</div>
 		</div>
 

@@ -51,7 +51,7 @@
 							<div class="community-post">
 								<div class="author-avator set-bg" style="width: 10%;">
 									<img style="margin-right: 10px; padding-right: 20px"
-										width="70px" height="70px"
+										width="85px" height="70px"
 										src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">
 								</div>
 
