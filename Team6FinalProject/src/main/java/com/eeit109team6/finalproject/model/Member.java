@@ -250,15 +250,4 @@ public class Member {
 //		this.likedNewses = likedNewses;
 //	}
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "message", cascade = CascadeType.ALL)
-//	private Set<Message> messages = new HashSet<Message>();
-//
-//	public Set<Message> getMessages() {
-//		return messages;
-//	}
-//
-//	public void setMessages(Set<Message> messages) {
-//		this.messages = messages;
-//	}
-
 }

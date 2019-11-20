@@ -98,51 +98,22 @@
 							人氣排行 <a style="font-size: 10px" href="#">看更多...</a>
 						</h4>
 						<div class="latest-blog">
+						
+							<c:forEach var="boardtype" items="${sessionScope.boardTop5}" varStatus="i"
+								begin="0" end="4">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/1.jpg"></div>
+									data-setbg="<c:url value='/getBoardImage/${boardtype.boardId}' />"></div>
+									
 								<div class="lb-content">
-									<div class="lb-date">PUBG</div>
-									<p>昨日人氣：60000</p>
+									<div class="lb-date">${boardtype.boardName}</div>
+									<p>累積人氣：${boardtype.boardViews}</p>
 									<a href="#" class="lb-author">討論區</a>
 								</div>
 							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">殭屍生存</div>
-									<p>昨日人氣：54000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg"
-									data-setbg="Images/latest-blog/3.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">魔獸世界</div>
-									<p>昨日人氣：46000</p>
-									<a href="#" class="lb-author">討論區</a>
-								</div>
-							</div>
+							
+							</c:forEach>
+							
 						</div>
 					</div>
 				</div>
@@ -150,65 +121,23 @@
 					<div class="footer-widget">
 						<h4 class="fw-title">熱門文章</h4>
 						<div class="top-comment">
-							<div class="tc-item">
+
+								<c:forEach var="discussion" items="${sessionScope.articleTop6}" varStatus="i"
+								begin="0" end="5">
+									<div class="tc-date"><a href="article?id=${discussion.articleId}"><p style="color:white;">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a></div>
+								
+								<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="Images/authors/1.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> PUBG
+										<a href="member?id=${discussion.member.member_id}"> ${discussion.member.memberdetail.nickname}</a> <span>於</span> ${discussion.boardType.boardName}看板
 									</p>
-									<div class="tc-date">[問題] 怎樣才能變強阿?</div>
+									<div class="tc-date">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</div>
 								</div>
 							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/2.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/3.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/4.jpg"></div>
-								<div class="tc-content">
-									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum dolor
-										sit amet, co
-									</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
+				
+								</c:forEach>
+
 						</div>
 					</div>
 				</div>
@@ -362,9 +291,10 @@
 						<div class="review-item">
 							<div class="review-cover set-bg"
 								data-setbg="<c:url value='/getPicture/${p.game_id}' />">
-								<div class="score yellow" style="margin-top: 0px">$${p.price
-									}</div>
+								
+								<div class="score yellow" style="margin-top: 0px">$${p.price}</div>
 							</div>
+							
 							<div class="review-text">
 								<h5>
 									<a href="<spring:url value='product?game_id=${p.game_id }'/>">${p.name }</a>

@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eeit109team6.finalproject.model.BoardType;
+import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.model.HomeMovie;
 import com.eeit109team6.finalproject.model.MemberDetail;
 import com.eeit109team6.finalproject.model.MovieInfo;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.Product;
+import com.eeit109team6.finalproject.service.IBoardTypeService;
 import com.eeit109team6.finalproject.service.IDiscussionService;
 import com.eeit109team6.finalproject.service.IHomeMovieService;
 import com.eeit109team6.finalproject.service.IMovieService;
@@ -30,8 +33,8 @@ public class HomeController {
 	ProductService service;
 	IHomeMovieService homeMovieService;
 	INewsService newsService;
-
-	IDiscussionService DiscussionService;
+	IDiscussionService discussionService;
+	IBoardTypeService boardTypeService;
 	IMovieService movieservice;
 
 	@Autowired
@@ -44,11 +47,14 @@ public class HomeController {
 		this.movieservice = movieservice;
 	}
 
-
-
 	@Autowired
 	public void setNewsService(INewsService newsService) {
 		this.newsService = newsService;
+	}
+	
+	@Autowired
+	public void setDiscussionService(IDiscussionService discussionService) {
+		this.discussionService = discussionService;
 	}
 
 	@Autowired
@@ -83,6 +89,11 @@ public class HomeController {
 		List<News> newslist = newsService.getAllNewsByViews();
 		session.setAttribute("newses", newslist);
 
+		List<Discussion> articleList = discussionService.getArticleTop6();
+		session.setAttribute("articleTop6", articleList);
+		
+		List<BoardType> boardTypeList = discussionService.getBoardTopN();
+		session.setAttribute("boardTop5", boardTypeList);
 
 		ArrayList<MovieInfo> newMovies = movieservice.getNewMovieInfo(3);
 		System.out.println("newMovies=" + newMovies.get(0).getMember().getAccount());

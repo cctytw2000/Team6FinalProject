@@ -2,6 +2,7 @@ package com.eeit109team6.finalproject.dao;
 
 import java.util.List;
 
+import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
 
@@ -21,6 +22,9 @@ public interface INewsDao {
 	List<News> getAllNewsByViews(); 
 	News getNewsById(Integer newsId); 
 	void updateNewsById(News news); //更新消息
+//====================================================消息評論=================================================
+	void addMemo(Message message); //新增消息評論
+	List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
 //====================================================未完成===================================================		
 	
 	

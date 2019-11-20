@@ -23,6 +23,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,13 +37,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit109team6.finalproject.model.Activity;
 import com.eeit109team6.finalproject.model.ActivityType;
-import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Game;
 import com.eeit109team6.finalproject.model.GameType;
 import com.eeit109team6.finalproject.model.Member;
+import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
-import com.eeit109team6.finalproject.model.Product;
 import com.eeit109team6.finalproject.service.IActivityService;
 import com.eeit109team6.finalproject.service.IGameService;
 import com.eeit109team6.finalproject.service.INewsService;
@@ -234,26 +234,26 @@ public class NewsController {
 		}
 		return b;
 	}
-	
+
 	// 用ajax給viewsx欄位加一
-		@RequestMapping(value = "/countForNews", method = RequestMethod.POST)
-		public void countForNews(@RequestParam("newsId") Integer newsId, @RequestParam("count") Integer views) {
+	@RequestMapping(value = "/countForNews", method = RequestMethod.POST)
+	public void countForNews(@RequestParam("newsId") Integer newsId, @RequestParam("count") Integer views) {
 //			System.out.println("newsId=" + newsId);
 //			System.out.println("views=" + views);
-			News news = newsService.getNewsById(newsId);
+		News news = newsService.getNewsById(newsId);
 //			System.out.println("views2="+news.getViews());
-			Integer i =  news.getViews();
-			if(i == null) {
-				i = 0;
-				news.setViews(i + views);
+		Integer i = news.getViews();
+		if (i == null) {
+			i = 0;
+			news.setViews(i + views);
 //				System.out.println("views3="+news.getViews());
-			} else {
-				news.setViews(i + views);
+		} else {
+			news.setViews(i + views);
 //				System.out.println("views4="+news.getViews());
-			}
-			newsService.updateNewsById(news);
-			
 		}
+		newsService.updateNewsById(news);
+
+	}
 
 //========================================未完成========================================
 
@@ -325,10 +325,10 @@ public class NewsController {
 	public String newsPage(Model model) {
 		List<News> newsList = newsService.getAllNewsByTime();
 		model.addAttribute("newsList", newsList);
-		
+
 		List<NewsType> newsTypeList = newsService.getAllNewsTypes();
 		model.addAttribute("newsTypeList", newsTypeList);
-		
+
 		return "newsPage";
 	}
 
@@ -342,18 +342,54 @@ public class NewsController {
 		return "newsPage";
 	}
 
-	// 查詢單筆消息詳細資料--> news.jsp
+	// 查詢單筆消息詳細資料--> newsDetail.jsp
 	@RequestMapping("/newsDetail")
-	public String getProductById(@RequestParam("newsId") Integer newsId, Model model, HttpSession session) {
+	public String getNewsDetailById(@RequestParam("newsId") Integer newsId, Model model, HttpSession session) {
 		News news = newsService.getNewsById(newsId);
 		model.addAttribute("news", news);
 
-//			List<Comment> comment = service.getCommentById(game_id);
-//			model.addAttribute("comments", comment);
+		List<Message> messagesList = newsService.getMessagesByNewsId(newsId);
+//		for(Message m:messages) {
+//			System.out.println("m="+m.getMember().getMember_id());
+//		}
+		model.addAttribute("messagesList", messagesList);
 
 		return "newsDetail";
 	}
 
-	
+	// 新增消息評論-> 消息細節
+	@RequestMapping(value = "/addMemo", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> addMemo(@RequestParam("memo") String memo, @RequestParam("newsId") Integer newsId,
+			@RequestParam("member_id") Integer member_id, Model model, HttpSession session, HttpServletRequest request) {
+//		System.out.println("memo="+memo);
+//		System.out.println("newsId="+newsId);
+//		System.out.println("member_id="+member_id);
+		
+		Member member = (Member) session.getAttribute("mem");
+		Message m = new Message();
+		m.setMemo(memo);
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = new Date();
+		String sd = sdFormat.format(d);
+		m.setPublicationDate(sd);;
+		m.setIpAddress(request.getRemoteAddr());// 取得發文位置
+		News n = newsService.getNewsById(newsId);
+		m.setNews(n);
+		m.setMember(member);
+		m.setIsVisable(true);
+
+		newsService.addMemo(m);
+		
+		Map<String, String> messageMap = new HashMap<>();
+		messageMap.put("messageId",String.valueOf(m.getMessageId()));
+		messageMap.put("memberId",String.valueOf(m.getMember().getMember_id()));
+		messageMap.put("userName",m.getMember().getUsername());
+		messageMap.put("memo",m.getMemo());
+		messageMap.put("publicationDate",m.getPublicationDate());
+		
+//		System.out.println(messageMap);
+		
+		return messageMap;
+	}
 
 }

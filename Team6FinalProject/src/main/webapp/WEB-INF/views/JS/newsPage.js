@@ -1,4 +1,4 @@
-//依進入消息主頁-->照時間先後排序
+//一進入消息主頁-->照時間先後排序
 $(document).ready(function() {
 	$.ajax({
 		url : "searchNewsByAjax.json",

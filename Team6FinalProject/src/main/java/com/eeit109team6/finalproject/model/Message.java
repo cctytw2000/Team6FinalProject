@@ -1,9 +1,7 @@
 package com.eeit109team6.finalproject.model;
 
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,25 +9,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="message")
 public class Message {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer messageId;
 	private String ipAddress;
-	private Timestamp publicationDate;
-	private Timestamp lastUpdated;
+	private String publicationDate;
+	private String lastUpdated;
 	private String memo;
 	private Boolean isVisable;
+	@ManyToOne
+	@JoinColumn(name = "NEWSID")
+	@JsonIgnore
 	private News news;
-//	private Member member;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MEMBER_ID")
+	@JsonIgnore
+	private Member member;
 	
 	public Message() {
 	}
 
-	@Id
-	@Column(name="MESSAGEID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getMessageId() {
 		return messageId;
 	}
@@ -38,7 +43,7 @@ public class Message {
 		this.messageId = messageId;
 	}
 
-	@Column(name = "IPADDRESS")
+	
 	public String getIpAddress() {
 		return ipAddress;
 	}
@@ -47,25 +52,22 @@ public class Message {
 		this.ipAddress = ipAddress;
 	}
 
-	@Column(name = "PUBLICATIONDATE")
-	public Timestamp getPublicationDate() {
+	public String getPublicationDate() {
 		return publicationDate;
 	}
 
-	public void setPublicationDate(Timestamp publicationDate) {
+	public void setPublicationDate(String publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 
-	@Column(name = "LASTUPDATED")
-	public Timestamp getLastUpdated() {
+	public String getLastUpdated() {
 		return lastUpdated;
 	}
 
-	public void setLastUpdated(Timestamp lastUpdated) {
+	public void setLastUpdated(String lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@Column(name="MEMO")
 	public String getMemo() {
 		return memo;
 	}
@@ -74,7 +76,6 @@ public class Message {
 		this.memo = memo;
 	}
 
-	@Column(name = "ISVISABLE")
 	public Boolean getIsVisable() {
 		return isVisable;
 	}
@@ -83,8 +84,6 @@ public class Message {
 		this.isVisable = isVisable;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "NEWSID")
 	public News getNews() {
 		return news;
 	}
@@ -93,15 +92,15 @@ public class Message {
 		this.news = news;
 	}
 
-//	@ManyToOne
-//	@JoinColumn(name = "MEMBER_ID")
-//	public Member getMember() {
-//		return member;
-//	}
-//
-//	public void setMember(Member member) {
-//		this.member = member;
-//	}
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+
 	
 	
 }

@@ -32,8 +32,7 @@
 <!-- 	//套版用 -->
 </head>
 
-<body
-	style="background-image: url(<c:url value='/Images/pattern.png' />)">
+<body>
 	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center">
 		<!-- Page section -->
@@ -51,8 +50,8 @@
 
 									<tr class="row" style="margin-bottom: 15px;">
 
-										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img alt="${boardType.boardName}"
-											src="<c:url value='/getBoardImage/${boardType.boardId}'/>"></a>
+										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img width="300" height="90" alt="${boardType.boardName}"
+											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
 											href="<spring:url value='board?id=${boardType.boardId}'/>">${boardType.boardName}</a>
@@ -93,37 +92,30 @@
 
 						<!-- widget -->
 						<div class="widget-item">
-							<h4 class="widget-title">Latest Posts</h4>
+							<h4 class="widget-title">最新發表!!</h4>
 							<div class="latest-blog">
+							
+							<c:forEach var="discussion" items="${sessionScope.articleLatest3}" varStatus="i"
+								begin="0" end="2">
+							
+							
 								<div class="lb-item">
-									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
+									<div class="lb-thumb set-bg"></div>
 									<div class="lb-content">
-										<div class="lb-date">June 21, 2018</div>
-										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-										<a href="#" class="lb-author">By Admin</a>
+										<div class="lb-date">發表時間  ${discussion.postTimeStamp}</div>
+										<a href="article?id=${discussion.articleId}"><p>【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a>
+										<div><img width="50" height="50" src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">By ${discussion.member.memberdetail.nickname}</div>
 									</div>
 								</div>
-								<div class="lb-item">
-									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/2.jpg"></div>
-									<div class="lb-content">
-										<div class="lb-date">June 21, 2018</div>
-										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-										<a href="#" class="lb-author">By Admin</a>
-									</div>
-								</div>
-								<div class="lb-item">
-									<div class="lb-thumb set-bg" data-setbg="img/latest-blog/3.jpg"></div>
-									<div class="lb-content">
-										<div class="lb-date">June 21, 2018</div>
-										<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-										<a href="#" class="lb-author">By Admin</a>
-									</div>
-								</div>
+								
+								</c:forEach>
+								
+								
 							</div>
 						</div>
 						<!-- widget -->
 						<div class="widget-item">
-							<h4 class="widget-title">Top Comments</h4>
+							<h4 class="widget-title">最熱門回應!!</h4>
 							<div class="top-comment">
 								<div class="tc-item">
 									<div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>

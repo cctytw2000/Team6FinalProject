@@ -1,6 +1,5 @@
 package com.eeit109team6.finalproject.model;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -125,7 +124,5 @@ public class Discussion {
 	public void setViews(Integer views) {
 		this.views = views;
 	}
-
-	
 
 }

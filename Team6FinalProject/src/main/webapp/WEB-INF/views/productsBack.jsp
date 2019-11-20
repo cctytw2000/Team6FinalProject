@@ -66,7 +66,7 @@
 
 
 			<div id="product" class="container tab-pane active" style="width:800px">
-				<table border="1" style="text-align: center">
+				<table style="text-align: center;width:750px" class="table table-sm">
 					<tr>
 						<th>商品編號
 						<th>商品名稱
@@ -92,7 +92,7 @@
 			</div>
 
 			<div id="productCancel" class="container tab-pane fade" style="width:800px">
-				<table border="1" style="text-align: center">
+				<table style="text-align: center;width:750px" class="table table-sm">
 					<tr>
 						<th>商品編號
 						<th>商品名稱
