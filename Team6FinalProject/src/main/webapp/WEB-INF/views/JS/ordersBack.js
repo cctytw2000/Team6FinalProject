@@ -1,4 +1,5 @@
 let data, pagebotNO;
+let member = [];
 $(document).ready(function () {
 	$.ajax({
 		url: "ordersBack.json",
@@ -7,14 +8,28 @@ $(document).ready(function () {
 			data = response;
 			if (response.Orders.length > 0) {
 				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");				
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
 			}
 			else {
-				$("tbody#ordersInfo").html("沒訂單資料");
+				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
 			}
 		}
 	});
 	ordermember();
+	ordersales();
+	$.ajax({
+		url: "membersBack.json",
+		success: function (response) {
+			for (let i = 0; i < response.Memners.length; i++) {
+				member.push(response.Memners[i].member_id);
+			}
+		}
+	});
+	$("input#member_id").blur(checkmember);
+	$("input#money_1").change(checkmoney);
+	$("input#money_4").change(checkmoney);
+	$("div#memberwin").on("show.bs.modal", memberwinshow);
+	$("div#memberwin").on("hide.bs.modal", memberwinhide);
 });
 // function showOrdersInfoall(response) {
 // 	let info = "";
@@ -57,13 +72,14 @@ function deleteOrders(orderId) {
 		+ ' /><p>'
 		+ '<input type="submit" class="btn btn-warning" value="確認取消"></form>');
 }
+let item = 5;
 function pagebot(response) {
 	let pagebottom = "";
 	pagebottom += '<li class="page-item" id="previous"><a class="page-link" href="#">Previous</a></li>'
 	console.log(response.Orders.length);
-	console.log(parseInt(response.Orders.length / 10) + 1);
+	console.log(parseInt(response.Orders.length / item) + 1);
 
-	for (let i = 1; i <= parseInt(response.Orders.length / 10) + 1; i++) {
+	for (let i = 1; i <= parseInt(response.Orders.length / item) + 1; i++) {
 		pagebottom += '<li class="page-item" id="' + i + '"><a class="page-link" href="#">' + i
 			+ '</a></li>';
 	}
@@ -71,7 +87,7 @@ function pagebot(response) {
 	$("ul#pageBottom").html(pagebottom);
 
 	document.getElementById("previous").addEventListener("click", previousChenge);
-	for (let i = 1; i <= parseInt(response.Orders.length / 10) + 1; i++) {
+	for (let i = 1; i <= parseInt(response.Orders.length / item) + 1; i++) {
 		document.getElementById(i).addEventListener("click", chengeOrdersInfo);
 	}
 	document.getElementById("next").addEventListener("click", nextChenge);
@@ -81,7 +97,6 @@ function pagebot(response) {
 }
 function showOrdersInfo(response, pageNo) {
 	let info = "";
-	let item = 10;
 	for (let i = (pageNo - 1) * item; i < response.Orders.length; i++) {
 		info += "<tr>";
 		info += '<td><a href="order/?order_id=' + response.Orders[i].order_id
@@ -98,7 +113,7 @@ function showOrdersInfo(response, pageNo) {
 				info += "<td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#mwin' onclick='deleteOrders(" + response.Orders[i].order_id + ")'>取消</button></td>";
 				break;
 			case 4:
-				info += "<td>已付款</td>";
+				info += "<td style='color:green'>已付款</td>";
 				info += "<td></td>";
 				break;
 		}
@@ -116,7 +131,7 @@ function showOrdersInfo(response, pageNo) {
 		document.getElementById("previous").addEventListener("click", previousChenge);
 	}
 	document.getElementById("next").removeEventListener("click", nextChenge);
-	if (pagebotNO == parseInt(response.Orders.length / 10) + 1) {
+	if (pagebotNO == parseInt(response.Orders.length / item) + 1) {
 		$("li#next").attr("class", "page-item disabled");
 	} else {
 		$("li#next").attr("class", "page-item");
@@ -137,21 +152,21 @@ function nextChenge() {
 	showOrdersInfo(data, pagebotNO);
 }
 
-function ordermember() {	
+function ordermember() {
 	$.ajax({
 		url: "memberOrdercount.json",
 		success: function (response) {
-			console.log(response);
+			//console.log(response);
 			console.log(response.countlist);
 			let date = [];
 			let count = [];
-			for (let i = 0; i < response.countlist.length; i++) {				
-				date.push(response.countlist[i].name);
+			for (let i = 0; i < response.countlist.length; i++) {
+				date.push(response.countlist[i].id + "_" + response.countlist[i].name);
 				count.push(response.countlist[i].count);
-			}	
+			}
 			console.log(date);
-			console.log(count);	
-			showorderCount(date, count);	
+			console.log(count);
+			showorderCount(date, count);
 		}
 	});
 }
@@ -165,9 +180,250 @@ function showorderCount(date, count) {
 				label: '訂單數量',
 				data: count,
 				backgroundColor: 'blue',
-				borderColor: 'brack',
+				borderColor: 'black',
 				borderWidth: 1
 			}]
+		}
+	});
+}
+function ordersales() {
+	$.ajax({
+		url: "dailySales.json",
+		success: function (response) {
+			//console.log(response);
+			console.log(response.sales);
+			let date = [];
+			let count = [];
+			for (let i = 0; i < response.sales.length; i++) {
+				date.push(response.sales[i][0]);
+				count.push(response.sales[i][1]);
+			}
+			console.log(date);
+			console.log(count);
+			showorderCount1(date, count);
+		}
+	});
+}
+function showorderCount1(date, count) {
+	var ctx = document.getElementById("chart1").getContext('2d');
+	var chart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: date,
+			datasets: [{
+				label: '元',
+				data: count,
+				fill: false,
+				borderColor: "blue", // 設定線的顏色
+				backgroundColor: 'blue', // 設定點的顏色
+				lineTension: 0,  // 顯示折線圖，不使用曲線				
+				borderWidth: 1
+			}]
+		}
+	});
+}
+function memberorderdata() {
+	$.ajax({
+		url: "memberOrder/" + $("input#member_id").val() + ".json",
+		success: function (response) {
+			console.log(response);
+			data = response;
+			$("tbody#ordersInfo").html("");
+			$("div#totalspan").html("");
+			$("ul#pageBottom").html("");
+			if (response.Orders.length > 0) {
+				pagebot(response);
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+			}
+			else {
+				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+			}
+		}
+	});
+
+}
+function checkmember() {
+	$("tbody#ordersInfo").html("");
+	$("div#totalspan").html("");
+	$("ul#pageBottom").html("");
+	$("span#err_msg").html("");
+	let memberdata = $("input#member_id").val();
+	if (memberdata == "") {
+		$.ajax({
+			url: "ordersBack.json",
+			success: function (response) {
+				console.log(response);
+				data = response;
+				if (response.Orders.length > 0) {
+					pagebot(response);
+					$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+				}
+				else {
+					$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+				}
+			}
+		});
+	}
+	else {
+		let re = /^\+?[1-9][0-9]*$/;
+		if (re.test(memberdata)) {
+			let falge = false;
+			for (let i = 0; i < member.length; i++) {
+				if (memberdata == member[i]) {
+					falge = true;
+				}
+			}
+			if (falge) {
+				memberorderdata();
+			} else {
+				$("span#err_msg").html("<img src='Images/noway.jpg'>無此會員編號");
+			}
+		}
+		else {
+			$("div#memberwin").modal("show");
+		}
+	}
+}
+
+function memberwinshow() {
+	$.ajax({
+		url: "memberkeyword",
+		type: "POST",
+		data: {
+			keyWord: $("input#member_id").val()
+		},
+		success: function (response) {
+			console.log(response);
+			if (response.members.length > 0) {
+				showmemberinfo(response);
+			}
+			else {
+				$("tbody#membertable").html("<tr id='err'><td colspan='3'>沒會員資料</td></tr>");
+				$("tr#err").click(function () {
+					$("input#member_id").val("");
+					$("div#memberwin").modal("hide");
+				});
+			}
+
+		}
+	});
+
+}
+function showmemberinfo(response) {
+	let info = "";
+	for (let i = 0; i < response.members.length; i++) {
+		info += "<tr id='" + response.members[i].member_id + "'>";
+		info += "<td>" + response.members[i].member_id + "</td>";
+		info += "<td>" + response.members[i].username + "</td>";
+		info += "<td>" + response.members[i].account + "</td>";
+		info += "</tr>";
+	}
+	$("tbody#membertable").html(info);
+	for (let i = 0; i < response.members.length; i++) {
+		$("tr#" + response.members[i].member_id).click(memberclick);
+	}
+}
+function memberclick() {
+	$("input#member_id").val(this.id);
+	$("div#memberwin").modal("hide");
+}
+function memberwinhide() {
+	checkmember();
+}
+
+function checkmoney() {
+	//alert($(this).val());
+	let memberdata = $("input#member_id").val();
+	$("tbody#ordersInfo").html("");
+	$("div#totalspan").html("");
+	$("ul#pageBottom").html("");
+	if (memberdata == "") {
+		if (!$(this).prop("checked")) {
+			//alert($(this).prop("checked"));
+			switch (parseInt($(this).val())) {
+				case 1:
+					money(4);
+					$("input#money_4").prop("checked", true);
+					break;
+				case 4:
+					money(1);
+					$("input#money_1").prop("checked", true);
+					break;
+			}
+		} else {
+			$.ajax({
+				url: "ordersBack.json",
+				success: function (response) {
+					console.log(response);
+					data = response;
+					if (response.Orders.length > 0) {
+						pagebot(response);
+						$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+					}
+					else {
+						$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+					}
+				}
+			});
+		}
+	} else {
+		if (!$(this).prop("checked")) {
+			//alert($(this).prop("checked"));
+			switch (parseInt($(this).val())) {
+				case 1:
+					moneymember(4, memberdata);
+					$("input#money_4").prop("checked", true);
+					break;
+				case 4:
+					moneymember(1, memberdata);
+					$("input#money_1").prop("checked", true);
+					break;
+			}
+		} else {
+			memberorderdata();
+		}
+	}
+
+
+}
+function money(state) {
+	$.ajax({
+		url: "money",
+		type: "POST",
+		data: {
+			state: state
+		},
+		success: function (response) {
+			console.log(response);
+			data = response;
+			if (response.Orders.length > 0) {
+				pagebot(response);
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+			}
+			else {
+				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+			}
+		}
+	});
+}
+function moneymember(state, memberid) {
+	$.ajax({
+		url: "moneymember",
+		type: "POST",
+		data: {
+			member_id: memberid,
+			state: state
+		},
+		success: function (response) {
+			console.log(response);
+			data = response;
+			if (response.Orders.length > 0) {
+				pagebot(response);
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+			}
+			else {
+				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+			}
 		}
 	});
 }

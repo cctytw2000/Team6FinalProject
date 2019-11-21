@@ -109,7 +109,7 @@ public class AioCheckOutController {
 			for (OrderItem oitem : order.getOrderItems()) {
 				System.out.println(oitem.getProduct().getName());
 				Product p = serviceP.getProductById(oitem.getProduct().getGame_id());
-				p.setStock(p.getStock() - 1);
+				p.setStock(p.getStock() - oitem.getCount());
 				serviceP.updateProductById(p);
 			}
 		}

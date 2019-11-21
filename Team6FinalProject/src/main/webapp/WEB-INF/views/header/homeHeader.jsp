@@ -74,7 +74,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="user-panel">
-					<button type="button" class="btn btn-primary" data-toggle="modal"
+					<button id="loginButton" type="button" class="btn btn-primary" data-toggle="modal"
 						data-target="#login">登入</button>
 					/
 					<button type="button" class="btn btn-primary" data-toggle="modal"

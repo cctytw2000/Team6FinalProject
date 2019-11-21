@@ -52,7 +52,7 @@ public class GameDaoImpl implements IGameDao {
 	@Override
 	public void updateGameTypeById(GameType gameType) {
 		Session session = sessionFactory.getCurrentSession();
-		session.clear();
+//		session.clear();
 		session.update(gameType);
 	}
 

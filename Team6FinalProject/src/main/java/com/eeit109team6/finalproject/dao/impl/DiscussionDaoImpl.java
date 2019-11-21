@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
+import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class DiscussionDaoImpl implements IDiscussionDao {
@@ -22,11 +23,10 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		this.factory = factory;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discussion> getAllArticles() {
 
-		String hql = "FROM Discussion";
+		String hql = "FROM Discussion d WHERE d.isDeleted = 0";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
@@ -37,6 +37,16 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	@Override
 	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
 
+		String hql = "FROM Discussion WHERE boardId = :boardId AND isDeleted = 0";
+		List<Discussion> list = new ArrayList<>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql).setParameter("boardId", boardId).getResultList();
+
+		return list;
+	}
+	
+	@Override
+	public List<Discussion> getArticleByBoardTypeIdBack(Integer boardId) {
 		String hql = "FROM Discussion WHERE boardId = :boardId";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
@@ -77,7 +87,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 
 	@Override
 	public List<Discussion> getArticleTop6() {
-		String hql = "FROM Discussion d ORDER BY views DESC";
+		String hql = "FROM Discussion d WHERE d.isDeleted = 0 ORDER BY views DESC";
 		Session session = factory.getCurrentSession();
 		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(6).getResultList(); 
 		return Dlist;
@@ -85,7 +95,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 
 	@Override
 	public List<Discussion> getLatestArticle() {
-		String hql = "FROM Discussion d ORDER BY articleId DESC";
+		String hql = "FROM Discussion d WHERE d.isDeleted = 0 ORDER BY articleId DESC";
 		Session session = factory.getCurrentSession();
 		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(3).getResultList(); 
 		return Dlist;
@@ -95,7 +105,40 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	public List<BoardType> getBoardTopN() {		
 		String hql = "FROM BoardType ORDER BY boardViews DESC";
 		Session session = factory.getCurrentSession();
-		List<BoardType> Blist = session.createQuery(hql).setMaxResults(5).getResultList(); 
+		List<BoardType> Blist = session.createQuery(hql).getResultList(); 
 		return Blist;
+	}
+
+	@Override
+	public void updateArticle(Discussion discussion) {
+		Session session = factory.getCurrentSession();
+		session.clear();
+		session.update(discussion);
+	}
+
+	// 將文章硬刪除
+	@Override
+	public void physicalDeleteArticleById(Integer articleId) {
+		Session session = factory.getCurrentSession();
+		Discussion discussion = session.get(Discussion.class, articleId);
+		session.delete(discussion);
+	}
+	
+	// 將isDeleted改為1，將文章標記軟刪除，但資料庫依然有紀錄。若要硬刪除，請用physicalDeleteArticleById()
+	@Override
+	public void deleteArticleById(Integer articleId) {
+		Session session = factory.getCurrentSession();
+		Discussion discussion = session.get(Discussion.class, articleId);
+		discussion.setIsDeleted(1);
+		session.update(discussion);
+	}
+	
+	// 將isDeleted改為0，反刪除被標記為軟刪除的文章，恢復為使用者可見。
+	@Override
+	public void recoverArticleById(Integer articleId) {
+		Session session = factory.getCurrentSession();
+		Discussion discussion = session.get(Discussion.class, articleId);
+		discussion.setIsDeleted(0);
+		session.update(discussion);
 	}
 }

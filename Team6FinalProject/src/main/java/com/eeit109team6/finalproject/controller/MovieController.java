@@ -507,7 +507,7 @@ public class MovieController {
 		System.out.println("deleteMovieId ====================================================== "+deleteMovieId);
 //		System.out.println("movie.getMovieId() ============================================= "+movie.getMovieId());
 //		System.out.println("movie.getMovieName() ============================================ "+movie.getMovieName());
-		homeMovieService.deleteMovieById(12);
+		homeMovieService.deleteMovieById(11);
 		return "redirect:/movieHome";
 	}
 

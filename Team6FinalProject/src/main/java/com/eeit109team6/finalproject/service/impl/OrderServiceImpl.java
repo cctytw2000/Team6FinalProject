@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit109team6.finalproject.dao.IOrderDao;
+import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Orders;
 import com.eeit109team6.finalproject.service.OrderService;
 
@@ -56,5 +57,30 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrderById(Integer order_id) {
 		dao.deleteOrderById(order_id);
 	}
+
+	@Transactional
+	@Override
+	public List<Object[]> dailySalescount() {
+		return dao.dailySalescount();
+	}
+
+	@Transactional
+	@Override
+	public List<Orders> findAll(Integer state) {		
+		return dao.findAll(state);
+	}
+
+	@Transactional
+	@Override
+	public List<Orders> showOrder(Integer member_id, Integer state) {
+		return dao.showOrder(member_id, state);
+	}
+	
+	@Transactional
+	@Override
+	public List<Member> getMemberByKeyWord(String keyWord) {
+		return dao.getMemberByKeyWord(keyWord);
+	}
+
 	
 }

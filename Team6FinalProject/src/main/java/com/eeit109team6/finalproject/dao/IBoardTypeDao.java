@@ -10,10 +10,6 @@ public interface IBoardTypeDao {
 	BoardType getBoardTypeById(int boardId);//依照id取得一個看板的資訊
 	void addBoardType(BoardType boardType);	//新增一個討論看板
 	void updateBoardTypeById(BoardType boardType);//修改討論看板名稱
-	
-	//=====先別動
-//	void deleteBoardType();				//刪除討論看板
-
-
+	void physicalDeleteBoardById(Integer boardId);//刪除看板
 	
 }

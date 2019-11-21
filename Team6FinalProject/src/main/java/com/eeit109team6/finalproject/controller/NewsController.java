@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -114,6 +114,12 @@ public class NewsController {
 	// 取得所有消息類別的json格式
 	@RequestMapping(value = "/newsBack/searchNewsTypeByAjax", produces = "application/json")
 	public @ResponseBody List<NewsType> searchNewsTypeByAjax() {
+		return newsService.getAllNewsTypes();
+	}
+
+	// 取得所有消息類別的json格式
+	@RequestMapping(value = "searchNewsTypeByAjax1", produces = "application/json")
+	public @ResponseBody List<NewsType> searchNewsTypeByAjax1() {
 		return newsService.getAllNewsTypes();
 	}
 
@@ -255,6 +261,168 @@ public class NewsController {
 
 	}
 
+	// 新增消息評論-> 消息細節
+	@RequestMapping(value = "/addMemo", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> addMemo(@RequestParam("memo") String memo,
+			@RequestParam("newsId") Integer newsId, @RequestParam("member_id") Integer member_id, Model model,
+			HttpSession session, HttpServletRequest request) {
+//			System.out.println("memo="+memo);
+//			System.out.println("newsId="+newsId);
+//			System.out.println("member_id="+member_id);
+
+		Member member = (Member) session.getAttribute("mem");
+		Message m = new Message();
+		m.setMemo(memo);
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = new Date();
+		String sd = sdFormat.format(d);
+		m.setPublicationDate(sd);
+		;
+		m.setIpAddress(request.getRemoteAddr());// 取得發文位置
+		News n = newsService.getNewsById(newsId);
+		m.setNews(n);
+		m.setMember(member);
+		m.setIsVisable(true);
+
+		newsService.addMemo(m);
+
+		Map<String, String> messageMap = new HashMap<>();
+		messageMap.put("messageId", String.valueOf(m.getMessageId()));
+		messageMap.put("memberId", String.valueOf(m.getMember().getMember_id()));
+		messageMap.put("userName", m.getMember().getUsername());
+		messageMap.put("memo", m.getMemo());
+		messageMap.put("publicationDate", m.getPublicationDate());
+
+//			System.out.println(messageMap);
+
+		return messageMap;
+	}
+
+	// 進入更新單筆消息詳細資料表單--> updateNews.jsp
+	@RequestMapping("/updateNews")
+	public String updateNewsById(HttpServletRequest request, Model model) {
+
+		News news = newsService.getNewsById(Integer.parseInt(request.getParameter("newsId")));
+		model.addAttribute("news", news);
+
+		return "updateNews";
+	}
+
+	// 更新消息資訊
+	@RequestMapping("/updateNewsDetail")
+	public String updateNewsDetailById(@RequestParam("newsId") Integer newsId,
+			@RequestParam("newsType") Integer newsTypeId, String title, String article, MultipartFile newsImage,
+			HttpServletRequest request) {
+
+		News original = newsService.getNewsById(newsId);
+		original.setNewsType(newsService.getNewsTypeById(newsTypeId));
+		original.setTitle(title);
+		original.setArticle(article);
+
+		// 上傳圖片begin
+		if (newsImage.getSize() == 0) {
+			original.setPicture(original.getPicture());
+		} else {
+			if (newsImage != null && !newsImage.isEmpty()) {
+				try {
+					byte[] b = newsImage.getBytes();
+					Blob blob = new SerialBlob(b);
+					original.setPicture(blob);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+				}
+			}
+		}
+
+		// 上傳圖片end
+		newsService.updateNewsById(original);
+
+		return "redirect:/newsBack";
+	}
+
+	// 刪除遊戲細節-->updateNews.jsp
+	@RequestMapping(value = "/deleteGameInUpdateNews", method = RequestMethod.POST)
+	public String deleteGameInUpdateNews(@RequestParam("gameId") Integer gameId, @RequestParam("newsId") Integer newsId,
+			HttpSession session) {
+//			System.out.println("newsId==" + newsId);
+		session.setAttribute("updateNewsId", newsId);
+		News news = newsService.getNewsById(newsId);
+		if (gameId == null) {
+			news.setGame(null);
+		}
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
+	// 更改遊戲細節-->updateNews.jsp
+	@RequestMapping(value = "/updateGameInUpdateNews", method = RequestMethod.POST)
+	public String updateGameInUpdateNews(@RequestParam("game") Integer gameId, @RequestParam("newsId") Integer newsId,
+			HttpSession session) {
+//				System.out.println("newsId==" + newsId);
+		session.setAttribute("updateNewsId", newsId);
+		News news = newsService.getNewsById(newsId);
+		Game game = gameService.getGameById(gameId);
+		news.setGame(game);
+
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
+	// 新增遊戲細節-->updateNews.jsp
+	@RequestMapping(value = "/showGameInUpdateNews", method = RequestMethod.POST)
+	public String showGameInUpdateNews(@RequestParam("game") Integer gameId, @RequestParam("newsId") Integer newsId,
+			HttpSession session) {
+//			System.out.println("newsId==" + newsId);
+		session.setAttribute("updateNewsId", newsId);
+		News news = newsService.getNewsById(newsId);
+		Game game = gameService.getGameById(gameId);
+		news.setGame(game);
+
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
+	// 刪除活動細節-->updateNews.jsp
+	@RequestMapping(value = "/deleteActivityInUpdateNews", method = RequestMethod.POST)
+	public String deleteActivityInUpdateNews(@RequestParam("activityId") Integer activityId,
+			@RequestParam("newsId") Integer newsId, HttpSession session) {
+//			System.out.println("newsId==" + newsId);
+		session.setAttribute("updateNewsId", newsId);
+		News news = newsService.getNewsById(newsId);
+		if (activityId == null) {
+			news.setActivity(null);
+		}
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
+	// 更改活動細節-->updateNews.jsp
+	@RequestMapping(value = "/updateActivityInUpdateNews", method = RequestMethod.POST)
+	public String updateActivityInUpdateNews(@RequestParam("activity") Integer activityId,
+			@RequestParam("newsId") Integer newsId) {
+//					System.out.println("newsId==" + newsId);
+		News news = newsService.getNewsById(newsId);
+		Activity activity = activityService.getActivityById(activityId);
+		news.setActivity(activity);
+
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
+	// 新增活動細節-->updateNews.jsp
+	@RequestMapping(value = "/showActivityInUpdateNews", method = RequestMethod.POST)
+	public String showActivityInUpdateNews(@RequestParam("activity") Integer activityId,
+			@RequestParam("newsId") Integer newsId) {
+//		System.out.println("newsId==" + newsId);
+		News news = newsService.getNewsById(newsId);
+		Activity activity = activityService.getActivityById(activityId);
+		news.setActivity(activity);
+
+		newsService.updateNewsById(news);
+		return "redirect:/updateNews?newsId=" + newsId;
+	}
+
 //========================================未完成========================================
 
 	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
@@ -356,40 +524,10 @@ public class NewsController {
 
 		return "newsDetail";
 	}
-
-	// 新增消息評論-> 消息細節
-	@RequestMapping(value = "/addMemo", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> addMemo(@RequestParam("memo") String memo, @RequestParam("newsId") Integer newsId,
-			@RequestParam("member_id") Integer member_id, Model model, HttpSession session, HttpServletRequest request) {
-//		System.out.println("memo="+memo);
-//		System.out.println("newsId="+newsId);
-//		System.out.println("member_id="+member_id);
-		
-		Member member = (Member) session.getAttribute("mem");
-		Message m = new Message();
-		m.setMemo(memo);
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d = new Date();
-		String sd = sdFormat.format(d);
-		m.setPublicationDate(sd);;
-		m.setIpAddress(request.getRemoteAddr());// 取得發文位置
-		News n = newsService.getNewsById(newsId);
-		m.setNews(n);
-		m.setMember(member);
-		m.setIsVisable(true);
-
-		newsService.addMemo(m);
-		
-		Map<String, String> messageMap = new HashMap<>();
-		messageMap.put("messageId",String.valueOf(m.getMessageId()));
-		messageMap.put("memberId",String.valueOf(m.getMember().getMember_id()));
-		messageMap.put("userName",m.getMember().getUsername());
-		messageMap.put("memo",m.getMemo());
-		messageMap.put("publicationDate",m.getPublicationDate());
-		
-//		System.out.println(messageMap);
-		
-		return messageMap;
+	
+	@RequestMapping(value = "/searchByKeyWord", method = RequestMethod.POST)
+	public void searchByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
+		model.addAttribute("news", newsService.getNewsByKeyWord(keyWord));
 	}
 
 }

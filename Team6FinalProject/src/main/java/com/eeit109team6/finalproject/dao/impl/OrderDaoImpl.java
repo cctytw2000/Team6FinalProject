@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IOrderDao;
+import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Orders;
 
 @Repository
@@ -74,4 +75,43 @@ public class OrderDaoImpl implements IOrderDao {
 		session.update(order);
 	}
 
+	@Override
+	public List<Object[]> dailySalescount() {
+		String hql = "SELECT CONVERT(date,ordertime) as 'time' , SUM(total) as 'Sales' "
+				+ "FROM Orders WHERE is_remove = 0 and state = 4 " + "GROUP BY CONVERT(date,ordertime) "
+				+ "ORDER BY CONVERT(date,ordertime) asc";
+		Query query = factory.getCurrentSession().createSQLQuery(hql);
+		List<Object[]> rows = query.getResultList();
+		for (Object[] row : rows) {
+			System.out.println("row[0].toString()=" + row[0].toString());
+			System.out.println("row[1].toString()=" + row[1].toString());
+			row[0] = row[0].toString();
+			row[1] = row[1].toString();
+		}
+		return rows;
+	}
+
+	@Override
+	public List<Orders> findAll(Integer state) {
+		String hql = "FROM Orders  WHERE is_remove = 0 and state = :state";
+		Query query = factory.getCurrentSession().createQuery(hql);
+		query.setParameter("state", state);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Orders> showOrder(Integer member_id, Integer state) {
+		String hql = "FROM Orders  WHERE member_id = :member_id and is_remove = 0 and state = :state";
+		Query query = factory.getCurrentSession().createQuery(hql);
+		query.setParameter("member_id", member_id);
+		query.setParameter("state", state);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Member> getMemberByKeyWord(String keyWord) {
+		String hql = "FROM Member  where username LIKE'%" + keyWord + "%' or account LIKE'%" + keyWord + "%'";
+		Query query = factory.getCurrentSession().createQuery(hql);
+		return query.getResultList();
+	}
 }

@@ -46,11 +46,11 @@ public class BoardTypeServiceImpl implements IBoardTypeService {
 		dao.updateBoardTypeById(boardType);
 	}
 
-//	@Transactional
-//	@Override
-//	public void deleteBoardType() {
-//		// TODO Auto-generated method stub
-//
-//	}
+	@Transactional
+	@Override
+	public void physicalDeleteBoardById(Integer boardId) {
+		dao.physicalDeleteBoardById(boardId);
+	}
+
 
 }

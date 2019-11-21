@@ -35,8 +35,9 @@
 	<div class="container mt-3">
 		<h1 align="center">新增發文分類</h1>
 		<div align="center">
-	<form:form method='POST' modelAttribute="subjectType">
+	<form:form method='POST' modelAttribute="subjectType" enctype="multipart/form-data">
 		<form:input path="subjectName" type="text" size="50px" />
+		<form:input path="sImage" type='file'/>
 		<p>
 			<input type="submit" value="送出">
 			<button type="button" onclick="GoBack()">取消</button>

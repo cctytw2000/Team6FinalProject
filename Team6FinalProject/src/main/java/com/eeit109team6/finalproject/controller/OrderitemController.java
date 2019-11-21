@@ -41,8 +41,7 @@ public class OrderitemController {
 		this.oservice = oservice;
 	}
 
-	// 訂單總覽-->後台showOrdersBack.jsp
-	@RequestMapping("/ordersBacksss")
+	// showOrdersBack.jsp測試
 	public String showOrdersBack(Model model) {
 		model.addAttribute("orders", observice.showOrders());
 		model.addAttribute("members", mservice.findAll());
@@ -83,7 +82,7 @@ public class OrderitemController {
 	// 查詢個人訂單json
 	@RequestMapping(value = "/memberOrder/{member_id}.json")
 	public void memberOrder(@PathVariable("member_id") Integer member_id, Model model) {
-		model.addAttribute("memberOrder", oservice.showOrder(member_id));
+		model.addAttribute("Orders", oservice.showOrder(member_id));
 	}
 
 	// 個人訂單數量
@@ -132,4 +131,34 @@ public class OrderitemController {
 		}
 
 	}
+
+	// 銷售金額
+	@RequestMapping("/dailySales")
+	public void dailySales(Model model) {
+		System.out.println("/dailySales");
+		model.addAttribute("sales", oservice.dailySalescount());
+	}
+
+	// (已或未)付款
+	@RequestMapping(value = "/money", method = RequestMethod.POST)
+	public void mony(@RequestParam("state") Integer state, Model model) {
+		System.out.println("/money");
+		model.addAttribute("Orders", oservice.findAll(state));
+	}
+
+	// (已或未)付款 會員
+	@RequestMapping(value = "/moneymember", method = RequestMethod.POST)
+	public void monymember(@RequestParam("member_id") Integer member_id, @RequestParam("state") Integer state,
+			Model model) {
+		System.out.println("/monymember");
+		model.addAttribute("Orders", oservice.showOrder(member_id, state));
+	}
+
+	// 關鍵字會員
+	@RequestMapping(value = "/memberkeyword", method = RequestMethod.POST)
+	public void memberkey(@RequestParam("keyWord") String keyWord, Model model) {
+		System.out.println("/memberkeyword");
+		model.addAttribute("members", oservice.getMemberByKeyWord(keyWord));
+	}
+
 }

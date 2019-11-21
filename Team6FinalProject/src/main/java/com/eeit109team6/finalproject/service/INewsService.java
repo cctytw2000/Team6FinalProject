@@ -22,9 +22,10 @@ public interface INewsService {
 	List<News> getAllNewsByViews(); 
 	News getNewsById(Integer newsId);
 	void updateNewsById(News news);
+	List<News> getNewsByKeyWord(String keyWord);
 //====================================================消息評論=================================================
-		void addMemo(Message message); //新增消息評論
-		List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
+	void addMemo(Message message); //新增消息評論
+	List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
 //====================================================未完成===================================================	
 	
 }

@@ -39,7 +39,17 @@
 
 			<h2 align="center" style="color:white">訂單編號${order.order_id }</h2><br>
 			<div align="center">
-				訂單時間${order.ordertime.replace(".0","")}<br><br>
+				訂單時間${order.ordertime.replace(".0","")}&nbsp;&nbsp;&nbsp;
+									<c:choose>
+										<c:when test="${order.state == 1}">
+										<div style="display: inline-block;color:red">未付款
+										</div><p>
+										</c:when>
+										<c:when test="${order.state == 4}">
+										<div style="display: inline-block;color:green">已付款
+										</div><p>										
+										</c:when>										
+									</c:choose>
 				<table border="1" style="text-align:center">
 					<tr>
 						<th>商品編號
@@ -55,18 +65,20 @@
 					</tr>
 					</c:forEach>
 				</table><br>
-				
-				總金額${order.total }元<p>
+				<div style="display: inline-block;">
+				<button type="button" class="btn btn-outline-warning"
+										onclick="window.location.href='showOrder'">返回訂單列表</button>			
+				</div>
+				總金額${order.total }元
 				<c:choose>
 										<c:when test="${order.state == 1}">
-										<form action="aioCheckOutOneTime" method="POST">	
+										<div style="display: inline-block;"><form action="aioCheckOutOneTime" method="POST">	
 										<input type="hidden" name="order_id" value="${order.order_id}">																			
-										<button class="btn btn-outline-warning" type="submit">確定付款</button><p>
-										</form>
+										<button class="btn btn-outline-warning" type="submit">確定付款</button>
+										</form></div>
 										</c:when>										
-				</c:choose>	
-				<p><button type="button" class="btn btn-outline-warning"
-										onclick="window.location.href='showOrder'">返回訂單列表</button>			
+				</c:choose>				
+				
 			</div>
 		</div>
 

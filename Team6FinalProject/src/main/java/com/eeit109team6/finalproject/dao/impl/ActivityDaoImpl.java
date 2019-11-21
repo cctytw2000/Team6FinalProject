@@ -51,7 +51,7 @@ public class ActivityDaoImpl implements IActivityDao {
 	@Override
 	public void updateActivityTypeById(ActivityType activityType) {
 		Session session = sessionFactory.getCurrentSession();
-		session.clear();
+//		session.clear();
 		session.update(activityType);
 	}
 

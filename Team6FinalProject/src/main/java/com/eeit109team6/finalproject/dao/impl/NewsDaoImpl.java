@@ -13,6 +13,7 @@ import com.eeit109team6.finalproject.model.Comment;
 import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
+import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class NewsDaoImpl implements INewsDao {
@@ -117,7 +118,6 @@ public class NewsDaoImpl implements INewsDao {
 	@Override
 	public void updateNewsById(News news) {
 		Session session = sessionFactory.getCurrentSession();
-		session.clear();
 		session.update(news);
 	}
 
@@ -127,6 +127,15 @@ public class NewsDaoImpl implements INewsDao {
 		List<News> list = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	@Override
+	public List<News> getNewsByKeyWord(String keyWord) {
+		String hql = "FROM News n where n.title LIKE'%" + keyWord + "%' ORDER BY publicationdate DESC";
+		System.out.println(hql);
+		Session session = sessionFactory.getCurrentSession();
+		List<News> list = session.createQuery(hql).getResultList();
 		return list;
 	}
 	
@@ -145,8 +154,6 @@ public class NewsDaoImpl implements INewsDao {
 		List<Message> list = session.createQuery(hql).setParameter("newsId", newsId).getResultList();
 		return list;
 	}
-
-	
 	
 //====================================================未完成===================================================	
 
