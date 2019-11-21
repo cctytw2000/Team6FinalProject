@@ -10,6 +10,7 @@ public interface IDiscussionService {
 
 	List<Discussion> getAllArticles();		// 取得所有文章
 	List<Discussion> getArticleByBoardTypeId(Integer boardId);//取得指定看板的所有文章
+	List<Discussion> getArticleByBoardTypeIdBack(Integer boardId);//取得指定看板的含標記軟刪除的所有文章
 	Discussion getArticleById(int articleId);//瀏覽單筆文章
 	void addArticle(Discussion discussion);  //新增一筆文章(樓主)
 	
@@ -20,4 +21,8 @@ public interface IDiscussionService {
 	
 	List<BoardType> getBoardTopN();			//首頁展示；人氣排行。查詢文章最多的一批看板
 	
+	void updateArticle(Discussion discussion);//修改文章
+	void physicalDeleteArticleById(Integer articleId);//硬刪除文章，從資料庫刪除，無法恢復	
+	void deleteArticleById(Integer articleId);//軟刪除文章
+	void recoverArticleById(Integer articleId);//反刪除文章
 }

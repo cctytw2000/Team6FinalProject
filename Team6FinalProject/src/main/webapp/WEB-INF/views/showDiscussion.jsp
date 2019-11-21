@@ -48,9 +48,9 @@
 								<!-- 								</tr> -->
 								<c:forEach var='boardType' items="${boardTypeList}">
 
-									<tr class="row" style="margin-bottom: 15px;">
+									<tr class="row" style="margin-bottom:15px;">
 
-										<td class="col-md-5"><a href="<spring:url value='board?id=${boardType.boardId}'/>"><img width="300" height="90" alt="${boardType.boardName}"
+										<td class="col-md-5"><a href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><img width="300" height="90" alt="${boardType.boardName}"
 											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
 										<td class="col-md-7"><a style="text-decoration: none;"
@@ -60,9 +60,7 @@
 													items="${boardType.discussion}">
 
 													<a style="text-decoration: none;"
-														href="<spring:url value='article?id=${discussion.articleId}'/>">【
-														${discussion.subjectType.subjectName}】
-														${discussion.subject}</a>
+														href="<spring:url value='article?id=${discussion.articleId}'/>">【${discussion.subjectType.subjectName}】${discussion.subject}</a>
 													<p>
 <!-- 													<div style="padding-left:15px"> -->
 <%-- 														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i --%>
@@ -103,7 +101,7 @@
 									<div class="lb-thumb set-bg"></div>
 									<div class="lb-content">
 										<div class="lb-date">發表時間  ${discussion.postTimeStamp}</div>
-										<a href="article?id=${discussion.articleId}"><p>【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a>
+										<a href="article?id=${discussion.articleId}"><p>【${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a>
 										<div><img width="50" height="50" src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">By ${discussion.member.memberdetail.nickname}</div>
 									</div>
 								</div>
@@ -111,42 +109,6 @@
 								</c:forEach>
 								
 								
-							</div>
-						</div>
-						<!-- widget -->
-						<div class="widget-item">
-							<h4 class="widget-title">最熱門回應!!</h4>
-							<div class="top-comment">
-								<div class="tc-item">
-									<div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>
-									<div class="tc-content">
-										<p>
-											<a href="#">James Smith</a> <span>on</span> Lorem consec
-											ipsum dolor sit amet, co
-										</p>
-										<div class="tc-date">June 21, 2018</div>
-									</div>
-								</div>
-								<div class="tc-item">
-									<div class="tc-thumb set-bg" data-setbg="img/authors/2.jpg"></div>
-									<div class="tc-content">
-										<p>
-											<a href="#">Michael James</a> <span>on</span>Cras sit amet
-											sapien aliquam
-										</p>
-										<div class="tc-date">June 21, 2018</div>
-									</div>
-								</div>
-								<div class="tc-item">
-									<div class="tc-thumb set-bg" data-setbg="img/authors/3.jpg"></div>
-									<div class="tc-content">
-										<p>
-											<a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor
-											consecsit amet, co
-										</p>
-										<div class="tc-date">June 21, 2018</div>
-									</div>
-								</div>
 							</div>
 						</div>
 						<!-- widget -->

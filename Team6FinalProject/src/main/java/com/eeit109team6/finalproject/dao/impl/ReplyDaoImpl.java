@@ -45,8 +45,8 @@ public class ReplyDaoImpl implements IReplyDao {
 
 	@Override
 	public void deleteReply(Integer replyId) {
-		// TODO Auto-generated method stub
-		
+		Session session = factory.getCurrentSession();
+//		session.delete(replyId);
 	}
 
 }

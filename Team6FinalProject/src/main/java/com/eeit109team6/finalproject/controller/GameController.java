@@ -134,7 +134,7 @@ public class GameController {
 
 	// 用ajax傳回gameDetail給addNews.jsp
 	@RequestMapping(value = "/newsBack/searchGameByAjax1", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> test(@RequestParam("gameId") Integer gameId) {
+	public @ResponseBody Map<String, String> searchGameByAjax1(@RequestParam("gameId") Integer gameId) {
 		System.out.println(gameId);
 		Game g = gameService.getGameById(gameId);
 		Map<String, String> gameMap = new HashMap<>();
@@ -151,6 +151,32 @@ public class GameController {
 
 		return gameMap;
 	}
+	
+	// 取得所有遊戲的json格式
+		@RequestMapping(value = "/searchGameByAjax2_1",produces = "application/json")
+		public @ResponseBody List<Game> searchGameByAjax2_1() {
+			return gameService.getAllGames();
+		}
+	
+	// 用ajax傳回gameDetail給updateNews.jsp
+		@RequestMapping(value = "/searchGameByAjax2", method = RequestMethod.POST)
+		public @ResponseBody Map<String, String> searchGameByAjax2(@RequestParam("gameId") Integer gameId) {
+			System.out.println(gameId);
+			Game g = gameService.getGameById(gameId);
+			Map<String, String> gameMap = new HashMap<>();
+			gameMap.put("gameTypeName", g.getGameType().getGameTypeName());
+			gameMap.put("name", g.getGameName());
+			// 若未設定發售日則傳回未設定
+			if (g.getPublicationDate().equals("")) {
+				gameMap.put("publicationDate", "未設定");
+			} else {
+				gameMap.put("publicationDate", g.getPublicationDate());
+			}
+			gameMap.put("publisher", g.getPublisher());
+			gameMap.put("platform", g.getPlatform());
+
+			return gameMap;
+		}
 
 	// 更新遊戲細節-->newsBack.jsp
 	@RequestMapping(value = "/updateGame", method = RequestMethod.POST)

@@ -39,14 +39,14 @@
 			<p>
 			
 			是否需要顯示遊戲細節: <input type="radio" name="showGame" value="1"> 是
-			<input type="radio" name="showGame" value="0"> 否
+			<input type="radio" name="showGame" value="0" CHECKED> 否
 			<div id="showGame1"></div>
 			<div class="row mb-2"></div>
 			<div id="showGame2"></div>
 			<p>
 
-				是否需要顯示活動細節: <input type="radio" name="showActivity" value="1">
-				是 <input type="radio" name="showActivity" value="0"> 否
+			是否需要顯示活動細節: <input type="radio" name="showActivity" value="1">是 
+			<input type="radio" name="showActivity" value="0" CHECKED> 否
 			<div id="showActivity1"></div>
 			<div class="row mb-2"></div>
 			<div id="showActivity2"></div>

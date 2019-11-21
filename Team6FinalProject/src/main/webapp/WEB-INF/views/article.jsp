@@ -10,6 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>遊戲討論區</title>
+<style>
+body  {
+  background-image: url("Images/community-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->
@@ -31,6 +39,31 @@
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#clickMeLogin").click(function() {
+		$("#loginButton").trigger('click');
+
+	});
+
+
+});
+
+
+
+</script>
+
+<style type="text/css">
+body  {
+  background-image: url("Images/community-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+</style>
 </head>
 
 <body>
@@ -38,14 +71,11 @@
 	<div align="center" style="height: 100%">
 
 		<h2>${discussion.boardType.boardName}</h2>
-		<section style="height: 100%"
-			class="page-section community-page set-bg"
-			data-setbg="Images/community-bg.jpg">
-			<div class="community-warp spad">
+		<section>
 
 				<div class="container">
-					<h2 style="text-align: left">【
-						${discussion.subjectType.subjectName}】 ${discussion.subject}</h2>
+					<h2 style="text-align: left">【${discussion.subjectType.subjectName}】
+						${discussion.subject}</h2>
 					<ul class="community-post-list">
 						<li style="text-align: left">
 							<div class="community-post">
@@ -57,31 +87,23 @@
 
 								<div class="post-content">
 
-									<h5>${discussion.member.memberdetail.nickname}<span
-											style="font-size: 8px">${discussion.member.account.split("@")[0]}</span>
+									<h5>${discussion.member.memberdetail.nickname}<span style="font-size: 8px">${discussion.member.account.split("@")[0]}</span>
 									</h5>
 									<div class="post-date">${discussion.postTimeStamp}</div>
 									<p>${discussion.articleBody}</p>
 								</div>
+
 								<span style="color: white; float: right">閱覽次數：${discussion.views}</span>
 							</div>
 						</li>
-						
-						
-					<c:forEach var="rp" items="${reply}">
-
-						<li>
-								<p style="color: #FFFFBB;margin-top:10px">${rp.member.memberdetail.nickname}, ${rp.replyBody}</p>
-
-						</li>
-					</c:forEach>
 
 
-						
 
 
-						
-						<li>
+
+<c:choose>
+<c:when test="${sessionScope.mem != Null }">
+	<li>
 							<div align="center">
 								<form method='POST'
 									action="${pageContext.request.contextPath}/addReply"
@@ -96,12 +118,15 @@
 											<td></td>
 											<td>
 											<div class="post-content">
-											<h5>${sessionScope.mem.memberdetail.nickname}
+											<h5 style="color:white"><img style="margin-right: 10px; padding-right: 20px"
+										width="85px" height="70px"
+										src="<c:url value='/memberImages/${mem.account}_${mem.member_id}/
+										${mem.username}${mem.member_id}${mem.headshot}' />">${sessionScope.mem.memberdetail.nickname}
 											<span style="font-size: 8px">${sessionScope.mem.account.split("@")[0]}</span>
 									</h5></div></td>
 										</tr>
 										<tr>
-											<td>
+											<td></td>
 											<td><textarea rows="5" name="body" cols="100"></textarea></td>
 										</tr>
 										<tr>
@@ -113,12 +138,70 @@
 								</form>
 							</div>
 						</li>
-					</ul>
 
+
+</c:when>
+<c:otherwise>
+		<div align="center">
+		<button id="clickMeLogin"  class="btn btn-primary"  type="button">點我登入</button>
+		</div>
+</c:otherwise>
+</c:choose>
+						
+					
+					</ul>
+<c:choose>
+								<c:when test="${sessionScope.mem != Null}">
+
+									<div align="center">
+										<form method='POST'
+											action="${pageContext.request.contextPath}/addReply"
+											enctype="multipart/form-data">
+
+											<input type="hidden" name="articleId"
+												value="${discussion.articleId}" /> <input type="hidden"
+												name="author"
+												value="${sessionScope.mem.memberdetail.nickname}" />
+												
+												
+											<table>
+												<tr>
+													<td></td>
+													<td>
+														<div class="post-content">
+															<h5>${sessionScope.mem.memberdetail.nickname}
+																<span style="font-size: 8px">${sessionScope.mem.account.split("@")[0]}</span>
+															</h5>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+													<td><textarea rows="5" name="body" cols="100"></textarea></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><input type="submit" value="送出">
+														<button type="button" onclick="GoBack()">取消</button></td>
+												</tr>
+											</table>
+								</c:when>
+								<c:otherwise>
+								
+								</c:otherwise>
+							</c:choose>
+
+
+
+							</form>
 				</div>
+				</li>
+				</ul>
+
 			</div>
-		</section>
-		<!-- Page section end -->
+	</div>
+	</section>
+	<!-- Page section end -->
 
 	</div>
 	<!-- 	套版用 -->

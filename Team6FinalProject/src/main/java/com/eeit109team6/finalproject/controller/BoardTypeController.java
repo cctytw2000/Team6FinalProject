@@ -58,7 +58,7 @@ public class BoardTypeController {
 	@RequestMapping("/discussionBack")
 	public String getAllBoardType(Model model) {
 		BoardType boardType = new BoardType();
-		boardType.setBoardName("aaaaaa");
+		boardType.setBoardName("");//開發時在此填入aaa看效果
 		model.addAttribute("boardType", boardType);//將boardType物件裝入model，model內的識別字串為boardType
 		List<BoardType> list = boardTypeservice.getAllBoardType();
 		System.out.println("進入討論區後台   getAllBoardType()");	

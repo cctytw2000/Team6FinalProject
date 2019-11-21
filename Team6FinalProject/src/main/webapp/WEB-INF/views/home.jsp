@@ -95,12 +95,12 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget mb-5 mb-md-0">
 						<h4 class="fw-title">
-							人氣排行 <a style="font-size: 10px" href="#">看更多...</a>
+							人氣排行 <a style="font-size: 10px" href="${pageContext.request.contextPath}/discussion">看更多...</a>
 						</h4>
 						<div class="latest-blog">
 						
 							<c:forEach var="boardtype" items="${sessionScope.boardTop5}" varStatus="i"
-								begin="0" end="4">
+								begin="0" end="7">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg"
 									data-setbg="<c:url value='/getBoardImage/${boardtype.boardId}' />"></div>
@@ -108,7 +108,7 @@
 								<div class="lb-content">
 									<div class="lb-date">${boardtype.boardName}</div>
 									<p>累積人氣：${boardtype.boardViews}</p>
-									<a href="<spring:url value='board?id=${boardtype.boardId}'/>" class="lb-author">討論區</a>
+									<a href="<spring:url value='board-Rich?id=${boardtype.boardId}'/>" class="lb-author">討論區</a>
 								</div>
 							</div>
 							
@@ -133,7 +133,7 @@
 								
 								<div class="tc-content">
 									<p>
-										<div style="color:white"> ${discussion.member.memberdetail.nickname}</div> <span style="color:white">於</span> <a href="<spring:url value='board?id=${discussion.boardType.boardId}'/>" style="color:#FF44AA">${discussion.boardType.boardName}看板</a>
+										<div style="color:white"> ${discussion.member.memberdetail.nickname}</div> <span style="color:white">於</span> <a href="<spring:url value='board-Rich?id=${discussion.boardType.boardId}'/>" style="color:#FF44AA">${discussion.boardType.boardName}看板</a>
 									</p>
 									<div class="tc-date">發文日期：${discussion.postTimeStamp}</div>
 									postTimeStamp

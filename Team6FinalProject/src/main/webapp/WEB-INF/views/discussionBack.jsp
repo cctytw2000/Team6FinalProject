@@ -36,35 +36,42 @@
 	<div class="container mt-3">
 		<h1 align="center">討論區後台功能</h1>
 		<div align="center">
-<!-- 			<a href="addBoard">新增討論區看板</a> -->
-			
-			
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-新增討論區看板
+		
+		<button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#addBoardType">新增討論區看板
 </button>
-			
+		
 	<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addBoardType" tabindex="-1" role="dialog" aria-labelledby="addBoardType" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="addBoardType">請輸入看板名稱</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-<form:form method='POST' action="${pageContext.request.contextPath}/addBoard" modelAttribute="boardType" enctype="multipart/form-data">
-		<form:input path="boardName" type="text" size="50px" />
-		<form:input path="bImage" type='file'/>
+	<form:form method='POST' action="${pageContext.request.contextPath}/addBoard" modelAttribute="boardType" enctype="multipart/form-data">
+	
+		<table>
+			<tr><th></th><th></th></tr>
+			<tr><td>現有看板總數為${Blist.size()}個</td><td></td></tr>
+			<tr><td>您將要增加第${Blist.size()+1}個看板</td><td></td></tr>
+			<tr></tr>
+			<tr></tr>		
+		</table>
+	
+
+		<br>
+		<br>
+		設定看板名稱為：<form:input path="boardName" type="text" size="15px" /><br><br>
+	
+		設定看板代表圖：<br><form:input path="bImage" type='file'/>
 		<p>
 			<input type="submit" value="送出">
 			<button type="button" onclick="GoBack()">取消</button>
 	</form:form>
-
-
-
 
       </div>
       <div class="modal-footer">
@@ -74,35 +81,40 @@
     </div>
   </div>
 </div>		
+	<!-- ===========================================================================================================  -->	
+
 			
+	<!-- ===========================================================================================================  -->	
+		<table style="width: 75%">
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-<!-- 			<a href="addSubjectType">新增發文分類</a>  -->
-			<table>
-				<tr>
-					<th>看板序號</th>
-					<th>看板名稱</th>
-					<th>文章數</th>
-					<th>瀏覽次數</th>
-				</tr>
-				<c:forEach items="${Blist}" var='boardType' varStatus="s">
-					<tr>
-						<td>${s.index+1}</td>
-						<td>${boardType.boardName}</td>
-						<td>${boardType.discussion.size()}</td>
-						<td>${boardType.boardViews}</td>
-					</tr>
-				</c:forEach>
-			</table>
+			<tr style="height: 35px; background-color:#E0F6C3">
+				<th></th>
+				<th>當前看板名稱</th>
+				<th><span style="font-size: small;"><font color="grey">瀏覽次數</font></span></th>
+				<th>文章數</th>
+				<th>看板圖</th>	
+				<th></th>
+			</tr>
+			<c:forEach items="${Blist}" var='boardType' varStatus="s">
+			<tr>
+				<td>${s.index+1}</td>
+				<td><a href="<spring:url value='board-RichBack?id=${boardType.boardId}'/>">${boardType.boardName}</a>
+											 </td>						 										 
+				<td>${boardType.boardViews}</td>
+				<td>${boardType.discussion.size()}</td>
+				<td><a href="<spring:url value='board-RichBack?id=${boardType.boardId}'/>"><img width="90" height="30" alt="${boardType.boardName}"
+											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
+											 </td>
+				<td><button type="button" class="btn btn-dark" style="margin-right:4px"
+					onclick="window.location.href='${pageContext.request.contextPath}/physicalDeleteBoardById?id=${boardType.boardId}'">刪除看板</button></td>
+				
+
+			</tr>
+			</c:forEach>
+		</table>
+					
+		<!-- ===========================================================================================================  -->	
+	
 		</div>
 		</div>
 		<!-- 	套版用 -->
