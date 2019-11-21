@@ -9,6 +9,4 @@ public interface IReplyDao {
 	void addReply(Reply reply);		//新增回覆
 	void updateReply(Integer replyId);	//修改回覆
 	void deleteReply(Integer replyId);	//刪除回覆
-
-
 }

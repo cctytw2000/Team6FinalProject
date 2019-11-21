@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>討論看板</title>
+<title>討論區後台</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->
@@ -50,29 +50,22 @@ tr:hover td {
 </style>
 </head>
 <body>
-	<jsp:include page="header/homeHeader.jsp" />
+	<jsp:include page="header/manageHeader.jsp" />
 
 	<div align="center">
 		<h1>看板名稱:${boardType.boardName}</h1>
-		
-		<c:choose>
-		<c:when test="${sessionScope.mem != Null }">
-				<button type="button" class="btn btn-success" style="float:right; margin-right:40px"
-					onclick="window.location.href='${pageContext.request.contextPath}/addArticle?id=${boardType.boardId}&name=${boardType.boardName}'">發表文章</button>
-		</c:when>
-		<c:otherwise></c:otherwise>
-		</c:choose>		
-		<a style="text-decoration: none;"
-			href="<spring:url value='board?id=${boardType.boardId}'/>"></a>
-
-		<table class="shadow p-3 mb-5 bg-white rounded" style="width: 95%">
+	
+		<table style="width: 100%">
 			<tr style="height: 35px; background-color:#E0F6C3">
 				<th></th>
 				<th style="text-align: center;">標題</th>
 				<th>作者</th>
 				<th><span style="font-size: small;"><font color="grey">人氣/互動</font></span></th>
 				<th>發表時間</th>
-				<th></th>
+				<th>顯示狀態</th>
+				<th>操作</th>
+				<th>徹底刪除</th>
+				
 			</tr>
 			<c:forEach var='DiscussionList' items="${DiscussionList}">
 				<tr>
@@ -86,10 +79,34 @@ tr:hover td {
 					<a style="text-decoration: none;"
 						href="<spring:url value='article?id=${DiscussionList.articleId}'/>"><span
 							style="font-size: small;"><font color="grey">${DiscussionList.articleBody.split("<br>")[0]}......</font></span></a></td>
-					<td>${DiscussionList.member.memberdetail.nickname}</td>
+					<td><a style="text-decoration: none;"
+						href="<spring:url value='member?id=${DiscussionList.member.member_id}'/>">${DiscussionList.member.memberdetail.nickname}</a></td>
 					<td><span style="font-size: small;">${DiscussionList.views}/
 							${DiscussionList.reply.size()}</span></td>
 					<td>${DiscussionList.postTimeStamp}</td>
+					<td><c:choose>
+							<c:when test="${DiscussionList.isDeleted != 0}">隱藏</c:when>
+							<c:otherwise>正常顯示</c:otherwise>
+							</c:choose>		
+					</td>
+					<td>
+					<c:choose>
+							<c:when test="${DiscussionList.isDeleted != 0}">
+					
+					<button type="button" class="btn btn-success" style="margin-right:4px"
+					onclick="window.location.href='${pageContext.request.contextPath}/recoverArticleById?id=${DiscussionList.articleId}'">恢復</button>
+					</c:when>
+					<c:otherwise>
+					<button type="button" class="btn btn-danger" style="margin-right:4px"
+					onclick="window.location.href='${pageContext.request.contextPath}/deleteArticle?id=${DiscussionList.articleId}'">刪除</button>
+					
+					
+					</c:otherwise>
+				</c:choose>
+					
+					</td>
+					<td><button type="button" class="btn btn-dark" style="margin-right:4px"
+					onclick="window.location.href='${pageContext.request.contextPath}/physicalDeleteArticle?id=${DiscussionList.articleId}'">徹底刪除</button></td>
 
 				</tr>
 			</c:forEach>

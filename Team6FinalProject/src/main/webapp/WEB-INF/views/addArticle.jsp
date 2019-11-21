@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>討論區</title>
+<script>
+	function GoBack() {
+		history.go(-1)
+	}
+</script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	套版用 -->

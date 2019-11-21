@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.dao.IBoardTypeDao;
 import com.eeit109team6.finalproject.model.BoardType;
+import com.eeit109team6.finalproject.model.Discussion;
 
 @Repository
 public class BoardTypeDaoImpl implements IBoardTypeDao {
@@ -50,11 +51,11 @@ public class BoardTypeDaoImpl implements IBoardTypeDao {
 		session.update(boardType);
 	}
 
-
-//	@Override
-//	public void deleteBoardType() {
-//		// TODO Auto-generated method stub
-//
-//	}
+	@Override
+	public void physicalDeleteBoardById(Integer boardId) {
+		Session session = factory.getCurrentSession();
+		BoardType boardType = session.get(BoardType.class, boardId);
+		session.delete(boardType);
+	}
 
 }

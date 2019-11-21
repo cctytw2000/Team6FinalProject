@@ -108,7 +108,7 @@
 								<div class="lb-content">
 									<div class="lb-date">${boardtype.boardName}</div>
 									<p>累積人氣：${boardtype.boardViews}</p>
-									<a href="<spring:url value='board?id=${boardtype.boardId}'/>" class="lb-author">討論區</a>
+									<a href="<spring:url value='board-Rich?id=${boardtype.boardId}'/>" class="lb-author">討論區</a>
 								</div>
 							</div>
 							
@@ -133,7 +133,7 @@
 								
 								<div class="tc-content">
 									<p>
-										<div style="color:white"> ${discussion.member.memberdetail.nickname}</div> <span style="color:white">於</span> <a href="<spring:url value='board?id=${discussion.boardType.boardId}'/>" style="color:#FF44AA">${discussion.boardType.boardName}看板</a>
+										<div style="color:white"> ${discussion.member.memberdetail.nickname}</div> <span style="color:white">於</span> <a href="<spring:url value='board-Rich?id=${discussion.boardType.boardId}'/>" style="color:#FF44AA">${discussion.boardType.boardName}看板</a>
 									</p>
 									<div class="tc-date">發文日期：${discussion.postTimeStamp}</div>
 									postTimeStamp
