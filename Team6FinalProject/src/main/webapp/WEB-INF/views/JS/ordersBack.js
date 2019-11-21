@@ -1,4 +1,5 @@
 let data, pagebotNO;
+let member = [];
 $(document).ready(function () {
 	$.ajax({
 		url: "ordersBack.json",
@@ -16,6 +17,15 @@ $(document).ready(function () {
 	});
 	ordermember();
 	ordersales();
+	$.ajax({
+		url: "membersBack.json",
+		success: function (response) {
+			for (let i = 0; i < response.Memners.length; i++) {
+				member.push(response.Memners[i].member_id);
+			}
+		}
+	});
+	$("input#member_id").blur(checkmember);
 });
 // function showOrdersInfoall(response) {
 // 	let info = "";
@@ -166,7 +176,7 @@ function showorderCount(date, count) {
 				label: '訂單數量',
 				data: count,
 				backgroundColor: 'blue',
-				borderColor: 'brack',
+				borderColor: 'black',
 				borderWidth: 1
 			}]
 		}
@@ -180,12 +190,12 @@ function ordersales() {
 			console.log(response.sales);
 			let date = [];
 			let count = [];
-			for (let i = 0; i < response.sales.length; i++){
+			for (let i = 0; i < response.sales.length; i++) {
 				date.push(response.sales[i][0]);
 				count.push(response.sales[i][1]);
-			}			
+			}
 			console.log(date);
-			console.log(count);			
+			console.log(count);
 			showorderCount1(date, count);
 		}
 	});
@@ -193,16 +203,67 @@ function ordersales() {
 function showorderCount1(date, count) {
 	var ctx = document.getElementById("chart1").getContext('2d');
 	var chart = new Chart(ctx, {
-		type: 'bar',
+		type: 'line',
 		data: {
 			labels: date,
 			datasets: [{
 				label: '元',
 				data: count,
-				backgroundColor: 'blue',
-				borderColor: 'brack',
+				fill: false,
+				borderColor: "blue", // 設定線的顏色
+				backgroundColor: 'blue', // 設定點的顏色
+				lineTension: 0,  // 顯示折線圖，不使用曲線				
 				borderWidth: 1
 			}]
 		}
 	});
+}
+function memberorderdata() {
+	$.ajax({
+		url: "memberOrder/" + $("input#member_id").val() + ".json",
+		success: function (response) {
+			console.log(response);
+			data = response;
+			$("tbody#ordersInfo").html("");
+			$("div#totalspan").html("");
+			$("ul#pageBottom").html("");
+			if (response.Orders.length > 0) {
+				pagebot(response);
+				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+			}
+			else {
+				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+			}
+		}
+	});
+
+}
+function checkmember() {
+	$("tbody#ordersInfo").html("");
+	$("div#totalspan").html("");
+	$("ul#pageBottom").html("");
+	$("span#account_msg").html("");
+	let memberdata = $("input#member_id").val();
+	if (memberdata == "") {
+		$("span#account_msg").html("<img src='Images/noway.jpg'>請輸入會員編號");
+	}
+	else {
+		let re = /^\+?[1-9][0-9]*$/;
+		if (re.test(memberdata)) {
+			let falge = false;
+			for (let i = 0; i < member.length; i++) {
+				if (memberdata == member[i]) {
+					falge = true;
+				}
+			}
+			if (falge) {				
+				memberorderdata();
+			} else {
+				$("span#account_msg").html("<img src='Images/noway.jpg'>無此會員編號");			
+			}
+		}
+		else {
+			$("span#account_msg").html("<img src='Images/noway.jpg'>請輸入會員編號(非零的正整數)");
+		}
+	}
 }

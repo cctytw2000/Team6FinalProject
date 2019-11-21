@@ -82,7 +82,7 @@ public class OrderitemController {
 	// 查詢個人訂單json
 	@RequestMapping(value = "/memberOrder/{member_id}.json")
 	public void memberOrder(@PathVariable("member_id") Integer member_id, Model model) {
-		model.addAttribute("memberOrder", oservice.showOrder(member_id));
+		model.addAttribute("Orders", oservice.showOrder(member_id));
 	}
 
 	// 個人訂單數量
@@ -138,4 +138,5 @@ public class OrderitemController {
 		System.out.println("/dailySales");
 		model.addAttribute("sales", oservice.dailySalescount());
 	}
+
 }

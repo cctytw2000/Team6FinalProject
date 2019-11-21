@@ -26,7 +26,7 @@
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="${pageContext.request.contextPath}/JS/ordersBack.js"></script>
+	<script src="${pageContext.request.contextPath}/JS/ordersBack.js"></script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -40,6 +40,13 @@
 	</ul>
 	<div class="tab-content">
 	<div id="showorders" class="container tab-pane active" style="width:900px">
+				<nav class="navbar navbar-expand-sm ">	
+					<div class="form-inline">				
+						會員編號:
+						<input class="form-control mr-sm-2" type="text"	id="member_id">
+						<span style="margin-left: 30px" id="account_msg"></span>			
+					</div>
+				</nav>
 				<table border="1" style="text-align: center; width: 100%">
 				<tr>
 					<th>訂單編號</th>
@@ -52,8 +59,8 @@
 				</tr>	
 				<tbody id="ordersInfo"></tbody>
 		</table>
-		<div  align="center" id="totalspan" style="text-align: center"></div>
-		<ul id="pageBottom" style="width: 30%; margin: 15px auto;" class="pagination">
+		<div  id="totalspan" style="width: 30%; margin: 15px auto;text-align: center"></div>
+		<ul id="pageBottom" style="margin: 0 auto;" class="pagination justify-content-center">
 		</ul>
 	</div>
 	<div id="orderchart" class="container tab-pane fade" style="width:900px">

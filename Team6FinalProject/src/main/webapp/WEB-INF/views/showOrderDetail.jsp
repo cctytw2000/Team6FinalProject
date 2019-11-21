@@ -39,7 +39,17 @@
 
 			<h2 align="center" style="color:white">訂單編號${order.order_id }</h2><br>
 			<div align="center">
-				訂單時間${order.ordertime.replace(".0","")}<br><br>
+				訂單時間${order.ordertime.replace(".0","")}&nbsp;&nbsp;&nbsp;
+									<c:choose>
+										<c:when test="${order.state == 1}">
+										<div style="display: inline-block;color:red">未付款
+										</div><p>
+										</c:when>
+										<c:when test="${order.state == 4}">
+										<div style="display: inline-block;color:green">已付款
+										</div><p>										
+										</c:when>										
+									</c:choose>
 				<table border="1" style="text-align:center">
 					<tr>
 						<th>商品編號
