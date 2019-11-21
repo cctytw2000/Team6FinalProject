@@ -2,9 +2,12 @@ package com.eeit109team6.finalproject.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -154,9 +157,8 @@ public class NewsDaoImpl implements INewsDao {
 		List<Message> list = session.createQuery(hql).setParameter("newsId", newsId).getResultList();
 		return list;
 	}
-	
-//====================================================未完成===================================================	
 
+//====================================================未完成===================================================	
 	
 
 	

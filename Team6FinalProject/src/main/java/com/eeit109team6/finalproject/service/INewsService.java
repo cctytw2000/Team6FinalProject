@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
@@ -27,5 +28,4 @@ public interface INewsService {
 	void addMemo(Message message); //新增消息評論
 	List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
 //====================================================未完成===================================================	
-	
 }

@@ -1,11 +1,11 @@
 package com.eeit109team6.finalproject.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.eeit109team6.finalproject.model.Message;
 import com.eeit109team6.finalproject.model.News;
 import com.eeit109team6.finalproject.model.NewsType;
-import com.eeit109team6.finalproject.model.Product;
 
 public interface INewsDao {
 //====================================================消息類別=================================================
@@ -28,6 +28,5 @@ public interface INewsDao {
 	void addMemo(Message message); //新增消息評論
 	List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
 //====================================================未完成===================================================		
-	
 	
 }

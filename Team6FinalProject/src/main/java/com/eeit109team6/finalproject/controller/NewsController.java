@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -422,6 +424,11 @@ public class NewsController {
 		newsService.updateNewsById(news);
 		return "redirect:/updateNews?newsId=" + newsId;
 	}
+	
+	@RequestMapping(value = "/searchByKeyWord", method = RequestMethod.POST)
+	public void searchByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
+		model.addAttribute("news", newsService.getNewsByKeyWord(keyWord));
+	}
 
 //========================================未完成========================================
 
@@ -525,9 +532,20 @@ public class NewsController {
 		return "newsDetail";
 	}
 	
-	@RequestMapping(value = "/searchByKeyWord", method = RequestMethod.POST)
-	public void searchByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
-		model.addAttribute("news", newsService.getNewsByKeyWord(keyWord));
+	@RequestMapping(value = "/hotNewsTop5.json")
+	public String hotNewsTop5( Model model) {
+		Map<String, Integer> data = new LinkedHashMap();
+		
+		List<News> newsesList = newsService.getAllNewsByViews();
+		for(int i=0 ; i<=4 ;i++) {
+			data.put(newsesList.get(i).getTitle(),newsesList.get(i).getViews());
+		}
+		
+		ArrayList hotNewsTop5 = new ArrayList();
+		hotNewsTop5.add(data);
+		model.addAttribute("hotNewsTop5",hotNewsTop5);
+		
+		return "newsBack";
 	}
 
 }
