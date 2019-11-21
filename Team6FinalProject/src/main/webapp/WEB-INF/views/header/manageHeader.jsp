@@ -54,7 +54,7 @@
 										
 										<div style="" class="dropdown-menu" aria-labelledby="navbarDropdown">
 												<a class="dropdown-item" href="${pageContext.request.contextPath}/moviepersonal">影片區</a>
-												<a class="dropdown-item" href="${pageContext.request.contextPath}/moviehome">首頁</a>
+												<a class="dropdown-item" href="${pageContext.request.contextPath}/movieHome">首頁</a>
 										</div>
 								
 								</li>

@@ -44,18 +44,19 @@ public class HomeMovieDaoImpl implements IHomeMovieDao {
 	}
 
 	@Override
-	public void deleteMovieInfoById(int id) {
+	public void deleteMovieById(Integer deleteMovieId) {
 		Session session = factory.getCurrentSession();
-		Movie movie = session.get(Movie.class, id);
+		Movie movie = session.get(Movie.class, deleteMovieId);
+		System.out.println("session.delete(movie)的deleteMovieId ================================= "+deleteMovieId);
 		session.delete(movie);
-		
+
 	}
 
 	@Override
-	public void updateMovieInfoById(Movie movie) {
+	public void updateMovieById(Movie movie) {
 		Session session = factory.getCurrentSession();
 		session.update(movie);
-		
+
 	}
 
 	@Override
@@ -80,7 +81,13 @@ public class HomeMovieDaoImpl implements IHomeMovieDao {
 	public void updateMovieid(HomeMovie homeMovie) {
 		Session session = factory.getCurrentSession();
 		session.update(homeMovie);
-		
+
+	}
+	//Done
+	@Override
+	public Movie moviefindById(Integer movieId) {
+		Movie movie = factory.getCurrentSession().get(Movie.class, movieId);
+		return movie;
 	}
 
 

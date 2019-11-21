@@ -75,10 +75,10 @@ public class HomeController {
 //	}
 	
 	
-	// moviepersonal.jsp UpdateClick --> /moviepersonal/updateMovie -->
+	// Run On Server -->  @RequestMapping(value ="/"     index(...) --> home.jsp (首頁)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpSession session) {
-//		找出首頁影片 預定ID = 1
+		//		找出首頁影片 <!-- homeMovie movie_Id == 1  -->
 		HomeMovie home = homeMovieService.findById(1);
 
 		List<Product> list = service.getProductTop8();

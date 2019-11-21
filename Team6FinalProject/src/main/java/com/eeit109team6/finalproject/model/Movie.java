@@ -1,5 +1,6 @@
 package com.eeit109team6.finalproject.model;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,17 +17,22 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Component(value = "Movie")
-@Scope(value = "prototype")
+//@Component(value = "Movie")
+//@Scope(value = "prototype")
 @Entity
 @Table(name = "movie")
 public class Movie {
-	private Integer movieId;
-	private String movieName;
-	private Set<HomeMovie> homeMovie;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer movieId;
+	
+	private String movieName;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", fetch = FetchType.LAZY)
+	private Set<HomeMovie> homeMovie = new LinkedHashSet<HomeMovie>();
+
+	
 	public Integer getMovieId() {
 		return movieId;
 	}
@@ -43,8 +49,8 @@ public class Movie {
 		this.movieName = movieName;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "movie", fetch = FetchType.LAZY)
-	@JsonIgnore
+	
+//	@JsonIgnore
 	public Set<HomeMovie> getHomeMovie() {
 		return homeMovie;
 	}

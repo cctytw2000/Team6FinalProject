@@ -14,9 +14,9 @@ public interface IHomeMovieService {
 	
 //	=============================================== Movie =======================================================
 	Integer addMovie(Movie movie); //新增影片
-	void deleteMovieInfoById(int id); //刪除影片
-	void updateMovieInfoById(Movie movie); //更新影片
+	void deleteMovieById(Integer deleteMovieId); //刪除影片
+	void updateMovieById(Movie movie); //更新影片
 	List<Movie> findAll();//查詢全部影片
 	Movie getMovieInfoByMovieID(Integer id); //查詢指定影片ID資訊
-	
+	Movie moviefindById(Integer movieId); // 查詢指定影片名稱 movieName 資訊
 }
