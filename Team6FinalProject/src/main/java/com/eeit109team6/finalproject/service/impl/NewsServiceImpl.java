@@ -105,6 +105,12 @@ public class NewsServiceImpl implements INewsService{
 	public List<News> getAllNewsByViews() {
 		return dao.getAllNewsByViews();
 	}
+	
+	@Transactional
+	@Override
+	public List<News> getNewsByKeyWord(String keyWord) {
+		return dao.getNewsByKeyWord(keyWord);
+	}
 
 //====================================================消息評論=================================================
 	

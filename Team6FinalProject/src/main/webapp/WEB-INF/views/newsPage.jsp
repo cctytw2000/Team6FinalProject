@@ -70,9 +70,21 @@
 		<div class="row">
 
 			<div id="newsWhite" class="col-2">
+				<div class="form-group" style="margin-top: 20px">
+					<div>
+						<input type="text" class="form-control input-sm" name="keyWord" id="keyWord"
+							placeholder="請輸入關鍵字..." onkeydown="searchByKeyWord(event)" >
+						<p>
+<!-- 						<div> -->
+<!-- 						 	<button class="btn btn-success" onclick="searchByKeyWord()">搜尋</button> -->
+<!-- 						</div> -->
+					</div>
+				</div>
+
 				<div class="dropdown dropright">
 					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" style="margin-top: 10px;margin-left: 10px;margin-bottom: 20px">依熱門程度排序</button>
+						data-toggle="dropdown"
+						style="margin-top: 10px; margin-left: 10px; margin-bottom: 20px">依熱門程度排序</button>
 					<div id="viewsSort" class="dropdown-menu">
 						<a class="dropdown-item" id="low" onclick="viewsSort(this.id)">由低到高</a>
 						<a class="dropdown-item" id="High" onclick="viewsSort(this.id)">由高到低</a>
@@ -81,13 +93,15 @@
 
 				<div class="dropdown dropright">
 					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" style="margin-left: 10px;margin-bottom: 20px">依新聞分類排序</button>
-					<div id="newsTypeSort" class='dropdown-menu'></div>
+						data-toggle="dropdown"
+						style="margin-left: 10px; margin-bottom: 20px">依新聞分類排序</button>
+					<div id="newsTypeSort" onload="newsTypeSortOnLoad()" class='dropdown-menu'></div>
 				</div>
 
 				<div class="dropdown dropright">
 					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" style="margin-left: 10px;margin-bottom: 20px">依發佈時間排序</button>
+						data-toggle="dropdown"
+						style="margin-left: 10px; margin-bottom: 20px">依發佈時間排序</button>
 					<div id="viewsSort" class="dropdown-menu">
 						<a class="dropdown-item" id="old" onclick="timeSort(this.id)">由舊到新</a>
 						<a class="dropdown-item" id="new" onclick="timeSort(this.id)">由新到舊</a>
@@ -114,7 +128,8 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<a href="#"><img src="${pageContext.request.contextPath}/Images/AD/AD1.PNG"></a>
+							<a href="#"><img
+								src="${pageContext.request.contextPath}/Images/AD/AD1.PNG"></a>
 						</div>
 						<c:forEach varStatus="i" begin="1" end="4">
 							<div class="carousel-item">

@@ -524,5 +524,10 @@ public class NewsController {
 
 		return "newsDetail";
 	}
+	
+	@RequestMapping(value = "/searchByKeyWord", method = RequestMethod.POST)
+	public void searchByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
+		model.addAttribute("news", newsService.getNewsByKeyWord(keyWord));
+	}
 
 }
