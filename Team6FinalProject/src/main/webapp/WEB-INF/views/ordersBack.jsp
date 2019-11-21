@@ -23,6 +23,18 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
+<style>
+.modal-dialog {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  @media(max-width: 768px) {
+    min-height: calc(100vh - 20px);
+  }
+}
+</style>
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -42,11 +54,16 @@
 	<div id="showorders" class="container tab-pane active" style="width:900px">
 				<nav class="navbar navbar-expand-sm ">	
 					<div class="form-inline">				
-						會員編號:
+						<label for="member_id">會員編號:</label>						
 						<input class="form-control mr-sm-2" type="text"	id="member_id">
-						<span style="margin-left: 30px" id="account_msg"></span>			
+						<span id="err_msg"></span>
+						<span style="margin-left: 30px">	
+							<input type="checkbox" id="money_1" name="money_1" value="1" checked><label for="money_1" style="display:inline; color:red;">未付款</label>	 
+							<input type="checkbox" id="money_4" name="money_4" value="4" checked><label for="money_4" style="display:inline; color:green;">已付款</label> 								
+						</span>
 					</div>
 				</nav>
+				
 				<table border="1" style="text-align: center; width: 100%">
 				<tr>
 					<th>訂單編號</th>
@@ -84,6 +101,22 @@
 					<div class="modal-content">
 						<div class="modal-header" id="mheader"></div>
 						<div class="modal-body" id="mbody"></div>
+					</div>
+				</div>
+			</div>
+			<div id="memberwin" class="modal fade" tabindex="-1" role="dialog"
+				aria-hidden="true" data-backdrop="static" data-keyboard="true"
+				aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">					
+					<table border="1" style="text-align: center; width: 100%">
+						<tr>
+						<th>會員編號</th>
+						<th>會員姓名</th>
+						<th>email</th>																
+					</tr>	
+					<tbody id="membertable"></tbody>
+					</table>
 					</div>
 				</div>
 			</div>

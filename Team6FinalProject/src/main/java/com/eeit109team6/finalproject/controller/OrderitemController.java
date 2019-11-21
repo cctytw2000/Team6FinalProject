@@ -139,4 +139,26 @@ public class OrderitemController {
 		model.addAttribute("sales", oservice.dailySalescount());
 	}
 
+	// (已或未)付款
+	@RequestMapping(value = "/money", method = RequestMethod.POST)
+	public void mony(@RequestParam("state") Integer state, Model model) {
+		System.out.println("/money");
+		model.addAttribute("Orders", oservice.findAll(state));
+	}
+
+	// (已或未)付款 會員
+	@RequestMapping(value = "/moneymember", method = RequestMethod.POST)
+	public void monymember(@RequestParam("member_id") Integer member_id, @RequestParam("state") Integer state,
+			Model model) {
+		System.out.println("/monymember");
+		model.addAttribute("Orders", oservice.showOrder(member_id, state));
+	}
+
+	// 關鍵字會員
+	@RequestMapping(value = "/memberkeyword", method = RequestMethod.POST)
+	public void memberkey(@RequestParam("keyWord") String keyWord, Model model) {
+		System.out.println("/memberkeyword");
+		model.addAttribute("members", oservice.getMemberByKeyWord(keyWord));
+	}
+
 }
