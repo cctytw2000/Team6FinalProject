@@ -146,7 +146,8 @@ function check_Login(account, username , type) {
 		success: function (data) {
 			if (data == true) {
 				console.log(data);
-				location.href = "/Team6FinalProject"
+//				location.href = "/Team6FinalProject"
+					location.reload();
 			} else {
 				console.log(data);
 				alert("此帳號沒註冊請至註冊頁面註冊")

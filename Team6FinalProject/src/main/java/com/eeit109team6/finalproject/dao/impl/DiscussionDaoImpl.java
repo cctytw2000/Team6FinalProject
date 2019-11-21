@@ -94,7 +94,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	public List<BoardType> getBoardTopN() {		
 		String hql = "FROM BoardType ORDER BY boardViews DESC";
 		Session session = factory.getCurrentSession();
-		List<BoardType> Blist = session.createQuery(hql).setMaxResults(5).getResultList(); 
+		List<BoardType> Blist = session.createQuery(hql).getResultList(); 
 		return Blist;
 	}
 }

@@ -95,12 +95,12 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget mb-5 mb-md-0">
 						<h4 class="fw-title">
-							人氣排行 <a style="font-size: 10px" href="#">看更多...</a>
+							人氣排行 <a style="font-size: 10px" href="${pageContext.request.contextPath}/discussion">看更多...</a>
 						</h4>
 						<div class="latest-blog">
 						
 							<c:forEach var="boardtype" items="${sessionScope.boardTop5}" varStatus="i"
-								begin="0" end="4">
+								begin="0" end="7">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg"
 									data-setbg="<c:url value='/getBoardImage/${boardtype.boardId}' />"></div>
