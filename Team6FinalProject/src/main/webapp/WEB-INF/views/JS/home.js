@@ -21,3 +21,17 @@ function countView(newsId) {
 		},
 	});
 }
+
+function homeupdateviews(id) {
+	$.ajax({
+		type : "POST",
+		url : "member/updateMoviesViews",
+		data : {
+			movieId : id
+		},
+
+		success : function(response) {
+			document.getElementById(id).setAttribute("onclick", "")
+		}
+	});
+}

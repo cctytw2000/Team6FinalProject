@@ -108,7 +108,7 @@
 								<div class="lb-content">
 									<div class="lb-date">${boardtype.boardName}</div>
 									<p>累積人氣：${boardtype.boardViews}</p>
-									<a href="#" class="lb-author">討論區</a>
+									<a href="<spring:url value='board?id=${boardtype.boardId}'/>" class="lb-author">討論區</a>
 								</div>
 							</div>
 							
@@ -127,12 +127,16 @@
 									<div class="tc-date"><a href="article?id=${discussion.articleId}"><p style="color:white;">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a></div>
 								
 								<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="Images/authors/1.jpg"></div>
+								<div class="tc-thumb set-bg" data-setbg="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />"></div>
+								
+								
+								
 								<div class="tc-content">
 									<p>
-										<a href="member?id=${discussion.member.member_id}"> ${discussion.member.memberdetail.nickname}</a> <span>於</span> ${discussion.boardType.boardName}看板
+										<div style="color:white"> ${discussion.member.memberdetail.nickname}</div> <span style="color:white">於</span> <a href="<spring:url value='board?id=${discussion.boardType.boardId}'/>" style="color:#FF44AA">${discussion.boardType.boardName}看板</a>
 									</p>
-									<div class="tc-date">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</div>
+									<div class="tc-date">發文日期：${discussion.postTimeStamp}</div>
+									postTimeStamp
 								</div>
 							</div>
 				
@@ -195,7 +199,7 @@
 					<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
 						<div class="rgi-thumb set-bg">
-							<video id="${newMovie.movie_ID}" onclick="updateviews('${newMovie.movie_ID}')" width="320" height="240" class="set-video"
+							<video id="${newMovie.movie_ID}" onclick="homeupdateviews('${newMovie.movie_ID}')" width="320" height="240" class="set-video"
 									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg"
 									playsinline="playsinline" controls="controls">
 									<source src="<c:url value='/memberMovies/${newMovie.member.account}${newMovie.member.member_id}/${newMovie.movie_ID}${newMovie.location_Test}'/>"

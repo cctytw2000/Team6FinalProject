@@ -128,6 +128,31 @@ public class DiscussionController {
 		// Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
 		return "board";
 	}
+	
+	// 進入指定看板，顯示指定看板的文章列表 --> board-Rich.jsp
+	@RequestMapping("/board-Rich")
+	public String getArticleByBoardTypeIdRich(@RequestParam("id") Integer boardId, Model model) {
+
+		// 1.取得指定看版屬性，並更新瀏覽人次，更新後再重取一次
+		BoardType boardType = boardTypeService.getBoardTypeById(boardId);				
+		discussionService.updateBoardViews(boardId); 
+		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// 透過service.getBoardTypeById方法取得一個指定看版的看板名稱
+		
+		// 2.取得指定看版的所有文章
+		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
+		
+		// 3.將屬性放入SpringMVC提供的model
+		model.addAttribute("DiscussionList", Discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
+		model.addAttribute("boardType", boardType2); // 將指定看板的名稱物件，注入model中，識別字串為boardType
+
+		// 說明:  discussionList 假若不給定名字，僅僅傳入list，則接收方JSP則以物件首字小寫+型態首字大寫List接收。
+		// 將service實作類別取得的物件，設給Spring提供的Model介面的model物件
+		// Spring提供的注入集合功能，支援List、Map、Properties、Set四種集合。ref:王本p48
+		return "board-Rich";
+	}
+	
+	
+	
 
 	// 查詢單一文章 --> article.jsp
 	@RequestMapping("/article")

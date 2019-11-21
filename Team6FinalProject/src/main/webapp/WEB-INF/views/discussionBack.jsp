@@ -36,16 +36,70 @@
 	<div class="container mt-3">
 		<h1 align="center">討論區後台功能</h1>
 		<div align="center">
-			<a href="addBoard">新增討論區看板</a>
+<!-- 			<a href="addBoard">新增討論區看板</a> -->
+			
+			
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+新增討論區看板
+</button>
+			
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<form:form method='POST' action="${pageContext.request.contextPath}/addBoard" modelAttribute="boardType" enctype="multipart/form-data">
+		<form:input path="boardName" type="text" size="50px" />
+		<form:input path="bImage" type='file'/>
+		<p>
+			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
+	</form:form>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+<!-- 			<a href="addSubjectType">新增發文分類</a>  -->
 			<table>
 				<tr>
-					<th>看板編號</th>
+					<th>看板序號</th>
 					<th>看板名稱</th>
+					<th>文章數</th>
+					<th>瀏覽次數</th>
 				</tr>
-				<c:forEach var='boardType' items="${boardTypeList}">
+				<c:forEach items="${Blist}" var='boardType' varStatus="s">
 					<tr>
-						<td>${boardType.boardId}</td>
+						<td>${s.index+1}</td>
 						<td>${boardType.boardName}</td>
+						<td>${boardType.discussion.size()}</td>
+						<td>${boardType.boardViews}</td>
 					</tr>
 				</c:forEach>
 			</table>
