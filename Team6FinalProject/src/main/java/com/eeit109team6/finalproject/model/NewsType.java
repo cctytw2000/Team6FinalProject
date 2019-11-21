@@ -24,7 +24,7 @@ public class NewsType {
 	@Column(name = "NEWSTYPEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsTypeId;
-	@Column(name = "NEWSTYPENAME", columnDefinition = "nvarchar")
+	@Column(name = "NEWSTYPENAME")
 	private String newsTypeName;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "newsType", cascade = CascadeType.ALL)
 	@JsonIgnore

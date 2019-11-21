@@ -33,8 +33,8 @@
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
 
-	<div class="container mt-3">
-		<h1>消息後台功能</h1>
+	<div class="container mt-2" style="padding: 10px 10%">
+		<h1 align="center">消息管理</h1>
 
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active"
@@ -66,7 +66,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center; width: 50%">
+				<table border="1" style="text-align: center; width: 100%">
 					<tr>
 						<th>消息類別編號
 						<th>消息類別名稱
@@ -96,7 +96,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center; width: 50%">
+				<table border="1" style="text-align: center; width: 100%">
 					<tr>
 						<th>遊戲類別編號
 						<th>遊戲類別名稱
@@ -126,7 +126,7 @@
 							type="submit" value="送出">
 					</form>
 				</nav>
-				<table border="1" style="text-align: center; width: 50%">
+				<table border="1" style="text-align: center; width: 100%">
 					<tr>
 						<th>活動類別編號
 						<th>活動類別名稱
@@ -285,7 +285,7 @@
 
 								<tr>
 									<td>${newsShow.newsId }
-									<td><a href="#">${newsShow.title }</a>
+									<td><a href="updateNews?newsId=${newsShow.newsId }">${newsShow.title }</a>
 									<td>${newsShow.newsType.newsTypeName }
 									<td>${newsShow.member.username }
 									<td>${newsShow.publicationDate }
@@ -317,7 +317,7 @@
 
 								<tr>
 									<td>${newsHide.newsId }
-									<td><a href="#">${newsHide.title }</a>
+									<td><a href="updateNews?newsId=${newsHide.newsId }">${newsHide.title }</a>
 									<td>${newsHide.newsType.newsTypeName }
 									<td>${newsHide.member.username }
 									<td>${newsHide.publicationDate }

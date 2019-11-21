@@ -117,7 +117,6 @@ public class NewsDaoImpl implements INewsDao {
 	@Override
 	public void updateNewsById(News news) {
 		Session session = sessionFactory.getCurrentSession();
-		session.clear();
 		session.update(news);
 	}
 

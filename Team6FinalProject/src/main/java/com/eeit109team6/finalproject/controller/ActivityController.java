@@ -176,6 +176,40 @@ public class ActivityController {
 		return activityMap;
 	}
 
+	// 取得所有活動的json格式
+	@RequestMapping(value = "/searchActivityByAjax2_1", produces = "application/json")
+	public @ResponseBody List<Activity> searchActivityByAjax2_1() {
+		return activityService.getAllActivities();
+	}
+
+	// 用ajax傳回activityDetail給updateNews.jsp
+	@RequestMapping(value = "/searchActivityByAjax2", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> searchActivityByAjax2(@RequestParam("activityId") Integer activityId) {
+		System.out.println(activityId);
+		Activity a = activityService.getActivityById(activityId);
+		Map<String, String> activityMap = new HashMap<>();
+		activityMap.put("name", a.getActivityName());
+		activityMap.put("activityTypeName", a.getActivityType().getActivityTypeName());
+		activityMap.put("location", a.getLocation());
+		// 若未設定日期/時間則不回傳
+		System.out.println(a.getStartingTime_date());
+		System.out.println(a.getStartingTime_date() instanceof String);
+		if (!(a.getStartingDate_time().equals(""))) {
+			activityMap.put("startingDate_time", a.getStartingDate_time());
+		}
+		if (!(a.getStartingTime_date().equals("00:00:00"))) {
+			activityMap.put("startingTime_date", a.getStartingTime_date());
+		}
+		if (!(a.getStartingDate().equals(""))) {
+			activityMap.put("startingDate", a.getStartingDate());
+		}
+		if (!(a.getEndingDate().equals(""))) {
+			activityMap.put("endingDate", a.getEndingDate());
+		}
+
+		return activityMap;
+	}
+
 	// 刪除活動-->newsBack.jsp
 	@RequestMapping(value = "/deleteActivity", method = RequestMethod.POST)
 	public String deleteActivityById(@RequestParam("activityId") Integer activityId) {
