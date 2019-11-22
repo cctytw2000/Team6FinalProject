@@ -218,16 +218,18 @@ body {
 
 
 				</ul>
-			
+
+
+
+
+
+
 			</div>
-			</li>
-			</ul>
+		</section>
 	</div>
-	</div>
-	</section>
 	<!-- Page section end -->
 
-	</div>
+
 	<!-- 	套版用 -->
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
