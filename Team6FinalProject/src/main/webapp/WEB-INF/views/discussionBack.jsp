@@ -34,18 +34,16 @@
 	<jsp:include page="header/manageHeader.jsp" />
 
 	<div class="container mt-3">
-		<h1 align="center">討論區後台功能<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBoardType">新增討論區看板
+		<h1 align="center">討論區後台<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBoardType">新增討論區看板
 </button></h1>		
 		<div align="center">
-		
 
-		
 	<!-- Modal -->
 <div class="modal fade" id="addBoardType" tabindex="-1" role="dialog" aria-labelledby="addBoardType" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addBoardType">請輸入看板名稱</h5>
+        <h5 class="modal-title" id="addBoardType"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -65,9 +63,9 @@
 
 		<br>
 		<br>
-		設定看板名稱為：<form:input path="boardName" type="text" size="15px" /><br><br>
+		<b>設定看板名稱為：</b><form:input path="boardName" type="text" size="15px" /><br><br>
 	
-		設定看板代表圖：<br><form:input path="bImage" type='file'/>
+		<b>設定看板代表圖：</b><form:input path="bImage" type='file'/>
 		<p>
 <!-- 			<input type="submit" value="送出"> -->
 <!-- 			<button type="button" onclick="GoBack()">取消</button> -->
@@ -75,8 +73,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">送出</button>
       </div>
       </form:form>
     </div>
@@ -86,12 +84,12 @@
 
 			
 	<!-- ===========================================================================================================  -->	
-		<table style="width: 75%">
+		<table style="width: 60%">
 			
 			<tr style="height: 35px; background-color:#E0F6C3">
 				<th></th>
 				<th>當前看板名稱</th>
-				<th><span style="font-size: small;"><font color="grey">瀏覽次數</font></span></th>
+				<th>看板瀏覽次數</th>
 				<th>文章數</th>
 				<th>看板圖</th>	
 				<th></th>
@@ -107,7 +105,7 @@
 											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
 				<td><button type="button" class="btn btn-dark" style="margin-right:4px"
-					onclick="window.location.href='${pageContext.request.contextPath}/physicalDeleteBoardById?id=${boardType.boardId}'">刪除看板</button></td>
+					onclick="window.location.href='${pageContext.request.contextPath}/physicalDeleteBoardById?id=${boardType.boardId}'">刪除</button></td>
 				
 
 			</tr>
