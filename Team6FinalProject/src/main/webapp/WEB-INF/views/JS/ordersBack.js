@@ -150,7 +150,7 @@ function showOrdersInfo(response, pageNo) {
 		$("li#next").attr("class", "page-item");
 		document.getElementById("next").addEventListener("click", nextChenge);
 	}
-	$("div#totalspan").html("第" + pagebotNO + "頁共" + response.Orders.length + "筆訂單");
+	$("div#totalspan").html("第" + pagebotNO + "頁/共" + response.Orders.length + "筆訂單");
 }
 
 function chengeOrdersInfo() {

@@ -34,9 +34,8 @@ public class Product {
 	private Integer price;
 	private String game_desc;
 	private Date date;
-	private Integer stock;
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	private Integer stock;	
+	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 	@JsonIgnore
