@@ -126,7 +126,7 @@
 
 								<c:forEach var="discussion" items="${sessionScope.articleTop6}" varStatus="i"
 								begin="0" end="5">
-									<div class="tc-date"><a href="article?id=${discussion.articleId}"><p style="color:white;">【 ${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a></div>
+									<div class="tc-date"><a href="article?id=${discussion.articleId}"><p style="color:white;">【${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a></div>
 								
 								<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />"></div>

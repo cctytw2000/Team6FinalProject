@@ -47,13 +47,14 @@ td {
 tr:hover td {
 	background-color: #FFF6DE;
 }
+
 </style>
 </head>
 <body>
 	<jsp:include page="header/homeHeader.jsp" />
 
 	<div align="center">
-		<h1>看板名稱:${boardType.boardName}</h1>
+		<h1>${boardType.boardName}看板</h1>
 		
 		<c:choose>
 		<c:when test="${sessionScope.mem != Null }">
@@ -69,7 +70,7 @@ tr:hover td {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addArticle">張貼文章表單</h5>
+        <h5 class="modal-title" id="addArticle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -115,7 +116,7 @@ tr:hover td {
 					<tr>
 						<td></td>
 						<td><input type="submit" value="送出">
-							<button type="button" onclick="GoBack()">取消</button></td>
+							</td>
 					</tr>
 				</table>
 			</form>
