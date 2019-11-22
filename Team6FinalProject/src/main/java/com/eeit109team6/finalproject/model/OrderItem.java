@@ -18,7 +18,7 @@ public class OrderItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer item_id;   //商品細項編號
 	private Integer count;  //商品數量
-	private Integer subtotal;  //小計	
+	private Integer subtotal;  //小計
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Product product;   //購買的遊戲	
