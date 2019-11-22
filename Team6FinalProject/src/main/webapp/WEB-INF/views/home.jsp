@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
+<!-- home.jsp -->
 <html>
 
 <head>
@@ -48,6 +49,7 @@
 	<!-- 	<section class="hero-section"> -->
 
 	<section style="background-color: black" style="width:100%;height:100%">
+		<!-- homeMovie movie_Id == 1  -->
 		<video style="height: 100%; width: 100%" playsinline="playsinline"
 			autoplay="autoplay" muted="muted" loop="loop">
 			<source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />'
@@ -205,6 +207,17 @@
 									<source src="<c:url value='/memberMovies/${newMovie.member.account}${newMovie.member.member_id}/${newMovie.movie_ID}${newMovie.location_Test}'/>"
 										type="video/mp4">
 								</video>
+								
+<!-- 								<script type="text/javascript"> 
+// 										確認source 構成
+// 										console.log('/memberMovies/');
+// 										console.log('${newMovie.member.account} == '${newMovie.member.account});
+// 										console.log('${newMovie.member.member_id} == '${newMovie.member.member_id});
+// 										console.log('   /   ');
+// 										console.log('${newMovie.movie_ID} == '${newMovie.movie_ID});
+// 										console.log('${newMovie.location_Test} == '${newMovie.location_Test});
+									</script> -->
+									
 							<div class="cata new">new</div>
 						</div>
 						<div class="rgi-content">

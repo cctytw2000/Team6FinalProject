@@ -14,21 +14,26 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Component(value = "homeMovie")
-@Scope(value = "prototype")
+//@Component(value = "homeMovie")
+//@Scope(value = "prototype")
 @Entity
 @Table(name = "homeMovie")
 public class HomeMovie {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
+	
 //	private Integer movieId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="movieId" )
 	private Movie movie;
 
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,11 +41,7 @@ public class HomeMovie {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="MOVIEID" )
+
 	public Movie getMovie() {
 		return movie;
 	}

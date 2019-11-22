@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit109team6.finalproject.model.Discussion;
 import com.eeit109team6.finalproject.model.MovieInfo;
+
+import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
+
+import com.eeit109team6.finalproject.controller.MemberController;
 import com.eeit109team6.finalproject.dao.IMovieDao;
 
 @Repository
@@ -29,8 +33,8 @@ public class MovieDaoImpl implements IMovieDao {
 		Integer id = (Integer) session.save(movieInfo);
 		return id;
 	}
-	// 設定 點擊率加一   getClick_Sum() + 1
 
+	//For MemberController movieservice.updateMovieViews(id); // 設定 點擊率加一   getClick_Sum() + 1
 	@Override
 	public void updateMovieViews(Integer id) {
 		System.out.println("updateMovieViews=" + id);
@@ -38,7 +42,7 @@ public class MovieDaoImpl implements IMovieDao {
 
 		movie.setClick_Sum(movie.getClick_Sum() + 1);
 	}
-//刪除單一影片
+	//刪除單一影片
 	@Override
 	public void deleteMovieInfoById(int movie_ID) {
 		Session session = factory.getCurrentSession();
@@ -51,9 +55,9 @@ public class MovieDaoImpl implements IMovieDao {
 	public void updateMovieInfoById(MovieInfo movieInfo) {
 		Session session = factory.getCurrentSession();
 		session.update(movieInfo);
-//		factory.getCurrentSession().update(movieInfo);
-//		session.clear();
-//		session.update(movieInfo);	
+		//		factory.getCurrentSession().update(movieInfo);
+		//		session.clear();
+		//		session.update(movieInfo);	
 	}
 
 	@Override
@@ -61,7 +65,7 @@ public class MovieDaoImpl implements IMovieDao {
 		Session session = factory.getCurrentSession();
 		MovieInfo movieInfo = session.get(MovieInfo.class, movie_ID);
 		// get 不管 movie_ID的名稱，強制使用Table PK 作為條件
-//		session.save(movieInfo);
+		//		session.save(movieInfo);
 		return (MovieInfo) movieInfo;
 	}
 
@@ -86,6 +90,7 @@ public class MovieDaoImpl implements IMovieDao {
 		return list;
 	}
 
+	//For MemberController movieservice.getMovieInfoByID(mem.getMember_id());
 	@Override
 	public ArrayList<MovieInfo> getMovieInfoByOwnerID(Integer id) {
 		String hql = "FROM MovieInfo WHERE owner_ID = ?1";

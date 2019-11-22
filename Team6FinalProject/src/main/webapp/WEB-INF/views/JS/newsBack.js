@@ -327,3 +327,41 @@ function reopenNews(newsId) {
 		+ '<input type="submit" class="btn btn-warning" value="確認發佈"></form>'
 }
 
+$(document).ready(function () {
+	hotNewsTop5();
+})
+
+function hotNewsTop5() {
+	let titles = []
+	let views = []
+	$.ajax({
+		type : "method",
+		url: "hotNewsTop5.json",
+		success: function (response) {
+			titles=Object.keys(response.hotNewsTop5[0])
+			for (let i = 0; i < titles.length; i++) {
+				views.push(response.hotNewsTop5[0][titles[i]])
+			}
+			console.log(titles)
+			console.log(views)
+			showHotNewsTop5(titles,views)
+		}
+	});
+}
+
+function showHotNewsTop5(titles,views) {
+	var ctx = document.getElementById("chart").getContext('2d');
+	var chart = new Chart(ctx, {
+		type: 'horizontalBar',
+		data: {
+			labels: titles,
+			datasets: [{
+				label: '發文截至今日之總觀看次數',
+				data: views,
+				backgroundColor: 'red',
+				borderColor: 'red',
+				borderWidth: 1,
+			}]
+		}
+	});
+} 

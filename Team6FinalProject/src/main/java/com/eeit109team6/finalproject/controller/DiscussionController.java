@@ -278,10 +278,10 @@ public class DiscussionController {
 		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// 透過service.getBoardTypeById方法取得一個指定看版的看板名稱
 		
 		// 2.取得指定看版的所有文章
-		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
+		List<Discussion> discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
 		
 		// 3.將屬性放入SpringMVC提供的model
-		model.addAttribute("DiscussionList", Discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
+		model.addAttribute("DiscussionList", discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
 		model.addAttribute("boardType", boardType2); // 將指定看板的名稱物件，注入model中，識別字串為boardType
 
 		return "board-RichBack";
@@ -295,13 +295,13 @@ public class DiscussionController {
 	}
 	
 	
-	// 刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
+	// 實體刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/physicalDeleteArticle", method = RequestMethod.GET)
 	public String physicalDeleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
-		Integer boardId = d.getBoardType().getBoardId();
+		Discussion d = discussionService.getArticleById(articleId);	//由articleId取得指定的文章資料列物件
+		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
 		
-		discussionService.physicalDeleteArticleById(articleId);
+		discussionService.physicalDeleteArticleById(articleId);//執行真正的刪除
 		
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
@@ -309,9 +309,9 @@ public class DiscussionController {
 	// 軟刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/deleteArticle", method = RequestMethod.GET)
 	public String deleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
+		Discussion d = discussionService.getArticleById(articleId); //由articleId取得指定的文章資料列物件
 		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
-		discussionService.deleteArticleById(articleId);//執行刪除
+		discussionService.deleteArticleById(articleId);//執行軟刪除
 		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//刪除後，再取一次原看板的所有文章
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
@@ -319,7 +319,7 @@ public class DiscussionController {
 	// 恢復文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/recoverArticleById", method = RequestMethod.GET)
 	public String recoverArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
+		Discussion d = discussionService.getArticleById(articleId); //由articleId取得指定的文章資料列物件
 		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
 		discussionService.recoverArticleById(articleId);;//執行恢復
 		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//恢復後，再取一次原看板的所有文章

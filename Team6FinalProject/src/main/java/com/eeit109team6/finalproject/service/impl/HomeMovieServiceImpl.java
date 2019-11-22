@@ -39,14 +39,14 @@ public class HomeMovieServiceImpl implements IHomeMovieService {
 	}
 
 	@Override
-	public void deleteMovieInfoById(int id) {
+	public void deleteMovieById(Integer deleteMovieId) {
 	 
-		dao.deleteMovieInfoById(id);
+		dao.deleteMovieById(deleteMovieId);
 	}
 
 	@Override
-	public void updateMovieInfoById(Movie movie) {
-		dao.updateMovieInfoById(movie);
+	public void updateMovieById(Movie movie) {
+		dao.updateMovieById(movie);
 		
 	}
 
@@ -64,6 +64,11 @@ public class HomeMovieServiceImpl implements IHomeMovieService {
 	public void updateMovieid(HomeMovie homeMovie) {
 		dao.updateMovieid(homeMovie);
 		
+	}
+
+	@Override
+	public Movie moviefindById(Integer movieId) {
+		return dao.moviefindById(movieId);
 	}
 
 }

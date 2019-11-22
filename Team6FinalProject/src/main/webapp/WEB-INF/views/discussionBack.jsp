@@ -34,11 +34,11 @@
 	<jsp:include page="header/manageHeader.jsp" />
 
 	<div class="container mt-3">
-		<h1 align="center">討論區後台功能</h1>
+		<h1 align="center">討論區後台功能<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBoardType">新增討論區看板
+</button></h1>		
 		<div align="center">
 		
-		<button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#addBoardType">新增討論區看板
-</button>
+
 		
 	<!-- Modal -->
 <div class="modal fade" id="addBoardType" tabindex="-1" role="dialog" aria-labelledby="addBoardType" aria-hidden="true">
@@ -69,15 +69,16 @@
 	
 		設定看板代表圖：<br><form:input path="bImage" type='file'/>
 		<p>
-			<input type="submit" value="送出">
-			<button type="button" onclick="GoBack()">取消</button>
-	</form:form>
+<!-- 			<input type="submit" value="送出"> -->
+<!-- 			<button type="button" onclick="GoBack()">取消</button> -->
+	
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+      </form:form>
     </div>
   </div>
 </div>		
