@@ -1,7 +1,9 @@
 package com.eeit109team6.finalproject.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -251,10 +253,16 @@ public class DiscussionController {
 //		System.out.println("Member的username:"+ mem.getUsername());
 
 //		// ==============設定發表文章時間=======================
-		Calendar rightNow = Calendar.getInstance();
-		String postTimeStamp = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-				+ ":" + rightNow.get(Calendar.SECOND);
+//		Calendar rightNow = Calendar.getInstance();
+//		String postTimeStamp = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+//				+ ":" + rightNow.get(Calendar.SECOND);
+		
+		
+		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		  String postTimeStamp = myFmt2.format(new Date ());
+		
 //		// ==============/設定發表文章時間=======================
 	
 		

@@ -56,18 +56,16 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
-
-a:hover, a:visited, a:link, a:active {
-
-}
-
 </style>
 </head>
 
 <body>
 	<jsp:include page="header/homeHeader.jsp" />
 	<div align="center" style="height: 100%">
-		<h2><a href="<spring:url value='board-Rich?id=${discussion.boardType.boardId}'/>">${discussion.boardType.boardName}</a></h2>
+		<h2>
+			<a
+				href="<spring:url value='board-Rich?id=${discussion.boardType.boardId}'/>">${discussion.boardType.boardName}</a>
+		</h2>
 		<section>
 
 			<div class="container">
@@ -95,6 +93,74 @@ a:hover, a:visited, a:link, a:active {
 						</div>
 					</li>
 
+
+					<c:forEach var="rp" items="${reply}" varStatus="s">
+					
+					
+					
+					
+					
+					
+					
+					
+						<li style="text-align: left">
+						<div class="community-post">
+							<div class="author-avator set-bg" style="width: 10%;">
+								<img style="margin-right: 10px; padding-right: 20px"
+									width="85px" height="70px"
+									src="<c:url value='/memberImages/${rp.member.account}_${rp.member.member_id}/${rp.member.username}${rp.member.member_id}${rp.member.headshot}' />">
+							</div>
+
+							<div class="post-content">
+
+								<h5>${rp.member.memberdetail.nickname}<span
+										style="font-size: 8px">${rp.member.account.split("@")[0]}</span>
+								</h5>
+								<div class="post-date"> ${rp.postTimeStamp}</div>
+								<p>${rp.replyBody}</p>
+							</div>
+
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+<!-- 						<li> -->
+<!-- 							<h5> -->
+<%-- 								回覆者 ${rp.member.memberdetail.nickname}<span --%>
+<!-- 									style="font-size: 8px"> -->
+<%-- 									${rp.member.account.split("@")[0]}</span> --%>
+<!-- 							</h5> -->
+
+
+<!-- 							<div class="post-date"> -->
+<%-- 								<p>時間 ${rp.postTimeStamp}</p> --%>
+<!-- 							</div> -->
+<%-- 							<p>${rp.replyBody}</p> --%>
+
+
+<!-- 						</li> -->
+
+
+					</c:forEach>
 
 
 
@@ -152,10 +218,7 @@ a:hover, a:visited, a:link, a:active {
 
 
 				</ul>
-				
-
-
-				</form>
+			
 			</div>
 			</li>
 			</ul>
