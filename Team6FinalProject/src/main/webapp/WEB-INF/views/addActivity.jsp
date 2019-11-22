@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#oneDayOnly, #manyDays{
+#oneDayOnly, #manyDays {
 	width: 300px;
 	height: 125px;
 }
@@ -32,7 +32,62 @@
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb1xzuP3Z01ePgv8dKWA06gyDTGPO2j8U&callback=initMap">
+	
+</script>
+<script>
+	function iii() {
+		let address = $("#address").val();
+		getLatLngByAddr(address);
+	}
 
+	function getLatLngByAddr(address) {
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			"address" : address
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+				var location = results[0].geometry.location, lat = location
+						.lat(), lng = location.lng();
+				initMap1(lat, lng)
+			}
+
+		})
+	}
+	
+	function initMap1(lat, lng) {
+		var uluru = {
+			lat : lat,
+			lng : lng
+		};
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 15,
+			center : uluru
+		});
+		var marker = new google.maps.Marker({
+			position : uluru,
+			map : map,
+			draggable : true
+		});
+	}
+
+	function initMap() {
+		var uluru = {
+			lat : 25.034015,
+			lng : 121.542575
+		};
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 15,
+			center : uluru
+		});
+		var marker = new google.maps.Marker({
+			position : uluru,
+			map : map,
+			draggable : true
+		});
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -40,12 +95,13 @@
 		<h1>新增活動資料</h1>
 		<form:form
 			action="${pageContext.request.contextPath}/newsBack/addActivity1"
-			method="POST" modelAttribute="activity" >
-		<p>
-		活動類別:<form:select path="activityType_" >
-				<form:option value="-1">請挑選</form:option>
-				<form:options items="${activityTypeMap }"></form:options>
-			</form:select>
+			method="POST" modelAttribute="activity">
+			<p>
+				活動類別:
+				<form:select path="activityType_">
+					<form:option value="-1">請挑選</form:option>
+					<form:options items="${activityTypeMap }"></form:options>
+				</form:select>
 			<p>
 				活動名稱:
 				<form:input path="activityName" type="text" />
@@ -69,7 +125,7 @@
 						autocomplete="off" path="startingTime_date" type="text" />
 			</div>
 			<p>
-			<!-- 		<button type="button" onclick="myFunction2()">活動時間為多天適用</button> -->
+				<!-- 		<button type="button" onclick="myFunction2()">活動時間為多天適用</button> -->
 			<div id="manyDays" style="display: none">
 				<p>
 				<h5>
@@ -88,7 +144,16 @@
 			<p>
 			<p>
 				活動地點:
-				<form:input path="location" type="text" />
+				<form:input path="location" type="text" id="address" />
+				<button onclick="iii()" type="button">顯示</button>
+			<div id="app" class="container">
+				<div class="row">
+					<div class="col">
+						<div id="map" style="height: 300px; width: 1000px"
+							class="embed-responsive embed-responsive-16by9"></div>
+					</div>
+				</div>
+			</div>
 			<p>
 				<input type="submit" value="送出">
 				<button type="button" onclick="GoBack()">取消</button>
