@@ -57,8 +57,94 @@ tr:hover td {
 		
 		<c:choose>
 		<c:when test="${sessionScope.mem != Null }">
-				<button type="button" class="btn btn-success" style="float:right; margin-right:40px"
+<!--				<button type="button" class="btn btn-success" style="float:right; margin-right:40px"
 					onclick="window.location.href='${pageContext.request.contextPath}/addArticle?id=${boardType.boardId}&name=${boardType.boardName}'">發表文章</button>
+		-->
+		
+				<button type="button" class="btn btn-success" style="float:right; margin-right:40px" data-toggle="modal" data-target="#addArticle">發表文章
+</button>
+		
+	<!-- Modal -->
+<div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addArticle">張貼文章表單</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+		<div align="center">
+			<form method='POST'
+				action="${pageContext.request.contextPath}/addArticle"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="boardId" value="${boardType.boardId}" /> 
+				<input
+					type="hidden" name="author"
+					value="${sessionScope.mem.memberdetail.nickname}" />
+					
+				<table style="width:100%">
+					<tr>
+						<td>作者</td>
+						<td><b>${sessionScope.mem.memberdetail.nickname}</b></td>
+					</tr>
+					<tr>
+						<td>分類</td>
+						<td><select name="subjectTypeId">
+						<c:forEach var="subjectType" items="${subjectType}">
+						
+								<option value="${subjectType.subjectTypeId}">${subjectType.subjectName}</option>
+						
+						
+						</c:forEach></select>
+						</td>
+					</tr>
+					<tr>
+						<td>主題</td> 
+						<td><input type="text" name="subject" size="30px" /></td>
+					</tr>
+
+					<tr>
+						<td>內文</td>
+						<td><textarea rows="10" name="body" cols="50"></textarea></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="送出">
+							<button type="button" onclick="GoBack()">取消</button></td>
+					</tr>
+				</table>
+			</form>
+	</div>
+
+
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		</c:when>
 		<c:otherwise></c:otherwise>
 		</c:choose>		

@@ -39,31 +39,6 @@ body  {
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
-
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$("#clickMeLogin").click(function() {
-		$("#loginButton").trigger('click');
-
-	});
-
-
-});
-
-
-
-</script>
-
-<style type="text/css">
-body  {
-  background-image: url("Images/community-bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-</style>
 </head>
 
 <body>
@@ -87,7 +62,8 @@ body  {
 
 								<div class="post-content">
 
-									<h5>${discussion.member.memberdetail.nickname}<span style="font-size: 8px">${discussion.member.account.split("@")[0]}</span>
+									<h5>${discussion.member.memberdetail.nickname}<span
+											style="font-size: 8px">${discussion.member.account.split("@")[0]}</span>
 									</h5>
 									<div class="post-date">${discussion.postTimeStamp}</div>
 									<p>${discussion.articleBody}</p>
@@ -101,56 +77,36 @@ body  {
 
 
 
-<c:choose>
-<c:when test="${sessionScope.mem != Null }">
-	<li>
-							<div align="center">
-								<form method='POST'
-									action="${pageContext.request.contextPath}/addReply"
-									enctype="multipart/form-data">
-					
-									<input type="hidden" name="articleId" value="${discussion.articleId}" /> 
-									<input type="hidden" name="author"
-										value="${sessionScope.mem.memberdetail.nickname}" />
-										
-									<table>
-										<tr>
-											<td></td>
-											<td>
-											<div class="post-content">
-											<h5 style="color:white"><img style="margin-right: 10px; padding-right: 20px"
-										width="85px" height="70px"
-										src="<c:url value='/memberImages/${mem.account}_${mem.member_id}/
-										${mem.username}${mem.member_id}${mem.headshot}' />">${sessionScope.mem.memberdetail.nickname}
-											<span style="font-size: 8px">${sessionScope.mem.account.split("@")[0]}</span>
-									</h5></div></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td><textarea rows="5" name="body" cols="100"></textarea></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td><input type="submit" value="送出">
-												<button type="button" onclick="GoBack()">取消</button></td>
-										</tr>
-									</table>
-								</form>
-							</div>
-						</li>
 
 
-</c:when>
-<c:otherwise>
-		<div align="center">
-		<button id="clickMeLogin"  class="btn btn-primary"  type="button">點我登入</button>
-		</div>
-</c:otherwise>
-</c:choose>
+
+						<c:forEach var="rp" items="${reply}" varStatus="s">
+
+							<li>
+										<h5>回覆者 ${rp.member.memberdetail.nickname}<span
+												style="font-size: 8px"> ${rp.member.account.split("@")[0]}</span>
+										</h5>
+										<div class="post-date"><p>時間 ${rp.postTimeStamp}</p></div>
+										<p>${rp.replyBody}</p>
+									</div>
+
+	
+								</div>
 						
+							</li>
+									
+						</c:forEach>
+
+
+
+
+
+
 					
-					</ul>
-<c:choose>
+						
+						
+						<c:choose>
+
 								<c:when test="${sessionScope.mem != Null}">
 
 									<div align="center">

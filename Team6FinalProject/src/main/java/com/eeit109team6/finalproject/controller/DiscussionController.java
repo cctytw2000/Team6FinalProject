@@ -138,12 +138,17 @@ public class DiscussionController {
 		discussionService.updateBoardViews(boardId); 
 		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// 透過service.getBoardTypeById方法取得一個指定看版的看板名稱
 		
+		// for bootstrap版本發文表單，取得發文分類
+		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// 透過service.getAllSubjectType方法取得所有發文分類
+
+		
 		// 2.取得指定看版的所有文章
 		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
 		
 		// 3.將屬性放入SpringMVC提供的model
 		model.addAttribute("DiscussionList", Discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
 		model.addAttribute("boardType", boardType2); // 將指定看板的名稱物件，注入model中，識別字串為boardType
+		model.addAttribute("subjectType", subjectType); // 將分類名稱物件集合，注入model中，識別字串為subjectType
 
 		// 說明:  discussionList 假若不給定名字，僅僅傳入list，則接收方JSP則以物件首字小寫+型態首字大寫List接收。
 		// 將service實作類別取得的物件，設給Spring提供的Model介面的model物件

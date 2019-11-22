@@ -37,9 +37,7 @@
 		<h1 align="center">討論區後台功能<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBoardType">新增討論區看板
 </button></h1>		
 		<div align="center">
-		
 
-		
 	<!-- Modal -->
 <div class="modal fade" id="addBoardType" tabindex="-1" role="dialog" aria-labelledby="addBoardType" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -65,9 +63,9 @@
 
 		<br>
 		<br>
-		設定看板名稱為：<form:input path="boardName" type="text" size="15px" /><br><br>
+		<b>設定看板名稱為：</b><form:input path="boardName" type="text" size="15px" /><br><br>
 	
-		設定看板代表圖：<br><form:input path="bImage" type='file'/>
+		<b>設定看板代表圖：</b><form:input path="bImage" type='file'/>
 		<p>
 <!-- 			<input type="submit" value="送出"> -->
 <!-- 			<button type="button" onclick="GoBack()">取消</button> -->
@@ -86,7 +84,7 @@
 
 			
 	<!-- ===========================================================================================================  -->	
-		<table style="width: 75%">
+		<table style="width: 60%">
 			
 			<tr style="height: 35px; background-color:#E0F6C3">
 				<th></th>
@@ -94,7 +92,8 @@
 				<th><span style="font-size: small;"><font color="grey">瀏覽次數</font></span></th>
 				<th>文章數</th>
 				<th>看板圖</th>	
-				<th></th>
+				<th><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addBoardType">新增討論區看板
+</button></th>
 			</tr>
 			<c:forEach items="${Blist}" var='boardType' varStatus="s">
 			<tr>
