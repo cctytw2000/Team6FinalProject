@@ -220,12 +220,18 @@ public class DiscussionController {
 		System.out.println("subjectType=" + subjectType);
 
 		// ==============設定發表文章時間=======================
-		Calendar rightNow = Calendar.getInstance();
-		String createtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-				+ ":" + rightNow.get(Calendar.SECOND);
-		// ==============/設定發表文章時間=======================
-
+//		Calendar rightNow = Calendar.getInstance();
+//		String createtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+//				+ ":" + rightNow.get(Calendar.SECOND);
+		
+		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		  String postTimeStamp = myFmt2.format(new Date ());
+		
+//		// ==============/設定發表文章時間=======================
+		
+	
 		Discussion discussion = new Discussion();
 		discussion.setArticleBody(articleBody); // 填入文章
 		discussion.setMember(mem); // 填入發文者，引數為Member型態的物件mem
@@ -234,7 +240,7 @@ public class DiscussionController {
 		discussion.setBoardType(type); // 填入看版
 		discussion.setViews(0); // 填入人氣(計數器)，初始值為0
 		discussion.setIsDeleted(0); // 填入是否軟刪除，初始值為0，未被刪除
-		discussion.setPostTimeStamp(createtime);// 填入時間戳
+		discussion.setPostTimeStamp(postTimeStamp);// 填入時間戳
 
 		discussionService.addArticle(discussion);
 		return "redirect:/board-Rich?id=" + boardId;   // 重定向至看板，留意key值的用法
@@ -258,23 +264,17 @@ public class DiscussionController {
 //				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
 //				+ ":" + rightNow.get(Calendar.SECOND);
 		
-		
 		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		  String postTimeStamp = myFmt2.format(new Date ());
-		
+		String postTimeStamp = myFmt2.format(new Date ());
 //		// ==============/設定發表文章時間=======================
 	
-		
+
 		// ===============將值填入reply 屬性物件之內=====================
 		Discussion discussion = discussionService.getArticleById(articleId);//以articleId取得一筆文章物件
 		reply.setDiscussion(discussion);//將文章物件填入reply屬性。填入文章編號，引數為Discussion型態的物件discussion
 		reply.setReplyBody(replyBody); // 填入回覆文
 		reply.setMember(mem); // 填入發文者，引數為Member型態的物件mem
 		reply.setPostTimeStamp(postTimeStamp);// 填入時間戳
-		
-//		System.out.println("reply.getMember():"+reply.getMember()); 
-//		System.out.println("articleId=" + discussion);
 		
 		//===============呼叫Reply Service，將裝好資料的屬性物件，交給DAO以Hibernate塞進資料庫
 		replyService.addReply(reply);

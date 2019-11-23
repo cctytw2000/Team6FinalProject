@@ -78,6 +78,7 @@ body {
 								<img style="margin-right: 10px; padding-right: 20px"
 									width="85px" height="70px"
 									src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">
+							<button type="button" class="btn btn-secondary btn-lg" disabled>樓主</button>
 							</div>
 
 							<div class="post-content">
@@ -109,6 +110,8 @@ body {
 								<img style="margin-right: 10px; padding-right: 20px"
 									width="85px" height="70px"
 									src="<c:url value='/memberImages/${rp.member.account}_${rp.member.member_id}/${rp.member.username}${rp.member.member_id}${rp.member.headshot}' />">
+							
+							<button type="button" class="btn btn-secondary btn-lg" disabled>${s.index+2}樓</button>
 							</div>
 
 							<div class="post-content">
