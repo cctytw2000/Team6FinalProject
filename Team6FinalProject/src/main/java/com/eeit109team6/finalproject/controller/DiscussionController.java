@@ -1,7 +1,9 @@
 package com.eeit109team6.finalproject.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -138,12 +140,17 @@ public class DiscussionController {
 		discussionService.updateBoardViews(boardId); 
 		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// 透過service.getBoardTypeById方法取得一個指定看版的看板名稱
 		
+		// for bootstrap版本發文表單，取得發文分類
+		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// 透過service.getAllSubjectType方法取得所有發文分類
+
+		
 		// 2.取得指定看版的所有文章
 		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
 		
 		// 3.將屬性放入SpringMVC提供的model
 		model.addAttribute("DiscussionList", Discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
 		model.addAttribute("boardType", boardType2); // 將指定看板的名稱物件，注入model中，識別字串為boardType
+		model.addAttribute("subjectType", subjectType); // 將分類名稱物件集合，注入model中，識別字串為subjectType
 
 		// 說明:  discussionList 假若不給定名字，僅僅傳入list，則接收方JSP則以物件首字小寫+型態首字大寫List接收。
 		// 將service實作類別取得的物件，設給Spring提供的Model介面的model物件
@@ -213,12 +220,18 @@ public class DiscussionController {
 		System.out.println("subjectType=" + subjectType);
 
 		// ==============設定發表文章時間=======================
-		Calendar rightNow = Calendar.getInstance();
-		String createtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-				+ ":" + rightNow.get(Calendar.SECOND);
-		// ==============/設定發表文章時間=======================
-
+//		Calendar rightNow = Calendar.getInstance();
+//		String createtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+//				+ ":" + rightNow.get(Calendar.SECOND);
+		
+		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		  String postTimeStamp = myFmt2.format(new Date ());
+		
+//		// ==============/設定發表文章時間=======================
+		
+	
 		Discussion discussion = new Discussion();
 		discussion.setArticleBody(articleBody); // 填入文章
 		discussion.setMember(mem); // 填入發文者，引數為Member型態的物件mem
@@ -227,7 +240,7 @@ public class DiscussionController {
 		discussion.setBoardType(type); // 填入看版
 		discussion.setViews(0); // 填入人氣(計數器)，初始值為0
 		discussion.setIsDeleted(0); // 填入是否軟刪除，初始值為0，未被刪除
-		discussion.setPostTimeStamp(createtime);// 填入時間戳
+		discussion.setPostTimeStamp(postTimeStamp);// 填入時間戳
 
 		discussionService.addArticle(discussion);
 		return "redirect:/board-Rich?id=" + boardId;   // 重定向至看板，留意key值的用法
@@ -246,22 +259,22 @@ public class DiscussionController {
 //		System.out.println("Member的username:"+ mem.getUsername());
 
 //		// ==============設定發表文章時間=======================
-		Calendar rightNow = Calendar.getInstance();
-		String postTimeStamp = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-				+ ":" + rightNow.get(Calendar.SECOND);
+//		Calendar rightNow = Calendar.getInstance();
+//		String postTimeStamp = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+//				+ ":" + rightNow.get(Calendar.SECOND);
+		
+		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String postTimeStamp = myFmt2.format(new Date ());
 //		// ==============/設定發表文章時間=======================
 	
-		
+
 		// ===============將值填入reply 屬性物件之內=====================
 		Discussion discussion = discussionService.getArticleById(articleId);//以articleId取得一筆文章物件
 		reply.setDiscussion(discussion);//將文章物件填入reply屬性。填入文章編號，引數為Discussion型態的物件discussion
 		reply.setReplyBody(replyBody); // 填入回覆文
 		reply.setMember(mem); // 填入發文者，引數為Member型態的物件mem
 		reply.setPostTimeStamp(postTimeStamp);// 填入時間戳
-		
-//		System.out.println("reply.getMember():"+reply.getMember()); 
-//		System.out.println("articleId=" + discussion);
 		
 		//===============呼叫Reply Service，將裝好資料的屬性物件，交給DAO以Hibernate塞進資料庫
 		replyService.addReply(reply);
@@ -278,10 +291,10 @@ public class DiscussionController {
 		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// 透過service.getBoardTypeById方法取得一個指定看版的看板名稱
 		
 		// 2.取得指定看版的所有文章
-		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
+		List<Discussion> discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// 透過service.getArticleByBoardTypeId方法取得所有指定看板上的文章
 		
 		// 3.將屬性放入SpringMVC提供的model
-		model.addAttribute("DiscussionList", Discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
+		model.addAttribute("DiscussionList", discussionlist);// 將指定看板上的所有文章物件，都注入model中，識別字串為DiscussionList
 		model.addAttribute("boardType", boardType2); // 將指定看板的名稱物件，注入model中，識別字串為boardType
 
 		return "board-RichBack";
@@ -295,13 +308,13 @@ public class DiscussionController {
 	}
 	
 	
-	// 刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
+	// 實體刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/physicalDeleteArticle", method = RequestMethod.GET)
 	public String physicalDeleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
-		Integer boardId = d.getBoardType().getBoardId();
+		Discussion d = discussionService.getArticleById(articleId);	//由articleId取得指定的文章資料列物件
+		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
 		
-		discussionService.physicalDeleteArticleById(articleId);
+		discussionService.physicalDeleteArticleById(articleId);//執行真正的刪除
 		
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
@@ -309,9 +322,9 @@ public class DiscussionController {
 	// 軟刪除文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/deleteArticle", method = RequestMethod.GET)
 	public String deleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
+		Discussion d = discussionService.getArticleById(articleId); //由articleId取得指定的文章資料列物件
 		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
-		discussionService.deleteArticleById(articleId);//執行刪除
+		discussionService.deleteArticleById(articleId);//執行軟刪除
 		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//刪除後，再取一次原看板的所有文章
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
@@ -319,7 +332,7 @@ public class DiscussionController {
 	// 恢復文章 -->重定向至所屬的看板 board-RichBack.jsp
 	@RequestMapping(value = "/recoverArticleById", method = RequestMethod.GET)
 	public String recoverArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);
+		Discussion d = discussionService.getArticleById(articleId); //由articleId取得指定的文章資料列物件
 		Integer boardId = d.getBoardType().getBoardId();//為了回看板，取得看板id
 		discussionService.recoverArticleById(articleId);;//執行恢復
 		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//恢復後，再取一次原看板的所有文章

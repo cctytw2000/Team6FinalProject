@@ -7,8 +7,7 @@ $(document).ready(function () {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+				pagebot(response);				
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -99,8 +98,9 @@ function showOrdersInfo(response, pageNo) {
 	let info = "";
 	for (let i = (pageNo - 1) * item; i < response.Orders.length; i++) {
 		info += "<tr>";
-		info += '<td><a href="order/?order_id=' + response.Orders[i].order_id
-			+ '">' + response.Orders[i].order_id + '</a></td>';
+		info += '<td><a class="card-link" data-toggle="collapse" href="#o' + response.Orders[i].order_id + '">' + response.Orders[i].order_id + '</a></td>';
+		// info += '<td><a href="order/?order_id=' + response.Orders[i].order_id
+		// 	+ '">' + response.Orders[i].order_id + '</a></td>';
 		info += '<td><a href="member?id=' + response.Orders[i].member.member_id
 			+ '">' + response.Orders[i].member.username + '</a></td>';
 		info += "<td>" + response.Orders[i].member.account + "</td>";
@@ -118,11 +118,24 @@ function showOrdersInfo(response, pageNo) {
 				break;
 		}
 		info += "</tr>";
+		info += "<tr><td colspan='7'>";
+		info += "<div id='o" + response.Orders[i].order_id + "' class='collapse' data-parent='#accordion'>";
+		info += "<div class='card-body'>";
+		info += "<table border='1' style='text-align: center; width: 100%'>";
+		info += "<tr><th>商品編號</th><th>商品名稱</th><th>數量</th><th>金額</th></tr>";
+		info += "<tbody id='oitem" + response.Orders[i].order_id + "'></tbody>";
+		info += "</table>";
+		info += "</div>";
+		info += "</div>";
+		info += "</td></tr>";
 		if (i == pageNo * item - 1) {
 			break;
 		}
 	}
 	$("tbody#ordersInfo").html(info);
+	for (let i = (pageNo - 1) * item; i < response.Orders.length; i++) {
+		orderDeail(response.Orders[i].order_id);
+	}
 	document.getElementById("previous").removeEventListener("click", previousChenge);
 	if (pagebotNO == 1) {
 		$("li#previous").attr("class", "page-item disabled");
@@ -137,6 +150,7 @@ function showOrdersInfo(response, pageNo) {
 		$("li#next").attr("class", "page-item");
 		document.getElementById("next").addEventListener("click", nextChenge);
 	}
+	$("div#totalspan").html("第" + pagebotNO + "頁/共" + response.Orders.length + "筆訂單");
 }
 
 function chengeOrdersInfo() {
@@ -150,6 +164,29 @@ function previousChenge() {
 function nextChenge() {
 	pagebotNO++;
 	showOrdersInfo(data, pagebotNO);
+}
+function orderDeail(orderid) {
+	$.ajax({
+		url: "orderDeail/" + orderid + ".json",
+		success: function (response) {
+			console.log(response);
+			if (response.orderDeail.length > 0) {
+				let info = "";
+				for (let i = 0; i < response.orderDeail.length; i++) {
+					info += "<tr>";
+					info += "<td>" + response.orderDeail[i].product.game_id + "</td>";
+					info += "<td>" + response.orderDeail[i].product.name + "</td>";
+					info += "<td>" + response.orderDeail[i].count + "個</td>";
+					info += "<td>" + response.orderDeail[i].subtotal + "元</td>";
+					info += "</tr>";
+				}
+				$("tbody#oitem" + orderid).html(info);
+			}
+			else {
+				$("tbody#oitem" + orderid).html("<tr><td colspan='4'>沒訂單詳細資料</td></tr>");
+			}
+		}
+	});
 }
 
 function ordermember() {
@@ -232,8 +269,7 @@ function memberorderdata() {
 			$("div#totalspan").html("");
 			$("ul#pageBottom").html("");
 			if (response.Orders.length > 0) {
-				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+				pagebot(response);				
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -255,8 +291,7 @@ function checkmember() {
 				console.log(response);
 				data = response;
 				if (response.Orders.length > 0) {
-					pagebot(response);
-					$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+					pagebot(response);					
 				}
 				else {
 					$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -357,8 +392,7 @@ function checkmoney() {
 					console.log(response);
 					data = response;
 					if (response.Orders.length > 0) {
-						pagebot(response);
-						$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+						pagebot(response);						
 					}
 					else {
 						$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -397,8 +431,7 @@ function money(state) {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+				pagebot(response);				
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -418,8 +451,7 @@ function moneymember(state, memberid) {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);
-				$("div#totalspan").html("共" + response.Orders.length + "筆訂單");
+				pagebot(response);				
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");

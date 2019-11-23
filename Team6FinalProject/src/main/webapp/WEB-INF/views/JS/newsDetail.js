@@ -46,6 +46,7 @@ $(document).ready(function() {
 		}
 		$("#activityDetail").show();
 	}
+	showMemoForNews();
 })
 
 // 點入消息的計次功能
@@ -60,6 +61,42 @@ function countView(newsId) {
 		},
 		success : function() {
 			// alert("成功")
+		},
+	});
+}
+
+//顯示評論
+function showMemoForNews(){
+	let showComment = "";
+	let member_id = $("#member_id").val();
+	let newsId = $('#newsId').val();
+	$.ajax({
+		url : "showMemoForNews.json",
+		success : function(response) {
+			for(let i = 0; i < response.newsList.length; i++){
+				if(!(typeof response.newsList[i].messages === "undefined")){
+					for(let t = 0; t< response.newsList[i].messages.length; t++){
+						//依messageId重新排序
+						response.newsList[i].messages = response.newsList[i].messages.sort(function (a, b) {
+							 return a.messageId > b.messageId ? 1 : -1;
+							});
+						if(!(typeof response.newsList[i].messages[t] === "undefined") && response.newsList[i].newsId == newsId ){
+							console.log(response.newsList[i].messages[t]);
+							showComment += '<div class="media border p-3" style="width:600px;">';
+							showComment += '<div class="media-body">';
+							showComment += '<h4 style="color: #BBFFEE">'+ response.newsList[i].messages[t].member.username;
+							showComment += '<small style="margin-left:5%"><i>Posted on '+ response.newsList[i].messages[t].publicationDate.replace(".0","")+'</i></small>';
+							if(member_id == response.newsList[i].messages[t].member.member_id){
+								showComment += '<small style="margin-left:5%"><i onclick=\''+'editMessage('+'"'+ response.newsList[i].messages[t].messageId +'"'+','+'"'+response.newsList[i].messages[t].memo+'"'+')\''+'>編輯</i></small>';
+							}
+							showComment += '</h4>';
+							showComment += '<p id="'+ response.newsList[i].messages[t].messageId +'" style="color:#FFFFBB;margin-top:10px">'+ response.newsList[i].messages[t].memo +'</p>';
+							showComment += '</div></div>';
+						}
+					}
+				}
+			}
+			$("#memoForNews").html(showComment);
 		},
 	});
 }
@@ -86,17 +123,43 @@ function addMemo() {
 				memo : memo
 			},
 			success : function(response) {
-				console.log(response);
-					showComment += '<div class="media border p-3" style="width:600px;">';
-					showComment += '<div class="media-body">';
-					showComment += '<h4 style="color: #BBFFEE">'+ response.userName;
-					showComment += '<small style="margin-left:5%"><i>Posted on '+ response.publicationDate+'</i></small>';
-					showComment += '</h4>';
-					showComment += '<p id="'+ response.messageId +'"style="color:#FFFFBB;margin-top:10px">'+ response.memo +'</p>';
-					showComment += '</div></div>';
-					 $("#addMemo").val("");
-					 $("#add").before(showComment);
+				showMemoForNews();
+				$("#addMemo").val("");
 			}
 		});
 	}
+}
+
+//顯示修改評論欄位
+function editMessage(messageId, memo){
+	let info = "";
+	info += '<form>';
+	info += '<input type="hidden" name="messageId" value="' + messageId
+			+ '"></input>';
+	info += '<input class="form-control" style="width: 200px;float:left" type="text" name="memo" value="' + memo
+			+ '"></input>';
+	info += '<button type="button" class="btn btn-success" style="width:80px;" onclick="editMessage2('+messageId+')">送出</button>';
+	info += '</form>';
+	$("#"+messageId).html(info);
+}
+
+
+//修改評論
+
+function editMessage2(messageId){
+//	alert("messageId="+messageId);
+	let editMemo = $("input[name='memo']").val();
+//	alert("editMemo="+editMemo);
+	$.ajax({
+		type : "POST",
+		url : "editMessage2",
+		dataType : "json",
+		data : {
+			messageId : messageId,
+			memo : editMemo
+		},
+		success : function(response) {
+			showMemoForNews()
+		}
+	});
 }

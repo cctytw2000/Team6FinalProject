@@ -29,6 +29,8 @@
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -53,6 +55,8 @@
 				href="#newsHeaderShow">發佈消息</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
 				href="#newsHeaderHide">隱藏消息</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#hotNewsTop5">截至今日的熱門消息前5</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -70,18 +74,16 @@
 					<tr>
 						<th>消息類別編號
 						<th>消息類別名稱
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="newsType" items="${newsTypeList }">
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="newsType"
+								items="${newsTypeList }">
 								<tr>
 									<td>${newsType.newsTypeId }
 									<td>${newsType.newsTypeName }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateNewsType('${newsType.newsTypeId }', '${newsType.newsTypeName }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteNewsType(${newsType.newsTypeId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteNewsType(${newsType.newsTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -100,18 +102,16 @@
 					<tr>
 						<th>遊戲類別編號
 						<th>遊戲類別名稱
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="gameType" items="${gameTypeList }">
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="gameType"
+								items="${gameTypeList }">
 								<tr>
 									<td>${gameType.gameTypeId }
 									<td>${gameType.gameTypeName }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateGameType('${gameType.gameTypeId }', '${gameType.gameTypeName }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteGameType(${gameType.gameTypeId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteGameType(${gameType.gameTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -130,9 +130,7 @@
 					<tr>
 						<th>活動類別編號
 						<th>活動類別名稱
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="activityType"
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="activityType"
 								items="${activityTypeList }">
 
 								<tr>
@@ -141,9 +139,8 @@
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateActivityType('${activityType.activityTypeId }', '${activityType.activityTypeName }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteActivityType(${activityType.activityTypeId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteActivityType(${activityType.activityTypeId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -164,9 +161,8 @@
 						<th>遊戲發售日
 						<th>遊戲發行商
 						<th>遊戲平台
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="game" items="${gameList }">
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="game"
+								items="${gameList }">
 								<tr>
 									<td>${game.gameId }
 									<td>${game.gameName }
@@ -179,9 +175,8 @@
 											onclick="updateGame('${game.gameId }', '${game.gameName }', 
 											'${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', 
 											'${game.publicationDate }', '${game.publisher }', '${game.platform }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteGame(${game.gameId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteGame(${game.gameId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -202,9 +197,8 @@
 						<th>活動日期
 						<th>活動時間
 						<th>活動地點
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="activityOne" items="${activityOneList }">
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="activityOne"
+								items="${activityOneList }">
 								<tr>
 									<td>${activityOne.activityId }
 									<td>${activityOne.activityName }
@@ -218,14 +212,13 @@
 											'${activityOne.activityType.activityTypeId }',' ${activityOne.activityType.activityTypeName }',
 											'${activityOne.startingDate_time }', '${activityOne.startingTime_date }',
 											'${activityOne.location }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteActivityOne(${activityOne.activityId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteActivityOne(${activityOne.activityId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
 			<!-- //一日活動 -->
-			
+
 			<!-- 多日活動 -->
 			<div id="activityHeaderMore" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
@@ -241,9 +234,8 @@
 						<th>活動起始日
 						<th>活動結束日
 						<th>活動地點
-						<th>更新
-<!-- 						<th>刪除  -->
-							<c:forEach var="activityMore" items="${activityMoreList }">
+						<th>更新 <!-- 						<th>刪除  --> <c:forEach var="activityMore"
+								items="${activityMoreList }">
 								<tr>
 									<td>${activityMore.activityId }
 									<td>${activityMore.activityName }
@@ -257,9 +249,8 @@
 											'${activityMore.activityType.activityTypeId }',' ${activityMore.activityType.activityTypeName }',
 											'${activityMore.startingDate }','${activityMore.endingDate }',
 											'${activityMore.location }')">更新</button>
-<!-- 									<td><button type="button" class="btn btn-warning" -->
-<!-- 											data-toggle="modal" data-target="#ooo" -->
-<%-- 											onclick="deleteActivityMore(${activityMore.activityId })">刪除</button> --%>
+										<!-- 									<td><button type="button" class="btn btn-warning" -->
+										<!-- 											data-toggle="modal" data-target="#ooo" --> <%-- 											onclick="deleteActivityMore(${activityMore.activityId })">刪除</button> --%>
 							</c:forEach>
 				</table>
 			</div>
@@ -280,8 +271,7 @@
 						<th>發佈人
 						<th>發佈日期
 						<th>ip位置
-						<th>隱藏 <c:forEach var="newsShow"
-								items="${newsShowList }">
+						<th>隱藏 <c:forEach var="newsShow" items="${newsShowList }">
 
 								<tr>
 									<td>${newsShow.newsId }
@@ -312,8 +302,7 @@
 						<th>發佈人
 						<th>發佈日期
 						<th>ip位置
-						<th>發佈 <c:forEach var="newsHide"
-								items="${newsHideList }">
+						<th>發佈 <c:forEach var="newsHide" items="${newsHideList }">
 
 								<tr>
 									<td>${newsHide.newsId }
@@ -329,6 +318,17 @@
 				</table>
 			</div>
 			<!-- //隱藏消息 -->
+
+			<div id="hotNewsTop5" class="container tab-pane fade"
+				style="width: 900px">
+				<div class="chart-container"
+					style="position: relative; height: 30vh; width: 50vw">
+					<canvas id="chart"></canvas>
+				</div>
+			</div>
+
+
+
 			<!-- 彈出式視窗		 -->
 			<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
 				aria-hidden="true" data-backdrop="static" data-keyboard="true"

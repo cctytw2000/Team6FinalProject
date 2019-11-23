@@ -63,19 +63,24 @@
 						</span>
 					</div>
 				</nav>
-				
-				<table border="1" style="text-align: center; width: 100%">
-				<tr>
-					<th>訂單編號</th>
-					<th>顧客名稱</th>
-					<th>email</th>					
-					<th>訂單時間</th>
-					<th>訂單金額</th>
-					<th>狀態</th>						
-					<th>取消</th>										
-				</tr>	
-				<tbody id="ordersInfo"></tbody>
-		</table>
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header">
+						<table border="1" style="text-align: center; width: 100%">
+							<tr>
+								<th>訂單編號</th>
+								<th>顧客名稱</th>
+								<th>email</th>					
+								<th>訂單時間</th>
+								<th>訂單金額</th>
+								<th>狀態</th>						
+								<th>取消</th>										
+							</tr>	
+							<tbody id="ordersInfo"></tbody>
+						</table>
+					</div>					
+				</div>
+			</div>
 		<div  id="totalspan" style="width: 30%; margin: 15px auto;text-align: center"></div>
 		<ul id="pageBottom" style="margin: 0 auto;" class="pagination justify-content-center">
 		</ul>

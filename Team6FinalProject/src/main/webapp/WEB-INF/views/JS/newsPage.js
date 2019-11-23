@@ -224,11 +224,12 @@ function searchByKeyWord(e){
 						html += "<p>"+ (data.news[i].article).substr(0, 100);
 						html += " ...<a onclick='countView("+data.news[i].newsId+")' href='newsDetail?newsId="+ data.news[i].newsId +"'>繼續閱讀</a></p>";
 						html += "</tr></tbody>";
+					} else {
+						html += "<thead><tr><th>無相關消息</tr></thead>";
 					}
 				}
 				$("#newsOrderByTime").html(html);
-			}
-			else {
+			} else {
 				let html1 = "";
 				html1 += "<thead><tr><th>無相關消息</tr></thead>";
 				$("#newsOrderByTime").html(html1);

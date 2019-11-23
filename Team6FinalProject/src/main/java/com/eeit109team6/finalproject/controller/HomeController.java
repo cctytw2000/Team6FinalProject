@@ -87,6 +87,11 @@ public class HomeController {
 		model.addAttribute("homeMovie", home);
 
 		List<News> newslist = newsService.getAllNewsByViews();
+		for (int i = newslist.size() - 1; i >= 0; i--) {
+			if (newslist.get(i).getIsVisable() == false) {
+				newslist.remove(i);
+			}
+		}
 		session.setAttribute("newses", newslist);
 
 		List<Discussion> articleList = discussionService.getArticleTop6();

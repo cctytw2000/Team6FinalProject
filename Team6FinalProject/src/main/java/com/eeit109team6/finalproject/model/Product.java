@@ -34,14 +34,14 @@ public class Product {
 	private Integer price;
 	private String game_desc;
 	private Date date;
-	private Integer stock;
-	@ManyToOne(fetch = FetchType.LAZY)
+	private Integer stock;	
+	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 	@JsonIgnore
 	private Blob photo;
 	private Integer is_remove;
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 

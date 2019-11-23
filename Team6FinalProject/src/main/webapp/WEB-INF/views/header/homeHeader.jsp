@@ -310,8 +310,8 @@
 												href="${pageContext.request.contextPath}/member/PhotoList">照片清單</a>
 													<a class="dropdown-item"
 												href="${pageContext.request.contextPath}/member/movies">影片清單</a>
-											<a class="dropdown-item"
-												href="${pageContext.request.contextPath}/member/sendChangePassWordMail">修改密碼</a>
+<!-- 											<a class="dropdown-item" -->
+<%-- 												href="${pageContext.request.contextPath}/member/sendChangePassWordMail" >修改密碼</a> --%>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item"
 												href="${pageContext.request.contextPath}/member/logout">登出</a>

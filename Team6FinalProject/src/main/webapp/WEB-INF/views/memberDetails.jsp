@@ -137,19 +137,20 @@
 
 
 
-			<form
-				action="${pageContext.request.contextPath}/member/ChangeNickname"
-				method="post">
+
 				<p style="text-align: center; font-size: 30px; color: black">個人資料</p>
 				<br>
 				<div style="width: 100%; margin: 30px auto;">
-					<input type="hidden" name="memberID"
-						value="${MemberDetial.memberdetail.memberID}">
+		
 					<div>
 						<label>姓名：</label>
 						<p>${MemberDetial.username}</p>
 					</div>
-
+			<form
+				action="${pageContext.request.contextPath}/member/ChangeNickname"
+				method="post">
+							<input type="hidden" name="memberID"
+						value="${MemberDetial.memberdetail.memberID}">
 					<div id="nickname">
 						<label>暱稱：</label> <br> <input
 							style="border-width: 0; background-color: white" type="text"
@@ -157,14 +158,65 @@
 							readonly="readonly" value="${MemberDetial.memberdetail.nickname}"></input>
 						<button id="openupdate" type="button" onclick="openUpdate('${MemberDetial.memberdetail.nickname}')">編輯</button>
 					</div>
-
+			</form>
 
 					<div>
 						<label>信箱：</label>
 						<p>${MemberDetial.account}</p>
 					</div>
 
+	<div>
+						<label>密碼：</label>
+						<p>
+						<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+修改密碼
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">修改密碼</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      		<form
+				action="${pageContext.request.contextPath}/member/sendChangePassWordPage"
+				method="post">
+      <div class="modal-body">
+    	
+				<div
+					style="width: 70%; height: 70%;">
+					<div class="form-group">
+						<label for="account">帳號:</label> <input type="email"
+							class="form-control" style="width:100%; margin: 0" id="account"
+							name="account" aria-describedby="emailHelp"
+							placeholder="Enter email"> <small id="emailHelp"
+							class="form-text text-muted">請輸入當初您在註冊時所輸入的帳號</small>
+					</div>
+
+<!-- 					<button name="insert" type="submit" class="btn btn-primary">寄信</button> -->
+				</div>
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="insert" class="btn btn-primary">寄信</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+						
+						
+						
+						
+						
+						</p>
+					</div>
 
 
 
@@ -190,7 +242,7 @@
 <!-- 					</div> -->
 
 				</div>
-			</form>
+
 		</div>
 
 	</section>

@@ -52,7 +52,7 @@
 	<header class="header-section">
 		<div class="container">
 			<!-- logo -->
-			<a class="site-logo" href="${pageContext.request.contextPath}"> <img src="../Images/logo.png" alt="">
+			<a class="site-logo" href="${pageContext.request.contextPath}"> <img src="../Images/newLogo.png" alt="">
 			</a>
 
 			<!-- responsive -->
@@ -170,6 +170,9 @@
 				<div class="nt-item">
 					<span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a>
 				</div>
+				<div class="nt-item">
+					<span class="racing">賽事</span><a href="#">台灣 講屁話 準決賽</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -224,7 +227,7 @@
 							value="${token}">
 
 						<input type="hidden" name="oldpassword" value="Null">
-						<fieldset style="margin-left: 40%">
+						<fieldset style="margin-left: 40%; width: 50%">
 							<div style="text-align: center; color: white">修改密碼</div>
 							<div class="div1">
 								<label class='label1'>新密碼:</label><input type="password" id="password"

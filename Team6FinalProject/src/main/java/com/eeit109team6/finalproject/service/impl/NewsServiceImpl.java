@@ -1,6 +1,7 @@
 package com.eeit109team6.finalproject.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,12 +127,25 @@ public class NewsServiceImpl implements INewsService{
 		return dao.getMessagesByNewsId(newsId);
 	}
 
+	@Transactional
+	@Override
+	public List<Message> getAllMessages() {
+		return dao.getAllMessages();
+	}
+
+	@Transactional
+	@Override
+	public void editMessage(Integer messageId, String memo) {
+		dao.editMessage(messageId, memo);
+	}
+
+	@Transactional
+	@Override
+	public Message getMessageById(Integer messageId) {
+		return dao.getMessageById(messageId);
+	}
+
 //====================================================未完成====================================================
-
-	
-
-
-
 	
 
 }

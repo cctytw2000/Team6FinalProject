@@ -7,9 +7,9 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>${msg}</title>
-	<!-- <link rel="stylesheet" href="CSS/RegisteredMember.css"> -->
+<meta charset="UTF-8">
+<title>${msg}</title>
+<!-- <link rel="stylesheet" href="CSS/RegisteredMember.css"> -->
 
 
 
@@ -17,32 +17,44 @@
 
 
 
-	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/owl.carousel.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/animate.css' type="text/css" />
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/font-awesome.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/owl.carousel.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/animate.css'
+	type="text/css" />
 
 
-	<script src="https://kit.fontawesome.com/685268963f.js"></script>
+<script src="https://kit.fontawesome.com/685268963f.js"></script>
 
-	<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
-	<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
-	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
-	<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
-
-
+<%-- 	<script src="${pageContext.request.contextPath}/JS/login.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/RegisteredMember.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleRegistered.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/JS/FBGoogleLogin.js"></script> --%>
 
 
 
 
-	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/RegisteredMember.css' type="text/css" />
+
+
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/RegisteredMember.css'
+	type="text/css" />
 
 
 </head>
 
-<body style="background-image: url(<c:url value='/Images/pattern.png' />)">
+<body
+	style="background-image: url(<c:url value='/Images/pattern.png' />)">
 
 
 
@@ -62,24 +74,32 @@
 
 	<section class="footer-top-section">
 		<div style="height: 350px" class="container">
-			<div class="footer-top-bg">
-				<img src="<c:url value='/Images/footer-top-bg.png' />" />
-			</div>
+<!-- 			<div class="footer-top-bg"> -->
+<%-- 				<img src="<c:url value='/Images/footer-top-bg.png' />" /> --%>
+<!-- 			</div> -->
 
-			<form action="${pageContext.request.contextPath}/member/sendChangePassWordPage" method="post">
 
-				<fieldset style="margin-left:40%">
-					<h3 style="text-align:center;color:white">${msg}</h3>
-					<div class="div1">
-						<label style="color:white" class='label1'>帳號:</label><input type="text" id="account"
-							name="account">
+
+			<form
+				action="${pageContext.request.contextPath}/member/sendChangePassWordPage"
+				method="post" style="color: white">
+				<div
+					style="width: 70%; height: 70%;">
+					<div class="form-group">
+						<label for="account">帳號:</label> <input type="email"
+							class="form-control" style="width: 50%; margin: 0" id="account"
+							name="account" aria-describedby="emailHelp"
+							placeholder="Enter email"> <small id="emailHelp"
+							class="form-text text-muted">請輸入當初您在註冊時所輸入的帳號</small>
 					</div>
-					<div class="div1" style="text-align: center">
-						<input name="insert" type="submit" value="輸入">
-					</div>
 
-				</fieldset>
+					<button name="insert" type="submit" class="btn btn-primary">寄信</button>
+				</div>
 			</form>
+
+
+
+
 		</div>
 
 	</section>
@@ -92,7 +112,8 @@
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
 	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
 
 

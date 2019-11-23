@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IDiscussionDao;
 import com.eeit109team6.finalproject.model.BoardType;
 import com.eeit109team6.finalproject.model.Discussion;
-import com.eeit109team6.finalproject.model.Product;
 
 @Repository
 public class DiscussionDaoImpl implements IDiscussionDao {
