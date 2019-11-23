@@ -12,18 +12,18 @@ import org.springframework.stereotype.Repository;
 import com.eeit109team6.finalproject.dao.IHomeMovieDao;
 import com.eeit109team6.finalproject.model.HomeMovie;
 import com.eeit109team6.finalproject.model.Movie;
-import com.eeit109team6.finalproject.model.MovieInfo;
+
 
 
 @Repository
 public class HomeMovieDaoImpl implements IHomeMovieDao {
 
-	public HomeMovieDaoImpl() {
-	}
+//	public HomeMovieDaoImpl() {
+//	}
 
 	SessionFactory factory;
 
-	@Override
+//	@Override
 	@Autowired
 	public void setSession(SessionFactory factory) {
 		this.factory = factory;
@@ -49,7 +49,6 @@ public class HomeMovieDaoImpl implements IHomeMovieDao {
 		Movie movie = session.get(Movie.class, deleteMovieId);
 		System.out.println("session.delete(movie)的deleteMovieId ================================= "+deleteMovieId);
 		session.delete(movie);
-
 	}
 
 	@Override

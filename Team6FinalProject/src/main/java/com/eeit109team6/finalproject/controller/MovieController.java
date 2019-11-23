@@ -313,14 +313,12 @@ public class MovieController {
 
 	// 後台Click --> 影片管理(首頁管理) Clicked --> "/movieHome" --> moviehome.jsp
 	@RequestMapping("/movieHome")
-	public String homeSelectAllMovie(Model model, HttpSession session, Movie movie) {
+	public String homeSelectAllMovie(Model model, HttpSession session) {
 
-		System.out.println("---------------------------------  (\"/movieHome\")         影片管理(首頁管理)moviehome.jsp------------------------------");
-		Member member = (Member)session.getAttribute("mem");
-		//		List<Movie> list = service.getMovieInfoByOwnerID(member.getMember_id());
-		movie.getMovieId();
+		System.out.println("-------------------------------------------  後台Click --> 影片管理(首頁管理) Clicked --> \"/movieHome\" --> moviehome.jsp-----------------------------------------");
+		
+		//		Member member = (Member)session.getAttribute("mem");
 		List<Movie> list = homeMovieService.findAll();
-		//List<MovieInfo> list = service.getMovies();
 		System.out.println("list.size() ===================================== "+list.size());
 		model.addAttribute("homeMovies", list);
 
@@ -330,44 +328,48 @@ public class MovieController {
 		//		System.out.println("member.getUsername()========================================"+member.getUsername());
 		//		System.out.println("member.getPassword()========================================"+member.getPassword());
 		//		System.out.println("member.getMemberlevel();===================================="+member.getMemberlevel());
-
+		//		測試用    END
 		return "movieHome";
 
 	}
 
 	// moviehome.jsp --> 新增影片 Clicked --> "/movieHome/addMovie" --> "redirect:/moviehome" 
 	@RequestMapping(value = "/movieHome/addMovie", method = RequestMethod.POST)
-	public String homeAddMovie( @RequestParam("video_file") MultipartFile video_file,String videoname, HttpSession session  ) {
+	public String homeAddMovie( @RequestParam("video_file") MultipartFile video_file,String videoname, HttpSession session,Movie movie  ) {
 
-		System.out.println("-----------------------------(\"/movieHome/addMovie\")     homeAddMovie----------------------------");
+		System.out.println("------------------------------------ moviehome.jsp --> 新增影片 Clicked --> \"/movieHome/addMovie\" --> \"redirect:/moviehome\" ------------------------------------");
+		
 		Member mem = (Member) session.getAttribute("mem");
-
-		Movie movie = new Movie();
-		//		videoname = movie.getMovieId()+video_file.getOriginalFilename();
-		movie.setMovieName(video_file.getOriginalFilename());
+		movie.setMovieName(video_file.getOriginalFilename());//video_file.getOriginalFilename() --> 取檔案名稱  xxx.mp4
+		System.out.println("movie.getMovieId() =============================== "+movie.getMovieId());
+		System.out.println("movie.getMovieName() ============================== "+movie.getMovieName());
 		homeMovieService.addMovie(movie);
+		
 		movie = homeMovieService.moviefindById(movie.getMovieId());
-		movie.setMovieName(movie.getMovieId()+video_file.getOriginalFilename());
+		movie.setMovieName(movie.getMovieId()+video_file.getOriginalFilename());//movie.getMovieId()+video_file.getOriginalFilename()  --> 取 movieId+xxx.mp4 重新儲存 進SQL
 		homeMovieService.addMovie(movie);
 
 
 
 		//新版影片上傳
+		//第一層Folder判定 memberMovies
 		Path p = Paths.get("C:/memberMovies"); // 路徑設定
 
 		if (Files.exists(p)) {
+			
 			System.out.print("資料夾已存在");
-		}
-		if (!Files.exists(p)) {
+		}else if (!Files.exists(p)) {
 			/* 不存在的話,直接建立資料夾 */
 			try {
-				Files.createDirectory(p);
+				Files.createDirectory(p); //建立資料夾 memberMovies folder
 				System.out.print("已成功建立資料夾");
 			} catch (IOException e) {
 				System.out.println("發生錯誤");
 			}
 		}
-
+		//第一層Folder判定 memberMovies  END
+		
+		//第二層Folder判定 Account+ID
 		p = Paths.get("C:/memberMovies/" + mem.getAccount() + mem.getMember_id()); // 路徑設定
 
 		if (Files.exists(p)) {
@@ -382,18 +384,20 @@ public class MovieController {
 				System.out.println("發生錯誤");
 			}
 		}
-
+		//第二層Folder判定 Account+ID END
+		
+		//Video 檔案 匯入 名稱改寫
 		String path = "C:/memberMovies/" + mem.getAccount() + mem.getMember_id();
 
 		if (!video_file.isEmpty()) {
 			try {
 				byte[] bytes = video_file.getBytes();
 
-				File dir = new File(path, movie.getMovieId() + video_file.getOriginalFilename());
+				File dir = new File(path, movie.getMovieId() + video_file.getOriginalFilename());//建立儲存路徑path與檔案名稱 movieId+xxx.mp4
 
-				//					File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+				//File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir));
-				stream.write(bytes);
+				stream.write(bytes);//按stream 設定的 dir 存入 檔案 bytes
 				stream.close();
 
 				return "redirect:/movieHome";
@@ -403,26 +407,23 @@ public class MovieController {
 		} else {
 			return "redirect:/movieHome";
 		}
-
+		//Video 檔案 匯入 名稱改寫 END
 	}
 
 	// moviehome.jsp --> update Clicked --> "/movieHome/updateMovie" -->  "redirect:/moviehome";
 	@RequestMapping("/movieHome/updateMovie")
 	public String homeSelectOneMovie(Model model, HttpSession session, Movie movie,
-			@RequestParam("movieId") Integer movieId,
-			@RequestParam("originMovieName") String originMovieName,
+			@RequestParam("updateMovieId") Integer updateMovieId,
+			@RequestParam("updateMovieName") String originMovieName,
 			@RequestParam("video_file") MultipartFile video_file) {
-		Member mem = (Member) session.getAttribute("mem");
 		System.out.println("-------------------------    \"/movieHome/updateMovie\"        homeSelectOneMovie   -----------------------------------");
-		System.out.println("movieId =========================== "+movieId);
-		System.out.println("originMovieName =============================== "+originMovieName);
-		System.out.println("video_file ===================================== "+video_file);
-		System.out.println("video_file.getOriginalFilename() ====================================== "+video_file.getOriginalFilename());
-		movie = homeMovieService.moviefindById(movieId);
-		System.out.println("movie.getMovieId() ==================================== "+movie.getMovieId());
-		System.out.println("movie.getMovieName() ======================================== "+movie.getMovieName());
 
-		//					判斷空值是下列哪一種情況
+
+		Member mem = (Member) session.getAttribute("mem");
+		movie = homeMovieService.moviefindById(updateMovieId);
+		
+
+		//		判斷空值是下列哪一種情況
 		//		if(video_file.getOriginalFilename() == null) {
 		//			System.out.println("video_file.getOriginalFilename() == null");
 		//		}else if (video_file.getOriginalFilename() == "" ) {
@@ -434,15 +435,16 @@ public class MovieController {
 		//		}
 		//		判斷空值是下列哪一種情況  END
 
+		// 判斷是否沒選檔(空值)，如果有選就做修改
 		if (video_file.getOriginalFilename() == "" ) {
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!video_file.getOriginalFilename() == \"\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! video_file.getOriginalFilename() == \"\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return "redirect:/movieHome";
 		}else {
-			movie.setMovieName(video_file.getOriginalFilename());
+			movie.setMovieName(movie.getMovieId() + video_file.getOriginalFilename());
 			homeMovieService.updateMovieById(movie);
-			movie = homeMovieService.moviefindById(movieId);
-			System.out.println("movie.getMovieId() ============================ "+movie.getMovieId());
-			System.out.println("movie.getMovieName() ============================== "+movie.getMovieName());
+			
+			
+			//檔案上傳
 			Path p = Paths.get("C:/memberMovies"); // 路徑設定
 
 			if (Files.exists(p)) {
@@ -473,7 +475,7 @@ public class MovieController {
 			}
 
 			String path = "C:/memberMovies/" + mem.getAccount() + mem.getMember_id();
-			
+
 			if (!video_file.isEmpty()) {
 				try {
 					byte[] bytes = video_file.getBytes();
@@ -492,9 +494,9 @@ public class MovieController {
 			} else {
 				return "redirect:/movieHome";
 			}
-			
+
 		}
-		
+
 	}
 
 
@@ -502,12 +504,15 @@ public class MovieController {
 	// moviehome.jsp --> delete Clicked --> "/movieHome/deleteMovie" -->  "redirect:/moviehome";
 	@RequestMapping(value = "/movieHome/deleteMovie")
 	public String homeDeleteMovie(Model model, HttpSession session, Movie movie,
-			@RequestParam("deleteMovieId") Integer deleteMovieId) {
+			@RequestParam("deleteMovieId") Integer deleteMovieId,
+			@RequestParam("deleteMovieIdCheck")Integer deleteMovieIdCheck) {
 		System.out.println("----------------@RequestMapping(\"/movieHome/deleteMovie\")     homeDeleteMovie---------------");
+
 		System.out.println("deleteMovieId ====================================================== "+deleteMovieId);
-//		System.out.println("movie.getMovieId() ============================================= "+movie.getMovieId());
-//		System.out.println("movie.getMovieName() ============================================ "+movie.getMovieName());
-		homeMovieService.deleteMovieById(11);
+		System.out.println("deleteMovieIdCheck ====================================================== "+deleteMovieIdCheck);
+		//		System.out.println("movie.getMovieId() ============================================= "+movie.getMovieId());
+		//		System.out.println("movie.getMovieName() ============================================ "+movie.getMovieName());
+		homeMovieService.deleteMovieById(deleteMovieIdCheck);
 		return "redirect:/movieHome";
 	}
 

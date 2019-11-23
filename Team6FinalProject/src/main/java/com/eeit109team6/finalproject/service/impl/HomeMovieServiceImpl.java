@@ -33,40 +33,47 @@ public class HomeMovieServiceImpl implements IHomeMovieService {
 	}
 
 	@Override
+	@Transactional
 	public Integer addMovie(Movie movie) {
 		// TODO Auto-generated method stub
 		return dao.addMovie(movie);
 	}
 
 	@Override
+	@Transactional
 	public void deleteMovieById(Integer deleteMovieId) {
 	 
 		dao.deleteMovieById(deleteMovieId);
 	}
 
 	@Override
+	@Transactional
 	public void updateMovieById(Movie movie) {
 		dao.updateMovieById(movie);
 		
 	}
 
 	@Override
+	@Transactional
 	public List<Movie> findAll() {
 		return dao.findAll();
 	}
 
 	@Override
+	@Transactional
 	public Movie getMovieInfoByMovieID(Integer id) {
 		return dao.getMovieInfoByMovieID(id);
 	}
 
 	@Override
+	@Transactional
 	public void updateMovieid(HomeMovie homeMovie) {
 		dao.updateMovieid(homeMovie);
 		
 	}
 
 	@Override
+	@Transactional
 	public Movie moviefindById(Integer movieId) {
 		return dao.moviefindById(movieId);
 	}

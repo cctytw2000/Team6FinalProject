@@ -22,11 +22,15 @@ function movieHomeDelete(movieId) {
 //	document.getElementById("deleteMovieId").value="movieId";
 	var deleteMovieId = movieId;
 //	alert (deleteMovieId);
-	document.getElementById("deleteMovieId").value=deleteMovieId;
+	document.getElementById("deleteMovieIdCheck").value=deleteMovieId;
 //	return movieId;
 }
 
 function movieHomeUpdate(movieId,movieName) {
-	document.getElementById("deleteMovieId").value="movieId";
-	document.getElementById("deleteMovieName").value="movieName";
+	var updateMovieId = movieId;
+	var updateMovieName = movieName;
+	alert (updateMovieId);
+	alert (updateMovieName);
+	document.getElementById("updateMovieId").value=updateMovieId;
+	document.getElementById("updateMovieName").value=updateMovieName;
 }

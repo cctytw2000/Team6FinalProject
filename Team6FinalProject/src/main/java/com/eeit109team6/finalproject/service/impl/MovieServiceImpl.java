@@ -20,7 +20,7 @@ public class MovieServiceImpl implements IMovieService {
 		this.dao = dao;
 	}
 
-	@Transactional
+	@Transactional // 用意為 begin tran 與 commit tran 的意思
 	@Override
 	public Integer addMovie(MovieInfo movieinfo) {
 		return dao.addMovie(movieinfo);

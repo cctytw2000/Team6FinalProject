@@ -17,7 +17,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 <%-- <script src="${pageContext.request.contextPath}/JS/memberMovieIndex.js"></script> --%>
-<script src="${pageContext.request.contextPath}/JS/movieHomeUpdateAndDelete.js"></script>
+<script
+	src="${pageContext.request.contextPath}/JS/movieHomeUpdateAndDelete.js"></script>
 <title>title</title>
 
 </head>
@@ -36,7 +37,8 @@
 
 	<section style="height: 100%" class="recent-game-section spad set-bg">
 		<!-- 新增影片 Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">新增影片</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#exampleModalCenter">新增影片</button>
 
 		<!-- 新增影片 Modal  #exampleModalCenter -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
@@ -45,7 +47,8 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">Modal
+							title</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -100,7 +103,7 @@
 									<%-- 										要改 <c:url> 的 value  --%>
 
 									<source
-										src="<c:url value='/memberMovies/${sessionScope.mem.account}${sessionScope.mem.member_id}/${homeMovies.movieId}${homeMovies.movieName}'/>"
+										src="<c:url value='/memberMovies/${sessionScope.mem.account}${sessionScope.mem.member_id}/${homeMovies.movieName}'/>"
 										type="video/mp4">
 
 								</video>
@@ -119,13 +122,14 @@
 								<!-- 								<a -->
 								<%-- 									href="movieHome/viewUpdateMovie?movie_ID=${allmovies.movie_ID }" --%>
 								<!-- 									class="commentUpdate">Update</a> -->
-								<!-- href="moviepersonal/updateMovie" -->
+								<!-- href="moviepersonal/updateMovie" updateModalCenter -->
 
 
 								<!-- Update Button trigger modal -->
 								<button type="button" class="btn btn-primary"
 									style="margin-right: 50px;" data-toggle="modal"
-									data-target="#updateModalCenter">Update</button>
+									data-target="#updateModalCenter"
+									onclick="movieHomeUpdate('${homeMovies.movieId}','${homeMovies.movieName}')">Update</button>
 
 								<!-- Update Modal  #UpdateModalCenter -->
 								<div class="modal fade" id="updateModalCenter" tabindex="-1"
@@ -134,8 +138,7 @@
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Modal
-													title</h5>
+												<h5 class="modal-title" id="exampleModalLongTitle">Update Modal</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -143,28 +146,23 @@
 											</div>
 											<div class="modal-body">
 
-
-												<!-- 要改  action-->
 												<form style="background-color: white" method="POST"
 													action="${pageContext.request.contextPath}/movieHome/updateMovie"
 													enctype="multipart/form-data">
 													<p>
-														<!-- 	確認修改的影片與Model功能 -->
-														<input type="hidden" name="movieId"
-															value="${homeMovies.movieId}" /> <input type="hidden"
-															name="originMovieName" value="${homeMovies.movieName}" />
+														<!-- 	確認要修改的影片與Model功能 -->
+														<input type="hidden" name="updateMovieId" value="" id="updateMovieId" />
+														<input type="hidden" name="updateMovieName" value="" id="updateMovieName" />
+														<input type="hidden" name="originMovieId" value="${homeMovies.movieId}"  />
 													<p>
 														選則檔案: <input type="file" name="video_file"><br />
 													<p>
-														<input type="submit" value="送出"><br />
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">取消</button>
+														<button type="submit" class="btn btn-primary">確認修改</button>
+													</div>
 												</form>
-
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
 											</div>
 										</div>
 									</div>
@@ -180,13 +178,13 @@
 								<%-- 									href="moviepersonal/deleteMovie?movie_ID=${allmovies.movie_ID }" --%>
 								<!-- 									class="commentDelete">Delete</a> -->
 								<!-- Delete Button trigger modal -->
-									<!-- 	檢查movieHomeUpdateAndDelete取值 -->
-														<input type="hidden" name="movieId" value="${homeMovies.movieId}" id="movieId" /> 
-														<input type="hidden" name="deleteMovieName" value="${homeMovies.movieName}" />
+								<!-- 	檢查movieHomeUpdateAndDelete取值 -->
+
 								<button type="button" class="btn btn-primary"
 									style="margin-right: 50px;" data-toggle="modal"
-									data-target="#deleteModalCenter" onclick="movieHomeDelete('${homeMovies.movieId}')">Delete</button>
-													
+									data-target="#deleteModalCenter"
+									onclick="movieHomeDelete('${homeMovies.movieId}')">Delete</button>
+
 								<!-- Delete  Modal  #deleteModalCenter -->
 								<div class="modal fade" id="deleteModalCenter" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -194,8 +192,8 @@
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Modal
-													title</h5>
+												<h5 class="modal-title" id="exampleModalLongTitle">Delete Modal
+													</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -207,19 +205,18 @@
 													action="${pageContext.request.contextPath}/movieHome/deleteMovie"
 													enctype="multipart/form-data">
 													<p>
-														<!-- 	確認刪除的影片與Model功能 -->
-														<input type="hidden" name="deleteMovieId" value="" id="deleteMovieId"/> 
-														<input type="hidden" name="deleteMovieName" value="" id="deleteMovieName"/>
+														<!-- 	確認刪除的影片與Model功能  -->
+														<input type="hidden" name="deleteMovieIdCheck" value="" id="deleteMovieIdCheck"/> 
+														<input type="hidden" name="deleteMovieId" value="${homeMovies.movieId}" />
+														<%-- <input type="hidden" name="deleteMovieName" value="${homeMovies.movieName}" /> --%>
 													<p>
-														<input type="submit" value="確認刪除"><br />
+														<!-- <input class="btn btn-secondary" type="submit" value="確認刪除"><br /> -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">取消</button>
+														<button type="submit" class="btn btn-primary">確認刪除</button>
+													</div>
 												</form>
-
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
 											</div>
 										</div>
 									</div>
