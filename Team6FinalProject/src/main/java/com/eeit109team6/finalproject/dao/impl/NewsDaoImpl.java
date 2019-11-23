@@ -158,6 +158,29 @@ public class NewsDaoImpl implements INewsDao {
 		return list;
 	}
 
+	@Override
+	public List<Message> getAllMessages() {
+		String hql = "FROM Message";
+		List<Message> list = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
+	@Override
+	public void editMessage(Integer messageId, String memo) {
+		String hql = "update Message set memo = :memo where messageId = :messageId";
+		Session session = sessionFactory.getCurrentSession();
+		session.createQuery(hql).setParameter("memo", memo).setParameter("messageId", messageId).executeUpdate();		
+	}
+
+	@Override
+	public Message getMessageById(Integer messageId) {
+		Session session = sessionFactory.getCurrentSession();
+		Message message = session.get(Message.class, messageId);
+		return message;
+	}
+
 //====================================================未完成===================================================	
 	
 

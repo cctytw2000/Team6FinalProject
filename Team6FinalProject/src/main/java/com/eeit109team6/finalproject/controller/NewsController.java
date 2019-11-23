@@ -279,7 +279,7 @@ public class NewsController {
 		Date d = new Date();
 		String sd = sdFormat.format(d);
 		m.setPublicationDate(sd);
-		;
+
 		m.setIpAddress(request.getRemoteAddr());// 取得發文位置
 		News n = newsService.getNewsById(newsId);
 		m.setNews(n);
@@ -294,7 +294,7 @@ public class NewsController {
 		messageMap.put("userName", m.getMember().getUsername());
 		messageMap.put("memo", m.getMemo());
 		messageMap.put("publicationDate", m.getPublicationDate());
-
+		messageMap.put("publicationDate", m.getPublicationDate());
 //			System.out.println(messageMap);
 
 		return messageMap;
@@ -424,13 +424,51 @@ public class NewsController {
 		newsService.updateNewsById(news);
 		return "redirect:/updateNews?newsId=" + newsId;
 	}
-	
+
 	@RequestMapping(value = "/searchByKeyWord", method = RequestMethod.POST)
 	public void searchByKeyWord(@RequestParam("keyWord") String keyWord, Model model) {
 		model.addAttribute("news", newsService.getNewsByKeyWord(keyWord));
 	}
 
-//========================================未完成========================================
+	@RequestMapping(value = "/hotNewsTop5.json")
+	public String hotNewsTop5(Model model) {
+		Map<String, Integer> data = new LinkedHashMap();
+
+		List<News> newsesList = newsService.getAllNewsByViews();
+		for (int i = newsesList.size() - 1; i >= 0; i--) {
+			if (newsesList.get(i).getIsVisable() == false) {
+				newsesList.remove(i);
+			}
+		}
+		for (int i = 0; i <= 4; i++) {
+			data.put(newsesList.get(i).getTitle(), newsesList.get(i).getViews());
+		}
+
+		ArrayList hotNewsTop5 = new ArrayList();
+		hotNewsTop5.add(data);
+		model.addAttribute("hotNewsTop5", hotNewsTop5);
+
+		return "newsBack";
+	}
+
+	// 顯示評論
+	@RequestMapping(value = "/showMemoForNews.json")
+	public String showMemoForNews(Model model) {
+		ArrayList<News> news = (ArrayList<News>) newsService.getAllNewsByTime();
+		model.addAttribute("newsList", news);
+		return "newsDetail";
+	}
+
+	// 修改評論
+	@RequestMapping(value = "/editMessage2")
+	public String editMessage2(@RequestParam("messageId") Integer messageId, @RequestParam("memo") String memo) {
+		System.out.println("messageId=" + messageId);
+		System.out.println("memo=" + memo);
+		newsService.editMessage(messageId, memo);
+		Message m = newsService.getMessageById(messageId);
+		Integer newsId = m.getNews().getNewsId();
+		return "redirect:/newsDetail?newsId=" + newsId;
+	}
 
 	// 查詢所有後臺消息類別--> 消息後台 newsBack.jsp
 	@RequestMapping("/newsBack")
@@ -523,29 +561,9 @@ public class NewsController {
 		News news = newsService.getNewsById(newsId);
 		model.addAttribute("news", news);
 
-		List<Message> messagesList = newsService.getMessagesByNewsId(newsId);
-//		for(Message m:messages) {
-//			System.out.println("m="+m.getMember().getMember_id());
-//		}
-		model.addAttribute("messagesList", messagesList);
-
 		return "newsDetail";
 	}
-	
-	@RequestMapping(value = "/hotNewsTop5.json")
-	public String hotNewsTop5( Model model) {
-		Map<String, Integer> data = new LinkedHashMap();
-		
-		List<News> newsesList = newsService.getAllNewsByViews();
-		for(int i=0 ; i<=4 ;i++) {
-			data.put(newsesList.get(i).getTitle(),newsesList.get(i).getViews());
-		}
-		
-		ArrayList hotNewsTop5 = new ArrayList();
-		hotNewsTop5.add(data);
-		model.addAttribute("hotNewsTop5",hotNewsTop5);
-		
-		return "newsBack";
-	}
+
+//========================================未完成========================================
 
 }

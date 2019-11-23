@@ -127,6 +127,24 @@ public class NewsServiceImpl implements INewsService{
 		return dao.getMessagesByNewsId(newsId);
 	}
 
+	@Transactional
+	@Override
+	public List<Message> getAllMessages() {
+		return dao.getAllMessages();
+	}
+
+	@Transactional
+	@Override
+	public void editMessage(Integer messageId, String memo) {
+		dao.editMessage(messageId, memo);
+	}
+
+	@Transactional
+	@Override
+	public Message getMessageById(Integer messageId) {
+		return dao.getMessageById(messageId);
+	}
+
 //====================================================未完成====================================================
 	
 

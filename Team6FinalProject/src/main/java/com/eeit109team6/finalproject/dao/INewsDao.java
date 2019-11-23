@@ -27,6 +27,9 @@ public interface INewsDao {
 //====================================================消息評論=================================================
 	void addMemo(Message message); //新增消息評論
 	List<Message> getMessagesByNewsId(Integer newsId); //依消息id取得評論
+	List<Message> getAllMessages();
+	void editMessage(Integer messageId, String memo);
+	Message getMessageById(Integer messageId);
 //====================================================未完成===================================================		
 	
 }

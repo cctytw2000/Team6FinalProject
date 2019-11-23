@@ -73,7 +73,7 @@
 				<div class="form-group" style="margin-top: 20px">
 					<div>
 						<input type="text" class="form-control input-sm" name="keyWord" id="keyWord"
-							placeholder="請輸入關鍵字..." onkeydown="searchByKeyWord(event)" >
+							placeholder="請輸入消息標題關鍵字..." onkeydown="searchByKeyWord(event)" >
 						<p>
 <!-- 						<div> -->
 <!-- 						 	<button class="btn btn-success" onclick="searchByKeyWord()">搜尋</button> -->

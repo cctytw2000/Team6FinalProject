@@ -97,22 +97,15 @@
 		<hr style="border-bottom: 2px dashed #F8F8FF">
 		
 <!-- 		顯示評論 -->
-		<c:forEach var="messages" items="${messagesList }" varStatus="i">
-			<div id="memoForNews" class="media border p-3" style="width:600px;">
-				<div class="media-body">
-					<h4 style="color: #BBFFEE">${messages.member.username}
-						<small style="margin-left:5%"><i>Posted on ${messages.publicationDate.replace(".0","")}</i></small>
-					</h4>
-					<p id="${messages.messageId }"style="color:#FFFFBB;margin-top:10px">${messages.memo }</p>
-				</div>
+			<div id="memoForNews">
 			</div>
-		</c:forEach>
 		
 <!-- 		輸入評論 -->
 		<div class="form-group" style="margin:20px" id="add">
 			<div class="input-group " style="width: 500px;">
 				<input type="hidden" id="newsId" name="newsId"
-					value="${news.newsId }"> <input type="hidden"
+					value="${news.newsId }"> 
+				<input type="hidden"
 					id="member_id" value="${sessionScope.mem.member_id }">
 				<textarea class="form-control" rows="1" id="addMemo" name="memo"
 					style="resize: none;" placeholder="請輸入評論..."></textarea>
