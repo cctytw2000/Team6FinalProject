@@ -131,7 +131,7 @@ public class MemberController {
 		System.out.println("@RequestMapping(value = \"/moviepersonal/addMovie\")" + movieInfo);
 
 		Integer movieId = movieservice.addMovie(movieInfo);
-		//新版影片上傳
+		// 新版影片上傳
 		Path p = Paths.get("C:/memberMovies"); // 路徑設定
 
 		if (Files.exists(p)) {
@@ -170,7 +170,8 @@ public class MemberController {
 
 				File dir = new File(path, movieId + video_file.getOriginalFilename());
 
-				//					File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+				// File serverFile = new File(dir.getAbsolutePath() + File.separator +
+				// videoname);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir));
 				stream.write(bytes);
 				stream.close();
@@ -190,7 +191,8 @@ public class MemberController {
 		Member mem = (Member) session.getAttribute("mem");
 
 		ArrayList<MovieInfo> list = (ArrayList<MovieInfo>) movieservice.getMovieInfoByID(mem.getMember_id());
-		//		List<MovieInfo> list = movieservice.getMovieInfoByOwnerID(mem.getMember_id());
+		// List<MovieInfo> list =
+		// movieservice.getMovieInfoByOwnerID(mem.getMember_id());
 		model.addAttribute("movies", list);
 		return "memberMovieIndex";
 
@@ -206,19 +208,20 @@ public class MemberController {
 
 	}
 
-	//===========================會員一般註冊====================================
+	// ===========================會員一般註冊====================================
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
 	public String registerMember(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("username") String username, @RequestParam("memberimg") MultipartFile memberimg, Model model,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
-		//		String[] suppressedFields = result.getSuppressedFields();
+		// String[] suppressedFields = result.getSuppressedFields();
 
 		Member mem = new Member();
-		//		if (suppressedFields.length > 0) {
-		//			throw new RuntimeException(
-		//					"嘗試輸入錯誤的欄位:" + org.springframework.util.StringUtils.arrayToCommaDelimitedString(suppressedFields));
-		//		}
+		// if (suppressedFields.length > 0) {
+		// throw new RuntimeException(
+		// "嘗試輸入錯誤的欄位:" +
+		// org.springframework.util.StringUtils.arrayToCommaDelimitedString(suppressedFields));
+		// }
 
 		// ==============設定創建帳號時間=======================
 		Calendar rightNow = Calendar.getInstance();
@@ -234,7 +237,7 @@ public class MemberController {
 		// ==============/密碼加密=======================
 
 		MemberLevel level = IMemberLevelService.findById(2);
-		//		System.out.println("level==" + level.getLevelName());
+		// System.out.println("level==" + level.getLevelName());
 
 		// ==============設定token====================
 		KeyGenerator keyGen;
@@ -341,7 +344,7 @@ public class MemberController {
 			redirectAttributes.addFlashAttribute("msg", "有東西有問題喔");
 			return "redirect:/jump";
 		}
-		//		return "redirect:/jump";
+		// return "redirect:/jump";
 	}
 
 	// ===========================會員第三方登入====================================
@@ -374,18 +377,18 @@ public class MemberController {
 		lilo.setType("Login");
 		lilo.setClientIP(request.getRemoteAddr());
 		lilo.setAccountType(type);
-		//		System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
+		// System.out.println("member.getMemberlevel().getLevelName()"+member.getMemberlevel().getLevelName());
 		if (member != null) {
 			System.out.println("第三方登入");
 			lilo.setIsSuccess(1);
 			LiLoInforService.add(lilo);
-			//			session.setAttribute("username", member.getUsername());
-			//			session.setAttribute("token", member.getToken());
-			//			session.setAttribute("account", member.getAccount());
-			//			session.setAttribute("member_id", member.getMember_id());
+			// session.setAttribute("username", member.getUsername());
+			// session.setAttribute("token", member.getToken());
+			// session.setAttribute("account", member.getAccount());
+			// session.setAttribute("member_id", member.getMember_id());
 			session.setAttribute("mem", member);
-			//			session.setAttribute("type", member.getType());
-			//			session.setAttribute("level", member.getMemberlevel().getLevelName());
+			// session.setAttribute("type", member.getType());
+			// session.setAttribute("level", member.getMemberlevel().getLevelName());
 			return true;
 		} else {
 
@@ -532,7 +535,8 @@ public class MemberController {
 			Member member = MemService.login(mem);
 
 			LiLoInfo lilo = new LiLoInfo();
-			//			System.out.println("LiLo============================" + member.getLiLoInfo().size());
+			// System.out.println("LiLo============================" +
+			// member.getLiLoInfo().size());
 			// ==============設定登入帳號時間=======================
 			Calendar rightNow = Calendar.getInstance();
 			String logintime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
@@ -549,14 +553,14 @@ public class MemberController {
 
 			if (member != null) {
 				LiLoInforService.add(lilo);
-				//				session.setAttribute("username", member.getUsername());
-				//				session.setAttribute("token", member.getToken());
-				//				session.setAttribute("account", member.getAccount());
-				//				session.setAttribute("member_id", member.getMember_id());
+				// session.setAttribute("username", member.getUsername());
+				// session.setAttribute("token", member.getToken());
+				// session.setAttribute("account", member.getAccount());
+				// session.setAttribute("member_id", member.getMember_id());
 				session.setAttribute("mem", member);
-				//				session.setAttribute("type", member.getType());
+				// session.setAttribute("type", member.getType());
 
-				//				session.setAttribute("level", member.getMemberlevel().getLevelName());
+				// session.setAttribute("level", member.getMemberlevel().getLevelName());
 				redirectAttributes.addFlashAttribute("msg", "歡迎光臨Gamily");
 				return "redirect:/jump";
 			} else {
@@ -590,7 +594,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/sendChangePassWordPage", method = RequestMethod.POST)
 	public String sendChangePassWord(@RequestParam("account") String account, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		//		System.out.println("account=" + account);
+		// System.out.println("account=" + account);
 		String changeType, type, msh_;
 		if (session.getAttribute("mem") == null) {
 			changeType = "忘記密碼";
@@ -676,10 +680,10 @@ public class MemberController {
 						+ mem.getAccount() + "&token=" + mem.getToken() + "&type=" + type;
 
 				message.setSubject(changeType);
-				//				message.setText();
-				//				changeType
+				// message.setText();
+				// changeType
 
-				//				<a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+				// <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
 				message.setContent("<h2>please click this url to change your password</h2>\n" + "<a href='" + url + "'>"
 						+ msh_ + "</a>", "text/html");
 				Transport transport = session_.getTransport("smtp");
@@ -697,10 +701,10 @@ public class MemberController {
 			}
 		} else {
 			redirectAttributes.addFlashAttribute("msg", "沒有此帳號，或者您註冊的帳號為FB、Google帳號");
-
+			session.removeAttribute("mem");
 			return "redirect:/jump";
 		}
-		//		return "redirect:/jump";
+		// return "redirect:/jump";
 	}
 
 	// ===========================會員登出===================================
@@ -713,7 +717,8 @@ public class MemberController {
 		Member member = MemService.findById(member_);
 
 		LiLoInfo lilo = new LiLoInfo();
-		//		System.out.println("LiLo============================" + member.getLiLoInfo().size());
+		// System.out.println("LiLo============================" +
+		// member.getLiLoInfo().size());
 		// ==============設定登出帳號時間=======================
 		Calendar rightNow = Calendar.getInstance();
 		String logouttime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
@@ -730,12 +735,12 @@ public class MemberController {
 
 		LiLoInforService.add(lilo);
 
-		//		session.removeAttribute("username");
-		//		session.removeAttribute("token");
-		//		session.removeAttribute("account");
-		//		session.removeAttribute("member_id");
+		// session.removeAttribute("username");
+		// session.removeAttribute("token");
+		// session.removeAttribute("account");
+		// session.removeAttribute("member_id");
 		session.removeAttribute("mem");
-		//		session.removeAttribute("type");
+		// session.removeAttribute("type");
 		redirectAttributes.addFlashAttribute("msg", "謝謝光臨Gamily");
 		return "redirect:/jump";
 
@@ -764,9 +769,9 @@ public class MemberController {
 			Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 		if ("Null".equals(oldPassWord)) {
 			Member mem = new Member();
-			//			System.out.println("account:" + account);
-			//			System.out.println("token:" + token);
-			//			System.out.println("newPassWord:" + newPassWord);
+			// System.out.println("account:" + account);
+			// System.out.println("token:" + token);
+			// System.out.println("newPassWord:" + newPassWord);
 
 			// ==============密碼加密=======================
 
@@ -781,21 +786,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem);
 			if (isSuccess) {
-				//				session.removeAttribute("username");
-				//				session.removeAttribute("token");
-				//				session.removeAttribute("account");
-				//				session.removeAttribute("member_id");
+				// session.removeAttribute("username");
+				// session.removeAttribute("token");
+				// session.removeAttribute("account");
+				// session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				//				session.removeAttribute("type");
+				// session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
-				//				session.removeAttribute("username");
-				//				session.removeAttribute("token");
-				//				session.removeAttribute("account");
-				//				session.removeAttribute("member_id");
+				// session.removeAttribute("username");
+				// session.removeAttribute("token");
+				// session.removeAttribute("account");
+				// session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				//				session.removeAttribute("type");
+				// session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
@@ -824,21 +829,21 @@ public class MemberController {
 			mem.setPassword(password_AES);
 			Boolean isSuccess = MemService.changePwd(mem, new_password_AES);
 			if (isSuccess) {
-				//				session.removeAttribute("username");
-				//				session.removeAttribute("token");
-				//				session.removeAttribute("account");
-				//				session.removeAttribute("member_id");
+				// session.removeAttribute("username");
+				// session.removeAttribute("token");
+				// session.removeAttribute("account");
+				// session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				//				session.removeAttribute("type");
+				// session.removeAttribute("type");
 				redirectAttributes.addFlashAttribute("msg", "修改成功\n請依照新密碼登入");
 				return "redirect:/jump";
 			} else {
-				//				session.removeAttribute("username");
-				//				session.removeAttribute("token");
-				//				session.removeAttribute("account");
-				//				session.removeAttribute("member_id");
+				// session.removeAttribute("username");
+				// session.removeAttribute("token");
+				// session.removeAttribute("account");
+				// session.removeAttribute("member_id");
 				session.removeAttribute("mem");
-				//				session.removeAttribute("type");
+				// session.removeAttribute("type");
 
 				redirectAttributes.addFlashAttribute("msg", "資訊錯誤請重新輸入");
 				return "redirect:/jump";
@@ -970,13 +975,13 @@ public class MemberController {
 		System.out.println("File name  = " + memberimg.getOriginalFilename());
 		MemService.changeHeadshot(createtime + memberimg.getOriginalFilename(), memberId);
 		Member memberForSession = MemService.findById(m);
-		//		session.removeAttribute("username");
-		//		session.removeAttribute("token");
-		//		session.removeAttribute("account");
-		//		session.removeAttribute("member_id");
+		// session.removeAttribute("username");
+		// session.removeAttribute("token");
+		// session.removeAttribute("account");
+		// session.removeAttribute("member_id");
 		session.setAttribute("mem", memberForSession);
-		//		session.removeAttribute("type");
-		//		redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
+		// session.removeAttribute("type");
+		// redirectAttributes.addFlashAttribute("msg", "大頭貼已更新");
 		return "redirect:/";
 
 	}
