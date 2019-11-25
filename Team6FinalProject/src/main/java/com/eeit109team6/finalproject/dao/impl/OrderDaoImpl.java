@@ -114,4 +114,14 @@ public class OrderDaoImpl implements IOrderDao {
 		Query query = factory.getCurrentSession().createQuery(hql);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Object[]> memberSalescount() {
+		String hql = "SELECT member_id as 'Member' , SUM(total) as 'Sales' "
+				+ "FROM Orders WHERE is_remove = 0 and state = 4 " + "GROUP BY member_id "
+				+ "ORDER BY member_id asc";
+		Query query = factory.getCurrentSession().createSQLQuery(hql);
+		return query.getResultList();
+	}
+
 }

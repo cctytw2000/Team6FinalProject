@@ -34,11 +34,13 @@
     min-height: calc(100vh - 20px);
   }
 }
+
 </style>
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/ordersBack.js"></script>
+<script src="${pageContext.request.contextPath}/JS/ordersBack.js"></script>
+<script src="${pageContext.request.contextPath}/JS/ordersBack1.js"></script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -47,7 +49,9 @@
 	<h1 align="center">訂單管理</h1>
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#showorders">訂單總覽</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#ordershow">訂單查詢</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#orderchart">會員訂單統計</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#memberSaleschart">會員消費統計</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#dailySalesAmount">每日銷售金額</a></li>
 	</ul>
 	<div class="tab-content">
@@ -85,16 +89,48 @@
 		<ul id="pageBottom" style="margin: 0 auto;" class="pagination justify-content-center">
 		</ul>
 	</div>
-	<div id="orderchart" class="container tab-pane fade" style="width:900px">
-		<div class="chart-container" style="position: relative; height:30vh; width:50vw">
-                <canvas id="chart"></canvas>
-    	</div>
+	<div id="ordershow" class="container tab-pane fade" style="width:900px">
+			<nav class="navbar navbar-expand-sm ">
+				<div class="form-inline">				
+						<label for="order_id">訂單編號:</label>						
+						<input class="form-control mr-sm-2" type="text"	id="order_id">
+						<span id="err_msg1"></span>						
+				</div>
+			</nav>	
+			<div id="accordion1">
+				<div class="card">
+					<div class="card-header">
+						<table border="1" style="text-align: center; width: 100%">
+							<tr>
+								<th>訂單編號</th>
+								<th>顧客名稱</th>
+								<th>email</th>					
+								<th>訂單時間</th>
+								<th>訂單金額</th>
+								<th>狀態</th>						
+								<th>取消</th>										
+							</tr>	
+							<tbody id="orderInfo1"></tbody>
+						</table>
+					</div>					
+				</div>
+			</div>
 	</div>	
+	<div id="orderchart" class="container tab-pane fade" style="width:900px;">
+	   	<div class="chart-container" style="position: relative; height:30vh; width:50vw">
+		                <canvas id="chart"></canvas>
+	   	</div>	    	
+	</div>	
+	<div id="memberSaleschart" class="container tab-pane fade" style="width:900px;">
+	 	   <div class="chart-container" style="position: relative; height:30vh; width:50vw">
+		                <canvas id="chart2"></canvas>
+		   </div>
+	</div>
 	<div id="dailySalesAmount" class="container tab-pane fade" style="width:900px">
 		<div class="chart-container" style="position: relative; height:30vh; width:50vw">
                 <canvas id="chart1"></canvas>
     	</div>
-	</div>
+	</div>	
 	</div>
 	</div>
 	</section>		

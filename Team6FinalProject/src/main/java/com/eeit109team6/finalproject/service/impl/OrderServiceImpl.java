@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public List<Orders> findAll(Integer state) {		
+	public List<Orders> findAll(Integer state) {
 		return dao.findAll(state);
 	}
 
@@ -75,12 +75,17 @@ public class OrderServiceImpl implements OrderService {
 	public List<Orders> showOrder(Integer member_id, Integer state) {
 		return dao.showOrder(member_id, state);
 	}
-	
+
 	@Transactional
 	@Override
 	public List<Member> getMemberByKeyWord(String keyWord) {
 		return dao.getMemberByKeyWord(keyWord);
 	}
 
-	
+	@Transactional
+	@Override
+	public List<Object[]> memberSalescount() {
+		return dao.memberSalescount();
+	}
+
 }

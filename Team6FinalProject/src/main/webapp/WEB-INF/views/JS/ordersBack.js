@@ -1,5 +1,5 @@
 let data, pagebotNO;
-let member = [];
+let member = [], orders = [];
 $(document).ready(function () {
 	$.ajax({
 		url: "ordersBack.json",
@@ -8,6 +8,9 @@ $(document).ready(function () {
 			data = response;
 			if (response.Orders.length > 0) {
 				pagebot(response);
+				for (let i = 0; i < response.Orders.length; i++) {
+					orders.push(response.Orders[i].order_id);
+				}
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -136,6 +139,9 @@ function showOrdersInfo(response, pageNo) {
 	$("tbody#ordersInfo").html(info);
 	for (let i = (pageNo - 1) * item; i < response.Orders.length; i++) {
 		orderDeail(response.Orders[i].order_id);
+		if (i == pageNo * item - 1) {
+			break;
+		}
 	}
 	document.getElementById("previous").removeEventListener("click", previousChenge);
 	if (pagebotNO == 1) {
@@ -252,7 +258,7 @@ function showorderCount1(date, count) {
 				label: '元',
 				data: count,
 				fill: false,
-				borderColor: "blue", // 設定線的顏色
+				borderColor: 'blue', // 設定線的顏色
 				backgroundColor: 'blue', // 設定點的顏色
 				lineTension: 0,  // 顯示折線圖，不使用曲線				
 				borderWidth: 1

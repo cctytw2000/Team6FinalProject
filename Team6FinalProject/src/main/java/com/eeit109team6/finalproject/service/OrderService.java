@@ -16,4 +16,5 @@ public interface OrderService {
 	public List<Orders> findAll(Integer state);
 	public List<Orders> showOrder(Integer member_id,Integer state);
 	public List<Member> getMemberByKeyWord(String keyWord);
+	public List<Object[]> memberSalescount();
 }

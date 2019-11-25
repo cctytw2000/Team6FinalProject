@@ -64,6 +64,12 @@ public class OrderitemController {
 		return "orderBackDetail";
 	}
 
+	// 查詢訂單
+	@RequestMapping(value = "/order/{order_id}.json")
+	public void order(@PathVariable("order_id") Integer order_id, Model model) {
+		model.addAttribute("order", oservice.getOrderById(order_id));
+	}
+
 	// 查詢訂單細項json
 	@RequestMapping(value = "/orderDeail/{order_id}.json")
 	public void orderDeail(@PathVariable("order_id") Integer order_id, Model model) {
@@ -161,4 +167,28 @@ public class OrderitemController {
 		model.addAttribute("members", oservice.getMemberByKeyWord(keyWord));
 	}
 
+	// 會員銷售金額
+	@RequestMapping("/memberSales")
+	public void memberSales(Model model) {
+		System.out.println("/memberSales");
+		List<Object[]> rows = oservice.memberSalescount();
+//		for (Object[] row : rows) {
+//			Member m = mservice.findById(Integer.parseInt(row[0].toString()));
+//			row[0] = m.getMember_id() + "_" + m.getUsername();
+//		}
+		List<Object[]> lists = new ArrayList<Object[]>();
+		List<Member> mlist = mservice.findAll();
+		for (Member m : mlist) {
+			Object[] ob = new Object[2];
+			ob[0] = m.getMember_id() + "_" + m.getUsername();
+			ob[1] = 0;
+			for (Object[] row : rows) {
+				if (m.getMember_id() == Integer.parseInt(row[0].toString())) {
+					ob[1] = row[1];
+				}
+			}
+			lists.add(ob);
+		}
+		model.addAttribute("membersales", lists);
+	}
 }
