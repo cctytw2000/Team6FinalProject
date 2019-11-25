@@ -7,7 +7,7 @@ $(document).ready(function () {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);				
+				pagebot(response);
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -72,13 +72,14 @@ function deleteOrders(orderId) {
 		+ '<input type="submit" class="btn btn-warning" value="確認取消"></form>');
 }
 let item = 5;
+let totalPages;
 function pagebot(response) {
 	let pagebottom = "";
 	pagebottom += '<li class="page-item" id="previous"><a class="page-link" href="#">Previous</a></li>'
 	console.log(response.Orders.length);
-	console.log(parseInt(response.Orders.length / item) + 1);
-
-	for (let i = 1; i <= parseInt(response.Orders.length / item) + 1; i++) {
+	totalPages = (response.Orders.length % item == 0) ? parseInt(response.Orders.length / item) : parseInt(response.Orders.length / item) + 1;
+	console.log(totalPages);
+	for (let i = 1; i <= totalPages; i++) {
 		pagebottom += '<li class="page-item" id="' + i + '"><a class="page-link" href="#">' + i
 			+ '</a></li>';
 	}
@@ -86,7 +87,7 @@ function pagebot(response) {
 	$("ul#pageBottom").html(pagebottom);
 
 	document.getElementById("previous").addEventListener("click", previousChenge);
-	for (let i = 1; i <= parseInt(response.Orders.length / item) + 1; i++) {
+	for (let i = 1; i <= totalPages; i++) {
 		document.getElementById(i).addEventListener("click", chengeOrdersInfo);
 	}
 	document.getElementById("next").addEventListener("click", nextChenge);
@@ -144,7 +145,7 @@ function showOrdersInfo(response, pageNo) {
 		document.getElementById("previous").addEventListener("click", previousChenge);
 	}
 	document.getElementById("next").removeEventListener("click", nextChenge);
-	if (pagebotNO == parseInt(response.Orders.length / item) + 1) {
+	if (pagebotNO == totalPages) {
 		$("li#next").attr("class", "page-item disabled");
 	} else {
 		$("li#next").attr("class", "page-item");
@@ -269,7 +270,7 @@ function memberorderdata() {
 			$("div#totalspan").html("");
 			$("ul#pageBottom").html("");
 			if (response.Orders.length > 0) {
-				pagebot(response);				
+				pagebot(response);
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -291,7 +292,7 @@ function checkmember() {
 				console.log(response);
 				data = response;
 				if (response.Orders.length > 0) {
-					pagebot(response);					
+					pagebot(response);
 				}
 				else {
 					$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -392,7 +393,7 @@ function checkmoney() {
 					console.log(response);
 					data = response;
 					if (response.Orders.length > 0) {
-						pagebot(response);						
+						pagebot(response);
 					}
 					else {
 						$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -431,7 +432,7 @@ function money(state) {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);				
+				pagebot(response);
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
@@ -451,7 +452,7 @@ function moneymember(state, memberid) {
 			console.log(response);
 			data = response;
 			if (response.Orders.length > 0) {
-				pagebot(response);				
+				pagebot(response);
 			}
 			else {
 				$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");

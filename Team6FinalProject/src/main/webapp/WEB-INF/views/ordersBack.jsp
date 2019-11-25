@@ -42,7 +42,7 @@
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
-	<section class="" style="height: 100%;">
+	<section>
 	<div class="container mt-3" style="width: 60%; margin: 15px auto">
 	<h1 align="center">訂單管理</h1>
 	<ul class="nav nav-tabs">
