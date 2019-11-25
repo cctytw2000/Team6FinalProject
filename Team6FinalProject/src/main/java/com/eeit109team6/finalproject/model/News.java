@@ -45,15 +45,15 @@ public class News {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsId;
 	private String title;
-	@Temporal(TemporalType.TIMESTAMP)  
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-	private Date publicationDate;
+//	@Temporal(TemporalType.TIMESTAMP)  
+//	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	private String publicationDate;
 	private String article;
 	private Integer likes;
 	private Integer views;
 	private Boolean isVisable;
 	private String ipAddress;
-	private Date lastUpdated;
+	private String lastUpdated;
 	@JsonIgnore
 	private Blob picture;
 
@@ -159,11 +159,11 @@ public class News {
 		this.title = title;
 	}
 
-	public Date getPublicationDate() {
+	public String getPublicationDate() {
 		return publicationDate;
 	}
 
-	public void setPublicationDate(Date publicationDate) {
+	public void setPublicationDate(String publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 
@@ -207,11 +207,11 @@ public class News {
 		this.ipAddress = ipAddress;
 	}
 
-	public Date getLastUpdated() {
+	public String getLastUpdated() {
 		return lastUpdated;
 	}
 
-	public void setLastUpdated(Date lastUpdated) {
+	public void setLastUpdated(String lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 

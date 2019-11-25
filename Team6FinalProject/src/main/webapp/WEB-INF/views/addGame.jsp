@@ -26,37 +26,46 @@
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
 <title>新增遊戲</title>
+<style>
+input {
+	width: 500px
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
 	<div class="container mt-3">
-		<h1>新增遊戲資料</h1>
-		<form:form
-			action="${pageContext.request.contextPath}/newsBack/addGame1"
-			method="POST" modelAttribute="game">
-			<p>
-				遊戲類別:
-				<form:select path="gameType_">
-					<form:option value="-1">請挑選</form:option>
-					<form:options items="${gameTypeMap }"></form:options>
-				</form:select>
-			<p>
-				遊戲名稱:
-				<form:input path="gameName" type="text" />
-			<p>
-				發行日期:
-				<form:input id="datepicker" name="publicationDate"
-					autocomplete="off" path="publicationDate" type="text" value="" />
-			<p>
-				發行商名稱:
-				<form:input path="publisher" type="text" />
-			<p>
-				發行平台:
-				<form:input path="platform" type="text" />
-			<p>
-				<input type="submit" value="送出">
-				<button type="button" onclick="GoBack()">取消</button>
-		</form:form>
+		<h1 style="text-align: center;">新增遊戲資料</h1>
+		<div style="margin: 0px auto; width: 420px">
+			<form:form
+				action="${pageContext.request.contextPath}/newsBack/addGame1"
+				method="POST" modelAttribute="game">
+				<p>
+					遊戲類別:
+					<form:select path="gameType_">
+						<form:option value="-1">請挑選</form:option>
+						<form:options items="${gameTypeMap }"></form:options>
+					</form:select>
+				<p>
+					遊戲名稱:
+					<form:input path="gameName" type="text" />
+				<p>
+					發行日期:
+					<form:input id="datepicker" name="publicationDate"
+						autocomplete="off" path="publicationDate" type="text" value="" />
+				<p>
+					發行商名稱:
+					<form:input path="publisher" type="text" />
+				<p>
+					發行平台:
+					<form:input path="platform" type="text" />
+				<p>
+				<div style="text-align: center">
+					<button>送出</button>
+					<button type="button" onclick="GoBack()">取消</button>
+				</div>
+			</form:form>
+		</div>
 	</div>
 
 	<!-- 	套版用 -->

@@ -123,10 +123,10 @@ function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,pub
 			$("#test").html(html);
 		}
 	});
-	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新遊戲細節</h5>'
+	document.getElementById("yyy").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新遊戲細節</h5>'
 			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
 			+ '<span>&times;</span>' + '</button>'
-	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateGame">'
+	document.getElementById("yyy1").innerHTML = '<form method="POST" action="updateGame">'
 			+ '<input type="hidden" name="gameId" value='
 			+ gameId
 			+ ' /><p>'
@@ -189,10 +189,10 @@ function updateActivityOne(activityId, activityName,activityTypeId,activityTypeN
 			$("#test").html(html);
 		}
 	});
-	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
+	document.getElementById("yyy").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
 			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
 			+ '<span>&times;</span>' + '</button>'
-	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivityOne">'
+	document.getElementById("yyy1").innerHTML = '<form method="POST" action="updateActivityOne">'
 			+ '<input type="hidden" name="activityId" value='
 			+ activityId
 			+ ' /><p>'
@@ -255,10 +255,10 @@ function updateActivityMore(activityId, activityName,activityTypeId,activityType
 			$("#test").html(html);
 		}
 	});
-	document.getElementById("xxx").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
+	document.getElementById("yyy").innerHTML = '<h5 class="modal-title" id="exampleModalLabel">更新活動細節</h5>'
 			+ '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
 			+ '<span>&times;</span>' + '</button>'
-	document.getElementById("xxx1").innerHTML = '<form method="POST" action="updateActivityMore">'
+	document.getElementById("yyy1").innerHTML = '<form method="POST" action="updateActivityMore">'
 			+ '<input type="hidden" name="activityId" value='
 			+ activityId
 			+ ' /><p>'
@@ -352,16 +352,41 @@ function hotNewsTop5() {
 function showHotNewsTop5(titles,views) {
 	var ctx = document.getElementById("chart").getContext('2d');
 	var chart = new Chart(ctx, {
-		type: 'horizontalBar',
+		type: 'bar',
+//		type: 'horizontalBar',
+//		隱藏x軸
+//		options: {
+//		    scales: {
+//		        xAxes: [{
+//		            ticks: {
+//		                display: false
+//		            }
+//		        }]
+//		    }
+//		},
 		data: {
 			labels: titles,
 			datasets: [{
 				label: '發文截至今日之總觀看次數',
 				data: views,
-				backgroundColor: 'red',
-				borderColor: 'red',
-				borderWidth: 1,
+				backgroundColor: '#E2FC83',
+				hoverBackgroundColor:'#EF8A0E',
+				scaleShowLabels: false
 			}]
-		}
+		},
+		plugins: [{
+		    beforeInit: function (chart) {
+		        chart.data.labels.forEach(function (value, index, array) {
+		            var a = [];
+		            a.push(value.slice(0, 10));
+		            var i = 1;
+		            while(value.length > (i * 10)){
+		                a.push(value.slice(i * 10, (i + 1) * 10));
+		                i++;
+		            }
+		            array[index] = a;
+		        })
+		    }
+		}]
 	});
 } 

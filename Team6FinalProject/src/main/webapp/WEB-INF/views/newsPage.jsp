@@ -43,8 +43,7 @@
 
 </head>
 
-<body
-	style="background-image: url(<c:url value='/Images/pattern.png' />)">
+<body style="background-color: #F2F3F3">
 	<jsp:include page="header/homeHeader.jsp" />
 
 	<!-- Latest news section -->
@@ -70,14 +69,15 @@
 		<div class="row">
 
 			<div id="newsWhite" class="col-2">
-				<div class="form-group" style="margin-top: 20px">
+				<div class="form-group" style="margin-top: 10px">
 					<div>
-						<input type="text" class="form-control input-sm" name="keyWord" id="keyWord"
-							placeholder="請輸入消息標題關鍵字..." onkeydown="searchByKeyWord(event)" >
+						<input type="text" class="form-control input-sm" name="keyWord"
+							id="keyWord" placeholder="請輸入消息標題關鍵字..."
+							onkeydown="searchByKeyWord(event)">
 						<p>
-<!-- 						<div> -->
-<!-- 						 	<button class="btn btn-success" onclick="searchByKeyWord()">搜尋</button> -->
-<!-- 						</div> -->
+							<!-- 						<div> -->
+							<!-- 						 	<button class="btn btn-success" onclick="searchByKeyWord()">搜尋</button> -->
+							<!-- 						</div> -->
 					</div>
 				</div>
 
@@ -95,7 +95,8 @@
 					<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown"
 						style="margin-left: 10px; margin-bottom: 20px">依新聞分類排序</button>
-					<div id="newsTypeSort" onload="newsTypeSortOnLoad()" class='dropdown-menu'></div>
+					<div id="newsTypeSort" onload="newsTypeSortOnLoad()"
+						class='dropdown-menu'></div>
 				</div>
 
 				<div class="dropdown dropright">
@@ -110,15 +111,15 @@
 
 			</div>
 
-			<div id="newsCenter" class="col-6">
+			<div id="newsCenter" class="col-7">
 				<table
-					style="border: none; text-align: left; color: white; width: 100%; table-layout: fixed; word-wrap: break-word;"
+					style="width: 100%;margin-top: 10px;"
 					id="newsOrderByTime">
 				</table>
 			</div>
-			<div id="newsAD" class="col-4">
-				<%-- 				<img style="padding-top: 7px;padding-left: 15%" src="${pageContext.request.contextPath}/Images/AD/廣告11.PNG"> --%>
-				<div style="padding-top: 7px; padding-left: 15%" id="circleContent"
+			
+			<div id="newsAD" class="col-3" style="padding-right:0;margin-top:10px">
+				<div style="width:375px;float:right" id="circleContent"
 					class="carousel slide" data-ride="carousel" data-interval="3000">
 					<ol class="carousel-indicators">
 						<li data-target="#circleContent" data-slide-to="0" class="active"></li>
@@ -128,26 +129,42 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<a href="#"><img
+							<a target="_blank"
+								href="https://www.nintendo.tw/switch/ringadventure/"><img
 								src="${pageContext.request.contextPath}/Images/AD/AD1.PNG"></a>
 						</div>
-						<c:forEach varStatus="i" begin="1" end="4">
-							<div class="carousel-item">
-								<a href="#"><img
-									src="${pageContext.request.contextPath}/Images/AD/AD${(i.index)+1 }.PNG"></a>
-							</div>
-						</c:forEach>
+						<div class="carousel-item">
+							<a target="_blank"
+								href="http://v3m.got.gtarcade.com/?q=5d078b90d9fd60090709&kw=game%20of%20thrones%20%E9%81%8A%E6%88%B2&target=&pl=&creative=355572278874&gclid=CjwKCAiA8ejuBRAaEiwAn-iJ3kKxM1gJ04Vkb7a6vSULDXTiPChys-CeBQwXQS18faRbfiUXZequLBoCZdwQAvD_BwE"><img
+								src="${pageContext.request.contextPath}/Images/AD/AD2.PNG"></a>
+						</div>
+						<div class="carousel-item">
+							<a target="_blank"
+								href="https://www.callofduty.com/tw/zh/modernwarfare/home"><img
+								src="${pageContext.request.contextPath}/Images/AD/AD3.PNG"></a>
+						</div>
+						<div class="carousel-item">
+							<a target="_blank"
+								href="https://swordshield.portal-pokemon.com/tc/"><img
+								src="${pageContext.request.contextPath}/Images/AD/AD4.PNG"></a>
+						</div>
+						<div class="carousel-item">
+							<a target="_blank"
+								href="https://outerworlds.obsidian.net/en"><img
+								src="${pageContext.request.contextPath}/Images/AD/AD5.PNG"></a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 
 
 	<!--背景底色 -->
-	<section class="footer-top-section" style="height: 100%;">
-		<div style="height: 378px" class="container"></div>
-	</section>
+<!-- 	<section class="footer-top-section" style="height: 100%;"> -->
+<!-- 		<div style="height: 378px" class="container"></div> -->
+<!-- 	</section> -->
 	<!--//背景底色 -->
 
 	<!--====== Javascripts & Jquery 套版用======-->

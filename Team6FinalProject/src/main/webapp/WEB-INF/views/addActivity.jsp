@@ -55,7 +55,7 @@
 
 		})
 	}
-	
+
 	function initMap1(lat, lng) {
 		var uluru = {
 			lat : lat,
@@ -92,72 +92,79 @@
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
 	<div class="container mt-3">
-		<h1>新增活動資料</h1>
-		<form:form
-			action="${pageContext.request.contextPath}/newsBack/addActivity1"
-			method="POST" modelAttribute="activity">
-			<p>
-				活動類別:
-				<form:select path="activityType_">
-					<form:option value="-1">請挑選</form:option>
-					<form:options items="${activityTypeMap }"></form:options>
-				</form:select>
-			<p>
-				活動名稱:
-				<form:input path="activityName" type="text" />
-			<p>
-				<button type="button" onclick="TimePick()">活動時間選擇</button>
-				<!-- 			<button type="button" onclick="myFunction()">活動時間為一天適用</button> -->
-			<div id="oneDayOnly">
-				<!-- 		<div id="myDIV" style="display: none"> -->
+		<h1 align="center">新增活動資料</h1>
+		<div style="margin: 0px auto; width: 420px">
+			<form:form
+				action="${pageContext.request.contextPath}/newsBack/addActivity1"
+				method="POST" modelAttribute="activity">
 				<p>
-				<h5>
-					適用於<span style="color: red">一</span>日活動
-				</h5>
+					活動類別:
+					<form:select path="activityType_">
+						<form:option value="-1">請挑選</form:option>
+						<form:options items="${activityTypeMap }"></form:options>
+					</form:select>
+				<p>
+					活動名稱:
+					<form:input style="width:300px" path="activityName" type="text" />
+				<p>
+					<button type="button" onclick="TimePick()">活動時間選擇</button>
+					<!-- 			<button type="button" onclick="myFunction()">活動時間為一天適用</button> -->
+				<div id="oneDayOnly">
+					<!-- 		<div id="myDIV" style="display: none"> -->
+					<p>
+					<h5>
+						適用於<span style="color: red">一</span>日活動
+					</h5>
+					<p>
+					<p>
+						活動日期:
+						<form:input id="datepicker1" name="startingDate_time"
+							autocomplete="off" path="startingDate_time" type="text" />
+					<p>
+						活動時間:
+						<form:input id="timepicker" name="startingTime_date"
+							autocomplete="off" path="startingTime_date" type="text" />
+				</div>
+				<p>
+					<!-- 		<button type="button" onclick="myFunction2()">活動時間為多天適用</button> -->
+				<div id="manyDays" style="display: none">
+					<p>
+					<h5>
+						適用於<span style="color: red;">多</span>日活動
+					</h5>
+					<p>
+					<p>
+						活動開始日:
+						<form:input id="datepicker2" name="startingDate"
+							autocomplete="off" path="startingDate" type="text" />
+					<p>
+						活動結束日:
+						<form:input id="datepicker3" name="endingDate" autocomplete="off"
+							path="endingDate" type="text" />
+				</div>
 				<p>
 				<p>
-					活動日期:
-					<form:input id="datepicker1" name="startingDate_time"
-						autocomplete="off" path="startingDate_time" type="text" />
-				<p>
-					活動時間:
-					<form:input id="timepicker" name="startingTime_date"
-						autocomplete="off" path="startingTime_date" type="text" />
-			</div>
-			<p>
-				<!-- 		<button type="button" onclick="myFunction2()">活動時間為多天適用</button> -->
-			<div id="manyDays" style="display: none">
-				<p>
-				<h5>
-					適用於<span style="color: red;">多</span>日活動
-				</h5>
-				<p>
-				<p>
-					活動開始日:
-					<form:input id="datepicker2" name="startingDate" autocomplete="off"
-						path="startingDate" type="text" />
-				<p>
-					活動結束日:
-					<form:input id="datepicker3" name="endingDate" autocomplete="off"
-						path="endingDate" type="text" />
-			</div>
-			<p>
-			<p>
-				活動地點:
-				<form:input path="location" type="text" id="address" />
-				<button onclick="iii()" type="button">顯示</button>
-			<div id="app" class="container">
-				<div class="row">
-					<div class="col">
-						<div id="map" style="height: 300px; width: 1000px"
-							class="embed-responsive embed-responsive-16by9"></div>
+					活動地點:
+					<form:input style="width:300px" path="location" type="text"
+						id="address" />
+					<button onclick="iii()" type="button">顯示</button>
+				<div id="app" class="container">
+					<div class="row">
+						<div class="col">
+							<div id="map" style="height: 300px; width: 500px"
+								class="embed-responsive embed-responsive-16by9"></div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<p>
-				<input type="submit" value="送出">
-				<button type="button" onclick="GoBack()">取消</button>
-		</form:form>
+				<p>
+				<div style="text-align: center">
+					<input type="submit" value="送出">
+					<button type="button" onclick="GoBack()">取消</button>
+				</div>
+				<div class="row mb-2"></div>
+				<div class="row mb-2"></div>
+			</form:form>
+		</div>
 	</div>
 
 	<!-- 	套版用 -->

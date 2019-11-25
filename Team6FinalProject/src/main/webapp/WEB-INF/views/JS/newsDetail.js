@@ -34,15 +34,19 @@ $(document).ready(function() {
 	if (id.length != 0) {
 		if (startingDate_time.length == 5) {
 			$("#startingDate_time").html(html);
+			$("#startingDate_time").hide();
 		}
 		if (startingTime_date == "活動時間:00:00:00") {
 			$("#startingTime_date").html(html);
+			$("#startingTime_date").hide();
 		}
 		if (startingDate.length == 6) {
 			$("#startingDate").html(html);
+			$("#startingDate").hide();
 		}
 		if (endingDate.length == 6) {
 			$("#endingDate").html(html);
+			$("#endingDate").hide();
 		}
 		$("#activityDetail").show();
 	}
@@ -73,6 +77,8 @@ function showMemoForNews(){
 	$.ajax({
 		url : "showMemoForNews.json",
 		success : function(response) {
+			showComment += '<p style="clear: both;">'
+			showComment += '<hr style="clear: both;">';
 			for(let i = 0; i < response.newsList.length; i++){
 				if(!(typeof response.newsList[i].messages === "undefined")){
 					for(let t = 0; t< response.newsList[i].messages.length; t++){
@@ -82,15 +88,14 @@ function showMemoForNews(){
 							});
 						if(!(typeof response.newsList[i].messages[t] === "undefined") && response.newsList[i].newsId == newsId ){
 							console.log(response.newsList[i].messages[t]);
-							showComment += '<div class="media border p-3" style="width:600px;">';
-							showComment += '<div class="media-body">';
-							showComment += '<h4 style="color: #BBFFEE">'+ response.newsList[i].messages[t].member.username;
-							showComment += '<small style="margin-left:5%"><i>Posted on '+ response.newsList[i].messages[t].publicationDate.replace(".0","")+'</i></small>';
+							showComment += '<div class="card" style="width:500px;clear: left;">';
+							showComment += '<div class="card-body"  style="font-family: Microsoft JhengHei">';
+							showComment += '<span style="font-size:20px">'+ response.newsList[i].messages[t].member.username +'  :</span>';
+							showComment += '<span id="'+ response.newsList[i].messages[t].messageId +'" style="margin-left:10px">'+ response.newsList[i].messages[t].memo +'</span>';
+							showComment += '<small style="margin-left:5%;">'+ response.newsList[i].messages[t].publicationDate.replace(".0","")+'</small>';
 							if(member_id == response.newsList[i].messages[t].member.member_id){
-								showComment += '<small style="margin-left:5%"><i onclick=\''+'editMessage('+'"'+ response.newsList[i].messages[t].messageId +'"'+','+'"'+response.newsList[i].messages[t].memo+'"'+')\''+'>編輯</i></small>';
+								showComment += '<button class="btn btn-warning btn-sm" style="float:right"><i onclick=\''+'editMessage('+'"'+ response.newsList[i].messages[t].messageId +'"'+','+'"'+response.newsList[i].messages[t].memo+'"'+')\''+'>編輯</i></button>';
 							}
-							showComment += '</h4>';
-							showComment += '<p id="'+ response.newsList[i].messages[t].messageId +'" style="color:#FFFFBB;margin-top:10px">'+ response.newsList[i].messages[t].memo +'</p>';
 							showComment += '</div></div>';
 						}
 					}
@@ -136,16 +141,15 @@ function editMessage(messageId, memo){
 	info += '<form>';
 	info += '<input type="hidden" name="messageId" value="' + messageId
 			+ '"></input>';
-	info += '<input class="form-control" style="width: 200px;float:left" type="text" name="memo" value="' + memo
+	info += '<input class="form-control" style="width: 200px;" type="text" name="memo" value="' + memo
 			+ '"></input>';
-	info += '<button type="button" class="btn btn-success" style="width:80px;" onclick="editMessage2('+messageId+')">送出</button>';
+	info += '<p><button type="button" class="btn btn-warning btn-sm" style="width:80px;" onclick="editMessage2('+messageId+')">送出</button></p>';
 	info += '</form>';
 	$("#"+messageId).html(info);
 }
 
 
 //修改評論
-
 function editMessage2(messageId){
 //	alert("messageId="+messageId);
 	let editMemo = $("input[name='memo']").val();

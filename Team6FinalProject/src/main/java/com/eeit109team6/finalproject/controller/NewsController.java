@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -140,7 +141,7 @@ public class NewsController {
 		News news = new News();
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date publicationDate = format.parse(format.format(new Date()));// 取得發文時間
+		String publicationDate = format.format(new Date());// 取得發文時間
 
 		news.setMember((Member) session.getAttribute("mem"));
 		news.setIpAddress(request.getRemoteAddr());// 取得發文位置
@@ -557,8 +558,9 @@ public class NewsController {
 
 	// 查詢單筆消息詳細資料--> newsDetail.jsp
 	@RequestMapping("/newsDetail")
-	public String getNewsDetailById(@RequestParam("newsId") Integer newsId, Model model, HttpSession session) {
+	public String getNewsDetailById(@RequestParam("newsId") Integer newsId, Model model) throws ParseException {
 		News news = newsService.getNewsById(newsId);
+		
 		model.addAttribute("news", news);
 
 		return "newsDetail";

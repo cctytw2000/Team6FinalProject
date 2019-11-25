@@ -138,7 +138,7 @@ function updateGame() {
 					html2 +="<option value="+ id +">"+name+"</option>";
 				}
 			}
-			html2 += "</select></span><p><div id='test'></div>";
+			html2 += "</select></span><p><div id='test' align='center'></div>";
 			html2 += '<input type="submit" class="btn btn-warning" value="確認"></form>';
 			$("#xxx1").html(html2);
 		}
@@ -185,7 +185,7 @@ function showGame() {
 				let name = gameNameList[i];
 				html2 +="<option value="+ id +">"+name+"</option>";
 			}
-			html2 += "</select></span><p><div id='test'></div>";
+			html2 += "</select></span><p><div id='test' align='center'></div>";
 			html2 += '<input type="submit" class="btn btn-warning" value="確認"></form>';
 			$("#xxx1").html(html2);
 		}
@@ -253,7 +253,7 @@ function updateActivity() {
     				html2 +="<option value="+ id +">"+name+"</option>";
     			}
     		}
-    		html2 += "</select></span><p><div id='activityShow'></div>";
+    		html2 += "</select></span><p><div id='activityShow' align='center'></div>";
     		html2 += '<input type="submit" class="btn btn-warning" value="確認"></form>';
     		$("#xxx1").html(html2);
     	}
@@ -300,7 +300,7 @@ function showActivity() {
     			let name = activityNameList[i];
     			html2 +="<option value="+ id +">"+name+"</option>";
     		}
-    		html2 += "</select></span><p><div id='activityShow'></div>";
+    		html2 += "</select></span><p><div id='activityShow' align='center'></div>";
     		html2 += '<input type="submit" class="btn btn-warning" value="確認"></form>';
     		$("#xxx1").html(html2);
     	}

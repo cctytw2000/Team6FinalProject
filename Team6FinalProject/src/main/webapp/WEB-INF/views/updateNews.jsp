@@ -40,7 +40,7 @@
 	<jsp:include page="header/manageHeader.jsp" />
 
 	<div class="container mt-3">
-		<h1>更新消息資料</h1>
+		<h1 style="text-align: center;">更新消息資料</h1>
 		<form action="${pageContext.request.contextPath}/updateNewsDetail"
 			method="POST" enctype="multipart/form-data">
 			<input type=hidden name="newsId" id="newsId" value="${news.newsId }">
@@ -63,43 +63,46 @@
 			<div class="row mb-2"></div>
 			
 			<p>
-			<div style="display: none" onload="hasGame()" id="hasGame">
+			<div style="display: none;font-size: 14px; color: #878787;line-height: 2;" onload="hasGame()" id="hasGame">
 				是否需要更改或刪除遊戲細節:
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateGame()">更改</button>
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="deleteGame()">刪除</button>
 			</div>
 			
+			
 			<p>
-			<div style="display: none" onload="hasActivity()" id="hasActivity">
+			<div style="display: none;font-size: 14px; color: #878787;line-height: 2;" onload="hasActivity()" id="hasActivity">
 				是否需要更改或刪除活動細節:
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="updateActivity()">更改</button>
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="deleteActivity()">刪除</button>
 			</div>
-			<p>
+			
 			
 			<p>
-			<div style="display: none" id="noGame">
+			<div style="display: none;font-size: 14px; color: #878787;line-height: 2;" id="noGame">
 				是否需要顯示遊戲細節: 
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="showGame()">是</button>
 			</div>
 			
+			
 			<p>
-			<div style="display: none" id="noActivity">
+			<div style="display: none;font-size: 14px; color: #878787;line-height: 2;" id="noActivity">
 				是否需要顯示活動細節: 
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-warning btn-sm"
 											data-toggle="modal" data-target="#ooo"
 											onclick="showActivity()">是</button>
 			</div>
+			
 
 			<p>
 				消息標題: <input name="title" type="text" id="title" style="width: 100%"
@@ -116,7 +119,7 @@
 		</form>
 		
 		<!-- 彈出式視窗		 -->
-		<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
+		<div id="ooo" class="modal fade text-center" tabindex="-1" role="dialog"
 			aria-hidden="true" data-backdrop="static" data-keyboard="true"
 			aria-labelledby="exampleModalLabel">
 			<div class="modal-dialog" style="width:1000px">

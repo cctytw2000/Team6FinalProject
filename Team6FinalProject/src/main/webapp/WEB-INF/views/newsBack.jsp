@@ -31,11 +31,20 @@
 <!-- 	//套版用 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<style>
+.modal {
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
 
-	<div class="container mt-2" style="padding: 10px 10%">
+	<div class="container mt-2" style="padding: 10px 90px;">
 		<h1 align="center">消息管理</h1>
 
 		<ul class="nav nav-tabs">
@@ -149,7 +158,7 @@
 			<!-- 遊戲 -->
 			<div id="gameHeader" class="container tab-pane col">
 				<nav class="navbar navbar-expand-sm ">
-					<a class="btn btn-primary"
+					<a class="btn btn-success"
 						href="${pageContext.request.contextPath}/newsBack/addGame"
 						role="button">新增遊戲</a>
 				</nav>
@@ -171,7 +180,7 @@
 									<td>${game.publisher }
 									<td>${game.platform }
 									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
+											data-toggle="modal" data-target="#ooo1"
 											onclick="updateGame('${game.gameId }', '${game.gameName }', 
 											'${game.gameType.gameTypeId }',' ${game.gameType.gameTypeName }', 
 											'${game.publicationDate }', '${game.publisher }', '${game.platform }')">更新</button>
@@ -185,7 +194,7 @@
 			<!-- 一日活動 -->
 			<div id="activityHeaderOne" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
-					<a class="btn btn-primary"
+					<a class="btn btn-success"
 						href="${pageContext.request.contextPath}/newsBack/addActivity"
 						role="button">新增活動</a>
 				</nav>
@@ -207,7 +216,7 @@
 									<td>${activityOne.startingTime_date }
 									<td>${activityOne.location }
 									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
+											data-toggle="modal" data-target="#ooo1"
 											onclick="updateActivityOne('${activityOne.activityId }', '${activityOne.activityName }',
 											'${activityOne.activityType.activityTypeId }',' ${activityOne.activityType.activityTypeName }',
 											'${activityOne.startingDate_time }', '${activityOne.startingTime_date }',
@@ -222,7 +231,7 @@
 			<!-- 多日活動 -->
 			<div id="activityHeaderMore" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
-					<a class="btn btn-primary"
+					<a class="btn btn-success"
 						href="${pageContext.request.contextPath}/newsBack/addActivity"
 						role="button">新增活動</a>
 				</nav>
@@ -244,7 +253,7 @@
 									<td>${activityMore.endingDate }
 									<td>${activityMore.location }
 									<td><button type="button" class="btn btn-warning"
-											data-toggle="modal" data-target="#ooo"
+											data-toggle="modal" data-target="#ooo1"
 											onclick="updateActivityMore('${activityMore.activityId }', '${activityMore.activityName }',
 											'${activityMore.activityType.activityTypeId }',' ${activityMore.activityType.activityTypeName }',
 											'${activityMore.startingDate }','${activityMore.endingDate }',
@@ -259,7 +268,7 @@
 			<!-- 發佈消息 -->
 			<div id="newsHeaderShow" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
-					<a class="btn btn-primary"
+					<a class="btn btn-success"
 						href="${pageContext.request.contextPath}/newsBack/addNews"
 						role="button">新增消息</a>
 				</nav>
@@ -278,7 +287,7 @@
 									<td><a href="updateNews?newsId=${newsShow.newsId }">${newsShow.title }</a>
 									<td>${newsShow.newsType.newsTypeName }
 									<td>${newsShow.member.username }
-									<td>${newsShow.publicationDate }
+									<td>${newsShow.publicationDate.replace(".0","") }
 									<td>${newsShow.ipAddress }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
@@ -290,7 +299,7 @@
 			<!-- 隱藏消息 -->
 			<div id="newsHeaderHide" class="container tab-pane">
 				<nav class="navbar navbar-expand-sm ">
-					<a class="btn btn-primary"
+					<a class="btn btn-success"
 						href="${pageContext.request.contextPath}/newsBack/addNews"
 						role="button">新增消息</a>
 				</nav>
@@ -309,7 +318,7 @@
 									<td><a href="updateNews?newsId=${newsHide.newsId }">${newsHide.title }</a>
 									<td>${newsHide.newsType.newsTypeName }
 									<td>${newsHide.member.username }
-									<td>${newsHide.publicationDate }
+									<td>${newsHide.publicationDate.replace(".0","") }
 									<td>${newsHide.ipAddress }
 									<td><button type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#ooo"
@@ -330,13 +339,25 @@
 
 
 			<!-- 彈出式視窗		 -->
-			<div id="ooo" class="modal fade" tabindex="-1" role="dialog"
+			<div id="ooo" class="modal fade text-center" tabindex="-1" role="dialog"
 				aria-hidden="true" data-backdrop="static" data-keyboard="true"
-				aria-labelledby="exampleModalLabel">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
+				aria-labelledby="exampleModalLabel" >
+				<div class="modal-dialog modal-sm" >
+					<div class="modal-content" >
 						<div class="modal-header" id="xxx"></div>
 						<div class="modal-body" id="xxx1"></div>
+					</div>
+				</div>
+			</div>
+			<!-- //彈出式視窗		 -->
+			<!-- 彈出式視窗	for遊戲、活動	 -->
+			<div id="ooo1" class="modal fade" tabindex="-1" role="dialog"
+				aria-hidden="true" data-backdrop="static" data-keyboard="true"
+				aria-labelledby="exampleModalLabel"  style="height:460px">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header" id="yyy"></div>
+						<div class="modal-body" id="yyy1"></div>
 					</div>
 				</div>
 			</div>

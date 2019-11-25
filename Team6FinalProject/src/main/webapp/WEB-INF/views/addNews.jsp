@@ -30,8 +30,8 @@
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
 
-	<div class="container mt-3">
-		<h1>新增消息資料</h1>
+	<div class="container mt-3" >
+		<h1 align="center">新增消息資料</h1>
 		<form action="${pageContext.request.contextPath}/newsBack/addNews1"
 			method="POST" enctype="multipart/form-data">
 			<p>
@@ -65,11 +65,9 @@
 				是否刊登: <input type="radio" name="isVisable" value="1"> 是 <input
 					type="radio" name="isVisable" value="0"> 否
 			<p>
-
-				<input type="submit" value="送出">
-				<button type="button" onclick="GoBack()">取消</button>
+			<input type="submit" value="送出">
+			<button type="button" onclick="GoBack()">取消</button>
 		</form>
-
 	</div>
 	<!-- 	套版用 -->
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>

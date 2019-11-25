@@ -27,10 +27,13 @@
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- //套版用 -->
+<style>
+p {
+	font-family: Microsoft JhengHei;
+}
+</style>
 </head>
-<body>
-<body
-	style="background-image: url(<c:url value='/Images/pattern.png' />)">
+<body style="background-color: #F2F3F3">
 	<jsp:include page="header/homeHeader.jsp" />
 
 	<!-- Latest news section -->
@@ -51,86 +54,114 @@
 	</div>
 	<!-- Latest news section end -->
 
-	<div class="container"
-		style="height:auto;background-image: url(<c:url value='/Images/pattern.png' />)">
-		<div style="text-align: center">
-			<div style="padding-top: 50px; padding-bottom: 10px">
-				<h3 style="color: white">${news.title}</h3>
+	<div class="container">
+		<div>
+			<div style="padding-top: 20px; padding-bottom: 10px">
+				<h2 style="font-family: Microsoft JhengHei">${news.title}</h2>
 			</div>
 			<div>
-				<button type="button" class="btn btn-info pull-left">${news.newsType.newsTypeName}</button>
-				<h5 style="color: pink; text-align: right">(Gamily專題記者:${news.member.username}報導)
-					${news.publicationDate}</h5>
+				<button style="font-family: Microsoft JhengHei" type="button"
+					class="btn btn-success pull-left">${news.newsType.newsTypeName}</button>
+				<h4
+					style="color: #FFD000; text-align: right; font-family: Microsoft JhengHei">
+					(Gamily專題記者: <i>${news.member.username}</i> 報導)
+					${news.publicationDate.replace(".0","")}
+				</h4>
 			</div>
-			<hr style="border-bottom: 2px dashed #F8F8FF; margin-top: 30px">
+			<hr style="margin-top: 30px">
 			<div>
 				<img width='400' height='400'
+					style="float: left; margin-right: 30px"
 					src="<c:url value='/getNewsPicture/${news.newsId}' />">
 			</div>
 			<div>
 				<p id="article"
-					style="color: white; font-size: large; text-align: left">${news.article}</p>
+					style="color: black; font-size: large; text-align: left; font-family: Microsoft JhengHei">${news.article}</p>
 			</div>
-			<div id="gameDetail" style="text-align: left; display: none">
-				<hr style="border-bottom: 2px dashed #F8F8FF">
-				<h5 style="margin-bottom: 10px; color: GreenYellow">遊戲資訊</h5>
-				<p id="gameId" style="display: none">${news.game.gameId}</p>
-				<p style="color: GreenYellow">遊戲類型:${news.game.gameType.gameTypeName}</p>
-				<p style="color: GreenYellow">遊戲名稱:${news.game.gameName}</p>
-				<p id="gamePublicationDate" style="color: GreenYellow">遊戲發售日:${news.game.publicationDate}</p>
-				<p style="color: GreenYellow">遊戲發行商:${news.game.publisher}</p>
-				<p style="color: GreenYellow">遊戲平台:${news.game.platform}</p>
+			<hr>
+
+			<p id="gameDetail" style="display: none; float: left">
+				<a style="font-family: Microsoft JhengHei; margin-right: 10px"
+					class="btn btn-primary" data-toggle="collapse" href="#showG"
+					role="button" aria-expanded="false" aria-controls="#showG">遊戲資訊</a>
+			</p>
+			<div class="row" style="float: left">
+				<div class="col">
+					<div class="collapse multi-collapse" id="showG">
+						<div class="card card-body"
+							style="text-align: left; width: 300px;">
+							<p id="gameId" style="display: none">${news.game.gameId}</p>
+							<p style="color: #D8171A; font-size: 20px">遊戲類型:${news.game.gameType.gameTypeName}</p>
+							<p style="color: #D8171A; font-size: 20px">遊戲名稱:${news.game.gameName}</p>
+							<p id="gamePublicationDate"
+								style="color: #D8171A; font-size: 20px">遊戲發售日:${news.game.publicationDate}</p>
+							<p style="color: #D8171A; font-size: 20px">遊戲發行商:${news.game.publisher}</p>
+							<p style="color: #D8171A; font-size: 20px">遊戲平台:${news.game.platform}</p>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="activityDetail" style="text-align: left; display: none">
-				<hr style="border-bottom: 2px dashed #F8F8FF">
-				<h5 style="margin-bottom: 10px; color: GreenYellow">活動資訊</h5>
-				<p id="activityId" style="display: none">${news.activity.activityId}</p>
-				<p style="color: GreenYellow">活動類型:${news.activity.activityType.activityTypeName}</p>
-				<p style="color: GreenYellow">活動名稱:${news.activity.activityName}</p>
-				<p id="startingDate_time" style="color: GreenYellow">活動日期:${news.activity.startingDate_time}</p>
-				<p id="startingTime_date" style="color: GreenYellow">活動時間:${news.activity.startingTime_date}</p>
-				<p id="startingDate" style="color: GreenYellow">活動起始日:${news.activity.startingDate}</p>
-				<p id="endingDate" style="color: GreenYellow">活動結束日:${news.activity.endingDate}</p>
-				<p style="color: GreenYellow">活動地點:${news.activity.location}</p>
+			<p>
+			<p id="activityDetail" style="display: none; float: left">
+				<a
+					style="font-family: Microsoft JhengHei; margin-right: 10px; margin-left: 10px"
+					class="btn btn-primary" data-toggle="collapse" href="#showA"
+					role="button" aria-expanded="false" aria-controls="#showA">活動資訊</a>
+			</p>
+			<div class="row" style="float: left">
+				<div class="col">
+					<div class="collapse multi-collapse" id="showA">
+						<div class="card card-body"
+							style="text-align: left; width: 300px;">
+							<p id="activityId" style="display: none">${news.activity.activityId}</p>
+							<p style="color: #D8171A; font-size: 20px">活動類型:${news.activity.activityType.activityTypeName}</p>
+							<p style="color: #D8171A; font-size: 20px">活動名稱:${news.activity.activityName}</p>
+							<p id="startingDate_time" style="color: #D8171A; font-size: 20px">活動日期:${news.activity.startingDate_time}</p>
+							<p id="startingTime_date" style="color: #D8171A; font-size: 20px">活動時間:${news.activity.startingTime_date}</p>
+							<p id="startingDate" style="color: #D8171A; font-size: 20px">活動起始日:${news.activity.startingDate}</p>
+							<p id="endingDate" style="color: #D8171A; font-size: 20px">活動結束日:${news.activity.endingDate}</p>
+							<p style="color: #D8171A; font-size: 20px">活動地點:${news.activity.location}</p>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<hr style="border-bottom: 2px dashed #F8F8FF">
-		
-<!-- 		顯示評論 -->
-			<div id="memoForNews">
-			</div>
-		
-<!-- 		輸入評論 -->
-		<div class="form-group" style="margin:20px" id="add">
-			<div class="input-group " style="width: 500px;">
-				<input type="hidden" id="newsId" name="newsId"
-					value="${news.newsId }"> 
-				<input type="hidden"
-					id="member_id" value="${sessionScope.mem.member_id }">
-				<textarea class="form-control" rows="1" id="addMemo" name="memo"
-					style="resize: none;" placeholder="請輸入評論..."></textarea>
-				<span class="input-group-btn">
-					<button class="btn btn-success" onclick="addMemo()">發表</button>
-				</span>
+
+			<!-- 		顯示評論 -->
+			<div id="memoForNews"></div>
+
+			<!-- 		輸入評論 -->
+			<div class="form-group" style="margin-top: 20px" id="add">
+				<div class="input-group " style="width: 500px;">
+					<input type="hidden" id="newsId" name="newsId"
+						value="${news.newsId }"> <input type="hidden"
+						id="member_id" value="${sessionScope.mem.member_id }">
+					<textarea class="form-control" rows="1" id="addMemo" name="memo"
+						style="resize: none; font-family: Microsoft JhengHei"
+						placeholder="請輸入評論..."></textarea>
+					<span class="input-group-btn">
+						<button style="font-family: Microsoft JhengHei"
+							class="btn btn-success" onclick="addMemo()">發表</button>
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>
+		<!--背景底色 -->
+		<!-- 	<section class="footer-top-section" style="height: 100%;"> -->
+		<!-- 		<div style="height: 378px" class="container"></div> -->
+		<!-- 	</section> -->
+		<!--//背景底色 -->
 
-	<!--背景底色 -->
-	<section class="footer-top-section" style="height: 100%;">
-		<div style="height: 378px" class="container"></div>
-	</section>
-	<!--//背景底色 -->
-
-	<!--====== Javascripts & Jquery 套版用======-->
-	<script src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/main.js"></script>
-	<!-- 自訂js設定檔  -->
-	<script src="${pageContext.request.contextPath}/JS/newsDetail.js"></script>
-
+		<!--====== Javascripts & Jquery 套版用======-->
+		<script
+			src="${pageContext.request.contextPath}/JS/jquery-3.2.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/JS/owl.carousel.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/JS/jquery.marquee.min.js"></script>
+		<script src="${pageContext.request.contextPath}/JS/main.js"></script>
+		<!-- 自訂js設定檔  -->
+		<script src="${pageContext.request.contextPath}/JS/newsDetail.js"></script>
 </body>
 </html>
