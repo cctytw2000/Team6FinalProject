@@ -74,7 +74,12 @@ public class MovieController {
 		System.out.println(
 				"------------------------------------@(\"/movies\")     findMovies-----------------------------------");
 		List<MovieInfo> list = service.getMovies();
+		
+		
+		ArrayList<MovieInfo> newMovies = service.getNewMovieInfo(3);
+		
 		model.addAttribute("movies", list);
+		model.addAttribute("newMovies", newMovies);
 		return "movieindex";
 
 	}
