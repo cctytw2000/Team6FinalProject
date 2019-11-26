@@ -29,6 +29,13 @@
 	type="text/css" />
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
+<style>
+body {
+	background-image: url("Images/discussionbg.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+</style>
 <!-- 	//套版用 -->
 </head>
 
@@ -50,10 +57,10 @@
 
 									<tr class="row" style="margin-bottom:15px;">
 
-										<td class="col-md-5"><a href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><img width="300" height="90" alt="${boardType.boardName}"
+										<td class="col-md-6"><a href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><img width="380" height="90" alt="${boardType.boardName}"
 											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
 											 </td>
-										<td class="col-md-7"><a style="text-decoration: none;"
+										<td class="col-md-6"><a style="text-decoration: none;"
 											href="<spring:url value='board-Rich?id=${boardType.boardId}'/>">${boardType.boardName}</a>
 											<p>
 												<c:forEach var='discussion' begin="0" end="0"
@@ -93,8 +100,8 @@
 							<h4 class="widget-title">最新發表!!</h4>
 							<div class="latest-blog">
 							
-							<c:forEach var="discussion" items="${sessionScope.articleLatest3}" varStatus="i"
-								begin="0" end="2">
+							<c:forEach var="discussion" items="${sessionScope.articleLatest}" varStatus="i"
+								begin="0" end="7">
 							
 							
 								<div class="lb-item">
@@ -112,32 +119,7 @@
 							</div>
 						</div>
 						<!-- widget -->
-						<div class="widget-item">
-							<div class="feature-item set-bg" data-setbg="img/features/1.jpg">
-								<span class="cata new">new</span>
-								<div class="fi-content text-white">
-									<h5>
-										<a href="#">Suspendisse ut justo tem por, rutrum</a>
-									</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									</p>
-									<a href="#" class="fi-comment">3 Comments</a>
-								</div>
-							</div>
-						</div>
-						<!-- widget -->
-						<div class="widget-item">
-							<div class="review-item">
-								<div class="review-cover set-bg" data-setbg="img/review/1.jpg">
-									<div class="score yellow">9.3</div>
-								</div>
-								<div class="review-text">
-									<h5>Assasin’’s Creed</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing
-										ipsum dolor sit ame.</p>
-								</div>
-							</div>
-						</div>
+
 					</div>
 
 

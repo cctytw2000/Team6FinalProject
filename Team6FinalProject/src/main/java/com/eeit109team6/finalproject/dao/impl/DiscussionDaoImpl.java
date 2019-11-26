@@ -36,7 +36,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	@Override
 	public List<Discussion> getArticleByBoardTypeId(Integer boardId) {
 
-		String hql = "FROM Discussion WHERE boardId = :boardId AND isDeleted = 0";
+		String hql = "FROM Discussion WHERE boardId = :boardId AND isDeleted = 0 ORDER BY articleId DESC";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("boardId", boardId).getResultList();
@@ -46,7 +46,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	
 	@Override
 	public List<Discussion> getArticleByBoardTypeIdBack(Integer boardId) {
-		String hql = "FROM Discussion WHERE boardId = :boardId";
+		String hql = "FROM Discussion WHERE boardId = :boardId ORDER BY articleId DESC";
 		List<Discussion> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).setParameter("boardId", boardId).getResultList();
@@ -96,7 +96,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 	public List<Discussion> getLatestArticle() {
 		String hql = "FROM Discussion d WHERE d.isDeleted = 0 ORDER BY articleId DESC";
 		Session session = factory.getCurrentSession();
-		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(3).getResultList(); 
+		List<Discussion> Dlist = session.createQuery(hql).setMaxResults(10).getResultList(); 
 		return Dlist;
 	}
 
@@ -115,7 +115,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.update(discussion);
 	}
 
-	// å°‡æ–‡ç« ç¡¬åˆªé™¤
+	// ±N¤å³¹µw§R°£
 	@Override
 	public void physicalDeleteArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();
@@ -123,7 +123,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.delete(discussion);
 	}
 	
-	// å°‡isDeletedæ”¹ç‚º1ï¼Œå°‡æ–‡ç« æ¨™è¨˜è»Ÿåˆªé™¤ï¼Œä½†è³‡æ–™åº«ä¾ç„¶æœ‰ç´€éŒ„ã€‚è‹¥è¦ç¡¬åˆªé™¤ï¼Œè«‹ç”¨physicalDeleteArticleById()
+	// ±NisDeleted§ï¬°1¡A±N¤å³¹¼Ğ°O³n§R°£¡A¦ı¸ê®Æ®w¨ÌµM¦³¬ö¿ı¡C­Y­nµw§R°£¡A½Ğ¥ÎphysicalDeleteArticleById()
 	@Override
 	public void deleteArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();
@@ -132,7 +132,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.update(discussion);
 	}
 	
-	// å°‡isDeletedæ”¹ç‚º0ï¼Œååˆªé™¤è¢«æ¨™è¨˜ç‚ºè»Ÿåˆªé™¤çš„æ–‡ç« ï¼Œæ¢å¾©ç‚ºä½¿ç”¨è€…å¯è¦‹ã€‚
+	// ±NisDeleted§ï¬°0¡A¤Ï§R°£³Q¼Ğ°O¬°³n§R°£ªº¤å³¹¡A«ì´_¬°¨Ï¥ÎªÌ¥i¨£¡C
 	@Override
 	public void recoverArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();

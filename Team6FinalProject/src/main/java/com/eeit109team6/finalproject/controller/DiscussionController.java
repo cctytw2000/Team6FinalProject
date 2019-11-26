@@ -73,93 +73,94 @@ public class DiscussionController {
 	}
 
 
-	// è¨è«–å€ä¸»é :åˆ—å‡ºæ‰€æœ‰çœ‹æ¿ --> showDiscussion.jsp
+	// °Q½×°Ï¥D­¶:¦C¥X©Ò¦³¬İªO --> showDiscussion.jsp
 	@RequestMapping("/discussion")
 	public String getAllBoardType(Model model, HttpServletRequest request, HttpSession session) {
 
 //		HttpSession session = request.getSession();
-		System.out.println("é€²å…¥æ§åˆ¶å™¨æ–¹æ³•getAllBoardType()ï¼Œå³å°‡å°å‘è¦–åœ–showDiscussion");
+		System.out.println("¶i¤J±±¨î¾¹¤èªkgetAllBoardType()¡A§Y±N¾É¦Vµø¹ÏshowDiscussion");
 		
-//		Member mem = (Member) session.getAttribute("mem");//å¾Sessionå–å¾—ä½¿ç”¨è€…æœƒå“¡    //é€™å…©è¡Œè‹¥æ”¾åœ¨å‰å°ï¼Œéç™»å…¥ç‹€æ…‹é»è¨è«–å€ä¸»é æœƒ500
-//		System.out.println("Memberçš„username:"+ mem.getUsername());
-//		System.out.println("sessionå…§çš„username:" + session.getAttribute("username"));
-		// boardTypeServiceå¯¦ä½œæ–¹æ³•å‘DAOå–å¾—æ‰€æœ‰çœ‹æ¿çš„å€¼ï¼Œå°‡å…¶è¨­çµ¦BoardTypeå‹æ…‹çš„ç‰©ä»¶çµ„æˆçš„ä¸²åˆ—
+//		Member mem = (Member) session.getAttribute("mem");//±qSession¨ú±o¨Ï¥ÎªÌ·|­û    //³o¨â¦æ­Y©ñ¦b«e¥x¡A«Dµn¤Jª¬ºAÂI°Q½×°Ï¥D­¶·|500
+//		System.out.println("Memberªºusername:"+ mem.getUsername());
+//		System.out.println("session¤ºªºusername:" + session.getAttribute("username"));
+		// boardTypeService¹ê§@¤èªk¦VDAO¨ú±o©Ò¦³¬İªOªº­È¡A±N¨ä³]µ¹BoardType«¬ºAªºª«¥ó²Õ¦¨ªº¦ê¦C
 		
-//		System.out.println("ä½¿ç”¨è€…ç™»å…¥çš„ipä½ç½®:"+mem.getRemoteAddr());// å–å¾—ç™¼æ–‡ä½ç½®);
-//		Discussion.setIpAddress(request.getRemoteAddr());// å–å¾—ç™¼æ–‡ä½ç½®
+//		System.out.println("¨Ï¥ÎªÌµn¤Jªºip¦ì¸m:"+mem.getRemoteAddr());// ¨ú±oµo¤å¦ì¸m);
+//		Discussion.setIpAddress(request.getRemoteAddr());// ¨ú±oµo¤å¦ì¸m
 //		
 //		List<Discussion> allArticlelist = discussionService.getAllArticles();
 //		List<Integer> viewsByBoardType = By;
 		
-		// å–å¾—æœ€æ–°ç™¼è¡¨çš„ä¸‰ç¯‡æ–‡ç« 
+		// ¨ú±o³Ì·sµoªíªº¤T½g¤å³¹
 		List<Discussion> articlelist = discussionService.getLatestArticle();
-		session.setAttribute("articleLatest3", articlelist);
+		session.setAttribute("articleLatest", articlelist);
 		
 		List<BoardType> list = boardTypeService.getAllBoardType();
-		System.out.println("æŠ“å–çœ‹æ¿åˆ—è¡¨");
+		System.out.println("§ì¨ú¬İªO¦Cªí");
 		model.addAttribute(list);
 		return "showDiscussion";
 	}
 
-	// é¡¯ç¤ºå…¨ç«™è¨è«–å€æ‰€æœ‰æ–‡ç« åˆ—è¡¨: æœ¬æ–¹æ³•æš«ç„¡ç”¨æ­¦ä¹‹åœ°
+	// Åã¥Ü¥ş¯¸°Q½×°Ï©Ò¦³¤å³¹¦Cªí: ¥»¤èªk¼ÈµL¥ÎªZ¤§¦a
 //	@RequestMapping("/board")		
 //	public String getAllArticles(Model model) {
 //		List<Discussion> list = discussionService.getAllArticles();
-//		model.addAttribute(list);//discussionList  ä¸çµ¦å®šåå­—ï¼Œå‰‡ç”¨ç‰©ä»¶é¦–å­—å°å¯«+å‹æ…‹é¦–å­—å¤§å¯«Listã€‚
+//		model.addAttribute(list);//discussionList  ¤£µ¹©w¦W¦r¡A«h¥Îª«¥ó­º¦r¤p¼g+«¬ºA­º¦r¤j¼gList¡C
 //	return "board";
 //	}
 
-	// é€²å…¥æŒ‡å®šçœ‹æ¿ï¼Œé¡¯ç¤ºæŒ‡å®šçœ‹æ¿çš„æ–‡ç« åˆ—è¡¨ --> board.jsp
+	// ¶i¤J«ü©w¬İªO¡AÅã¥Ü«ü©w¬İªOªº¤å³¹¦Cªí --> board.jsp
 	@RequestMapping("/board")
 	public String getArticleByBoardTypeId(@RequestParam("id") Integer boardId, Model model) {
 
-		// 1.å–å¾—æŒ‡å®šçœ‹ç‰ˆå±¬æ€§ï¼Œä¸¦æ›´æ–°ç€è¦½äººæ¬¡ï¼Œæ›´æ–°å¾Œå†é‡å–ä¸€æ¬¡
+		
+		// 1.¨ú±o«ü©w¬İª©Äİ©Ê¡A¨Ã§ó·sÂsÄı¤H¦¸¡A§ó·s«á¦A­«¨ú¤@¦¸
 		BoardType boardType = boardTypeService.getBoardTypeById(boardId);				
 		discussionService.updateBoardViews(boardId); 
-		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// é€éservice.getBoardTypeByIdæ–¹æ³•å–å¾—ä¸€å€‹æŒ‡å®šçœ‹ç‰ˆçš„çœ‹æ¿åç¨±
+		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// ³z¹Lservice.getBoardTypeById¤èªk¨ú±o¤@­Ó«ü©w¬İª©ªº¬İªO¦WºÙ
 		
-		// 2.å–å¾—æŒ‡å®šçœ‹ç‰ˆçš„æ‰€æœ‰æ–‡ç« 
-		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// é€éservice.getArticleByBoardTypeIdæ–¹æ³•å–å¾—æ‰€æœ‰æŒ‡å®šçœ‹æ¿ä¸Šçš„æ–‡ç« 
+		// 2.¨ú±o«ü©w¬İª©ªº©Ò¦³¤å³¹
+		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// ³z¹Lservice.getArticleByBoardTypeId¤èªk¨ú±o©Ò¦³«ü©w¬İªO¤Wªº¤å³¹
 		
-		// 3.å°‡å±¬æ€§æ”¾å…¥SpringMVCæä¾›çš„model
-		model.addAttribute("DiscussionList", Discussionlist);// å°‡æŒ‡å®šçœ‹æ¿ä¸Šçš„æ‰€æœ‰æ–‡ç« ç‰©ä»¶ï¼Œéƒ½æ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºDiscussionList
-		model.addAttribute("boardType", boardType2); // å°‡æŒ‡å®šçœ‹æ¿çš„åç¨±ç‰©ä»¶ï¼Œæ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºboardType
+		// 3.±NÄİ©Ê©ñ¤JSpringMVC´£¨Ñªºmodel
+		model.addAttribute("DiscussionList", Discussionlist);// ±N«ü©w¬İªO¤Wªº©Ò¦³¤å³¹ª«¥ó¡A³£ª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°DiscussionList
+		model.addAttribute("boardType", boardType2); // ±N«ü©w¬İªOªº¦WºÙª«¥ó¡Aª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°boardType
 
-		// èªªæ˜:  discussionList å‡è‹¥ä¸çµ¦å®šåå­—ï¼Œåƒ…åƒ…å‚³å…¥listï¼Œå‰‡æ¥æ”¶æ–¹JSPå‰‡ä»¥ç‰©ä»¶é¦–å­—å°å¯«+å‹æ…‹é¦–å­—å¤§å¯«Listæ¥æ”¶ã€‚
-		// å°‡serviceå¯¦ä½œé¡åˆ¥å–å¾—çš„ç‰©ä»¶ï¼Œè¨­çµ¦Springæä¾›çš„Modelä»‹é¢çš„modelç‰©ä»¶
-		// Springæä¾›çš„æ³¨å…¥é›†åˆåŠŸèƒ½ï¼Œæ”¯æ´Listã€Mapã€Propertiesã€Setå››ç¨®é›†åˆã€‚ref:ç‹æœ¬p48
+		// »¡©ú:  discussionList °²­Y¤£µ¹©w¦W¦r¡A¶È¶È¶Ç¤Jlist¡A«h±µ¦¬¤èJSP«h¥Hª«¥ó­º¦r¤p¼g+«¬ºA­º¦r¤j¼gList±µ¦¬¡C
+		// ±Nservice¹ê§@Ãş§O¨ú±oªºª«¥ó¡A³]µ¹Spring´£¨ÑªºModel¤¶­±ªºmodelª«¥ó
+		// Spring´£¨Ñªºª`¤J¶°¦X¥\¯à¡A¤ä´©List¡BMap¡BProperties¡BSet¥|ºØ¶°¦X¡Cref:¤ı¥»p48
 		return "board";
 	}
 	
-	// é€²å…¥æŒ‡å®šçœ‹æ¿ï¼Œé¡¯ç¤ºæŒ‡å®šçœ‹æ¿çš„æ–‡ç« åˆ—è¡¨ --> board-Rich.jsp
+	// ¶i¤J«ü©w¬İªO¡AÅã¥Ü«ü©w¬İªOªº¤å³¹¦Cªí --> board-Rich.jsp
 	@RequestMapping("/board-Rich")
 	public String getArticleByBoardTypeIdRich(@RequestParam("id") Integer boardId, Model model) {
 
-		// 1.å–å¾—æŒ‡å®šçœ‹ç‰ˆå±¬æ€§ï¼Œä¸¦æ›´æ–°ç€è¦½äººæ¬¡ï¼Œæ›´æ–°å¾Œå†é‡å–ä¸€æ¬¡
+		// 1.¨ú±o«ü©w¬İª©Äİ©Ê¡A¨Ã§ó·sÂsÄı¤H¦¸¡A§ó·s«á¦A­«¨ú¤@¦¸
 		BoardType boardType = boardTypeService.getBoardTypeById(boardId);				
 		discussionService.updateBoardViews(boardId); 
-		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// é€éservice.getBoardTypeByIdæ–¹æ³•å–å¾—ä¸€å€‹æŒ‡å®šçœ‹ç‰ˆçš„çœ‹æ¿åç¨±
+		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// ³z¹Lservice.getBoardTypeById¤èªk¨ú±o¤@­Ó«ü©w¬İª©ªº¬İªO¦WºÙ
 		
-		// for bootstrapç‰ˆæœ¬ç™¼æ–‡è¡¨å–®ï¼Œå–å¾—ç™¼æ–‡åˆ†é¡
-		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// é€éservice.getAllSubjectTypeæ–¹æ³•å–å¾—æ‰€æœ‰ç™¼æ–‡åˆ†é¡
+		// for bootstrapª©¥»µo¤åªí³æ¡A¨ú±oµo¤å¤ÀÃş
+		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// ³z¹Lservice.getAllSubjectType¤èªk¨ú±o©Ò¦³µo¤å¤ÀÃş
 
 		
-		// 2.å–å¾—æŒ‡å®šçœ‹ç‰ˆçš„æ‰€æœ‰æ–‡ç« 
-		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// é€éservice.getArticleByBoardTypeIdæ–¹æ³•å–å¾—æ‰€æœ‰æŒ‡å®šçœ‹æ¿ä¸Šçš„æ–‡ç« 
+		// 2.¨ú±o«ü©w¬İª©ªº©Ò¦³¤å³¹
+		List<Discussion> Discussionlist = discussionService.getArticleByBoardTypeId(boardId);// ³z¹Lservice.getArticleByBoardTypeId¤èªk¨ú±o©Ò¦³«ü©w¬İªO¤Wªº¤å³¹
 		
-		// 3.å°‡å±¬æ€§æ”¾å…¥SpringMVCæä¾›çš„model
-		model.addAttribute("DiscussionList", Discussionlist);// å°‡æŒ‡å®šçœ‹æ¿ä¸Šçš„æ‰€æœ‰æ–‡ç« ç‰©ä»¶ï¼Œéƒ½æ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºDiscussionList
-		model.addAttribute("boardType", boardType2); // å°‡æŒ‡å®šçœ‹æ¿çš„åç¨±ç‰©ä»¶ï¼Œæ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºboardType
-		model.addAttribute("subjectType", subjectType); // å°‡åˆ†é¡åç¨±ç‰©ä»¶é›†åˆï¼Œæ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºsubjectType
+		// 3.±NÄİ©Ê©ñ¤JSpringMVC´£¨Ñªºmodel
+		model.addAttribute("DiscussionList", Discussionlist);// ±N«ü©w¬İªO¤Wªº©Ò¦³¤å³¹ª«¥ó¡A³£ª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°DiscussionList
+		model.addAttribute("boardType", boardType2); // ±N«ü©w¬İªOªº¦WºÙª«¥ó¡Aª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°boardType
+		model.addAttribute("subjectType", subjectType); // ±N¤ÀÃş¦WºÙª«¥ó¶°¦X¡Aª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°subjectType
 
-		// èªªæ˜:  discussionList å‡è‹¥ä¸çµ¦å®šåå­—ï¼Œåƒ…åƒ…å‚³å…¥listï¼Œå‰‡æ¥æ”¶æ–¹JSPå‰‡ä»¥ç‰©ä»¶é¦–å­—å°å¯«+å‹æ…‹é¦–å­—å¤§å¯«Listæ¥æ”¶ã€‚
-		// å°‡serviceå¯¦ä½œé¡åˆ¥å–å¾—çš„ç‰©ä»¶ï¼Œè¨­çµ¦Springæä¾›çš„Modelä»‹é¢çš„modelç‰©ä»¶
-		// Springæä¾›çš„æ³¨å…¥é›†åˆåŠŸèƒ½ï¼Œæ”¯æ´Listã€Mapã€Propertiesã€Setå››ç¨®é›†åˆã€‚ref:ç‹æœ¬p48
+		// »¡©ú:  discussionList °²­Y¤£µ¹©w¦W¦r¡A¶È¶È¶Ç¤Jlist¡A«h±µ¦¬¤èJSP«h¥Hª«¥ó­º¦r¤p¼g+«¬ºA­º¦r¤j¼gList±µ¦¬¡C
+		// ±Nservice¹ê§@Ãş§O¨ú±oªºª«¥ó¡A³]µ¹Spring´£¨ÑªºModel¤¶­±ªºmodelª«¥ó
+		// Spring´£¨Ñªºª`¤J¶°¦X¥\¯à¡A¤ä´©List¡BMap¡BProperties¡BSet¥|ºØ¶°¦X¡Cref:¤ı¥»p48
 		return "board-Rich";
 	}
 	
 
-	// ç€è¦½æ–‡ç«  --> article.jsp
+	// ÂsÄı¤å³¹ --> article.jsp
 	@RequestMapping("/article")
 	public String getArticleById(Model model, @RequestParam("id") Integer articleId) {
 		System.out.println("articleId:" + articleId);
@@ -177,49 +178,49 @@ public class DiscussionController {
 		return "article";
 	}
 
-//	æä¾›æ–°å¢æ–‡ç« æ™‚çš„è¡¨å–® --> addArticle.jsp 
+//	´£¨Ñ·s¼W¤å³¹®Éªºªí³æ --> addArticle.jsp 
 	@RequestMapping(value = "/addArticle", method = RequestMethod.GET)
 	public String getAddArticleForm(@RequestParam("id") Integer boardId, @RequestParam("name") String name, Model model,
 			HttpServletRequest request, HttpSession session) {
-		System.out.println("****************************************é€²å…¥Discussion Controller getAddArticleForm()");
+		System.out.println("****************************************¶i¤JDiscussion Controller getAddArticleForm()");
 
-		System.out.println("å–å¾—request.getSession()");
+		System.out.println("¨ú±orequest.getSession()");
 
-		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// é€éservice.getAllSubjectTypeæ–¹æ³•å–å¾—æ‰€æœ‰ç™¼æ–‡åˆ†é¡
+		List<SubjectType> subjectType = subjectTypeService.getAllSubjectType();// ³z¹Lservice.getAllSubjectType¤èªk¨ú±o©Ò¦³µo¤å¤ÀÃş
 		System.out.println("subjectTypeService.getAllSubjectType()");
 
-		model.addAttribute("subjectType", subjectType); // å°‡åˆ†é¡åç¨±ç‰©ä»¶é›†åˆï¼Œæ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºsubjectType
+		model.addAttribute("subjectType", subjectType); // ±N¤ÀÃş¦WºÙª«¥ó¶°¦X¡Aª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°subjectType
 
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("boardName", name);
 
-		// subjectTypeServiceå¯¦ä½œæ–¹æ³•å‘DAOå–å¾—æ‰€æœ‰ç™¼æ–‡åˆ†é¡çš„å€¼ï¼Œå°‡å…¶è¨­çµ¦SubjectTypeå‹æ…‹çš„ç‰©ä»¶çµ„æˆçš„ä¸²åˆ—
+		// subjectTypeService¹ê§@¤èªk¦VDAO¨ú±o©Ò¦³µo¤å¤ÀÃşªº­È¡A±N¨ä³]µ¹SubjectType«¬ºAªºª«¥ó²Õ¦¨ªº¦ê¦C
 		List<BoardType> list = boardTypeService.getAllBoardType();
-		System.out.println("åœ¨getAddArticleForm()å…§ï¼ŒæŠ“å–çœ‹æ¿åˆ—è¡¨");
+		System.out.println("¦bgetAddArticleForm()¤º¡A§ì¨ú¬İªO¦Cªí");
 		model.addAttribute(list);
 		System.out.println("model.addAttribute(list)" + list);
 
 		return "addArticle";
 	}
 
-	// æ–°å¢æ–‡ç«  -->é‡å®šå‘è‡³æ‰€å±¬çš„è¨è«–çœ‹æ¿ board.jsp
+	// ·s¼W¤å³¹ -->­«©w¦V¦Ü©ÒÄİªº°Q½×¬İªO board.jsp
 	@RequestMapping(value = "/addArticle", method = RequestMethod.POST)
 	public String processAddArticle(@RequestParam("boardId") Integer boardId, @RequestParam("subject") String subject,
 			@RequestParam("subjectTypeId") Integer subjectType, @RequestParam("body") String body,
 			@RequestParam("author") String author, Model model, HttpServletRequest request, HttpSession session) {
-		System.out.println("é€²å…¥processAddArticle()æ–¹æ³•");
+		System.out.println("¶i¤JprocessAddArticle()¤èªk");
 		BoardType type = boardTypeService.getBoardTypeById(boardId);
 		
-		String articleBody = request.getParameter("body").replaceAll("\n", "<br>");//æ›è¡Œè™•ç†
+		String articleBody = request.getParameter("body").replaceAll("\n", "<br>");//´«¦æ³B²z
 		
-		Member mem = (Member) session.getAttribute("mem");//å¾Sessionå–å¾—ä½¿ç”¨è€…æœƒå“¡
-//		System.out.println("Memberçš„username:"+ mem.getUsername());
-		//ä»¥addArticle.jspä¸‹æ‹‰é¸å–®subjectTypeIdï¼Œè¢«é¸å–çš„${subjectType.subjectTypeId}å€¼ï¼Œå‘¼å«DAOå–å¾—å°æ‡‰çš„SubjectTypeç‰©ä»¶
+		Member mem = (Member) session.getAttribute("mem");//±qSession¨ú±o¨Ï¥ÎªÌ·|­û
+//		System.out.println("Memberªºusername:"+ mem.getUsername());
+		//¥HaddArticle.jsp¤U©Ô¿ï³æsubjectTypeId¡A³Q¿ï¨úªº${subjectType.subjectTypeId}­È¡A©I¥sDAO¨ú±o¹ïÀ³ªºSubjectTypeª«¥ó
 		SubjectType Stype = subjectTypeService.getSubjectTypeById(subjectType);
 
 		System.out.println("subjectType=" + subjectType);
 
-		// ==============è¨­å®šç™¼è¡¨æ–‡ç« æ™‚é–“=======================
+		// ==============³]©wµoªí¤å³¹®É¶¡=======================
 //		Calendar rightNow = Calendar.getInstance();
 //		String createtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
 //				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
@@ -229,36 +230,36 @@ public class DiscussionController {
 		
 		  String postTimeStamp = myFmt2.format(new Date ());
 		
-//		// ==============/è¨­å®šç™¼è¡¨æ–‡ç« æ™‚é–“=======================
+//		// ==============/³]©wµoªí¤å³¹®É¶¡=======================
 		
 	
 		Discussion discussion = new Discussion();
-		discussion.setArticleBody(articleBody); // å¡«å…¥æ–‡ç« 
-		discussion.setMember(mem); // å¡«å…¥ç™¼æ–‡è€…ï¼Œå¼•æ•¸ç‚ºMemberå‹æ…‹çš„ç‰©ä»¶mem
-		discussion.setSubject(subject); // å¡«å…¥æ¨™é¡Œ
-		discussion.setSubjectType(Stype);// å¡«å…¥ç™¼æ–‡åˆ†é¡
-		discussion.setBoardType(type); // å¡«å…¥çœ‹ç‰ˆ
-		discussion.setViews(0); // å¡«å…¥äººæ°£(è¨ˆæ•¸å™¨)ï¼Œåˆå§‹å€¼ç‚º0
-		discussion.setIsDeleted(0); // å¡«å…¥æ˜¯å¦è»Ÿåˆªé™¤ï¼Œåˆå§‹å€¼ç‚º0ï¼Œæœªè¢«åˆªé™¤
-		discussion.setPostTimeStamp(postTimeStamp);// å¡«å…¥æ™‚é–“æˆ³
+		discussion.setArticleBody(articleBody); // ¶ñ¤J¤å³¹
+		discussion.setMember(mem); // ¶ñ¤Jµo¤åªÌ¡A¤Ş¼Æ¬°Member«¬ºAªºª«¥ómem
+		discussion.setSubject(subject); // ¶ñ¤J¼ĞÃD
+		discussion.setSubjectType(Stype);// ¶ñ¤Jµo¤å¤ÀÃş
+		discussion.setBoardType(type); // ¶ñ¤J¬İª©
+		discussion.setViews(0); // ¶ñ¤J¤H®ğ(­p¼Æ¾¹)¡Aªì©l­È¬°0
+		discussion.setIsDeleted(0); // ¶ñ¤J¬O§_³n§R°£¡Aªì©l­È¬°0¡A¥¼³Q§R°£
+		discussion.setPostTimeStamp(postTimeStamp);// ¶ñ¤J®É¶¡ÂW
 
 		discussionService.addArticle(discussion);
-		return "redirect:/board-Rich?id=" + boardId;   // é‡å®šå‘è‡³çœ‹æ¿ï¼Œç•™æ„keyå€¼çš„ç”¨æ³•
+		return "redirect:/board-Rich?id=" + boardId;   // ­«©w¦V¦Ü¬İªO¡A¯d·Nkey­Èªº¥Îªk
 	}
 
 	
-	// æ–°å¢å›è¦† -->é‡å®šå‘è‡³æ‰€å±¬çš„è¨è«–æ–‡ç«  article.jsp
+	// ·s¼W¦^ÂĞ -->­«©w¦V¦Ü©ÒÄİªº°Q½×¤å³¹ article.jsp
 	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
 	public String processAddReply(@RequestParam("articleId") Integer articleId,
 			@RequestParam("body") String body,
 			@RequestParam("author") String author, Model model, HttpServletRequest request, HttpSession session) throws ParseException {
-		System.out.println("é€²å…¥æ–°å¢å›è¦† processAddReply()æ–¹æ³•ï¼ŒarticleId:\"+articleId");
+		System.out.println("¶i¤J·s¼W¦^ÂĞ processAddReply()¤èªk¡AarticleId:\"+articleId");
 		Reply reply = new Reply();
-		String replyBody = request.getParameter("body").replaceAll("\n", "<br>");//æ›è¡Œè™•ç†
-		Member mem = (Member) session.getAttribute("mem");//å¾Sessionå–å¾—ä½¿ç”¨è€…æœƒå“¡
-//		System.out.println("Memberçš„username:"+ mem.getUsername());
+		String replyBody = request.getParameter("body").replaceAll("\n", "<br>");//´«¦æ³B²z
+		Member mem = (Member) session.getAttribute("mem");//±qSession¨ú±o¨Ï¥ÎªÌ·|­û
+//		System.out.println("Memberªºusername:"+ mem.getUsername());
 
-//		// ==============è¨­å®šç™¼è¡¨æ–‡ç« æ™‚é–“=======================
+//		// ==============³]©wµoªí¤å³¹®É¶¡=======================
 //		Calendar rightNow = Calendar.getInstance();
 //		String postTimeStamp = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
 //				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
@@ -266,41 +267,41 @@ public class DiscussionController {
 		
 		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String postTimeStamp = myFmt2.format(new Date ());
-//		// ==============/è¨­å®šç™¼è¡¨æ–‡ç« æ™‚é–“=======================
+//		// ==============/³]©wµoªí¤å³¹®É¶¡=======================
 	
 
-		// ===============å°‡å€¼å¡«å…¥reply å±¬æ€§ç‰©ä»¶ä¹‹å…§=====================
-		Discussion discussion = discussionService.getArticleById(articleId);//ä»¥articleIdå–å¾—ä¸€ç­†æ–‡ç« ç‰©ä»¶
-		reply.setDiscussion(discussion);//å°‡æ–‡ç« ç‰©ä»¶å¡«å…¥replyå±¬æ€§ã€‚å¡«å…¥æ–‡ç« ç·¨è™Ÿï¼Œå¼•æ•¸ç‚ºDiscussionå‹æ…‹çš„ç‰©ä»¶discussion
-		reply.setReplyBody(replyBody); // å¡«å…¥å›è¦†æ–‡
-		reply.setMember(mem); // å¡«å…¥ç™¼æ–‡è€…ï¼Œå¼•æ•¸ç‚ºMemberå‹æ…‹çš„ç‰©ä»¶mem
-		reply.setPostTimeStamp(postTimeStamp);// å¡«å…¥æ™‚é–“æˆ³
+		// ===============±N­È¶ñ¤Jreply Äİ©Êª«¥ó¤§¤º=====================
+		Discussion discussion = discussionService.getArticleById(articleId);//¥HarticleId¨ú±o¤@µ§¤å³¹ª«¥ó
+		reply.setDiscussion(discussion);//±N¤å³¹ª«¥ó¶ñ¤JreplyÄİ©Ê¡C¶ñ¤J¤å³¹½s¸¹¡A¤Ş¼Æ¬°Discussion«¬ºAªºª«¥ódiscussion
+		reply.setReplyBody(replyBody); // ¶ñ¤J¦^ÂĞ¤å
+		reply.setMember(mem); // ¶ñ¤Jµo¤åªÌ¡A¤Ş¼Æ¬°Member«¬ºAªºª«¥ómem
+		reply.setPostTimeStamp(postTimeStamp);// ¶ñ¤J®É¶¡ÂW
 		
-		//===============å‘¼å«Reply Serviceï¼Œå°‡è£å¥½è³‡æ–™çš„å±¬æ€§ç‰©ä»¶ï¼Œäº¤çµ¦DAOä»¥Hibernateå¡é€²è³‡æ–™åº«
+		//===============©I¥sReply Service¡A±N¸Ë¦n¸ê®ÆªºÄİ©Êª«¥ó¡A¥æµ¹DAO¥HHibernate¶ë¶i¸ê®Æ®w
 		replyService.addReply(reply);
-		return "redirect:/article?id=" + articleId; // é‡å®šå‘è‡³æ‰€å±¬æ–‡ç« ï¼Œç•™æ„keyå€¼çš„ç”¨æ³•
+		return "redirect:/article?id=" + articleId; // ­«©w¦V¦Ü©ÒÄİ¤å³¹¡A¯d·Nkey­Èªº¥Îªk
 	}
 		
-	// å¾Œå°:é€²å…¥æŒ‡å®šçœ‹æ¿ï¼Œé¡¯ç¤ºæŒ‡å®šçœ‹æ¿çš„æ–‡ç« åˆ—è¡¨ --> board-RichBack.jsp
+	// «á¥x:¶i¤J«ü©w¬İªO¡AÅã¥Ü«ü©w¬İªOªº¤å³¹¦Cªí --> board-RichBack.jsp
 	@RequestMapping("/board-RichBack")
 	public String getArticleByBoardTypeIdRichBack(@RequestParam("id") Integer boardId, Model model) {
 
-		// 1.å–å¾—æŒ‡å®šçœ‹ç‰ˆå±¬æ€§ï¼Œä¸¦æ›´æ–°ç€è¦½äººæ¬¡ï¼Œæ›´æ–°å¾Œå†é‡å–ä¸€æ¬¡
+		// 1.¨ú±o«ü©w¬İª©Äİ©Ê¡A¨Ã§ó·sÂsÄı¤H¦¸¡A§ó·s«á¦A­«¨ú¤@¦¸
 		BoardType boardType = boardTypeService.getBoardTypeById(boardId);				
 		discussionService.updateBoardViews(boardId); 
-		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// é€éservice.getBoardTypeByIdæ–¹æ³•å–å¾—ä¸€å€‹æŒ‡å®šçœ‹ç‰ˆçš„çœ‹æ¿åç¨±
+		BoardType boardType2 = boardTypeService.getBoardTypeById(boardId);// ³z¹Lservice.getBoardTypeById¤èªk¨ú±o¤@­Ó«ü©w¬İª©ªº¬İªO¦WºÙ
 		
-		// 2.å–å¾—æŒ‡å®šçœ‹ç‰ˆçš„æ‰€æœ‰æ–‡ç« 
-		List<Discussion> discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// é€éservice.getArticleByBoardTypeIdæ–¹æ³•å–å¾—æ‰€æœ‰æŒ‡å®šçœ‹æ¿ä¸Šçš„æ–‡ç« 
+		// 2.¨ú±o«ü©w¬İª©ªº©Ò¦³¤å³¹
+		List<Discussion> discussionlist = discussionService.getArticleByBoardTypeIdBack(boardId);// ³z¹Lservice.getArticleByBoardTypeId¤èªk¨ú±o©Ò¦³«ü©w¬İªO¤Wªº¤å³¹
 		
-		// 3.å°‡å±¬æ€§æ”¾å…¥SpringMVCæä¾›çš„model
-		model.addAttribute("DiscussionList", discussionlist);// å°‡æŒ‡å®šçœ‹æ¿ä¸Šçš„æ‰€æœ‰æ–‡ç« ç‰©ä»¶ï¼Œéƒ½æ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºDiscussionList
-		model.addAttribute("boardType", boardType2); // å°‡æŒ‡å®šçœ‹æ¿çš„åç¨±ç‰©ä»¶ï¼Œæ³¨å…¥modelä¸­ï¼Œè­˜åˆ¥å­—ä¸²ç‚ºboardType
+		// 3.±NÄİ©Ê©ñ¤JSpringMVC´£¨Ñªºmodel
+		model.addAttribute("DiscussionList", discussionlist);// ±N«ü©w¬İªO¤Wªº©Ò¦³¤å³¹ª«¥ó¡A³£ª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°DiscussionList
+		model.addAttribute("boardType", boardType2); // ±N«ü©w¬İªOªº¦WºÙª«¥ó¡Aª`¤Jmodel¤¤¡AÃÑ§O¦r¦ê¬°boardType
 
 		return "board-RichBack";
 	}
 	
-	// åˆªé™¤çœ‹æ¿ -->é‡å®šå‘è‡³è¨è«–å€å¾Œå°é¦–é  discussionBack.jsp
+	// §R°£¬İªO -->­«©w¦V¦Ü°Q½×°Ï«á¥x­º­¶ discussionBack.jsp
 	@RequestMapping(value = "/physicalDeleteBoardById", method = RequestMethod.GET)
 	public String physicalDeleteBoardById(@RequestParam("id") Integer boardId) {		
 		boardTypeService.physicalDeleteBoardById(boardId);
@@ -308,34 +309,34 @@ public class DiscussionController {
 	}
 	
 	
-	// å¯¦é«”åˆªé™¤æ–‡ç«  -->é‡å®šå‘è‡³æ‰€å±¬çš„çœ‹æ¿ board-RichBack.jsp
+	// ¹êÅé§R°£¤å³¹ -->­«©w¦V¦Ü©ÒÄİªº¬İªO board-RichBack.jsp
 	@RequestMapping(value = "/physicalDeleteArticle", method = RequestMethod.GET)
 	public String physicalDeleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId);	//ç”±articleIdå–å¾—æŒ‡å®šçš„æ–‡ç« è³‡æ–™åˆ—ç‰©ä»¶
-		Integer boardId = d.getBoardType().getBoardId();//ç‚ºäº†å›çœ‹æ¿ï¼Œå–å¾—çœ‹æ¿id
+		Discussion d = discussionService.getArticleById(articleId);	//¥ÑarticleId¨ú±o«ü©wªº¤å³¹¸ê®Æ¦Cª«¥ó
+		Integer boardId = d.getBoardType().getBoardId();//¬°¤F¦^¬İªO¡A¨ú±o¬İªOid
 		
-		discussionService.physicalDeleteArticleById(articleId);//åŸ·è¡ŒçœŸæ­£çš„åˆªé™¤
+		discussionService.physicalDeleteArticleById(articleId);//°õ¦æ¯u¥¿ªº§R°£
 		
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
 		
-	// è»Ÿåˆªé™¤æ–‡ç«  -->é‡å®šå‘è‡³æ‰€å±¬çš„çœ‹æ¿ board-RichBack.jsp
+	// ³n§R°£¤å³¹ -->­«©w¦V¦Ü©ÒÄİªº¬İªO board-RichBack.jsp
 	@RequestMapping(value = "/deleteArticle", method = RequestMethod.GET)
 	public String deleteArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId); //ç”±articleIdå–å¾—æŒ‡å®šçš„æ–‡ç« è³‡æ–™åˆ—ç‰©ä»¶
-		Integer boardId = d.getBoardType().getBoardId();//ç‚ºäº†å›çœ‹æ¿ï¼Œå–å¾—çœ‹æ¿id
-		discussionService.deleteArticleById(articleId);//åŸ·è¡Œè»Ÿåˆªé™¤
-		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//åˆªé™¤å¾Œï¼Œå†å–ä¸€æ¬¡åŸçœ‹æ¿çš„æ‰€æœ‰æ–‡ç« 
+		Discussion d = discussionService.getArticleById(articleId); //¥ÑarticleId¨ú±o«ü©wªº¤å³¹¸ê®Æ¦Cª«¥ó
+		Integer boardId = d.getBoardType().getBoardId();//¬°¤F¦^¬İªO¡A¨ú±o¬İªOid
+		discussionService.deleteArticleById(articleId);//°õ¦æ³n§R°£
+		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//§R°£«á¡A¦A¨ú¤@¦¸­ì¬İªOªº©Ò¦³¤å³¹
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
 	
-	// æ¢å¾©æ–‡ç«  -->é‡å®šå‘è‡³æ‰€å±¬çš„çœ‹æ¿ board-RichBack.jsp
+	// «ì´_¤å³¹ -->­«©w¦V¦Ü©ÒÄİªº¬İªO board-RichBack.jsp
 	@RequestMapping(value = "/recoverArticleById", method = RequestMethod.GET)
 	public String recoverArticleById(@RequestParam("id") Integer articleId) {
-		Discussion d = discussionService.getArticleById(articleId); //ç”±articleIdå–å¾—æŒ‡å®šçš„æ–‡ç« è³‡æ–™åˆ—ç‰©ä»¶
-		Integer boardId = d.getBoardType().getBoardId();//ç‚ºäº†å›çœ‹æ¿ï¼Œå–å¾—çœ‹æ¿id
-		discussionService.recoverArticleById(articleId);;//åŸ·è¡Œæ¢å¾©
-		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//æ¢å¾©å¾Œï¼Œå†å–ä¸€æ¬¡åŸçœ‹æ¿çš„æ‰€æœ‰æ–‡ç« 
+		Discussion d = discussionService.getArticleById(articleId); //¥ÑarticleId¨ú±o«ü©wªº¤å³¹¸ê®Æ¦Cª«¥ó
+		Integer boardId = d.getBoardType().getBoardId();//¬°¤F¦^¬İªO¡A¨ú±o¬İªOid
+		discussionService.recoverArticleById(articleId);;//°õ¦æ«ì´_
+		List<Discussion> discussion = discussionService.getArticleByBoardTypeIdBack(boardId);//«ì´_«á¡A¦A¨ú¤@¦¸­ì¬İªOªº©Ò¦³¤å³¹
 		return "redirect:/board-RichBack?id=" + boardId;
 	}
 	
