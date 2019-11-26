@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <title>新增消息</title>
 <!-- 	套版用 -->
@@ -32,7 +33,7 @@
 
 	<div class="container mt-3" >
 		<h1 align="center">新增消息資料</h1>
-		<form action="${pageContext.request.contextPath}/newsBack/addNews1"
+		<form onsubmit="return (validateForm());" name="news" action="${pageContext.request.contextPath}/newsBack/addNews1"
 			method="POST" enctype="multipart/form-data">
 			<p>
 			消息類別:<span id="newsType"></span>
@@ -65,7 +66,7 @@
 				是否刊登: <input type="radio" name="isVisable" value="1"> 是 <input
 					type="radio" name="isVisable" value="0"> 否
 			<p>
-			<input type="submit" value="送出">
+			<input onclick="check()" type="submit" value="送出">
 			<button type="button" onclick="GoBack()">取消</button>
 		</form>
 	</div>

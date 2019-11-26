@@ -9,6 +9,8 @@
 <html>
 
 <head>
+<link rel="icon" type="image/gif/png"
+	href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 
 <title>後台影片管理</title>
@@ -42,7 +44,7 @@
 		});
 	});
 </script>
-<title>title</title>
+
 <style>
 .label1 {
 	color: white;
@@ -85,10 +87,10 @@
 
 			<!-- Recent game   影片區-->
 			<div class="section-title">
-				<div class="row">
-					<!-- <div class="cata new"> this is a pink TAG </div> -->
-					<h2>影片區</h2>
-				</div>
+
+
+				<h2 style="color: white; text-align: center; padding-bottom: 80px;">影片區管理</h2>
+
 				<div class="row">
 					<c:forEach var="allmovies" items="${allmovies}">
 						<div class="col-lg-4 col-md-6">
@@ -113,11 +115,15 @@
 									<p>${allmovies.movie_content}</p>
 									<!-- Time -->
 									<p>${allmovies.time}</p>
-									<a href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"  class="commentUpdate" >Update</a>
+									<a
+										href="moviepersonal/viewUpdateMovie?movie_ID=${allmovies.movie_ID }"
+										class="commentUpdate">Update</a>
 									<!-- href="moviepersonal/updateMovie" -->
-									
+
 									<%-- onclick="window.location.href='moviepersonal/updateMovie?movie_ID=${allmovies.movie_ID }'" --%>
-									<a href="moviepersonal/deleteMovie?movie_ID=${allmovies.movie_ID }" class="commentDelete">Delete</a>
+									<a
+										href="moviepersonal/deleteMovie?movie_ID=${allmovies.movie_ID }"
+										class="commentDelete">Delete</a>
 								</div>
 							</div>
 						</div>
@@ -155,7 +161,6 @@
 									<p>
 										選則檔案: <input type="file" name="video_file"><br />
 									<p>
-										
 									<p>
 										<input type="submit" value="送出"><br />
 								</form>

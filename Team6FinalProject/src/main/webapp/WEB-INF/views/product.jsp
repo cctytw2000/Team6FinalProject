@@ -6,7 +6,8 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
+<link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
+    <meta charset="UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
 <title>商品資料</title>
@@ -15,7 +16,13 @@
 
 <script src="${pageContext.request.contextPath}/JS/product.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#clickMeLogin").click(function() {
+			$("#loginButton").trigger('click');
 
+		});
+
+	});
 </script>
 <style>
 #edit{
@@ -92,7 +99,7 @@ color:red
 					</p>
 				</div>
 
-<div id="commentInfo">
+<div style="width:100%" id="commentInfo">
 <%-- 				<c:forEach var="c" items="${comments }"> --%>
 <!-- 					<div class="media border p-3" style="width: 600px;"> -->
 
@@ -109,18 +116,36 @@ color:red
 <!-- 						</div> -->
 <!-- 					</div> -->
 <%-- 				</c:forEach> --%>
-</div>				
-				<div class="form-group">
+</div>		
+
+
+
+			<c:choose>
+<c:when test="${sessionScope.mem != Null }">
+			<input type="hidden" id="game_id" name="game_id" value="${product.game_id }">
+							<input type="hidden" id="loginusername" value="${sessionScope.mem.username }"><br>	
+	<div class="form-group">
 					<nav class="navbar navbar-expand-sm " style="padding-left: 0px">
 						
-							<input type="hidden" id="game_id" name="game_id" value="${product.game_id }">
-							<input type="hidden" id="loginusername" value="${sessionScope.mem.username }">
+				
 							<textarea class="form-control" rows="1" id="addComment"
 								name="comment" style="width: 600px" placeholder="請輸入評論..."></textarea>
-							<button class="btn btn-success" onclick="addComment()">Comment</button>
+							<button class="btn btn-success" onclick="addComment()">送出評論</button>
 						
 					</nav>
 				</div>
+</c:when>
+
+<c:otherwise>
+
+<div>
+			<input type="hidden" id="game_id" name="game_id" value="${product.game_id }">
+							<input type="hidden" id="loginusername" value="${sessionScope.mem.username }"><br>	
+				
+								<button style="white-space:pre-wrap;" id="clickMeLogin" class="btn btn-primary" type="button">登入後留言</button>
+							</div>
+</c:otherwise>
+</c:choose>
 
 
 			</div>

@@ -48,7 +48,7 @@ $(document).ready(function() {
     					html +="<option value="+ id +">"+name+"</option>";
     				}
     				html += "</select></span";
-//    				$("#showGame1").show();
+// $("#showGame1").show();
     				$("#showGame1").html(html);
     			}
     		});
@@ -108,7 +108,7 @@ $(document).ready(function() {
     					html +="<option value="+ id +">"+name+"</option>";
     				}
     				html += "</select></span";
-//    				$("#showActivity1").show();
+// $("#showActivity1").show();
     				$("#showActivity1").html(html);
     			}
     		});
@@ -121,7 +121,7 @@ $(document).ready(function() {
     });
 })
 
-//產生activityDetail
+// 產生activityDetail
 function activityDetail(number) {
 	if(number == -1){
 		let html1 ="";
@@ -158,3 +158,20 @@ function activityDetail(number) {
 		}
 	});
 }
+
+function validateForm() {   
+	  if ($("#newsType").val() == "-1") {
+	    alert("你尚未選取消息類別");
+	    return false;
+	  } 
+	  if ($("#title").val().replace(/\s+/g, "").length == 0 || $("#title").val() == "") {
+		  alert("你尚未選取消息標題");
+		  return false;
+	  } 
+	  if ($("#article").val() == "") {
+		  alert("你尚未選取消息內容");
+		  return false;
+	  } 
+	  
+	  return( true );
+	}

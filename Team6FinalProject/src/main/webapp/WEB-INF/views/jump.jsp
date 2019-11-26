@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
     <meta charset="UTF-8">
     <title>跳轉網頁</title>
     <meta http-equiv="refresh" content="5;url=${pageContext.request.contextPath}">

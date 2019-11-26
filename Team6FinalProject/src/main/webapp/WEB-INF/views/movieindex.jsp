@@ -9,6 +9,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 
 <script
@@ -16,7 +17,26 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <title>title</title>
+<script type="text/javascript">
 
+function homeupdateviews(id) {
+	$.ajax({
+		type : "POST",
+		url : "member/updateMoviesViews",
+		data : {
+			movieId : id
+		},
+
+		success : function(response) {
+			document.getElementById(id).setAttribute("onclick", "")
+		}
+	});
+}
+
+
+
+
+</script>
 </head>
 
 <body
@@ -61,18 +81,18 @@
 		data-setbg="Images/recent-game-bg.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Games</h2>
+				<div class="cata new">熱門影片</div>
+			
 			</div>
 			<div class="row">
-				<c:forEach var="movie" items="${movies}">
+				<c:forEach var="movie" items="${movies}" begin="0" end="2">
 					<div class="col-lg-4 col-md-6">
 						<div class="recent-game-item">
 							<!-- 標籤 -->
 
 							<div class="rgi-thumb set-bg">
-								<div class="cata racing">racing</div>
-								<video width="320" height="240" class="set-video"
+								<div class="cata racing">熱門影片</div>
+								<video id="${movie.movie_ID}" onclick="homeupdateviews('${movie.movie_ID}')" width="320" height="240" class="set-video"
 									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg" playsinline="playsinline"
 									controls="controls">
 									<source src="<c:url value='/Movie/${movie.location_Test}'/>"
@@ -88,7 +108,8 @@
 								<!-- 							內文 -->
 								<p>${movie.movie_content}.</p>
 								<!-- 							案讚數 -->
-								<a href="#" class="comment">Like</a>
+									<p>觀看次數：${movie.click_Sum}</p>
+<!-- 								<a href="#" class="comment">Like</a> -->
 
 <!-- 								<div class="rgi-extra"> -->
 <!-- 									<div class="rgi-heart"> -->
@@ -102,7 +123,61 @@
 
 				</c:forEach>
 			</div>
+		
 		</div>
+		
+		
+		<div class="container">
+			<div class="section-title">
+				<div class="cata new">最新影片</div>
+			
+			</div>
+			<div class="row">
+				<c:forEach var="movie" items="${newMovies}" begin="0" end="2">
+					<div class="col-lg-4 col-md-6">
+						<div class="recent-game-item">
+							<!-- 標籤 -->
+
+							<div class="rgi-thumb set-bg">
+								<div class="cata racing">最新影片</div>
+								<video id="${movie.movie_ID}" onclick="homeupdateviews('${movie.movie_ID}')" width="320" height="240" class="set-video"
+									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg" playsinline="playsinline"
+									controls="controls">
+									<source src="<c:url value='/memberMovies/${movie.member.account}${movie.member.member_id}/${movie.movie_ID}${movie.location_Test}'/>"
+										type="video/mp4">
+
+
+								</video>
+							</div>
+							<div style="margin-top: 50px;" class="rgi-content">
+								<!-- 							標題 -->
+								<h6>${movie.location_Test }</h6>
+								<h5>${movie.name }</h5>
+								<!-- 							內文 -->
+								<p>${movie.movie_content}.</p>
+								<!-- 							案讚數 -->
+									<p>觀看次數：${movie.click_Sum}</p>
+<!-- 								<a href="#" class="comment">Like</a> -->
+
+<!-- 								<div class="rgi-extra"> -->
+<!-- 									<div class="rgi-heart"> -->
+<!-- 										<img src="Images/icons/heart.png" alt="heart.png"> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+							</div>
+
+						</div>
+					</div>
+
+				</c:forEach>
+			</div>
+			
+
+		</div>
+		
+		
+		
+		
 	</section>
 	<!-- Recent game section  End-->
 

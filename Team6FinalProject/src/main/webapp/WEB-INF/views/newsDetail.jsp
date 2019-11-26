@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <title>消息內容</title>
 <script
@@ -125,7 +126,9 @@ p {
 					</div>
 				</div>
 			</div>
-
+			<p style="clear: both;">
+			<hr id="hr" style="clear: both;display:none">
+			
 			<!-- 		顯示評論 -->
 			<div id="memoForNews"></div>
 

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <style>
 #oneDayOnly, #manyDays {
@@ -94,7 +95,7 @@
 	<div class="container mt-3">
 		<h1 align="center">新增活動資料</h1>
 		<div style="margin: 0px auto; width: 420px">
-			<form:form
+			<form:form id="activity" onclick="return false"
 				action="${pageContext.request.contextPath}/newsBack/addActivity1"
 				method="POST" modelAttribute="activity">
 				<p>
@@ -158,7 +159,7 @@
 				</div>
 				<p>
 				<div style="text-align: center">
-					<input type="submit" value="送出">
+					<input id="btn" type="submit" value="送出">
 					<button type="button" onclick="GoBack()">取消</button>
 				</div>
 				<div class="row mb-2"></div>

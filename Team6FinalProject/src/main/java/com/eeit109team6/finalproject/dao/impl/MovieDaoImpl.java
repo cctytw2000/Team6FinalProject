@@ -72,7 +72,7 @@ public class MovieDaoImpl implements IMovieDao {
 	// DONE
 	@Override
 	public List<MovieInfo> getMovies() {
-		String hql = "FROM MovieInfo";
+		String hql = "FROM MovieInfo order by Click_Sum desc";
 		List<MovieInfo> list = new ArrayList<>();
 		Session session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
