@@ -60,7 +60,8 @@ table th{
 	background-color:#FFFFFF
 }
 #ordersInfo tr:nth-child(n) tr:nth-child(even){
-	background-color:#BBFFBB
+	background-color:#F0F0F0
+	/*background-color:#BBFFBB*/
 }
 div.modal-dialog div.modal-content table th{
 	background-color:#DCB5FF
@@ -78,7 +79,8 @@ div.modal-dialog div.modal-content table th{
 	background-color:#FFFFFF
 }
 #orderInfo1 tr:nth-child(n) tr:nth-child(even){
-	background-color:#BBFFBB
+	background-color:#F0F0F0
+	/*background-color:#BBFFBB*/
 }
 </style>
 

@@ -125,7 +125,7 @@ function showOrdersInfo(response, pageNo) {
 		info += "<tr><td colspan='7'>";
 		info += "<div id='o" + response.Orders[i].order_id + "' class='collapse' data-parent='#accordion'>";
 		info += "<div class='card-body'>";
-		info += "<table border='1' style='text-align: center; width: 100%'>";
+		info += "<table style='text-align: center; width: 100%'>";
 		info += "<tr><th>商品編號</th><th>商品名稱</th><th>數量</th><th>金額</th></tr>";
 		info += "<tbody id='oitem" + response.Orders[i].order_id + "'></tbody>";
 		info += "</table>";
