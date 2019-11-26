@@ -1,5 +1,6 @@
 //顯示換行及空格
 $(document).ready(function() {
+	showMemoForNews();
 	var content = $('#article').text();
 	// alert(content)
 	$('#article').html((content.replace(/\n/g, '<br/>')).replace(/\s/g,"&nbsp;"));
@@ -19,6 +20,7 @@ $(document).ready(function() {
 			$("#gamePublicationDate").text("遊戲發售日:尚無確切發行日期");
 		}
 		$("#gameDetail").show();
+		$("#hr").show();
 	}
 })
 
@@ -49,8 +51,8 @@ $(document).ready(function() {
 			$("#endingDate").hide();
 		}
 		$("#activityDetail").show();
+		$("#hr").show();
 	}
-	showMemoForNews();
 })
 
 // 點入消息的計次功能
@@ -77,8 +79,6 @@ function showMemoForNews(){
 	$.ajax({
 		url : "showMemoForNews.json",
 		success : function(response) {
-			showComment += '<p style="clear: both;">'
-			showComment += '<hr style="clear: both;">';
 			for(let i = 0; i < response.newsList.length; i++){
 				if(!(typeof response.newsList[i].messages === "undefined")){
 					for(let t = 0; t< response.newsList[i].messages.length; t++){

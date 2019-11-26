@@ -37,9 +37,9 @@ input {
 	<div class="container mt-3">
 		<h1 style="text-align: center;">新增遊戲資料</h1>
 		<div style="margin: 0px auto; width: 420px">
-			<form:form
+			<form:form id="game"
 				action="${pageContext.request.contextPath}/newsBack/addGame1"
-				method="POST" modelAttribute="game">
+				method="POST" modelAttribute="game" onclick="return false">
 				<p>
 					遊戲類別:
 					<form:select path="gameType_">
@@ -61,7 +61,7 @@ input {
 					<form:input path="platform" type="text" />
 				<p>
 				<div style="text-align: center">
-					<button>送出</button>
+					<button id="button">送出</button>
 					<button type="button" onclick="GoBack()">取消</button>
 				</div>
 			</form:form>
