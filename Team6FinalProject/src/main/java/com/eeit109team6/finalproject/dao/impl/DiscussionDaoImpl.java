@@ -115,7 +115,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.update(discussion);
 	}
 
-	// ±N¤å³¹µw§R°£
+	// å°‡æ–‡ç« ç¡¬åˆªé™¤
 	@Override
 	public void physicalDeleteArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();
@@ -123,7 +123,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.delete(discussion);
 	}
 	
-	// ±NisDeleted§ï¬°1¡A±N¤å³¹¼Ğ°O³n§R°£¡A¦ı¸ê®Æ®w¨ÌµM¦³¬ö¿ı¡C­Y­nµw§R°£¡A½Ğ¥ÎphysicalDeleteArticleById()
+	// å°‡isDeletedæ”¹ç‚º1ï¼Œå°‡æ–‡ç« æ¨™è¨˜è»Ÿåˆªé™¤ï¼Œä½†è³‡æ–™åº«ä¾ç„¶æœ‰ç´€éŒ„ã€‚è‹¥è¦ç¡¬åˆªé™¤ï¼Œè«‹ç”¨physicalDeleteArticleById()
 	@Override
 	public void deleteArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();
@@ -132,7 +132,7 @@ public class DiscussionDaoImpl implements IDiscussionDao {
 		session.update(discussion);
 	}
 	
-	// ±NisDeleted§ï¬°0¡A¤Ï§R°£³Q¼Ğ°O¬°³n§R°£ªº¤å³¹¡A«ì´_¬°¨Ï¥ÎªÌ¥i¨£¡C
+	// å°‡isDeletedæ”¹ç‚º0ï¼Œååˆªé™¤è¢«æ¨™è¨˜ç‚ºè»Ÿåˆªé™¤çš„æ–‡ç« ï¼Œæ¢å¾©ç‚ºä½¿ç”¨è€…å¯è¦‹ã€‚
 	@Override
 	public void recoverArticleById(Integer articleId) {
 		Session session = factory.getCurrentSession();
