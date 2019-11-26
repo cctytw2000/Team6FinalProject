@@ -35,7 +35,53 @@
     min-height: calc(100vh - 20px);
   }
 }
-
+table th{
+	background-color:#FFFFCE
+}
+#ordersInfo tr:nth-child(1){
+	background-color:#FFFFFF
+}
+#ordersInfo tr:nth-child(3){
+	background-color:#F0F0F0
+}
+#ordersInfo tr:nth-child(5){
+	background-color:#FFFFFF
+}
+#ordersInfo tr:nth-child(7){
+	background-color:#F0F0F0
+}
+#ordersInfo tr:nth-child(9){
+	background-color:#FFFFFF
+}
+#ordersInfo tr:nth-child(n) th{
+	background-color:#CECEFF
+}
+#ordersInfo tr:nth-child(n) tr:nth-child(odd){
+	background-color:#FFFFFF
+}
+#ordersInfo tr:nth-child(n) tr:nth-child(even){
+	background-color:#F0F0F0
+	/*background-color:#BBFFBB*/
+}
+div.modal-dialog div.modal-content table th{
+	background-color:#DCB5FF
+}
+#membertable tr:hover{
+	background-color:#F9F900
+}
+#orderInfo1 tr:nth-child(1) {
+	background-color:#FFFFFF
+}
+#orderInfo1 tr:nth-child(n) th{
+	background-color:#CECEFF
+}
+#orderInfo1 tr:nth-child(n) tr:nth-child(odd){
+	background-color:#FFFFFF
+}
+#orderInfo1 tr:nth-child(n) tr:nth-child(even){
+	background-color:#F0F0F0
+	/*background-color:#BBFFBB*/
+}
 </style>
 
 <script src="https://kit.fontawesome.com/685268963f.js"></script>

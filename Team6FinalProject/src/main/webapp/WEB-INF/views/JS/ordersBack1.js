@@ -58,7 +58,7 @@ function showOrderInfo1(orderid) {
             info += "<tr><td colspan='7'>";
             info += "<div id='oo" + response.order.order_id + "' class='collapse show' data-parent='#accordion1'>";
             info += "<div class='card-body'>";
-            info += "<table border='1' style='text-align: center; width: 100%'>";
+            info += "<table style='text-align: center; width: 100%'>";
             info += "<tr><th>商品編號</th><th>商品名稱</th><th>數量</th><th>金額</th></tr>";
             info += "<tbody id='ooitem" + response.order.order_id + "'></tbody>";
             info += "</table>";

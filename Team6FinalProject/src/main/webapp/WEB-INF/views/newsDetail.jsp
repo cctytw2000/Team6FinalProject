@@ -32,6 +32,12 @@
 p {
 	font-family: Microsoft JhengHei;
 }
+#divArticle p{
+	color: black; 
+	font-size: large; 
+	text-align: left; 
+	font-family: Microsoft JhengHei
+}
 </style>
 </head>
 <body style="background-color: #F2F3F3">
@@ -75,9 +81,8 @@ p {
 					style="float: left; margin-right: 30px"
 					src="<c:url value='/getNewsPicture/${news.newsId}' />">
 			</div>
-			<div>
-				<p id="article"
-					style="color: black; font-size: large; text-align: left; font-family: Microsoft JhengHei">${news.article}</p>
+			<div id="divArticle">
+				${news.article}
 			</div>
 			<hr>
 

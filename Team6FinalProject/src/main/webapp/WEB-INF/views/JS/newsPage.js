@@ -17,8 +17,9 @@ $(document).ready(function() {
 					html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
 					html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
 					html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
-					html += "<p style='color:#686868;font-size:15px'>"+ (data.newsList[i].article).substr(0, 200);
-					html += " ...<a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a></p>";
+					html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 200)
+					html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+					html += "</div>"
 					html += "</tr></tbody>";
 				}
 			}
