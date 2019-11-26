@@ -15,6 +15,15 @@ public class Mail {
 
 	private String email;
 	private String pwd;
+	private String MailMessage;
+
+	public String getMailMessage() {
+		return MailMessage;
+	}
+
+	public void setMailMessage(String mailMessage) {
+		MailMessage = mailMessage;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -24,7 +33,7 @@ public class Mail {
 		this.pwd = pwd;
 	}
 
-	public Boolean SendMessage(Integer memberId,String account , String token ) {
+	public Boolean SendMessage(Integer memberId, String account, String token) {
 
 		final String Email = email;// your Gmail
 		final String EmailPwd = pwd;// your password
@@ -44,28 +53,30 @@ public class Mail {
 
 		try {
 
-//			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()
-//					+ "/member/insertMemberInformationform?id=" + memberId + "&token=" + mem.getToken();
-//			System.out.println("url = " + url);
+
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(Email));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(account));
 			message.setSubject("驗證信");
-			message.setText("Wellcome To FootBook \n" + "http://localhost:8080/Team6FinalProject/member/insertMemberIn"
-					+ "formationform?id=" + memberId + "&token=" + token);
+			message.setContent(MailMessage,  "text/html;charset=UTF-8");
+			
+			
+	
+			
+			
+
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, Email, EmailPwd);
 
 			Transport.send(message);
 
-
-			return true ; 
+			return true;
 		} catch (MessagingException e) {
 			return false;
 		}
-			
-
 
 	}
+
+
 }

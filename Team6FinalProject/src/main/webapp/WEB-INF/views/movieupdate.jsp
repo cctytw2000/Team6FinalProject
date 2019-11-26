@@ -57,6 +57,7 @@
 										
 										<input type="hidden" name="movie_ID" value="${movieInfo.movie_ID }" />
 										<input type="hidden" name="member_id" value="${movieInfo.getMember().getMember_id() }" />
+										<input type="hidden" name="oldfilename" value="${movieInfo.location_Test }" />
 										<p>
 											影片標題: <input name="movie_name" type="text" size="50px"
 												value="${movieInfo.name }" />

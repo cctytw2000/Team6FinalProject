@@ -102,6 +102,65 @@ public class MemberController {
 		LiLoInforService = liLoInforService;
 	}
 
+	@RequestMapping(value = "/member/updateMovie", method = RequestMethod.POST)
+	public String updateMovie(
+			// @ModelAttribute("movieInfo") MovieInfo movieInfo,
+			@RequestParam(value = "movie_ID") Integer movie_ID, @RequestParam(value = "member_id") Integer member_id,
+			@RequestParam(value = "movie_name") String movie_name,
+			@RequestParam(value = "movie_content") String movie_content,
+			@RequestParam(value = "video_file") MultipartFile video_file, HttpSession session, Model model,
+			@RequestParam(value = "oldfilename") String oldfilename) {
+
+		String videoname = video_file.getOriginalFilename();
+
+		String path = session.getServletContext().getRealPath("/"); // 找到影片上傳路徑
+
+		MovieInfo movieInfo = movieservice.getMovieInfoByMovieID(movie_ID);
+
+		Member member = MemService.findById(member_id);
+
+		movieInfo.setMember(member);
+
+		movieInfo.setName(movie_name);
+		movieInfo.setMovie_content(movie_content);
+
+		if (!"".equals(videoname)) {
+			System.out.println("!\"\".equals(videoname)");
+			movieInfo.setLocation_Test(videoname);
+		} else {
+			movieInfo.setLocation_Test(oldfilename);
+		}
+
+		movieservice.updateMovieInfoById(movieInfo);
+
+		if (!video_file.isEmpty()) {
+			try {
+				byte[] bytes = video_file.getBytes();
+				File dir = new File(path + "\\WEB-INF\\views\\Movie");
+				System.out.println("File dir ======== " + dir);
+				if (!dir.exists())
+					dir.mkdirs();
+
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				System.out.println("You successfully uploaded file=" + videoname);
+
+			} catch (Exception e) {
+				System.out.println("You failed to upload " + videoname + " => " + e.getMessage());
+
+			}
+		} else {
+			System.out.println("You failed to upload " + videoname + " because the file was empty.");
+
+		}
+
+		return "redirect:/member/movies";
+	}
+
 	@RequestMapping(value = "/member/addMovie", method = RequestMethod.POST)
 	public String memberAddMovie(@RequestParam("movie_name") String movie_name,
 			@RequestParam("movie_content") String movie_content, @RequestParam("video_file") MultipartFile video_file,
@@ -209,6 +268,26 @@ public class MemberController {
 	}
 
 	// ===========================會員一般註冊====================================
+	/**
+	 * @param account
+	 * @param password
+	 * @param username
+	 * @param memberimg
+	 * @param model
+	 * @param redirectAttributes
+	 * @param request
+	 * @return
+	 */
+	/**
+	 * @param account
+	 * @param password
+	 * @param username
+	 * @param memberimg
+	 * @param model
+	 * @param redirectAttributes
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
 	public String registerMember(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("username") String username, @RequestParam("memberimg") MultipartFile memberimg, Model model,
@@ -331,9 +410,32 @@ public class MemberController {
 			e2.printStackTrace();
 		}
 
+//		mem.setAccount(account);
+//		mem.setUsername(username);
+//		mem.setPassword(password_AES);
+//		mem.setHeadshot(createtime + memberimg.getOriginalFilename());
+//		mem.setType("General");
+//		mem.setMemberlevel(level);
+//		mem.setRegisteredtime(registeredtime);
+//		mem.setIsactive(0);
+
+		String htmlCode = "";
+		htmlCode += "<div style='margin:0 auto;border:2px solid #02DF82;width:500px;text-align:center;font-size:22px;border-radius:10px'>";
+		htmlCode += "<h1>您的會員資料 :</h1>";
+		htmlCode += "<table style='border:none;text-align:ceneter;margin:0 auto'>";
+		htmlCode += "<tr><td>會員編號:</td><td>" + memberId + "</td></tr>";
+
+		htmlCode += "<tr><td>大頭貼:" + "</td>"+"<td>" +"<img src='cid:image'/><br>"+"</td>";
+		htmlCode += "<tr><td>姓名:</td><td>" + username + "</td></tr>";
+		htmlCode += "<tr><td>信箱:</td><td>" + account + "</td></tr>";
+		htmlCode += "<tr><td>認證:</td><td>"
+				+ "<a href =http://localhost:8080/Team6FinalProject/member/insertMemberInformationform?id=" + memberId
+				+ "&token=" + mem.getToken() + ">點擊認證</a>" + "</td></tr>";
+
 		Mail mail = new Mail();
 		mail.setEmail(email);
 		mail.setPwd(pwd);
+		mail.setMailMessage(htmlCode);
 		Boolean isSuccess = mail.SendMessage(memberId, mem.getAccount(), mem.getToken());
 		if (isSuccess) {
 			System.out.println("寄送email結束.");

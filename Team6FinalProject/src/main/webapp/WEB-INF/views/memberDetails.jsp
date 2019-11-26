@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <title>會員資料</title>
 <!-- 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
+
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
 	type="text/css" />
@@ -82,7 +84,7 @@
                                                 <div class="modal-body">
                                                     <img style="width:50%;margin:5px 100px" height="250"
                                                         src="<c:url value='/memberImag
-						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />"">
+						es/${sessionScope.mem.account}_${sessionScope.mem.member_id}/${sessionScope.mem.username}${sessionScope.mem.member_id}${sessionScope.mem.headshot}' />">
 
 
 
