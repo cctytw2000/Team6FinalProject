@@ -40,6 +40,13 @@
 	padding-left: 20px;
 	padding-bottom: 20px;
 }
+#divArticle p{
+	color:#686868;
+	font-size:15px
+}
+#divArticle a{
+	color:#02007C;
+}
 </style>
 
 </head>
