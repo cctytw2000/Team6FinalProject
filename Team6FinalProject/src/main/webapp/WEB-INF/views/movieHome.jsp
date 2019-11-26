@@ -9,9 +9,10 @@
 <html>
 
 <head>
-    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
+<link rel="icon" type="image/gif/png"
+	href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
-
+<title>首頁影片管理</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -20,23 +21,46 @@
 <%-- <script src="${pageContext.request.contextPath}/JS/memberMovieIndex.js"></script> --%>
 <script
 	src="${pageContext.request.contextPath}/JS/movieHomeUpdateAndDelete.js"></script>
-<title>title</title>
 
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/bootstrap.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/font-awesome.min.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/owl.carousel.css'
+	type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/style.css' type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/CSS/animate.css'
+	type="text/css" />
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://kit.fontawesome.com/685268963f.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script>
+	$(function() {
+		$(".flip").click(function() {
+			$(".panel").slideToggle("slow");
+			$(".xs1").toggle();
+			$(".xs2").toggle();
+		});
+	});
+</script>
 </head>
 
-<body>
+<body
+	style="height: 100%;background-image: url(<c:url value='/Images/pattern.png'  />)">
+	<!-- 底色設定 循環至....... -->
 
-	<jsp:include page="header/homeHeader.jsp" />
+	<jsp:include page="header/manageHeader.jsp" />
 
-
-
-
-
-
-
-
-
-	<section style="height: 100%" class="recent-game-section spad set-bg">
+	<section class="footer-top-section" style="height: 100%">
+		<!-- 	style="height: 100%" class="recent-game-section spad set-bg" -->
 		<!-- 新增影片 Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-toggle="modal"
 			data-target="#exampleModalCenter">新增影片</button>
@@ -64,15 +88,15 @@
 							<p>
 								選則檔案: <input type="file" name="video_file"><br />
 							<p>
-								<input type="submit" value="送出"><br />
+								<!-- 								<input type="" value="送出"><br /> -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Save
+									changes</button>
+							</div>
 						</form>
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
 					</div>
 				</div>
 			</div>
@@ -83,8 +107,9 @@
 		<div class="container">
 
 			<div class="section-title">
-				<div class="cata new">已上傳的影片</div>
-				<h2>影片</h2>
+				<!-- 				<div class="cata new">已上傳的影片</div> -->
+				<!--  -->
+				<h2 style="color:white;text-align: center;">首頁影片管理</h2>
 			</div>
 
 			<div class="row">
@@ -98,8 +123,8 @@
 								<video id="${homeMovies.movieId}" width="320" height="240"
 									class="set-video"
 									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg"
-									playsinline="playsinline" controls="controls">
-									<%--   --%>
+									controls="controls">
+									<%-- playsinline="playsinline"  --%>
 									<%-- 										要改 <c:url> 的 value  --%>
 
 									<source
@@ -138,7 +163,8 @@
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Update Modal</h5>
+												<h5 class="modal-title" id="exampleModalLongTitle">Update
+													Modal</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -151,9 +177,11 @@
 													enctype="multipart/form-data">
 													<p>
 														<!-- 	確認要修改的影片與Model功能 -->
-														<input type="hidden" name="updateMovieId" value="" id="updateMovieId" />
-														<input type="hidden" name="updateMovieName" value="" id="updateMovieName" />
-														<input type="hidden" name="originMovieId" value="${homeMovies.movieId}"  />
+														<input type="hidden" name="updateMovieId" value=""
+															id="updateMovieId" /> <input type="hidden"
+															name="updateMovieName" value="" id="updateMovieName" />
+														<input type="hidden" name="originMovieId"
+															value="${homeMovies.movieId}" />
 													<p>
 														選則檔案: <input type="file" name="video_file"><br />
 													<p>
@@ -192,8 +220,8 @@
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Delete Modal
-													</h5>
+												<h5 class="modal-title" id="exampleModalLongTitle">Delete
+													Modal</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -206,8 +234,9 @@
 													enctype="multipart/form-data">
 													<p>
 														<!-- 	確認刪除的影片與Model功能  -->
-														<input type="hidden" name="deleteMovieIdCheck" value="" id="deleteMovieIdCheck"/> 
-														<input type="hidden" name="deleteMovieId" value="${homeMovies.movieId}" />
+														<input type="hidden" name="deleteMovieIdCheck" value=""
+															id="deleteMovieIdCheck" /> <input type="hidden"
+															name="deleteMovieId" value="${homeMovies.movieId}" />
 														<%-- <input type="hidden" name="deleteMovieName" value="${homeMovies.movieName}" /> --%>
 													<p>
 														<!-- <input class="btn btn-secondary" type="submit" value="確認刪除"><br /> -->
