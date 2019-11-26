@@ -32,9 +32,28 @@
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <style>
 body {
-	background-image: url("Images/discussionbg.jpg");
+	background-image: url("Images/discussionbg.png");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+}
+
+a:link {
+  color: #0d1a00;
+}
+
+/* visited link */
+a:visited {
+  color: #0d1a00;
+}
+
+/* mouse over link */
+a:hover {
+  color: #0d1a00;
+}
+
+/* selected link */
+a:active {
+  color: blue;
 }
 </style>
 <!-- 	//套版用 -->
@@ -56,31 +75,31 @@ body {
 								<!-- 								</tr> -->
 								<c:forEach var='boardType' items="${boardTypeList}">
 
-									<tr class="row" style="margin-bottom:15px;">
+									<tr class="row" style="margin-bottom: 15px;">
 
-										<td class="col-md-6"><a href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><img width="380" height="90" alt="${boardType.boardName}"
-											src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
-											 </td>
-										<td class="col-md-6"><a style="text-decoration: none;"
-											href="<spring:url value='board-Rich?id=${boardType.boardId}'/>">${boardType.boardName}</a>
+										<td class="col-md-6"><a
+											href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><img
+												width="380" height="90" alt="${boardType.boardName}"
+												src="<c:url value='/getBoardImage/${boardType.boardId}' />"></a>
+										</td>
+										<td class="col-md-6"><a style="color:black;"
+											href="<spring:url value='board-Rich?id=${boardType.boardId}'/>"><b>${boardType.boardName}</b></a>
 											<p>
 												<c:forEach var='discussion' begin="0" end="0"
 													items="${boardType.discussion}">
 
-													<a style="text-decoration: none;"
-														href="<spring:url value='article?id=${discussion.articleId}'/>">【${discussion.subjectType.subjectName}】${discussion.subject}</a>
+													<a href="<spring:url value='article?id=${discussion.articleId}'/>"><b>【${discussion.subjectType.subjectName}】${discussion.subject}</b></a>
 													<p>
-<!-- 													<div style="padding-left:15px"> -->
-<%-- 														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i --%>
-<%-- 															class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span> --%>
-<!-- 													</div> -->
-
+														<!-- 													<div style="padding-left:15px"> -->
+														<%-- 														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i --%>
+														<%-- 															class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span> --%>
+														<!-- 													</div> -->
 												</c:forEach>
-												<div style="padding-left:15px">
-														<span><i id="eye" class="fas fa-eye"></i> ${boardType.boardViews}</span>&nbsp;&nbsp;<span><i
-															class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span>
-													</div>
-												</td>
+											<div style="padding-left: 15px">
+												<span><i id="eye" class="fas fa-eye"></i>
+													${boardType.boardViews}</span>&nbsp;&nbsp;<span><i
+													class="fas fa-list-alt"></i> ${boardType.discussion.size()}</span>
+											</div></td>
 										<%-- 										<td class="col-md-1">${boardType.discussion.size()}</td> --%>
 
 									</tr>
@@ -98,25 +117,32 @@ body {
 
 						<!-- widget -->
 						<div class="widget-item">
-							<h4 class="widget-title">最新發表!!</h4>
+							<h4 class="widget-title"><b>最新發表!!</b></h4>
 							<div class="latest-blog">
-							
-							<c:forEach var="discussion" items="${sessionScope.articleLatest}" varStatus="i"
-								begin="0" end="7">
-							
-							
-								<div class="lb-item">
-									<div class="lb-thumb set-bg"></div>
-									<div class="lb-content">
-										<div class="lb-date">發表時間  ${discussion.postTimeStamp}</div>
-										<a href="article?id=${discussion.articleId}"><p>【${discussion.subjectType.subjectName}】 ${discussion.subject}</p></a>
-										<div><img width="50" height="50" src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">By ${discussion.member.memberdetail.nickname}</div>
+
+								<c:forEach var="discussion"
+									items="${sessionScope.articleLatest}" varStatus="i" begin="0"
+									end="7">
+
+
+									<div class="lb-item">
+										<div class="lb-thumb set-bg"></div>
+										<div class="lb-content">
+											<div class="lb-date">發表時間 ${discussion.postTimeStamp}</div>
+											<a href="article?id=${discussion.articleId}">
+												【${discussion.subjectType.subjectName}】
+												${discussion.subject}</a>
+											<div>
+												<img width="50" height="50"
+													src="<c:url value='/memberImages/${discussion.member.account}_${discussion.member.member_id}/${discussion.member.username}${discussion.member.member_id}${discussion.member.headshot}' />">By
+												${discussion.member.memberdetail.nickname}
+											</div>
+										</div>
 									</div>
-								</div>
-								
+
 								</c:forEach>
-								
-								
+
+
 							</div>
 						</div>
 						<!-- widget -->
@@ -131,10 +157,11 @@ body {
 
 
 				</div>
-
+				<!-- style="background-image: url("Images/recent-game-bg.png");" -->
 			</div>
+
+		</section>
 	</div>
-	</section>
 	<!-- Page section end -->
 
 	<!-- 	套版用 -->
