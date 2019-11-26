@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.eeit109team6.finalproject.dao.IMemberDao;
 import com.eeit109team6.finalproject.model.Category;
+import com.eeit109team6.finalproject.model.HomeMovie;
 import com.eeit109team6.finalproject.model.Member;
 import com.eeit109team6.finalproject.model.Movie;
 import com.eeit109team6.finalproject.model.MovieInfo;
@@ -319,21 +320,11 @@ public class MovieController {
 		return "redirect:/moviepersonal";
 	}
 
-	// ============================================================================
-	// moviehome.jsp
-	// ===============================================================================================
-	// ============================================================================
-	// moviehome.jsp
-	// ===============================================================================================
-	// ============================================================================
-	// moviehome.jsp
-	// ===============================================================================================
-	// ============================================================================
-	// moviehome.jsp
-	// ===============================================================================================
-	// ============================================================================
-	// moviehome.jsp
-	// ===============================================================================================
+	// ============================================================================moviehome.jsp===============================================================================================
+	// ============================================================================moviehome.jsp===============================================================================================
+	// ============================================================================moviehome.jsp===============================================================================================
+	// ============================================================================moviehome.jsp===============================================================================================
+	// ============================================================================moviehome.jsp===============================================================================================
 
 	// 後台Click --> 影片管理(首頁管理) Clicked --> "/movieHome" --> moviehome.jsp
 	@RequestMapping("/movieHome")
@@ -548,5 +539,17 @@ public class MovieController {
 		homeMovieService.deleteMovieById(deleteMovieIdCheck);
 		return "redirect:/movieHome";
 	}
+	
+	// moviehome.jsp --> Choose Clicked --> "/movieHome/setIndex" --> "redirect:/moviehome";
+		@RequestMapping(value = "/movieHome/setIndex")
+		public String homeSetIndex(Model model, HttpSession session, HomeMovie homeMovie,
+				@RequestParam("movieId") Integer movieId) {
+			System.out.println("----------------@RequestMapping(\"/movieHome/deleteMovie\")     homeDeleteMovie---------------");
 
+			System.out.println("movieId ====================================================== " + movieId);
+			homeMovie = homeMovieService.findById(1);
+			homeMovie.setMovie(homeMovieService.getMovieInfoByMovieID(movieId));
+			homeMovieService.updateMovieid(homeMovie);
+			return "movieHome";
+		}
 }
