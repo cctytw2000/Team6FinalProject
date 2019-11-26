@@ -9,6 +9,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 
 <title>後台影片管理</title>

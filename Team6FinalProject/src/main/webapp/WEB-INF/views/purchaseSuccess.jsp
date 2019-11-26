@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <title>購買成功</title>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>

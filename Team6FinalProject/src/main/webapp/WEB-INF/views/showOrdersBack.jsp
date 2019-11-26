@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 	<meta charset="UTF-8">
 	<title>所有訂單</title>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>

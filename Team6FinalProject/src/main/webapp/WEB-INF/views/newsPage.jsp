@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <title>最新消息</title>
 <!-- 輪播 -->

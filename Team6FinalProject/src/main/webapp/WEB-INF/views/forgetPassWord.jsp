@@ -7,6 +7,7 @@
 <html>
 
 <head>
+    <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 <meta charset="UTF-8">
 <title>${msg}</title>
 <!-- <link rel="stylesheet" href="CSS/RegisteredMember.css"> -->
