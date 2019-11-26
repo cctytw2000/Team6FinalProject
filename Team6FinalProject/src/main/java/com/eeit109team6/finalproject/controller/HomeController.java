@@ -101,7 +101,7 @@ public class HomeController {
 		session.setAttribute("boardTop5", boardTypeList);
 
 		ArrayList<MovieInfo> newMovies = movieservice.getNewMovieInfo(3);
-		System.out.println("newMovies=" + newMovies.get(0).getMember().getAccount());
+
 		model.addAttribute("newMovies", newMovies);
 
 		return "home";
