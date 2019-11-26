@@ -9,7 +9,7 @@
 <head>
     <link rel="icon" type="image/gif/png" href="${pageContext.request.contextPath}/Images/titleLogo.png">
 	<meta charset="UTF-8">
-	<title>所有商品</title>
+	<title>商品管理</title>
 	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/bootstrap.min.css' type="text/css" />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/CSS/font-awesome.min.css' type="text/css" />

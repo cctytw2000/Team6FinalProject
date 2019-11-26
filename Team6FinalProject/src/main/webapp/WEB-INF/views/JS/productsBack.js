@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 		success: function (response) {
 			pagebottom += '<li class="page-item"><a class="page-link" href="#">Previous</a></li>'
-//				console.log(response.ProductJson.length)
+				console.log(response.ProductJson)
 //				console.log(response.ProductJson.length / 5)
 
 				for (let i = 1; i <= response.ProductJson.length / 5 + 1; i++) {
@@ -48,10 +48,10 @@ function chengeInfo() {
 //	document.getElementById("infoBody").innerHTML = ""
 	let info = "";
 	let count = 0 ;
-
-
+	console.log("showpage===",showpage-4)
+	console.log("data.ProductJson.length===",data.ProductJson.length)
 	for (let i = showpage-4; i < data.ProductJson.length; i++) {
-console.log("showpage===",showpage)
+
 		if (i < data.ProductJson.length  ) {
 			if (data.ProductJson[i].is_remove == "0") {
 				count++;
