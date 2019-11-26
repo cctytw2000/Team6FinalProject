@@ -542,7 +542,7 @@ public class MemberController {
 		mem.setAccount(account);
 		mem.setPassword(password_AES);
 		mem.setPassword(password_AES);
-		mem.setUsername(username);
+		mem.setUsername(username.replace(" ", ""));
 		mem.setType(type);
 		mem.setMemberlevel(level);
 		mem.setRegisteredtime(registeredtime);
