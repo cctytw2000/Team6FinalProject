@@ -42,7 +42,7 @@
 }
 #divArticle p{
 	color:#686868;
-	font-size:15px
+	font-size:17px
 }
 #divArticle a{
 	color:#02007C;

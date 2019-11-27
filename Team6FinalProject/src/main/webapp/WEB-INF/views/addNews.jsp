@@ -37,8 +37,8 @@
 }
 </style>
 <!-- ckeditor -->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/JS/ckeditor.config.js"></script>
+<script src="${pageContext.request.contextPath}/JS/ckeditor.js"></script>
 </head>
 <body>
 	<jsp:include page="header/manageHeader.jsp" />
@@ -73,16 +73,17 @@
 
 				消息內容:
 				<div id="divArticle">
-					<textarea name="article" id="article"></textarea>
+					<textarea name="article" id="article" placeholder="請輸入內文!"></textarea>
 				</div>
 				<script>
 					ClassicEditor
-						.create( document.querySelector( '#article' ), {
-			        		toolbar: ['heading','bold', 'italic', 'link','undo','redo' ]
-			    		} )
-			    		.catch( error => {
+						.create( document.querySelector( '#article' ), ckeditorConfig )
+			    		.then(editor => {
+            					console.log(editor);
+       					})
+						.catch( error => {
 			        		console.error( error );
-			    		} );
+			    	} );
     			</script>
 			<p>
 			<p>
