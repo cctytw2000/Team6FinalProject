@@ -17,6 +17,10 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
+.ck-editor__editable_inline {
+    min-height:110px;
+    min-width:850px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -39,7 +43,9 @@ body {
 <%-- <script src="${pageContext.request.contextPath}/JS/membersBack.js"></script> --%>
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
 <!-- 	//套版用 -->
-
+<!-- ckeditor -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -199,14 +205,25 @@ body {
 											</tr>
 											<tr>
 												<td></td>
-												<td><textarea rows="5" name="body" cols="100"></textarea></td>
+												<td><textarea rows="5" name="body" id="bodyEditor" cols="100"></textarea></td>
 											</tr>
 											<tr>
 												<td></td>
-												<td><input type="submit" value="送出">
-													<button type="button" onclick="GoBack()">取消</button></td>
+												<td><button type="submit" class="btn btn-primary mb-2">寫完囉，可以發表了</button></td>
 											</tr>
 										</table>
+														<script>
+					ClassicEditor
+			    		.create( document.querySelector( '#bodyEditor' ), {
+			        		toolbar: ['bold', 'italic', 'link','undo','redo' ]
+			    		} )
+			    		.catch( error => {
+			        		console.error( error );
+			    		} );
+    			</script>
+										
+										
+										
 									</form>
 								</div>
 							</li>

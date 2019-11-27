@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	for(let i = 0 ; i<3;i++){
+	for(let i = 0 ; i<4;i++){
 		var article1 = $("#"+i).text();
 		$("#"+i).text(article1.substr(0, 30))
 	}
