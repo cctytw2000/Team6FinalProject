@@ -128,7 +128,7 @@
 									<%-- 										要改 <c:url> 的 value  --%>
 
 									<source
-										src="<c:url var="memberMoviesUrl" value='/memberMovies/${sessionScope.mem.account}${sessionScope.mem.member_id}/${homeMovies.movieName}'/>${memberMoviesUrl} "
+										src="<c:url var="memberMoviesUrl" value='/movieHome/${homeMovies.movieName}'/>${memberMoviesUrl} "
 										type="video/mp4">
 
 								</video>
@@ -260,8 +260,7 @@
 								
 								<button type="button" class="btn btn-primary"
 									style="margin-right: 5px;" onclick="movieHomeSetIndex('${homeMovies.movieId}')">Choose</button>
-								<input type="submit" class="btn btn-primary"
-									style="margin-right: 5px;" onclick="movieHomeSetIndex('${homeMovies.movieId}')"value="Choose">
+	
 							</div>
 
 						</div>

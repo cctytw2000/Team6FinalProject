@@ -349,8 +349,7 @@ public class MovieController {
 
 	}
 
-	// moviehome.jsp --> 新增影片 Clicked --> "/movieHome/addMovie" -->
-	// "redirect:/moviehome"
+
 	@RequestMapping(value = "/movieHome/addMovie", method = RequestMethod.POST)
 	public String homeAddMovie(@RequestParam("video_file") MultipartFile video_file, String videoname,
 			HttpSession session, Movie movie) {
@@ -358,10 +357,8 @@ public class MovieController {
 		System.out.println(
 				"------------------------------------ moviehome.jsp --> 新增影片 Clicked --> \"/movieHome/addMovie\" --> \"redirect:/moviehome\" ------------------------------------");
 
-		Member mem = (Member) session.getAttribute("mem");
+
 		movie.setMovieName(video_file.getOriginalFilename());// video_file.getOriginalFilename() --> 取檔案名稱 xxx.mp4
-		System.out.println("movie.getMovieId() =============================== " + movie.getMovieId());
-		System.out.println("movie.getMovieName() ============================== " + movie.getMovieName());
 		homeMovieService.addMovie(movie);
 
 		movie = homeMovieService.moviefindById(movie.getMovieId());
@@ -369,15 +366,12 @@ public class MovieController {
 																					// --> 取 movieId+xxx.mp4 重新儲存 進SQL
 		homeMovieService.addMovie(movie);
 
-		// 新版影片上傳
-		// 第一層Folder判定 memberMovies
-		Path p = Paths.get("C:/memberMovies"); // 路徑設定
+		Path p = Paths.get("C:/movieHome"); // 路徑設定
 
 		if (Files.exists(p)) {
 
 			System.out.print("資料夾已存在");
 		} else if (!Files.exists(p)) {
-			/* 不存在的話,直接建立資料夾 */
 			try {
 				Files.createDirectory(p); // 建立資料夾 memberMovies folder
 				System.out.print("已成功建立資料夾");
@@ -385,27 +379,10 @@ public class MovieController {
 				System.out.println("發生錯誤");
 			}
 		}
-		// 第一層Folder判定 memberMovies END
 
-		// 第二層Folder判定 Account+ID
-		p = Paths.get("C:/memberMovies/" + mem.getAccount() + mem.getMember_id()); // 路徑設定
+	
 
-		if (Files.exists(p)) {
-			System.out.print("資料夾已存在");
-		}
-		if (!Files.exists(p)) {
-			/* 不存在的話,直接建立資料夾 */
-			try {
-				Files.createDirectory(p);
-				System.out.print("已成功建立資料夾");
-			} catch (IOException e) {
-				System.out.println("發生錯誤");
-			}
-		}
-		// 第二層Folder判定 Account+ID END
-
-		// Video 檔案 匯入 名稱改寫
-		String path = "C:/memberMovies/" + mem.getAccount() + mem.getMember_id();
+		String path = "C:/movieHome";
 
 		if (!video_file.isEmpty()) {
 			try {
@@ -414,8 +391,6 @@ public class MovieController {
 				File dir = new File(path, movie.getMovieId() + video_file.getOriginalFilename());// 建立儲存路徑path與檔案名稱
 																									// movieId+xxx.mp4
 
-				// File serverFile = new File(dir.getAbsolutePath() + File.separator +
-				// videoname);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir));
 				stream.write(bytes);// 按stream 設定的 dir 存入 檔案 bytes
 				stream.close();
@@ -427,11 +402,8 @@ public class MovieController {
 		} else {
 			return "redirect:/movieHome";
 		}
-		// Video 檔案 匯入 名稱改寫 END
 	}
 
-	// moviehome.jsp --> update Clicked --> "/movieHome/updateMovie" -->
-	// "redirect:/moviehome";
 	@RequestMapping("/movieHome/updateMovie")
 	public String homeSelectOneMovie(Model model, HttpSession session, Movie movie,
 			@RequestParam("updateMovieId") Integer updateMovieId,

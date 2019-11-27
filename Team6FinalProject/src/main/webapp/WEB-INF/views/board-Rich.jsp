@@ -253,7 +253,7 @@ tr:hover td {
 						${DiscussionList.subject}</a> <br> <a
 					style="text-decoration: none;"
 					href="<spring:url value='article?id=${DiscussionList.articleId}'/>"><span
-						style="font-size: small;"><font color="grey">${DiscussionList.articleBody.split("<br>")[0]}......</font></span></a></td>
+						style="font-size: small;"><font color="grey">${DiscussionList.articleBody.replace("</p>","<br>").split("<br>")[0]}......</font></span></a></td>
 				<td>${DiscussionList.member.memberdetail.nickname}</td>
 				<td><span style="font-size: small;">${DiscussionList.views}/
 						${DiscussionList.reply.size()}</span></td>

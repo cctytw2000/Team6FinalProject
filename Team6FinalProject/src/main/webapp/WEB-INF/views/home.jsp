@@ -52,7 +52,7 @@
 		<!-- homeMovie movie_Id == 1  -->
 		<video style="height: 100%; width: 100%" playsinline="playsinline"
 			autoplay="autoplay" muted="muted" loop="loop">
-			<source src='<c:url value='/Movie/${homeMovie.movie.movieName}' />'
+			<source src='<c:url value='/movieHome/${homeMovie.movie.movieName}' />'
 				type="video/mp4">
 		</video>
 	</section>
@@ -90,8 +90,8 @@
 				<div class="col-lg-4">
 					<div class="footer-logo text-white">
 						<img src="Images/newLogoFooter.png" alt="">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-							dolor sit ame.</p>
+						<p>Gamily來源於結合Game及Family兩字，我們希望藉由我們的網站，可以讓茫茫大海中的所有玩家，都能從我們網站上找到像家一樣的歸屬感。
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
