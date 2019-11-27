@@ -19,7 +19,7 @@ function movieHomeUpdate(movieId,movieName) {
 }
 
 function movieHomeSetIndex(movieId){
-	alert (movieId);
+//	alert (movieId);
 	$.ajax({
 		type : "POST",
 		url : "homeSetIndex",
