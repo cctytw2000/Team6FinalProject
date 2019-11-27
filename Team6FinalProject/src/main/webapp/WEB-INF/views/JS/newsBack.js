@@ -9,8 +9,8 @@ function updateNewsType(newsTypeId, newsTypeName) {
 			+ '<input type="hidden" name="newsTypeId" value='
 			+ newsTypeId
 			+ ' /><p>'
-			+ '消息類別名稱:<input name="newsTypeName" type="text" size="20px" value='
-			+ newsTypeName
+			+ '消息類別名稱:<input name="newsTypeName" type="text" size="20px" value='+'"'
+			+ newsTypeName+'"'
 			+ ' /><p>'
 			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
 }
@@ -130,19 +130,19 @@ function updateGame(gameId, gameName,gameTypeId,gameTypeName,publicationDate,pub
 			+ '<input type="hidden" name="gameId" value='
 			+ gameId
 			+ ' /><p>'
-			+ '遊戲名稱:<input name="gameName" type="text" size="20px" value='
-			+ gameName
+			+ '遊戲名稱:<input name="gameName" type="text" size="20px" value='+'"'
+			+ gameName+'"'
 			+ ' /><p>'
 			+ '<span id="test"></span>'
 			+ '<p><p>'
 			+ '遊戲發售日:<input name="publicationDate" type="text" size="20px" value='
 			+ publicationDate
 			+ '><p>'
-			+ '遊戲發行商:<input name="publisher" type="text" size="20px" value='
-			+ publisher
+			+ '遊戲發行商:<input name="publisher" type="text" size="20px" value='+'"'
+			+ publisher+'"'
 			+ ' /><p>'
-			+ '遊戲平台:<input name="platform" type="text" size="20x" value='
-			+ platform
+			+ '遊戲平台:<input name="platform" type="text" size="20x" value='+'"'
+			+ platform+'"'
 			+ ' /><p>'
 			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
 }
@@ -196,8 +196,8 @@ function updateActivityOne(activityId, activityName,activityTypeId,activityTypeN
 			+ '<input type="hidden" name="activityId" value='
 			+ activityId
 			+ ' /><p>'
-			+ '活動名稱:<input name="activityName" type="text" size="20px" value='
-			+ activityName
+			+ '活動名稱:<input name="activityName" type="text" size="20px" value='+'"'
+			+ activityName+'"'
 			+ ' /><p>'
 			+ '<span id="test"></span>'
 			+ '<p><p>'
@@ -207,8 +207,8 @@ function updateActivityOne(activityId, activityName,activityTypeId,activityTypeN
 			+ '活動時間:<input name="startingTime_date" type="text" size="20px" value='
 			+ startingTime_date
 			+ '><p>'
-			+ '活動地點:<input name="location" type="text" size="20px" value='
-			+ location
+			+ '活動地點:<input name="location" type="text" size="20px" value='+'"'
+			+ location+'"'
 			+ ' /><p>'
 			+ '<input type="submit" class="btn btn-warning" value="更新"></form>'
 }
