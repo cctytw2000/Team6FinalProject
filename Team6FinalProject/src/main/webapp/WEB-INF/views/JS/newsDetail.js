@@ -22,6 +22,7 @@ $(document).ready(function() {
 		$("#gameDetail").show();
 		$("#hr").show();
 	}
+	showMemoForNews()
 })
 
 // 依不同的活動日數顯示時間
@@ -79,6 +80,7 @@ function showMemoForNews(){
 	$.ajax({
 		url : "showMemoForNews.json",
 		success : function(response) {
+//			alert("成功");
 			for(let i = 0; i < response.newsList.length; i++){
 				if(!(typeof response.newsList[i].messages === "undefined")){
 					for(let t = 0; t< response.newsList[i].messages.length; t++){
@@ -90,9 +92,9 @@ function showMemoForNews(){
 							console.log(response.newsList[i].messages[t]);
 							showComment += '<div class="card" style="width:500px;clear: left;">';
 							showComment += '<div class="card-body"  style="font-family: Microsoft JhengHei">';
-							showComment += '<span style="font-size:20px">'+ response.newsList[i].messages[t].member.username +'  :</span>';
-							showComment += '<span id="'+ response.newsList[i].messages[t].messageId +'" style="margin-left:10px">'+ response.newsList[i].messages[t].memo +'</span>';
-							showComment += '<small style="margin-left:5%;">'+ response.newsList[i].messages[t].publicationDate.replace(".0","")+'</small>';
+							showComment += '<span style="font-size:20px;float:left">'+ response.newsList[i].messages[t].member.username +'  :</span>';
+							showComment += '<span id="'+ response.newsList[i].messages[t].messageId +'" style="margin-left:10px;float:left;padding-top:4px">'+ response.newsList[i].messages[t].memo +'</span>';
+							showComment += '<small style="margin-left:5%;float:left;padding-top:5px">'+ response.newsList[i].messages[t].publicationDate.replace(".0","")+'</small>';
 							if(member_id == response.newsList[i].messages[t].member.member_id){
 								showComment += '<button class="btn btn-warning btn-sm" style="float:right"><i onclick=\''+'editMessage('+'"'+ response.newsList[i].messages[t].messageId +'"'+','+'"'+response.newsList[i].messages[t].memo+'"'+')\''+'>編輯</i></button>';
 							}
@@ -138,12 +140,12 @@ function addMemo() {
 //顯示修改評論欄位
 function editMessage(messageId, memo){
 	let info = "";
-	info += '<form>';
+	info += '<form class="input-group">';
 	info += '<input type="hidden" name="messageId" value="' + messageId
 			+ '"></input>';
 	info += '<input class="form-control" style="width: 200px;" type="text" name="memo" value="' + memo
 			+ '"></input>';
-	info += '<p><button type="button" class="btn btn-warning btn-sm" style="width:80px;" onclick="editMessage2('+messageId+')">送出</button></p>';
+	info += '<p><span class="input-group-btn"><button type="button" class="btn btn-warning btn-sm" style="width:80px; margin-left:5px" onclick="editMessage2('+messageId+')">送出</button></span></p>';
 	info += '</form>';
 	$("#"+messageId).html(info);
 }
