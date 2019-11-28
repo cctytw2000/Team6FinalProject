@@ -1,24 +1,27 @@
-
 let address_check_val = false;
 let birth_check_val = false;
 let idnumber_check_val = false;
 
 let pwShown = 0;
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded",
+	function () {
 
+		document.getElementById("alladdress").addEventListener("input",
+			check_address);
+		document.getElementById("alladdress").addEventListener("input",
+			opencreate);
 
-	document.getElementById("alladdress").addEventListener("input", check_address);
-	document.getElementById("alladdress").addEventListener("input", opencreate);
+		document.getElementById("idnumber").addEventListener("input",
+			check_idnumber);
+		document.getElementById("idnumber").addEventListener("input",
+			opencreate);
 
-	document.getElementById("idnumber").addEventListener("input", check_idnumber);
-	document.getElementById("idnumber").addEventListener("input", opencreate);
+		document.getElementById("date").addEventListener("input",
+			check_birth);
+		document.getElementById("date").addEventListener("input",
+			opencreate);
 
-	document.getElementById("date").addEventListener("input", check_birth);
-	document.getElementById("date").addEventListener("input", opencreate);
-
-	
-
-});
+	});
 function check_idnumber() {
 	if (document.getElementById("idnumber").value != "") {
 		idnumber_check_val = true;
@@ -54,10 +57,23 @@ function opencreate() {
 	if (address_check_val && birth_check_val && idnumber_check_val) {
 		document.getElementById("submit").innerHTML = "<button type='submit'>新增</button>";
 	}
-	
 
+}
+
+function googleAutoinsert() {
+	document.getElementById("nickname").value = "google小子"
+	document.getElementById("tel").value = "0911999888"
+	document.getElementById("idnumber").value = "y225599888"
+
+	document.getElementById("submit").innerHTML = "<button type='submit'>新增</button>";
+
+	
 	
 	
 }
-
-
+function facebookAutoinsert() {
+	document.getElementById("nickname").value = "facebook小子"
+	document.getElementById("tel").value = "0911888999"
+	document.getElementById("idnumber").value = "y225588999"
+	document.getElementById("submit").innerHTML = "<button type='submit'>新增</button>";
+}

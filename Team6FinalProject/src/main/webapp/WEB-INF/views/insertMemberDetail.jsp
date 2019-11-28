@@ -154,9 +154,12 @@
                     </div>
                     <div class="div1">
                         <label class='label1'>生日:</label>
-                        <form:input id="date" name="birth" path="birth" type='date' /><span id="date_password"></span>
+                        <form:input id="date" name="birth" path="birth" type='date'/><span id="date_password"></span>
                     </div>
+                
                     <div id="submit" class="div1" style="text-align: center">
+                        <button type="button" onclick="googleAutoinsert()">google</button>
+                        <button type="button" onclick="facebookAutoinsert()">facebook</button>
                         <button type="submit" disabled>新增</button>
 
                     </div>

@@ -112,7 +112,7 @@ public class HomeController {
 			Model model) {
 
 		MemberDetail md = new MemberDetail();
-		md.setAddress("美國");
+
 		md.setToken(token);
 		md.setId(memberid);
 

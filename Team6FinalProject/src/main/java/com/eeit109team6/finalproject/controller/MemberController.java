@@ -171,10 +171,14 @@ public class MemberController {
 		MovieInfo movieInfo = new MovieInfo();
 
 		// ==============設定創建時間=======================
-		Calendar rightNow = Calendar.getInstance();
-		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
-				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
-				+ ":" + rightNow.get(Calendar.SECOND);
+		
+		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		  String registeredtime = myFmt2.format(new Date ());
+//		Calendar rightNow = Calendar.getInstance();
+//		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
+//				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
+//				+ ":" + rightNow.get(Calendar.SECOND);
 		// ==============/設定創建時間=======================
 
 		movieInfo.setTime(registeredtime);
