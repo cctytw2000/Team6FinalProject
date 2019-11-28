@@ -105,12 +105,13 @@ public class MemberController {
 	@RequestMapping(value = "/member/updateMovie", method = RequestMethod.POST)
 	public String updateMovie(
 			// @ModelAttribute("movieInfo") MovieInfo movieInfo,
-			@RequestParam(value = "movie_ID") Integer movie_ID, @RequestParam(value = "member_id") Integer member_id,
+			@RequestParam(value = "movie_ID") Integer movie_ID, 
+			@RequestParam(value = "member_id") Integer member_id,
 			@RequestParam(value = "movie_name") String movie_name,
 			@RequestParam(value = "movie_content") String movie_content,
 			@RequestParam(value = "video_file") MultipartFile video_file, HttpSession session, Model model,
 			@RequestParam(value = "oldfilename") String oldfilename) {
-
+		Member mem = (Member) session.getAttribute("mem");
 		String videoname = video_file.getOriginalFilename();
 
 		String path = session.getServletContext().getRealPath("/"); // 找到影片上傳路徑
@@ -127,38 +128,70 @@ public class MemberController {
 		if (!"".equals(videoname)) {
 			System.out.println("!\"\".equals(videoname)");
 			movieInfo.setLocation_Test(videoname);
+			movieservice.updateMovieInfoById(movieInfo);
+//			儲存
+
+			// 檔案上傳
+			Path p = Paths.get("C:/memberMovies"); // 路徑設定
+
+			if (Files.exists(p)) {
+				System.out.print("資料夾已存在");
+			} else if (!Files.exists(p)) {
+				/* 不存在的話,直接建立資料夾 */
+				try {
+					Files.createDirectory(p);
+					System.out.print("已成功建立資料夾");
+				} catch (IOException e) {
+					System.out.println("發生錯誤");
+				}
+			}
+
+			p = Paths.get("C:/memberMovies/" + mem.getAccount() + mem.getMember_id()); // 路徑設定
+
+			if (Files.exists(p)) {
+				System.out.println("資料夾已存在");
+			}
+			if (!Files.exists(p)) {
+				/* 不存在的話,直接建立資料夾 */
+				try {
+					Files.createDirectory(p);
+					System.out.println("已成功建立資料夾");
+				} catch (IOException e) {
+					System.out.println("發生錯誤");
+				}
+			}
+
+			 path = "C:/memberMovies/" + mem.getAccount() + mem.getMember_id();
+
+			if (!video_file.isEmpty()) {
+				try {
+					byte[] bytes = video_file.getBytes();
+
+					File dir = new File(path, movie_ID + video_file.getOriginalFilename());
+
+					// File serverFile = new File(dir.getAbsolutePath() + File.separator +
+					// videoname);
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir));
+					stream.write(bytes);
+					stream.close();
+
+					return "redirect:/member/movies";
+				} catch (Exception e) {
+					return "redirect:/member/movies";
+				}
+			} else {
+				return "redirect:/member/movies";
+			}
+//			儲存END
+
 		} else {
 			movieInfo.setLocation_Test(oldfilename);
+			movieservice.updateMovieInfoById(movieInfo);
+			
+
+			return "redirect:/member/movies";
 		}
 
-		movieservice.updateMovieInfoById(movieInfo);
-
-		if (!video_file.isEmpty()) {
-			try {
-				byte[] bytes = video_file.getBytes();
-				File dir = new File(path + "\\WEB-INF\\views\\Movie");
-				System.out.println("File dir ======== " + dir);
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + videoname);
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				System.out.println("You successfully uploaded file=" + videoname);
-
-			} catch (Exception e) {
-				System.out.println("You failed to upload " + videoname + " => " + e.getMessage());
-
-			}
-		} else {
-			System.out.println("You failed to upload " + videoname + " because the file was empty.");
-
-		}
-
-		return "redirect:/member/movies";
 	}
 
 	@RequestMapping(value = "/member/addMovie", method = RequestMethod.POST)
@@ -171,10 +204,10 @@ public class MemberController {
 		MovieInfo movieInfo = new MovieInfo();
 
 		// ==============設定創建時間=======================
-		
-		SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		  String registeredtime = myFmt2.format(new Date ());
+
+		SimpleDateFormat myFmt2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		String registeredtime = myFmt2.format(new Date());
 //		Calendar rightNow = Calendar.getInstance();
 //		String registeredtime = rightNow.get(Calendar.YEAR) + "-" + (rightNow.get(Calendar.MONTH) + 1) + "-"
 //				+ rightNow.get(Calendar.DATE) + " " + rightNow.get(Calendar.HOUR) + ":" + rightNow.get(Calendar.MINUTE)
@@ -429,7 +462,7 @@ public class MemberController {
 		htmlCode += "<table style='border:none;text-align:ceneter;margin:0 auto'>";
 		htmlCode += "<tr><td>會員編號:</td><td>" + memberId + "</td></tr>";
 
-		htmlCode += "<tr><td>大頭貼:" + "</td>"+"<td>" +"<img src='cid:image'/><br>"+"</td>";
+		htmlCode += "<tr><td>大頭貼:" + "</td>" + "<td>" + "<img src='cid:image'/><br>" + "</td>";
 		htmlCode += "<tr><td>姓名:</td><td>" + username + "</td></tr>";
 		htmlCode += "<tr><td>信箱:</td><td>" + account + "</td></tr>";
 		htmlCode += "<tr><td>認證:</td><td>"
