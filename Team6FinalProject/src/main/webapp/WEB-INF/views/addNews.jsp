@@ -79,7 +79,7 @@
 					ClassicEditor
 						.create( document.querySelector( '#article' ), ckeditorConfig )
 			    		.then(editor => {
-            					console.log(editor);
+			    			theEditor = editor;
        					})
 						.catch( error => {
 			        		console.error( error );

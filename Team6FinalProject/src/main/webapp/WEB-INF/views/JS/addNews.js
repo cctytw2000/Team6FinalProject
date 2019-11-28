@@ -160,7 +160,7 @@ function activityDetail(number) {
 }
 
 function validateForm() {   
-	  if ($("#newsType").val() == "-1") {
+	  if ($("select[name='newsType']").val() == "-1") {
 	    alert("你尚未選取消息類別");
 	    return false;
 	  } 
@@ -168,7 +168,7 @@ function validateForm() {
 		  alert("你尚未填寫消息標題");
 		  return false;
 	  } 
-	  if (CKEDITOR.instances['article'].getData() == "") {
+	  if (theEditor.getData() == "") {
 		  alert("你尚未填寫消息內容");
 		  return false;
 	  }  
