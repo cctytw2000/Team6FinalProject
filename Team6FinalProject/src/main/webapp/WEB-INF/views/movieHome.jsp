@@ -109,7 +109,7 @@
 			<div class="section-title">
 				<!-- 				<div class="cata new">已上傳的影片</div> -->
 				<!--  -->
-				<h2 style="color:white;text-align: center;">首頁影片管理</h2>
+				<h2 style="color: white; text-align: center;">首頁影片管理</h2>
 			</div>
 
 			<div class="row">
@@ -135,13 +135,16 @@
 
 							</div>
 							<div style="margin-top: 50px;" class="rgi-content">
-								<h3>各元素取值確認</h3>
-								<h6>sessionScope.mem.account == ${sessionScope.mem.account}</h6>
-								<h6>sessionScope.mem.member_id ==
-									${sessionScope.mem.member_id}</h6>
-								<h6>homeMovies.movieId == ${homeMovies.movieId}</h6>
-								<h6>homeMovies.movieName == ${homeMovies.movieName}</h6>
-								<h5>End</h5>
+								<!-- 								<h3>各元素取值確認</h3> -->
+								<%-- 								<h6>sessionScope.mem.account == ${sessionScope.mem.account}</h6> --%>
+								<!-- 								<h6>sessionScope.mem.member_id == -->
+								<%-- 									${sessionScope.mem.member_id}</h6> --%>
+								<%-- 								<h6>homeMovies.movieId == ${homeMovies.movieId}</h6> --%>
+								<%-- 								<h6>homeMovies.movieName == ${homeMovies.movieName}</h6> --%>
+								<!-- 								<h5>End</h5> -->
+								<h6 style="padding-bottom: 30px;">檔案名稱 :
+									${homeMovies.movieName}</h6>
+								<h6 style="padding-bottom: 30px;">存放資料夾 : movieHome</h6>
 
 								<!-- 	***************************************************   Update Model   **************************************************************    -->
 								<!-- 								<a -->
@@ -199,7 +202,7 @@
 
 
 								<!-- 	**************************************************   Update Model End   ***********************************************************************   -->
-								
+
 								<!-- 	**************************************************   Delete Model    ***********************************************************************   -->
 								<%-- onclick="window.location.href='moviepersonal/updateMovie?movie_ID=${allmovies.movie_ID }'" --%>
 								<!-- 								<a -->
@@ -253,14 +256,20 @@
 								<!-- Delete Modal  #DeleteModalCenter End-->
 
 								<!-- 	**************************************************   Delete Model End   ***********************************************************************   -->
-								
+
 								<!-- 	**************************************************   Dowload Model ***********************************************************************   -->
-								<a class="btn btn-primary" style="margin-right: 5px;" href="${memberMoviesUrl} " download>Dowload</a>
+								<a class="btn btn-primary" style="margin-right: 5px;"
+									href="${memberMoviesUrl} " download>Dowload</a>
 								<!-- 	**************************************************   Dowload Model End   ***********************************************************************   -->
-								
-								<button type="button" class="btn btn-primary"
-									style="margin-right: 5px;" onclick="movieHomeSetIndex('${homeMovies.movieId}')">Choose</button>
-	
+
+								<!-- 								<button type="button" class="btn btn-primary" -->
+								<%-- 									style="margin-right: 5px;" onclick="movieHomeSetIndex('${homeMovies.movieId}')">Choose</button> --%>
+								<input type="button" class="btn btn-primary"
+									id="${homeMovies.movieId}${homeMovies.movieId}"
+									style="margin-right: 5px; margin-top: 20px;"
+									onclick="movieHomeSetIndex('${homeMovies.movieId}')"
+									value="Choose">
+
 							</div>
 
 						</div>

@@ -102,7 +102,7 @@
 										controls="controls"
 										poster=<c:url value='/Images/video-Bg.jpg'  />>
 										<source
-											src="<c:url value='/Movie/${allmovies.location_Test}'/>"
+											src="<c:url value='/memberMovies/${allmovies.member.account}${allmovies.member.member_id}/${allmovies.movie_ID}${allmovies.location_Test}'/>"
 											type="video/mp4">
 									</video>
 								</div>
@@ -133,51 +133,51 @@
 			</div>
 			<!-- Recent game   End 影片區-->
 
-			<!-- New Video 新增表單   ROW  -->
-			<div class="row">
+<!-- 			<!-- New Video 新增表單   ROW  --> -->
+<!-- 			<div class="row"> -->
 
-				<!-- New Video panel 新增內容 -->
-				<div class="col-md-6">
+<!-- 				New Video panel 新增內容 -->
+<!-- 				<div class="col-md-6"> -->
 
 
-					<!-- tournament-item -->
-					<div class="tournament-item mb-4 mb-lg-0">
+<!-- 					tournament-item -->
+<!-- 					<div class="tournament-item mb-4 mb-lg-0"> -->
 
-						<!-- ti-content -->
-						<div class="ti-content">
+<!-- 						ti-content -->
+<!-- 						<div class="ti-content"> -->
 
-							<!-- 	ti-text-form -->
-							<div class="ti-text-form" id="addMovie">
+<!-- 								ti-text-form -->
+<!-- 							<div class="ti-text-form" id="addMovie"> -->
 
-								<!-- action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
-								<form style="background-color: white" method="POST"
-									action="moviepersonal/addMovie" enctype="multipart/form-data">
-									<p>
-										影片標題: <input name="movie_name" type="text" size="50px" />
-									<p>
-										內文描述:
-										<textarea name="movie_content"
-											style="width: 400px; height: 200px;"></textarea>
-									<p>
-										選則檔案: <input type="file" name="video_file"><br />
-									<p>
-									<p>
-										<input type="submit" value="送出"><br />
-								</form>
-							</div>
-							<!-- 	ti-text-form -->
+<!-- 								action 寫入目標 controller func 注意  action={設定為 (jsp name) +/+ (controller 原定func name)}=Mapping name -->
+<%-- 								<form style="background-color: white" method="POST" --%>
+<%-- 									action="moviepersonal/addMovie" enctype="multipart/form-data"> --%>
+<!-- 									<p> -->
+<!-- 										影片標題: <input name="movie_name" type="text" size="50px" /> -->
+<!-- 									<p> -->
+<!-- 										內文描述: -->
+<!-- 										<textarea name="movie_content" -->
+<!-- 											style="width: 400px; height: 200px;"></textarea> -->
+<!-- 									<p> -->
+<!-- 										選則檔案: <input type="file" name="video_file"><br /> -->
+<!-- 									<p> -->
+<!-- 									<p> -->
+<!-- 										<input type="submit" value="送出"><br /> -->
+<%-- 								</form> --%>
+<!-- 							</div> -->
+<!-- 								ti-text-form -->
 
-						</div>
-						<!-- ti-content -->
+<!-- 						</div> -->
+<!-- 						ti-content -->
 
-					</div>
-					<!-- 	tournament-item End  -->
+<!-- 					</div> -->
+<!-- 						tournament-item End  -->
 
-				</div>
-				<!-- New Video panel 新增內容 End  -->
+<!-- 				</div> -->
+<!-- 				New Video panel 新增內容 End  -->
 
-			</div>
-			<!-- New Video 新增表單 End  ROW -->
+<!-- 			</div> -->
+<!-- 			<!-- New Video 新增表單 End  ROW --> -->
 
 		</div>
 		<!-- div center End-->

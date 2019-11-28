@@ -19,7 +19,7 @@ function movieHomeUpdate(movieId,movieName) {
 }
 
 function movieHomeSetIndex(movieId){
-//	alert (movieId);
+	
 	$.ajax({
 		type : "POST",
 		url : "movieHome/setIndex",
@@ -28,9 +28,10 @@ function movieHomeSetIndex(movieId){
 		},
 
 		success : function(response) {
-			
-//			document.getElementById(movieId).setAttribute("onclick", "");
-//			document.getElementById(movieId).setAttribute("type","hidden");
+//			alert (""+movieId+movieId);
+			document.getElementById(""+movieId+movieId).setAttribute("onclick", "");
+			document.getElementById(""+movieId+movieId).setAttribute("type","hidden");
+//			alert (movieId);
 		}
 	});
 }

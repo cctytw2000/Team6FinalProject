@@ -95,7 +95,7 @@ function homeupdateviews(id) {
 								<video id="${movie.movie_ID}" onclick="homeupdateviews('${movie.movie_ID}')" width="320" height="240" class="set-video"
 									poster="${pageContext.request.contextPath}/Images/video-Bg.jpg" playsinline="playsinline"
 									controls="controls">
-									<source src="<c:url value='/Movie/${movie.location_Test}'/>"
+									<source src="<c:url value='/memberMovies/${movie.member.account}${movie.member.member_id}/${movie.movie_ID}${movie.location_Test}'/>"
 										type="video/mp4">
 
 

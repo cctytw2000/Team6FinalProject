@@ -224,12 +224,12 @@
 							<p>${newMovie.movie_content}</p>
 							<a href="#" class="comment">觀看次數：${newMovie.click_Sum}</a>
 							<div class="rgi-extra">
-								<div class="rgi-star">
-									<img src="Images/icons/star.png" alt="">
-								</div>
-								<div class="rgi-heart">
-									<img src="Images/icons/heart.png" alt="">
-								</div>
+<!-- 								<div class="rgi-star"> -->
+<!-- 									<img src="Images/icons/star.png" alt=""> -->
+<!-- 								</div> -->
+<!-- 								<div class="rgi-heart"> -->
+<!-- 									<img src="Images/icons/heart.png" alt=""> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 					</div>
