@@ -168,7 +168,9 @@
 						<p>${MemberDetial.account}</p>
 					</div>
 
-	<div>
+<c:choose>
+<c:when test="${ MemberDetial.type =='General'}">
+<div>
 						<label>密碼：</label>
 						<p>
 						<!-- Button trigger modal -->
@@ -213,15 +215,17 @@
     </div>
   </div>
 </div>
-						
-						
-						
-						
-						
+										
 						</p>
 					</div>
 
 
+</c:when>
+<c:otherwise>
+</c:otherwise>
+</c:choose>
+
+	
 
 
 
