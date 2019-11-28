@@ -291,20 +291,30 @@ function checkmember() {
 	$("ul#pageBottom").html("");
 	$("span#err_msg").html("");
 	let memberdata = $("input#member_id").val();
-	if (memberdata == "") {
-		$.ajax({
-			url: "ordersBack.json",
-			success: function (response) {
-				console.log(response);
-				data = response;
-				if (response.Orders.length > 0) {
-					pagebot(response);
+	let money_1 = $("input#money_1").prop("checked");
+	let money_4 = $("input#money_4").prop("checked");
+	if (memberdata == "") {		
+		if (money_1 && money_4) {
+			$.ajax({
+				url: "ordersBack.json",
+				success: function (response) {
+					console.log(response);
+					data = response;
+					if (response.Orders.length > 0) {
+						pagebot(response);
+					}
+					else {
+						$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
+					}
 				}
-				else {
-					$("tbody#ordersInfo").html("<tr><td colspan='7'>沒訂單資料</td></tr>");
-				}
+			});
+		}else{
+			if(money_1){
+				money(1);
+			}else{
+				money(4);
 			}
-		});
+		}		
 	}
 	else {
 		let re = /^\+?[1-9][0-9]*$/;
@@ -315,8 +325,17 @@ function checkmember() {
 					falge = true;
 				}
 			}
-			if (falge) {
-				memberorderdata();
+			if (falge) {			
+				if (money_1 && money_4) {
+					memberorderdata();
+				}else{
+					if(money_1){
+						moneymember(1, memberdata);
+					}else{
+						moneymember(4, memberdata);
+					}
+				}
+				
 			} else {
 				$("span#err_msg").html("<img src='Images/noway.jpg'>無此會員編號");
 			}
