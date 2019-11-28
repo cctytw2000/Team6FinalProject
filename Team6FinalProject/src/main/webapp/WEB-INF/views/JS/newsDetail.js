@@ -1,10 +1,10 @@
 //顯示換行及空格
-$(document).ready(function() {
-	showMemoForNews();
-	var content = $('#article').text();
-	// alert(content)
-	$('#article').html((content.replace(/\n/g, '<br/>')).replace(/\s/g,"&nbsp;"));
-})
+//$(document).ready(function() {
+//	showMemoForNews();
+//	var content = $('#article').text();
+//	// alert(content)
+//	$('#article').html((content.replace(/\n/g, '<br/>')).replace(/\s/g,"&nbsp;"));
+//})
 
 // 若無輸入遊戲發售日則顯示尚無確切發行日期
 $(document).ready(function() {

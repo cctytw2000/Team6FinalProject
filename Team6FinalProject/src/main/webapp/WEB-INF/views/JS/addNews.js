@@ -165,13 +165,13 @@ function validateForm() {
 	    return false;
 	  } 
 	  if ($("#title").val().replace(/\s+/g, "").length == 0 || $("#title").val() == "") {
-		  alert("你尚未選取消息標題");
+		  alert("你尚未填寫消息標題");
 		  return false;
 	  } 
-	  if ($("#article").val() == "") {
-		  alert("你尚未選取消息內容");
+	  if (CKEDITOR.instances['article'].getData() == "") {
+		  alert("你尚未填寫消息內容");
 		  return false;
-	  } 
+	  }  
 	  
 	  return( true );
 	}

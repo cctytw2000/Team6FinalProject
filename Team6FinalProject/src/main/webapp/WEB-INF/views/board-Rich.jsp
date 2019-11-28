@@ -28,7 +28,9 @@
 	href='${pageContext.request.contextPath}/CSS/animate.css'
 	type="text/css" />
 <script src="https://kit.fontawesome.com/685268963f.js"></script>
-
+<!-- ckeditor -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <!-- 	//套版用 -->
 <style type="text/css">
 th div {
@@ -51,6 +53,10 @@ td {
 tr:hover td {
 	background-color: #FFF6DE;
 }
+.ck-editor__editable_inline {
+    min-height:150px;
+}
+
 </style>
 </head>
 <body>
@@ -151,8 +157,15 @@ tr:hover td {
 										<label for="exampleFormControlTextarea1">內文</label>
 										<textarea class="form-control" id="bodyEditor" name="body" rows="10"></textarea>
 									</div>
-									
-
+				<script>
+					ClassicEditor
+			    		.create( document.querySelector( '#bodyEditor' ), {
+			        		toolbar: ['bold', 'italic', 'undo','redo' ]
+			    		} )
+			    		.catch( error => {
+			        		console.error( error );
+			    		} );
+    			</script>
 									<button type="submit" class="btn btn-primary mb-2">寫完囉，可以發表了</button>
 
 									<!-- ====================================修改旗標 -->
@@ -240,7 +253,7 @@ tr:hover td {
 						${DiscussionList.subject}</a> <br> <a
 					style="text-decoration: none;"
 					href="<spring:url value='article?id=${DiscussionList.articleId}'/>"><span
-						style="font-size: small;"><font color="grey">${DiscussionList.articleBody.split("<br>")[0]}......</font></span></a></td>
+						style="font-size: small;"><font color="grey">${DiscussionList.articleBody.replace("</p>","<br>").split("<br>")[0]}......</font></span></a></td>
 				<td>${DiscussionList.member.memberdetail.nickname}</td>
 				<td><span style="font-size: small;">${DiscussionList.views}/
 						${DiscussionList.reply.size()}</span></td>

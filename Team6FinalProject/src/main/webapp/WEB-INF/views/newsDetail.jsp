@@ -32,6 +32,12 @@
 p {
 	font-family: Microsoft JhengHei;
 }
+#divArticle p{
+	color: black; 
+	font-size: large; 
+ 	text-align: left;  
+	font-family: Microsoft JhengHei
+}
 </style>
 </head>
 <body style="background-color: #F2F3F3">
@@ -56,8 +62,8 @@ p {
 	<!-- Latest news section end -->
 
 	<div class="container">
-		<div>
-			<div style="padding-top: 20px; padding-bottom: 10px">
+		<div style="text-align: center">
+			<div style="padding-top: 20px; padding-bottom: 10px;text-align: left;">
 				<h2 style="font-family: Microsoft JhengHei">${news.title}</h2>
 			</div>
 			<div>
@@ -71,13 +77,11 @@ p {
 			</div>
 			<hr style="margin-top: 30px">
 			<div>
-				<img width='400' height='400'
-					style="float: left; margin-right: 30px"
+				<img width='500' height='400' 
 					src="<c:url value='/getNewsPicture/${news.newsId}' />">
 			</div>
-			<div>
-				<p id="article"
-					style="color: black; font-size: large; text-align: left; font-family: Microsoft JhengHei">${news.article}</p>
+			<div id="divArticle" style="margin-top: 15px">
+				${news.article}
 			</div>
 			<hr>
 

@@ -128,7 +128,7 @@
 									<%-- 										要改 <c:url> 的 value  --%>
 
 									<source
-										src="<c:url value='/memberMovies/${sessionScope.mem.account}${sessionScope.mem.member_id}/${homeMovies.movieName}'/>"
+										src="<c:url var="memberMoviesUrl" value='/movieHome/${homeMovies.movieName}'/>${memberMoviesUrl} "
 										type="video/mp4">
 
 								</video>
@@ -152,7 +152,7 @@
 
 								<!-- Update Button trigger modal -->
 								<button type="button" class="btn btn-primary"
-									style="margin-right: 50px;" data-toggle="modal"
+									style="margin-right: 5px;" data-toggle="modal"
 									data-target="#updateModalCenter"
 									onclick="movieHomeUpdate('${homeMovies.movieId}','${homeMovies.movieName}')">Update</button>
 
@@ -199,7 +199,7 @@
 
 
 								<!-- 	**************************************************   Update Model End   ***********************************************************************   -->
-
+								
 								<!-- 	**************************************************   Delete Model    ***********************************************************************   -->
 								<%-- onclick="window.location.href='moviepersonal/updateMovie?movie_ID=${allmovies.movie_ID }'" --%>
 								<!-- 								<a -->
@@ -209,7 +209,7 @@
 								<!-- 	檢查movieHomeUpdateAndDelete取值 -->
 
 								<button type="button" class="btn btn-primary"
-									style="margin-right: 50px;" data-toggle="modal"
+									style="margin-right: 5px;" data-toggle="modal"
 									data-target="#deleteModalCenter"
 									onclick="movieHomeDelete('${homeMovies.movieId}')">Delete</button>
 
@@ -253,6 +253,14 @@
 								<!-- Delete Modal  #DeleteModalCenter End-->
 
 								<!-- 	**************************************************   Delete Model End   ***********************************************************************   -->
+								
+								<!-- 	**************************************************   Dowload Model ***********************************************************************   -->
+								<a class="btn btn-primary" style="margin-right: 5px;" href="${memberMoviesUrl} " download>Dowload</a>
+								<!-- 	**************************************************   Dowload Model End   ***********************************************************************   -->
+								
+								<button type="button" class="btn btn-primary"
+									style="margin-right: 5px;" onclick="movieHomeSetIndex('${homeMovies.movieId}')">Choose</button>
+	
 							</div>
 
 						</div>

@@ -69,11 +69,15 @@ public class HomeMovieDaoImpl implements IHomeMovieDao {
 
 	@Override
 	public Movie getMovieInfoByMovieID(Integer id) {
-		String hql = "FROM Movie WHERE id = ?1";
-		//指定 ? 帶入值為 setParameter(1, id) 的 id
-		Query query = factory.getCurrentSession().createQuery(hql).setParameter(1, id);
-		Movie movielist = (Movie)query.getResultList();
-		return movielist;
+//		String hql = "FROM Movie WHERE id = ?1";
+//
+//		Query query = factory.getCurrentSession().createQuery(hql).setParameter(1, id);
+//		Movie movielist = (Movie)query.getResultList();
+		
+		Movie movie=factory.getCurrentSession().get(Movie.class, id);
+		
+		
+		return movie;
 	}
 
 	@Override

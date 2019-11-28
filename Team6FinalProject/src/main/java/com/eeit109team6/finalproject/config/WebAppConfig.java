@@ -64,6 +64,11 @@ public class WebAppConfig implements WebMvcConfigurer { // new
 		registry.addResourceHandler("/Movie/**").addResourceLocations("/WEB-INF/views/Movie/");
 		registry.addResourceHandler("/memberImages/**").addResourceLocations("file:C:/memberImages/");
 		registry.addResourceHandler("/memberMovies/**").addResourceLocations("file:C:/memberMovies/");
+		registry.addResourceHandler("/movieHome/**").addResourceLocations("file:C:/movieHome/");
+		
+		
+		
+
 
 	}
 

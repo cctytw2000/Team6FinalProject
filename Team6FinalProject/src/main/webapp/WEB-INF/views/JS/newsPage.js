@@ -5,6 +5,7 @@ $(document).ready(function() {
 		success : function(data) {
 // console.log(data)
 			var html = "";
+			
 			for (let i = 0; i < data.newsList.length; i++) {
 				if (data.newsList[i].isVisable == true) {
 					if((data.newsList[i].views) == null){
@@ -17,8 +18,9 @@ $(document).ready(function() {
 					html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
 					html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
 					html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
-					html += "<p style='color:#686868;font-size:15px'>"+ (data.newsList[i].article).substr(0, 200);
-					html += " ...<a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a></p>";
+					html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+					html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+					html += "</div>"
 					html += "</tr></tbody>";
 				}
 			}
@@ -85,8 +87,9 @@ function newsTypeSort(id){
 						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
 						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
 						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.newsList[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					}
 				}
@@ -111,14 +114,15 @@ function viewsSort(id){
 							data.newses[i].views=0;
 						}
 						html += "<thead><tr><th colspan='2'><h4>";
-						html += (data.newses[i].publicationDate).split(' ')[0];
+						html += (data.newsList[i].publicationDate).split(' ')[0];
 						html += "</h4></tr></thead><tbody><tr>";
 						html += "<td style='text-align: left;width:30%'>";
-						html += "<a onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newses[i].newsId+ "'></a>";
-						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'>"+ data.newses[i].title+ "</a></h4>";
-						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newses[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.newses[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
+						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
+						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					}
 				} 
@@ -129,14 +133,15 @@ function viewsSort(id){
 							data.newses[i].views=0;
 						}
 						html += "<thead><tr><th colspan='2'><h4>";
-						html += (data.newses[i].publicationDate).split(' ')[0];
+						html += (data.newsList[i].publicationDate).split(' ')[0];
 						html += "</h4></tr></thead><tbody><tr>";
 						html += "<td style='text-align: left;width:30%'>";
-						html += "<a onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newses[i].newsId+ "'></a>";
-						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'>"+ data.newses[i].title+ "</a></h4>";
-						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newses[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.newses[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.newses[i].newsId+")' href='newsDetail?newsId="+ data.newses[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
+						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
+						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					}
 				} 
@@ -167,8 +172,9 @@ function timeSort(id){
 						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
 						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
 						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.newsList[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					}
 				} 
@@ -185,8 +191,9 @@ function timeSort(id){
 						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
 						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
 						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.newsList[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					}
 				}
@@ -215,14 +222,15 @@ function searchByKeyWord(e){
 							data.news[i].views=0;
 						}
 						html += "<thead><tr><th colspan='2'><h4>";
-						html += (data.news[i].publicationDate).split(' ')[0];
+						html += (data.newsList[i].publicationDate).split(' ')[0];
 						html += "</h4></tr></thead><tbody><tr>";
 						html += "<td style='text-align: left;width:30%'>";
-						html += "<a onclick='countView("+data.news[i].newsId+")' href='newsDetail?newsId="+ data.news[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.news[i].newsId+ "'></a>";
-						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.news[i].newsId+")' href='newsDetail?newsId="+ data.news[i].newsId +"'>"+ data.news[i].title+ "</a></h4>";
-						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.news[i].views + "</p>"
-						html += "<p style='color:#686868;font-size:15px'>"+ (data.news[i].article).substr(0, 200);
-						html += " ...<a style='color:#02007C' onclick='countView("+data.news[i].newsId+")' href='newsDetail?newsId="+ data.news[i].newsId +"'>繼續閱讀</a></p>";
+						html += "<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'><img width='200' height='200' src='getNewsPicture/"+ data.newsList[i].newsId+ "'></a>";
+						html += "<td style='width:70%'><h4><a style='color:#02007C' onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>"+ data.newsList[i].title+ "</a></h4>";
+						html += "<p style='color:#686868;font-size:15px'>觀看人數:" + data.newsList[i].views + "</p>"
+						html += "<div id='divArticle'>"+(data.newsList[i].article).substr(0, 125).replace(/(<p><\/p>)+/g, '').replace(/\&nbsp\;/g, "").replace(/(<a[^>]*>)|(<[^>]a>)/g, "")
+						html += " ...<a onclick='countView("+data.newsList[i].newsId+")' href='newsDetail?newsId="+ data.newsList[i].newsId +"'>繼續閱讀</a>";
+						html += "</div>"
 						html += "</tr></tbody>";
 					} else {
 						html += "<thead><tr><th style='text-align:center'><h1>無相關消息</h1></thead>";
